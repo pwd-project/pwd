@@ -1,0 +1,3 @@
+rootProject.name = 'pwd'
+
+include 'pwd-backend'

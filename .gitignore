@@ -1,0 +1,25 @@
+# JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.buildpath
+.project
+.settings/
+.classpath
+
+# MacOS
+.DS_Store
+
+#gradle config
+.gradle
+
+#project binaries
+build
+target
+
+#logfiles
+*.log
+
