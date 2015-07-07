@@ -1,3 +1,9 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
 plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.2.4'
 }
@@ -8,19 +14,21 @@ scmVersion {
     }
 }
 
-
 allprojects {
     project.group = 'org.pwd'
     project.version = scmVersion.version
 }
 
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
-
+    apply plugin: 'spring-boot'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
+
+    mainClassName = 'org.pwd.application.PwdService'
 
     repositories {
         mavenCentral()
@@ -32,6 +40,7 @@ subprojects {
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.13'
 
         testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
+        testCompile group: 'org.spockframework', name: 'spock-spring', version: '1.0-groovy-2.4'
     }
 
     test {
