@@ -28,7 +28,7 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    mainClassName = 'org.pwd.application.PwdService'
+    mainClassName = 'org.pwd.PwdService'
 
     repositories {
         mavenCentral()
