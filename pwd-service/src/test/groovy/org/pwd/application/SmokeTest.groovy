@@ -17,10 +17,11 @@ import javax.transaction.Transactional
 @ActiveProfiles("integration")
 @WebIntegrationTest
 @SpringApplicationConfiguration(classes = PwdService)
+//@TransactionConfiguration(defaultRollback = false)
 class SmokeTest extends Specification {
 
-   @Autowired
-   WebsiteRepository websiteRepository
+    @Autowired
+    WebsiteRepository websiteRepository
 
     @Transactional
     def "should run the App and connect to database"() {
@@ -34,5 +35,4 @@ class SmokeTest extends Specification {
         then:
         persistedWebsite.url ==  new URL("http://example.com/")
     }
-
 }
