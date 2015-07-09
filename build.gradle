@@ -34,6 +34,11 @@ subprojects {
         mavenCentral()
     }
 
+    jar {
+        baseName = 'pwd-service'
+        version = 'latest'
+    }
+
     dependencies {
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.7'
         compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.13'
