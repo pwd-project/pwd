@@ -59,8 +59,3 @@ subprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
-
-//fired by heroku-buildpack-gradle
-task stage(){
-    println "heroku-buildpack-gradle: do nothing"
-}

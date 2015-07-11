@@ -8,4 +8,5 @@ dependencies {
 }
 
 //fired by heroku-buildpack-gradle
-task stage(dependsOn:installDist)
+task stage(dependsOn: ["build"]){
+}
