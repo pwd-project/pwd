@@ -10,6 +10,3 @@ spring:
     password: pwd
     initialize: false
     continue-on-error: false
-
-server:
-    port: 80
