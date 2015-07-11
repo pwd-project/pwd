@@ -6,3 +6,6 @@ dependencies {
     testCompile 'com.h2database:h2:1.4.187'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
 }
+
+//fired by heroku-buildpack-gradle
+task stage(dependsOn:installDist)
