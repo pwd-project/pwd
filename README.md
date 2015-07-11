@@ -37,3 +37,18 @@ Check the `currentVersion` number
 ```
 gradlew cV
 ```
+
+### Travis CI
+
+(https://travis-ci.org/pwd-project/pwd)
+
+### Heroku CLI
+Heroku toolbelt is a CLI tool for creating and managing Heroku apps.
+You'll need this for browsing application logs when running them on Heroku PaaS. 
+Install CLI from here: (https://toolbelt.heroku.com/).
+
+Browse logs for given app (environment):
+
+```
+heroku logs --app pwd-test
+```

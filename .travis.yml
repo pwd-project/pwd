@@ -1,9 +1,14 @@
 language: java
+
 jdk:
 - oraclejdk8
+
 deploy:
   provider: heroku
   api_key:
     secure: XEsikErOYWIloHguxjewWoL+OER6ni163ZYvBn6JXKIbNhnhG9LQk1apFa6omFWX8sLn2oZqVIkq27i/1V5nkQQ3T55KiblUkMAHY0+/FEnTNuqYfN4YMZBZ0w+VfJFnAP8g51+/un0NEia+BdPDUQQXLT5w6yhge2n59jQ0XcCut9DjJMFfs8Y6Qv9d60HPEHWSFrJaCXAWgQnGq/CLrWxjPaczx1/t6Gz6niFD0HiAnAa+IytvLUo8mnt+FWAK5tDyPx8txHE5NNNuPmTYPbP0LGMNEAkAIrSM3v8lFZpMFx2tlo5h3EUL7BHjhaJwt4h5UKSzNqxzwi1uqlWflnxi+lFRTTlpHRkq88ntvztJ9f+HbyY7KAH8EnkWZUkX2xFvTa4fBY+wgBRJw3hI5cK7MS4une+oa2Qh9nQEJQv8S3saQypaWsktEDNP/CrWRjVUxVTGe2cF6JJH316rOPb2NXIbmVQvRNB3eZ/bZUfWkqOeUnPNQ+0vS3NlnLPle3LzXoCLUG2gsXKQBMaEz3GW1SjL2/BRZ0G/gW0ZW0Pds52uyaGkFrkmx/o9C0IcEhek/t9TDaIOBtz6/IL1G0GK5YrL/3LYVd9+OBBweaf4O5cCOxPjTleskBshaSaT0oeB0of7MR+LCnAZknO5Ekn0WHcAlPo6g28+J5ob8IE=
   app: pwd-test
   on: master
+
+script:
+  - "./gradlew build"
