@@ -3,6 +3,8 @@ language: java
 jdk:
 - oraclejdk8
 
+script: ./gradlew build
+
 deploy:
   provider: heroku
   api_key:
@@ -10,5 +12,3 @@ deploy:
   app: pwd-test
   on: master
 
-script:
-  - "./gradlew build"
