@@ -50,5 +50,5 @@ Install CLI from here: (https://toolbelt.heroku.com/).
 Browse logs for given app (environment):
 
 ```
-heroku logs --app pwd-test
+heroku logs --app pwd-test --source app
 ```
