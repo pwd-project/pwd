@@ -104,8 +104,8 @@ Browse application logs for given app (environment):
 ```
 heroku logs --app pwd-prod --source app --tail
 ```
-### Password encryption
-All database passwords and API-Keys committed to GitHub repository **have to be encrypted** with Travis public key
+### Credentials
+**Heroku API-Keys** committed to GitHub repository **have to be encrypted** with Travis public key
 and then, stored in `.travis.yml`. 
 
 Travis decrypts them and passed as build environment variables,
@@ -117,5 +117,8 @@ Encrypt Heroku API-Key and add it to `.travis.yml` using:
 travis encrypt ****** --add deploy.api_key
 ```
 
+**Database passwords** should be managed using Heroku [Config Variables](https://devcenter.heroku.com/articles/config-vars).
+
+- `spring.datasource.password` - production database password
 
 
