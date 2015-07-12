@@ -60,7 +60,7 @@ For now, there are 3 envs:
 </tr>
 
 <tr>
-  <th>Address</th>
+  <th>URL</th>
   <td></td>
   <td></td>
   <td><a href="http://pwd-prod.herokuapp.com">pwd-prod.herokuapp.com</a></td>
@@ -97,12 +97,30 @@ build (currently, master branch is connected with pwd-prod application).
 ### Heroku toolbelt
 Heroku toolbelt is a CLI tool for creating and managing Heroku apps.
 You'll need this for browsing application logs when running them on Heroku PaaS. 
-Install CLI from here: (https://toolbelt.heroku.com/).
+[Install CLI](https://toolbelt.heroku.com/).
 
 Browse application logs for given app (environment):
 
 ```
 heroku logs --app pwd-prod --source app --tail
+```
+### Password encryption
+All database passwords and API-Keys committed to GitHub repository **have to be encrypted** with Travis public key
+and then, stored in `.travis.yml`. 
+
+Travis decrypts them and passed as build environment variables,
+see [encryption-keys](http://docs.travis-ci.com/user/encryption-keys/).
+
+Encrypt prod database password and add it to `.travis.yml` using:
+
+```
+travis encrypt spring.datasource.password=****** --add
+```
+
+Encrypt Heroku API-Key and add it to `.travis.yml` using:
+
+```
+travis encrypt ****** --add deploy.api_key
 ```
 
 
