@@ -1,6 +1,6 @@
-## PWD project
+# PWD project
 
-### How to build and run me
+## How to build and run me
 
 Clone our git repository:
 
@@ -15,40 +15,87 @@ Build project and fire tests:
 gradlew test
 ```
 
-Run PWD service at `http://localhost:8080`
+Run PWD service at `http://localhost:8080` (requires local Postgres, see [Databases](#Databases))
 
 ```
 gradlew run
 ```
 
-### Database
-Depending on selected ENV, service connects to database configured in `/src/resources/application-ENV.yml`.
-By default it's PostgresSQL at `localhost:5432`, dbname, user and password = `pwd`. 
+Health check:
+
+try `http://localhost:8080/` to see if service is up & running.
+
+## Environments
+
+Environments are configured with `application-*.yml`. 
+For now, there are 3 envs:
+
+<table style='word-wrap: break-word; border: 1px solid gray;'>
+<tr>
+  <td></td>
+  <th>local (default)</th>
+  <th>integration</th>
+  <th>prod</th>
+</tr>
+
+<tr>
+  <th>What for</th>
+  <td>development</td>
+  <td>integration tests</td>
+  <td>production</td>
+</tr>
+
+<tr>
+  <th>Database</th>
+  <td>Postgres at `localhost:5432`</td>
+  <td>in-memory (H2)</td>
+  <td>Postgres at `TBA`</td>
+</tr>
+
+<tr>
+  <th>Heroku deploy</th>
+  <td></td>
+  <td></td>
+  <td>from `master` branch</td>
+</tr>
+
+<tr>
+  <th>Address</th>
+  <td></td>
+  <td></td>
+  <td><a href="http://pwd-prod.herokuapp.com">pwd-prod.herokuapp.com</a></td>
+</tr>
 
 
-### Health check
+</table>
 
-Try `http://localhost:8080/` to see if service is up & running.
+### Databases
+PWD service uses PostgreSQL, as usual, for integration test we are using in-memory database (H2).
 
-### Project version
-Based on GIT tags. 
-Check the `currentVersion` number
+Depending on selected ENV, the service connects to an SQL database configured in `/src/resources/application-ENV.yml`.
 
-```
-gradlew cV
-```
+By default it's a PostgreSQL running at `localhost:5432`, dbname, user and password:  `pwd`. 
 
 ### Travis CI
+As usual, Travis is doing hard Continuous Integration job
+and checks if all of our commits are sound.
 
+See latest build and build history:
 (https://travis-ci.org/pwd-project/pwd)
 
-### Heroku CLI
+### Heroku CD
+
+
+### Heroku toolbelt
 Heroku toolbelt is a CLI tool for creating and managing Heroku apps.
 You'll need this for browsing application logs when running them on Heroku PaaS. 
 Install CLI from here: (https://toolbelt.heroku.com/).
 
-Browse logs for given app (environment):
+Browse application logs for given app (environment):
 
 ```
-heroku logs --app pwd-test --source app
+heroku logs --app pwd-prod --source app --tail
 ```
+
+
+

@@ -4,21 +4,10 @@ buildscript {
     }
 }
 
-plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.2.4'
-}
-
-scmVersion {
-    tag {
-        prefix = 'pwd'
-    }
-}
-
 allprojects {
     project.group = 'org.pwd'
-    project.version = scmVersion.version
+    project.version = '0.0.1-SNAPSHOT'
 }
-
 
 subprojects {
     apply plugin: 'java'
