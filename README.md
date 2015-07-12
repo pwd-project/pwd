@@ -111,12 +111,6 @@ and then, stored in `.travis.yml`.
 Travis decrypts them and passed as build environment variables,
 see [encryption-keys](http://docs.travis-ci.com/user/encryption-keys/).
 
-Encrypt prod database password and add it to `.travis.yml` using:
-
-```
-travis encrypt spring.datasource.password=****** --add env
-```
-
 Encrypt Heroku API-Key and add it to `.travis.yml` using:
 
 ```
