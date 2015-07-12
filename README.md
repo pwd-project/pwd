@@ -85,6 +85,14 @@ See latest build and build history:
 
 ### Heroku CD
 
+PWD production service runs on [Heroku](https://www.heroku.com) PaaS,
+which means that Heroku is doing Continous Delivery job.
+See [Deployment reference](https://devcenter.heroku.com/categories/reference#deployment).
+
+Deployment to Heroku container is done with `git push` to proper Heroku repository.
+
+Travis is configured to run automatic deploys from our GitHub repository after each successful
+build (currently, master branch is connected with pwd-prod application).
 
 ### Heroku toolbelt
 Heroku toolbelt is a CLI tool for creating and managing Heroku apps.
