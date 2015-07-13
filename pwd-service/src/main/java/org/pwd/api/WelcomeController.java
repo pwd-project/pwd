@@ -11,6 +11,6 @@ class WelcomeController {
 
     @RequestMapping("/")
     public Welcome welcome() {
-        return new Welcome("Welcome to PWD service.");
+        return new Welcome("Welcome to PWD service (KA).");
     }
 }
