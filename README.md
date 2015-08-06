@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/pwd-project/pwd.png?label=ready&title=Ready)](https://waffle.io/pwd-project/pwd)
 # PWD project
 
 ## How to build and run me
