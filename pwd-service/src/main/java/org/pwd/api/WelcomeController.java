@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class WelcomeController {
 
-    @RequestMapping("/")
+    @RequestMapping("/zonk")
     public Welcome welcome() {
         return new Welcome("Welcome to PWD service (KA).");
     }
