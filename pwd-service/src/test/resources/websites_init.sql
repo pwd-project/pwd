@@ -5,6 +5,8 @@ copy website from 'd:/websites_init.csv' delimiter ';' CSV quote '"';
 select * from  web_site;
 
 -------------------------------------------------------------------------------
+select 'insert into website(id, administrative_unit, url) values ('||id||',"'||administrative_unit||'","'||url||'");' from  website;
+
 insert into website(id, administrative_unit, url) values (1,'Urz¹d Gminy ¯abia Wola','http://www.zabiawola.pl');
 insert into website(id, administrative_unit, url) values (2,'Urz¹d Miejski w Korszach','http://www.korsze.pl');
 insert into website(id, administrative_unit, url) values (3,'Urz¹d Miejski w Sêpopolu','http://bip.warmia.mazury.pl/sepopol_gmina_miejsko_-_wiejska');

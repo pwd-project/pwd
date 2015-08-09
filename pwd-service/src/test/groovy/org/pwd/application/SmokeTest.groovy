@@ -7,6 +7,7 @@ import org.pwd.domain.audit.WebsiteAuditRepository
 import org.pwd.domain.websites.Website
 import org.pwd.domain.websites.WebsiteRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.annotation.Rollback
 
 import javax.transaction.Transactional
 import java.time.LocalDateTime
@@ -18,9 +19,6 @@ class SmokeTest extends IntegrationTest {
 
     @Autowired
     WebsiteRepository websiteRepository
-
-    @Autowired
-    WebsiteAuditRepository websiteAuditRepository
 
     @Transactional
     def "should run the App and connect to database"() {
@@ -35,17 +33,4 @@ class SmokeTest extends IntegrationTest {
         persistedWebsite.url ==  new URL("http://example.com/")
     }
 
-    @Transactional
-    def "should persist Documents as Postgres JSON types"(){
-      given:
-      def report = new WebsiteAuditReport([new MetricValue("metricA", 0), new MetricValue("metricB", 100)],
-                                          LocalDateTime.now())
-      def websiteAudit = new WebsiteAudit(report)
-
-      when:
-      websiteAuditRepository.save(websiteAudit)
-
-      then:
-      true
-    }
 }

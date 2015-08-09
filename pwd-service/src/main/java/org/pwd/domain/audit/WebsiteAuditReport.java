@@ -2,7 +2,6 @@ package org.pwd.domain.audit;
 
 import org.pwd.hibernate.Document;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,21 +15,14 @@ public class WebsiteAuditReport extends Document{
 
     private final List<MetricValue> metrics;
 
-    private final LocalDateTime created;
-
-    public WebsiteAuditReport(List<MetricValue> metrics, LocalDateTime created) {
+    public WebsiteAuditReport(List<MetricValue> metrics) {
         checkArgument(metrics != null);
-        checkArgument(created != null);
 
         this.metrics = new ArrayList<>(metrics);
-        this.created = created;
     }
 
     public List<MetricValue> getMetrics() {
         return Collections.unmodifiableList(metrics);
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
 }

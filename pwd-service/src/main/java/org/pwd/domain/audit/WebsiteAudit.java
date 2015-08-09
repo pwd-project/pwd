@@ -1,16 +1,22 @@
 package org.pwd.domain.audit;
 
+import com.google.common.base.Preconditions;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.pwd.domain.websites.Website;
+import org.pwd.hibernate.LocalDateTimeConverter;
 import org.pwd.hibernate.PostgresJsonUserType;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author bartosz.walacik
  */
 @Entity(name = "website_audit")
+@Table(indexes = { @Index(name = "website_audit_website_idx", columnList = "website_fk"),
+                   @Index(name = "website_audit_audit_idx",   columnList = "audit_fk")})
 @TypeDefs({ @TypeDef(name = "JsonObject", typeClass = PostgresJsonUserType.class) })
 public class WebsiteAudit {
     @Id
@@ -21,8 +27,31 @@ public class WebsiteAudit {
     @Type(type = "JsonObject")
     private WebsiteAuditReport auditReport;
 
-    public WebsiteAudit(WebsiteAuditReport auditReport) {
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime created;
+
+    @ManyToOne
+    @JoinColumn(name="website_fk")
+    private Website website;
+
+    @ManyToOne
+    @JoinColumn(name="audit_fk")
+    private Audit audit;
+
+    //only for Hibernate
+    WebsiteAudit() {
+    }
+
+    WebsiteAudit(Website website, Audit audit, WebsiteAuditReport auditReport) {
+        Preconditions.checkArgument(auditReport != null);
+        Preconditions.checkArgument(website != null);
+        Preconditions.checkArgument(audit != null);
+
         this.auditReport = auditReport;
+        this.website = website;
+        this.audit = audit;
+
+        created = LocalDateTime.now();
     }
 
     public int getId() {
@@ -31,5 +60,9 @@ public class WebsiteAudit {
 
     public WebsiteAuditReport getAuditReport() {
         return auditReport;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
     }
 }
