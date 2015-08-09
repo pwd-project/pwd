@@ -21,10 +21,10 @@ public class ShowEnv {
     public ShowEnv(Environment environment) {
         this.environment = environment;
 
-
         logger.info("-- ShowEnv --");
 
         Arrays.asList(environment.getActiveProfiles()).forEach(name -> logger.info("active.profile:" + name));
+
         logger.info("database.url: "+environment.getProperty("spring.datasource.url"));
 
     }

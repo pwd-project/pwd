@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audytowane strony</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+    <link href="/pwd-main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h1>Lista audytowanych stron: </h1>
+<ul>
+    {% for item in websites %}
+    <li>
+        <code>[{{ item.id }}]</code>
+        <a href="{{ item.url }}">{{ item.url }}</a>
+        &nbsp; {{ item.administrativeUnit }}
+    </li>
+    {% endfor %}
+
+</ul>
+
+</body>
+</html>

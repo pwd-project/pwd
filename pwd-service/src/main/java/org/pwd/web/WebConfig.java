@@ -1,4 +1,4 @@
-package org.pwd.api;
+package org.pwd.web;
 
 import com.lyncode.jtwig.mvc.JtwigViewResolver;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver() {
         JtwigViewResolver viewResolver = new JtwigViewResolver();
         viewResolver.setPrefix("classpath:templates/");
-        viewResolver.setSuffix(".twig");
+        viewResolver.setSuffix(".html");
         return viewResolver;
     }
 }
