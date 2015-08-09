@@ -1,6 +1,6 @@
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.pwd.hibernate.JsonPostgreSQLDialect
     hibernate:
       ddl-auto: update
   datasource:
@@ -10,3 +10,6 @@ spring:
     password: pwd
     initialize: false
     continue-on-error: false
+
+analysis:
+  endpoint: http://pwd-analysis.herokuapp.com/analysis

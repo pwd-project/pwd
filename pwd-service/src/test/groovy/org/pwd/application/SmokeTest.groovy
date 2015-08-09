@@ -1,27 +1,26 @@
 package org.pwd.application
 
-import org.pwd.PwdService
-import org.pwd.websites.Website
-import org.pwd.websites.WebsiteRepository
+import org.pwd.domain.audit.MetricValue
+import org.pwd.domain.audit.WebsiteAudit
+import org.pwd.domain.audit.WebsiteAuditReport
+import org.pwd.domain.audit.WebsiteAuditRepository
+import org.pwd.domain.websites.Website
+import org.pwd.domain.websites.WebsiteRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.SpringApplicationConfiguration
-import org.springframework.boot.test.WebIntegrationTest
-import org.springframework.test.context.ActiveProfiles
-import spock.lang.Specification
 
 import javax.transaction.Transactional
+import java.time.LocalDateTime
 
 /**
  * @author bartosz.walacik
  */
-@ActiveProfiles("integration")
-@WebIntegrationTest
-@SpringApplicationConfiguration(classes = PwdService)
-//@TransactionConfiguration(defaultRollback = false)
-class SmokeTest extends Specification {
+class SmokeTest extends IntegrationTest {
 
     @Autowired
     WebsiteRepository websiteRepository
+
+    @Autowired
+    WebsiteAuditRepository websiteAuditRepository
 
     @Transactional
     def "should run the App and connect to database"() {
@@ -34,5 +33,19 @@ class SmokeTest extends Specification {
 
         then:
         persistedWebsite.url ==  new URL("http://example.com/")
+    }
+
+    @Transactional
+    def "should persist Documents as Postgres JSON types"(){
+      given:
+      def report = new WebsiteAuditReport([new MetricValue("metricA", 0), new MetricValue("metricB", 100)],
+                                          LocalDateTime.now())
+      def websiteAudit = new WebsiteAudit(report)
+
+      when:
+      websiteAuditRepository.save(websiteAudit)
+
+      then:
+      true
     }
 }

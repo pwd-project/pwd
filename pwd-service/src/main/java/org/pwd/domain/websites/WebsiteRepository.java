@@ -1,4 +1,4 @@
-package org.pwd.websites;
+package org.pwd.domain.websites;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

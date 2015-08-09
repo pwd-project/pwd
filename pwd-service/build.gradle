@@ -3,6 +3,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE'
     compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
     compile 'com.lyncode:jtwig-spring:3.1.1'
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
 
     testCompile 'com.h2database:h2:1.4.187'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'

@@ -1,11 +1,10 @@
-package org.pwd.websites.api;
+package org.pwd.web.websites;
 
-import org.pwd.websites.WebsiteRepository;
+import org.pwd.domain.websites.WebsiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

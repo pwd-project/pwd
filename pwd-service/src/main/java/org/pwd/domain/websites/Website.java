@@ -1,4 +1,4 @@
-package org.pwd.websites;
+package org.pwd.domain.websites;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -6,7 +6,7 @@ import java.net.URL;
 /**
  * @author bartosz.walacik
  */
-@Entity(name = "web_site")
+@Entity(name = "website")
 public class Website {
     @Id
     //@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="web_site_id_seq", name="web_site_id_seq")

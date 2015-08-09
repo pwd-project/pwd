@@ -1,6 +1,6 @@
 spring:
   jpa:
-    database-platform:  org.hibernate.dialect.H2Dialect
+    database-platform: org.pwd.hibernate.JsonH2SQLDialect
     hibernate:
       ddl-auto: create
   datasource:
