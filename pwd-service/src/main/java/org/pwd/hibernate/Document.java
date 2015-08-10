@@ -1,7 +1,7 @@
 package org.pwd.hibernate;
 
 /**
- * Immutable object persisted as JSON
+ * <b>Immutable</b> object persisted as JSON
  *
  * @author bartosz.walacik
  */

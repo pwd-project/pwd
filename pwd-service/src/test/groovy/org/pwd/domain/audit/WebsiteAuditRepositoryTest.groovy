@@ -3,6 +3,7 @@ package org.pwd.domain.audit
 import org.hibernate.Session
 import org.hibernate.internal.SessionImpl
 import org.pwd.PwdService
+import org.pwd.application.IntegrationTest
 import org.pwd.domain.websites.Website
 import org.pwd.domain.websites.WebsiteRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,11 +20,9 @@ import javax.transaction.Transactional
 /**
  * @author bartosz.walacik
  */
-@Ignore //requires Postgres on localhost
+//@Ignore //requires Postgres on localhost
 
-@WebIntegrationTest
-@SpringApplicationConfiguration(classes = PwdService)
-class WebsiteAuditRepositoryTest extends Specification {
+class WebsiteAuditRepositoryTest extends IntegrationTest {
 
     @Autowired
     AuditRepository auditRepository
@@ -43,13 +42,10 @@ class WebsiteAuditRepositoryTest extends Specification {
         given:
         def audit = new Audit()
         audit.start()
-
         audit = auditRepository.save(audit)
 
-        def website = websiteRepository.getOne(1)
-
+        def website = getOrCreateWebsite()
         def report = new WebsiteAuditReport([new MetricValue("metricA", 0), new MetricValue("metricB", 100)])
-
         def websiteAudit = audit.createWebsiteAudit(website, report)
 
         when:
@@ -71,6 +67,13 @@ class WebsiteAuditRepositoryTest extends Specification {
 
     SessionImpl session(){
         (SessionImpl)entityManager.unwrap(Session)
+    }
+
+    Website getOrCreateWebsite(){
+        if (!websiteRepository.exists(1)){
+            websiteRepository.save(new Website(1, new URL("http://example.com/")))
+        }
+        websiteRepository.getOne(1)
     }
 
     WebsiteAudit reload(def websiteAudit){

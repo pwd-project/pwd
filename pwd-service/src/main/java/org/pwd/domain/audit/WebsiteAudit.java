@@ -17,14 +17,14 @@ import java.time.LocalDateTime;
 @Entity(name = "website_audit")
 @Table(indexes = { @Index(name = "website_audit_website_idx", columnList = "website_fk"),
                    @Index(name = "website_audit_audit_idx",   columnList = "audit_fk")})
-@TypeDefs({ @TypeDef(name = "JsonObject", typeClass = PostgresJsonUserType.class) })
+@TypeDefs({ @TypeDef(name = "WebsiteAuditReportJson", typeClass = WebsiteAuditReportUserType.class) })
 public class WebsiteAudit {
     @Id
     @SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="website_audit_id_seq", name="website_audit_id_seq")
     @GeneratedValue(generator="website_audit_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
 
-    @Type(type = "JsonObject")
+    @Type(type = "WebsiteAuditReportJson")
     private WebsiteAuditReport auditReport;
 
     @Convert(converter = LocalDateTimeConverter.class)

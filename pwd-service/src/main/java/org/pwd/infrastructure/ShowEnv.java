@@ -27,6 +27,8 @@ public class ShowEnv {
 
         logger.info("database.url: "+environment.getProperty("spring.datasource.url"));
 
+        logger.info("-- eof ShowEnv --");
+
     }
 }
 

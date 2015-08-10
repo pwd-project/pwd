@@ -1,7 +1,8 @@
 package org.pwd.hibernate;
 
-import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
@@ -18,8 +19,9 @@ import java.util.Objects;
 /**
  * @author bartosz.walacik
  */
-public class PostgresJsonUserType implements UserType {
-    protected static final ObjectMapper objectMapper = new ObjectMapper();
+public abstract class PostgresJsonUserType<T extends Document> implements UserType {
+
+    private static final Gson gson =  new GsonBuilder().setPrettyPrinting().create();
 
     @Override
     public int[] sqlTypes() {
@@ -27,9 +29,7 @@ public class PostgresJsonUserType implements UserType {
     }
 
     @Override
-    public Class returnedClass() {
-        return Document.class;
-    }
+    public abstract Class<T> returnedClass();
 
     @Override
     public boolean equals(Object o, Object o2) throws HibernateException {
@@ -47,12 +47,9 @@ public class PostgresJsonUserType implements UserType {
             return null;
         }
         PGobject pGobject = (PGobject) resultSet.getObject(names[0]);
-        Object jsonObject = null;
-        try {
-            jsonObject = objectMapper.readValue(pGobject.getValue(), this.returnedClass());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Document jsonObject = gson.fromJson(pGobject.getValue(), this.returnedClass());
+
         return jsonObject;
     }
 
@@ -62,12 +59,9 @@ public class PostgresJsonUserType implements UserType {
             preparedStatement.setNull(index, Types.NULL);
             return;
         }
-        String jsonString = null;
-        try {
-            jsonString = objectMapper.writeValueAsString(value);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        String jsonString = gson.toJson(value);
+
         PGobject pGobject = new PGobject();
         pGobject.setType("json");
         pGobject.setValue(jsonString);
@@ -76,7 +70,7 @@ public class PostgresJsonUserType implements UserType {
 
     @Override
     public Object deepCopy(Object o) throws HibernateException {
-        return o; //It is not necessary to copy immutable objects
+        return o; //It is not necessary to copy immutable objects, Documents should be immutable
     }
 
     @Override
