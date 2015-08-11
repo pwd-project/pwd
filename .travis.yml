@@ -9,5 +9,5 @@ deploy:
   on: master
 
 before_script:
-  - psql -c "CREATE USER pwd WITH PASSWORD 'pwd';"
-  - psql -c 'create database pwd-integration;' -U pwd
+  - psql -c "CREATE USER pwd WITH PASSWORD 'pwd';" -U postgres
+  - psql -c 'CREATE DATABASE pwd-integration OWNER pwd;' -U postgres
