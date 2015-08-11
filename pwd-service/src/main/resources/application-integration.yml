@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/pwd-integration
+    url: jdbc:postgresql://localhost:5432/pwd_integration
 server:
     port: 8081
