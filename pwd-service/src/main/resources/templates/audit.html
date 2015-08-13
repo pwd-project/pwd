@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audyt {{ audit.id }}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+    <link href="/pwd-main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h1>Audyt {{ audit.id }} </h1>
+
+<li/>status: {{audit.processStatus}}
+<li/>ilość stron: {{audit.auditedSitesCount}}
+<li/>wykonany: {{audit.finished}}
+<li/>czas trwania: {{audit.durationAsString}}
+</ul>
+
+<h2>Lista raportów dla audytowanych stron</h2>
+<table>
+<tr>
+    <th>#</th>
+    <th>URL</th>
+    <th>Wynik</th>
+    <th>Metryki</th>
+</tr>
+
+{% for item in websiteAudits %}
+<tr>
+    <td> [{{ item.id }}] </td>
+    <td> <a href="{{ item.website.url }}">{{ item.website.url }}</a> </td>
+    <td> {{ item.auditReport.score }} </td>
+    <td>
+        {% for m in item.auditReport.metrics %}
+          {{ m.metricName }}: {{m.value}} &nbsp;
+        {% endfor %}
+    </td>
+
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

@@ -27,6 +27,6 @@ class WebsitesController {
 
         model.addAttribute("websites", websiteRepository.findAll());
 
-        return "websites/websites";
+        return "websites";
     }
 }

@@ -13,9 +13,9 @@ class AnalysisRestClientTest extends IntegrationTest {
     def "should integrate with pwd-analysis service"(){
 
       when:
-      def response = analysisRestClient.getAnalysis("http://allegro.pl")
+      def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
 
       then:
-      response.anyTitle.score == 100
+      response.getMetric("anyTitle").value == 100
     }
 }

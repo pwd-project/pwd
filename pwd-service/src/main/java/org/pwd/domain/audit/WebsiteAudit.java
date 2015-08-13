@@ -30,7 +30,7 @@ public class WebsiteAudit {
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime created;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="website_fk")
     private Website website;
 
@@ -62,7 +62,12 @@ public class WebsiteAudit {
         return auditReport;
     }
 
+    public Website getWebsite() {
+        return website;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
+
 }

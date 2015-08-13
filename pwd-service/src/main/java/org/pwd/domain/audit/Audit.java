@@ -5,7 +5,10 @@ import org.pwd.domain.websites.Website;
 import org.pwd.hibernate.LocalDateTimeConverter;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 import static org.pwd.domain.audit.AuditProcessStatus.*;
 
@@ -28,6 +31,8 @@ public class Audit {
     @Enumerated(EnumType.STRING)
     private AuditProcessStatus processStatus;
 
+    private int auditedSitesCount;
+
     public Audit() {
         this.processStatus = NEW;
     }
@@ -36,16 +41,33 @@ public class Audit {
         return new WebsiteAudit(website, this, auditReport);
     }
 
-    public void start(){
+    public Audit start(){
         Preconditions.checkState(processStatus == NEW);
         started = LocalDateTime.now();
         processStatus = STARTED;
+        return this;
     }
 
-    public void done(){
+    public void done(int auditedSitesCount){
         Preconditions.checkState(processStatus == STARTED);
         finished = LocalDateTime.now();
         processStatus = AuditProcessStatus.DONE;
+        this.auditedSitesCount = auditedSitesCount;
+    }
+
+    public void broken(Exception e){
+        finished = LocalDateTime.now();
+        processStatus = AuditProcessStatus.BROKEN;
+    }
+
+    public Duration duration() {
+        if (started == null){
+            return Duration.ofSeconds(0);
+        }
+        if (finished == null){
+            return Duration.between(started, LocalDateTime.now());
+        }
+        return Duration.between(started, finished);
     }
 
     public int getId() {
@@ -62,5 +84,13 @@ public class Audit {
 
     public AuditProcessStatus getProcessStatus() {
         return processStatus;
+    }
+
+    public String durationAsString() {
+        return duration().toMinutes() +" mi "+  duration().getSeconds() % 60 +" s";
+    }
+
+    public int getAuditedSitesCount() {
+        return auditedSitesCount;
     }
 }

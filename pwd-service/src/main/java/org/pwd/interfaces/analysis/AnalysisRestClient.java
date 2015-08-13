@@ -1,6 +1,11 @@
 package org.pwd.interfaces.analysis;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.pwd.domain.audit.WebsiteAuditReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import groovy.json.JsonSlurper;
-import java.util.Map;
+
+import java.net.URL;
 
 
 /**
@@ -22,7 +27,7 @@ public class AnalysisRestClient {
     private final RestTemplate restTemplate = new RestTemplate();
     private final HttpHeaders headers;
     private final String analysisEndpointUrl;
-    private final JsonSlurper jsonSlurper = new JsonSlurper();
+    private final Gson gson = new GsonBuilder().create();
 
     @Autowired
     public AnalysisRestClient(@Value("${analysis.endpoint}") String analysisEndpointUrl) {
@@ -34,14 +39,15 @@ public class AnalysisRestClient {
         headers.add("Accept", "*/*");
     }
 
-    public Map getAnalysis(String websiteUrl){
+    public WebsiteAuditReport getAnalysis(URL websiteUrl) {
 
-        String result = restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl);
+        String response = restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl);
 
-        logger.info("analysis response: \n" + result);
+        logger.info("analysis: \n" + response);
 
-        Map parsed = (Map)jsonSlurper.parseText(result);
+        JsonObject json = gson.fromJson(response, JsonElement.class).getAsJsonObject();
 
-        return parsed;
+        return new WebsiteAuditReport(json);
     }
+
 }

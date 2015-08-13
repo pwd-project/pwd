@@ -1,6 +1,9 @@
 package org.pwd.domain.websites;
 
-import javax.persistence.*;
+import com.google.common.base.Preconditions;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.net.URL;
 
 /**
@@ -17,10 +20,13 @@ public class Website {
 
     private String administrativeUnit;
 
-    protected Website(){
+    //only for Hibernate
+    Website(){
     }
 
     public Website(int id, URL url) {
+        Preconditions.checkArgument(url != null);
+
         this.id = id;
         this.url = url;
     }
