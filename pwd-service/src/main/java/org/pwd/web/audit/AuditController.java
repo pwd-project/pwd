@@ -37,6 +37,6 @@ public class AuditController {
         model.addAttribute("audit", audit);
         model.addAttribute("websiteAudits", websiteAudits);
 
-        return "/audit";
+        return "audit";
     }
 }
