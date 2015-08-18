@@ -10,7 +10,7 @@ class DummyTest extends Specification{
 
     def "should load jtwig resources"(){
         given:
-        def res = new ClasspathJtwigResource("templates/home.html")
+        def res = new ClasspathJtwigResource("templates/index.html")
         println res
 
         expect:

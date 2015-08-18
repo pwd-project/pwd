@@ -11,5 +11,5 @@ dependencies {
 }
 
 //fired by heroku-buildpack-gradle
-task stage(dependsOn: ["assemble"]){
+task stage(dependsOn: ["assemble"]) {
 }
