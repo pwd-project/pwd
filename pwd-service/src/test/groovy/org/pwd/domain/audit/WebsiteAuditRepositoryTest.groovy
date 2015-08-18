@@ -45,7 +45,7 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         audit = auditRepository.save(audit)
 
         def website = getOrCreateWebsite()
-        def report = new WebsiteAuditReport([new MetricValue("metricA", 0), new MetricValue("metricB", 100)])
+        def report = new WebsiteAuditReport(200, [new MetricValue("metricA", 0), new MetricValue("metricB", 100)])
         def websiteAudit = audit.createWebsiteAudit(website, report)
 
         when:
@@ -55,6 +55,7 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         then:
         websiteAudit != websiteAuditPersisted
         websiteAuditPersisted.auditReport instanceof WebsiteAuditReport
+        websiteAuditPersisted.auditReport.httpStatusCode == 200
         with(websiteAuditPersisted.auditReport.metrics[0]){
             metricName == "metricA"
             value == 0
