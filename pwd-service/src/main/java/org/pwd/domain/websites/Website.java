@@ -2,6 +2,7 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.net.URL;
@@ -19,6 +20,9 @@ public class Website {
     private URL url;
 
     private String administrativeUnit;
+
+    @Embedded
+    private Address address;
 
     //only for Hibernate
     Website(){
