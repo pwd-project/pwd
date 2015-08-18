@@ -1,21 +1,54 @@
 package org.pwd.interfaces.analysis
 
-import org.pwd.application.IntegrationTest
-import org.springframework.beans.factory.annotation.Autowired
+import com.github.tomakehurst.wiremock.junit.WireMockRule
+import org.junit.Rule
+import org.springframework.http.MediaType
+import spock.lang.Specification
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*
 
 /**
  * @author bartosz.walacik
  */
-class AnalysisRestClientTest extends IntegrationTest {
+class AnalysisRestClientTest extends Specification {
 
-    @Autowired AnalysisRestClient analysisRestClient
+    @Rule
+    WireMockRule wireMockRule = new WireMockRule(8089)
+
 
     def "should integrate with pwd-analysis service"(){
+      given:
+      def analysisRestClient = new AnalysisRestClient('http://localhost:8089/analysis')
+
+      def expectedJson =
+        """
+        {
+          "analysis": {
+            "anyTitle": {
+              "score": 100
+            },
+            "htmlLang": {
+              "score": 0
+            }
+          },
+          "status": {
+            "responseCode": 200
+          }
+        }
+        """
+
+      wireMockRule.stubFor(get(urlPathEqualTo("/analysis"))
+                        .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", MediaType.APPLICATION_JSON.toString())
+                        .withBody(expectedJson)))
 
       when:
       def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
 
       then:
       response.getMetric("anyTitle").value == 100
+      response.getMetric("htmlLang").value == 0
+      response.getHttpStatusCode() == 200
     }
 }

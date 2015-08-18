@@ -13,6 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class WebsiteAuditReport extends Document{
 
+    private final int httpStatusCode;
     private final List<MetricValue> metrics;
 
     /**
@@ -21,12 +22,14 @@ public class WebsiteAuditReport extends Document{
     public WebsiteAuditReport(JsonObject analysisResponse) {
         checkArgument(analysisResponse != null);
 
+        this.httpStatusCode = statusCodeFromJson(analysisResponse);
         this.metrics = metricsFromJson(analysisResponse);
     }
 
-    public WebsiteAuditReport(List<MetricValue> metrics) {
+    public WebsiteAuditReport(int httpStatusCode, List<MetricValue> metrics) {
         checkArgument(metrics != null);
 
+        this.httpStatusCode = httpStatusCode;
         this.metrics = new ArrayList<>(metrics);
     }
 
@@ -36,6 +39,10 @@ public class WebsiteAuditReport extends Document{
                .filter(it -> it.getMetricName().equals(metricName))
                .findFirst()
                .orElseThrow(() -> new RuntimeException("no such metric: " + metricName));
+    }
+
+    public int getHttpStatusCode() {
+        return httpStatusCode;
     }
 
     public int score(){
@@ -50,10 +57,16 @@ public class WebsiteAuditReport extends Document{
         return Collections.unmodifiableList(metrics);
     }
 
-    private List<MetricValue> metricsFromJson(JsonObject analysisResponse) {
-        List<MetricValue> metrics = new ArrayList<>();
+    private int statusCodeFromJson(JsonObject analysisResponse) {
+        return analysisResponse.getAsJsonObject("status").getAsJsonPrimitive("responseCode").getAsInt();
+    }
 
-        for (Map.Entry<String, JsonElement> metricEntry : analysisResponse.entrySet()) {
+    private List<MetricValue> metricsFromJson(JsonObject analysisResponse) {
+
+        List<MetricValue> metrics = new ArrayList<>();
+        JsonObject analysisElement = analysisResponse.getAsJsonObject("analysis");
+
+        for (Map.Entry<String, JsonElement> metricEntry : analysisElement.entrySet()) {
             String metricName = metricEntry.getKey();
             JsonObject metricObject = metricEntry.getValue().getAsJsonObject();
 
