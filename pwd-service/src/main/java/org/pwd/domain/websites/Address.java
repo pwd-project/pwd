@@ -7,19 +7,35 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class Address {
-    private final String city;
-    private final String province;
+    private String city;
 
-    public Address(String city, String province) {
+    /** wojewodztwo */
+    private String voivodeship;
+
+    /**
+     * powiat
+     */
+    private String county;
+
+    //only for Hibernate
+    Address() {
+    }
+
+    public Address(String city, String voivodeship, String county) {
         this.city = city;
-        this.province = province;
+        this.voivodeship = voivodeship;
+        this.county = county;
     }
 
     public String getCity() {
         return city;
     }
 
-    public String getProvince() {
-        return province;
+    public String getVoivodeship() {
+        return voivodeship;
+    }
+
+    public String getCounty() {
+        return county;
     }
 }
