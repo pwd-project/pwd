@@ -5,7 +5,7 @@ copy website from 'd:/websites_init.csv' delimiter ';' CSV quote '"';
 select * from  web_site;
 
 -------------------------------------------------------------------------------
-select 'insert into website(id, administrative_unit, url) values ('||id||',"'||administrative_unit||'","'||url||'");' from  website;
+select 'insert into website(id, city, county, voivodeship, administrative_unit, url) values ('||id||',"'||administrative_unit||'","'||url||'");' from  website;
 
 INSERT INTO website (id, city, county, voivodeship, administrative_unit, url) VALUES (1,'¯abia Wola','grodziski','mazowieckie','Urz¹d Gminy ¯abia Wola','http://www.zabiawola.pl');
 INSERT INTO website (id, city, county, voivodeship, administrative_unit, url) VALUES (2,'Korsze','kêtrzyñski','warmiñsko-mazurskie','Urz¹d Miejski w Korszach','http://www.korsze.pl');
