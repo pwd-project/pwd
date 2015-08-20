@@ -14,3 +14,4 @@ addons:
 before_script:
   - psql -c "CREATE USER pwd WITH PASSWORD 'pwd';" -U postgres
   - psql -c 'CREATE DATABASE pwd_integration OWNER pwd;' -U postgres
+  - psql -c "CREATE EXTENSION unaccent;" -U postgres -d pwd_integration
