@@ -1,23 +1,40 @@
 {% extends "layout/base.twig" %}
 
 {% block content %}
-<section class="container-fluid" style="background-color: #fff">
-    <div class="row mt">
-        <div class="col-sm-8 col-sm-offset-2">
-            <h4>Lista audytowanych stron: </h4>
-            <ul>
-                {% for item in websites %}
-                <li>
-                    <code>[{{ item.id }}]</code>
-                    <a href="{{ item.url }}">{{ item.url }}</a>
-                    &nbsp; {{ item.administrativeUnit }}
-                    ,&nbsp; {{ item.address.city }}
-                    ,&nbsp; {{ item.address.voivodeship }}
-                    ,&nbsp; {{ item.address.county }}
-                </li>
-                {% endfor %}
-            </ul>
+    <section class="container-fluid">
+        <div class="row mt">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Lista serwisów</h1>
+                <form class="well">
+                    <input type="text" class="form-control" placeholder="Szukaj..."/>
+                </form>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nazwa</th>
+                        <th>Serwis</th>
+                        <th>Miasto</th>
+                        <th>Województwo</th>
+                        <th>Kraj</th>
+                        <th>Audyt</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in websites %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ item.administrativeUnit }}</td>
+                            <td>{{ item.address.city }}</td>
+                            <td>{{ item.address.voivodeship }}</td>
+                            <td>{{ item.address.county }}</td>
+                            <td><a href="{{ item.url }}">{{ item.url }}</a></td>
+                            <td><a href="/serwisy/{{ item.id }}/audyty">Zobacz</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

@@ -4,7 +4,6 @@
 <section class="container-fluid" style="background-color: #fff">
     <div class="row mt">
         <div class="col-sm-8 col-sm-offset-2">
-
             <form action="/audyty" method="post">
                 <input type="submit" value="Wystartuj audyt"/>
             </form>
@@ -14,19 +13,19 @@
 
             <h1>Lista wykonanych audytow stron </h1>
             <table>
-                <tr>
+                <thead>
                     <th>#</th>
                     <th>status</th>
                     <th>ilość stron</th>
                     <th>wykonany</th>
                     <th>czas trwania</th>
-                </tr>
+                </thead>
                 {% for item in audits %}
-                <td><a href="/audyty/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
-                <td>{{ item.processStatus }}</td>
-                <td>{{ item.auditedSitesCount}}</td>
-                <td>{{ item.finished}}</td>
-                <td>{{ item.durationAsString}}</td>
+                    <td><a href="/audyty/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
+                    <td>{{ item.processStatus }}</td>
+                    <td>{{ item.auditedSitesCount}}</td>
+                    <td>{{ item.finished}}</td>
+                    <td>{{ item.durationAsString}}</td>
                 </tr>
                 {% endfor %}
             </table>
