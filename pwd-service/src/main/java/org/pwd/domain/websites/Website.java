@@ -35,6 +35,10 @@ public class Website {
         this.url = url;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public int getId() {
         return id;
     }

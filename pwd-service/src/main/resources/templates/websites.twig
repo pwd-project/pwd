@@ -11,6 +11,9 @@
                     <code>[{{ item.id }}]</code>
                     <a href="{{ item.url }}">{{ item.url }}</a>
                     &nbsp; {{ item.administrativeUnit }}
+                    ,&nbsp; {{ item.address.city }}
+                    ,&nbsp; {{ item.address.voivodeship }}
+                    ,&nbsp; {{ item.address.county }}
                 </li>
                 {% endfor %}
             </ul>
