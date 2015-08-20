@@ -25,10 +25,10 @@
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
                             <td>{{ item.administrativeUnit }}</td>
+                            <td><a href="{{ item.url }}">{{ item.url }}</a></td>
                             <td>{{ item.address.city }}</td>
                             <td>{{ item.address.voivodeship }}</td>
                             <td>{{ item.address.county }}</td>
-                            <td><a href="{{ item.url }}">{{ item.url }}</a></td>
                             <td><a href="/serwisy/{{ item.id }}/audyty">Zobacz</a></td>
                         </tr>
                     {% endfor %}
