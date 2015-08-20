@@ -21,7 +21,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
         JtwigViewResolver viewResolver = new JtwigViewResolver();
-        viewResolver.setPrefix("classpath:/templates/");
+        viewResolver.setPrefix("classpath:templates/");
         viewResolver.setSuffix(".twig");
         viewResolver.setEncoding("UTF-8");
         return viewResolver;
