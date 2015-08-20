@@ -15,7 +15,7 @@ class SmokeTest extends IntegrationTest {
     WebsiteRepository websiteRepository
 
     @Transactional
-    def "should run the App and connect to database"() {
+    def "should run the App and connect to the database"() {
         given:
         def website = new Website(1, new URL("http://example.com/"))
 

@@ -24,7 +24,7 @@ public class Website {
     @Embedded
     private Address address;
 
-    //only for Hibernate
+    // only for Hibernate
     Website(){
     }
 
