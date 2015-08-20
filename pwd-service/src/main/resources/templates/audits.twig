@@ -1,0 +1,36 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+<section class="container-fluid" style="background-color: #fff">
+    <div class="row mt">
+        <div class="col-sm-8 col-sm-offset-2">
+
+            <form action="/audits" method="post">
+                <input type="submit" value="Wystartuj audyt"/>
+            </form>
+            <form action="/audits" method="get">
+                <input type="submit" value="Reload"/>
+            </form>
+
+            <h1>Lista wykonanych audytow stron </h1>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>status</th>
+                    <th>ilość stron</th>
+                    <th>wykonany</th>
+                    <th>czas trwania</th>
+                </tr>
+                {% for item in audits %}
+                <td><a href="/audits/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
+                <td>{{ item.processStatus }}</td>
+                <td>{{ item.auditedSitesCount}}</td>
+                <td>{{ item.finished}}</td>
+                <td>{{ item.durationAsString}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

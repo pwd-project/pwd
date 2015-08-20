@@ -1,0 +1,89 @@
+{% extends 'layout/base.twig' %}
+
+{% block content %}
+    <section id="headerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>Dbamy o użyteczność<br/>
+                        stron państwowych.</h1>
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="img/ipad-hand.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid" style="background-color: #fff">
+        <div class="row mt">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h4>Wyniki analizy</h4>
+                <a href="/audits">Lista wykonanych audytow</a>
+                <table class="table table-striped table-hover hide">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Portal</th>
+                        <th>Data analizy</th>
+                        <th>Ocena</th>
+                        <th>Szczegóły analizy</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="http://radom.pl">radom.pl</a></td>
+                        <td>2015-08-01</td>
+                        <td>
+                            <i class="glyphicon glyphicon-star"/>
+                            <i class="glyphicon glyphicon-star"/>
+                            <i class="glyphicon glyphicon-star"/>
+                            <i class="glyphicon glyphicon-star-empty"/>
+                        </td>
+                        <td><a href="#">szczegóły</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row mt text-center">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h1>Twoja strona pod naszym nadzorem</h1>
+
+                <h3>Zobacz jak wygląda nasz proces analizy</h3>
+            </div>
+        </div>
+
+        <div class="row mt text-center">
+            <div class="col-lg-4">
+                <img src="img/ser01.png" width="180" alt="">
+                <h4>1 - Odwiedzny Twojej strony</h4>
+
+                <p>Nasz system odwiedzi Twoją stronę i sprawdzi kilka rzeczy, co tutaj można lepiej opisać bla
+                    blabla.</p>
+            </div>
+
+            <div class="col-lg-4">
+                <img src="img/ser02.png" width="180" alt="">
+                <h4>2 - Analiza danych</h4>
+
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever.</p>
+
+            </div>
+
+            <div class="col-lg-4">
+                <img src="img/ser03.png" width="180" alt="">
+                <h4>3 - Raport</h4>
+
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever.</p>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

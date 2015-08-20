@@ -17,7 +17,7 @@ import java.util.List;
  * @author bartosz.walacik
  */
 @Controller
-@RequestMapping("/audits")
+@RequestMapping("/audyty")
 public class AuditController {
 
     private final AuditRepository auditRepository;

@@ -12,7 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @author bartosz.walacik
  */
 @Controller
-@RequestMapping("/websites")
+@RequestMapping("/serwisy")
 class WebsitesController {
 
     private WebsiteRepository websiteRepository;
@@ -22,7 +22,7 @@ class WebsitesController {
         this.websiteRepository = websiteRepository;
     }
 
-    @RequestMapping(method= GET)
+    @RequestMapping(method = GET)
     public String getWebsites(Model model) {
 
         model.addAttribute("websites", websiteRepository.findAll());

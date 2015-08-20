@@ -16,7 +16,7 @@ import java.util.List;
  * @author bartosz.walacik
  */
 @Controller
-@RequestMapping("/audits")
+@RequestMapping("/audyty")
 class AuditListController {
 
     private final AuditProcessStarter auditProcessStarter;
