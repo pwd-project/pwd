@@ -22,7 +22,7 @@
                     <th>czas trwania</th>
                 </tr>
                 {% for item in audits %}
-                <td><a href="/audits/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
+                <td><a href="/audyty/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
                 <td>{{ item.processStatus }}</td>
                 <td>{{ item.auditedSitesCount}}</td>
                 <td>{{ item.finished}}</td>
