@@ -10,7 +10,7 @@ import spock.lang.Specification
  * @author bartosz.walacik
  */
 @ActiveProfiles("integration")
-@WebIntegrationTest
+//@WebIntegrationTest
 @SpringApplicationConfiguration(classes = PwdService)
 abstract class IntegrationTest extends Specification{
 }

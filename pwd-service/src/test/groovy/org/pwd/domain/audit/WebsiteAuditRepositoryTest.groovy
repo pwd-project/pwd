@@ -2,16 +2,11 @@ package org.pwd.domain.audit
 
 import org.hibernate.Session
 import org.hibernate.internal.SessionImpl
-import org.pwd.PwdService
 import org.pwd.application.IntegrationTest
 import org.pwd.domain.websites.Website
 import org.pwd.domain.websites.WebsiteRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.SpringApplicationConfiguration
-import org.springframework.boot.test.WebIntegrationTest
 import org.springframework.test.annotation.Rollback
-import spock.lang.Ignore
-import spock.lang.Specification
 
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
@@ -20,8 +15,6 @@ import javax.transaction.Transactional
 /**
  * @author bartosz.walacik
  */
-//@Ignore //requires Postgres on localhost
-
 class WebsiteAuditRepositoryTest extends IntegrationTest {
 
     @Autowired

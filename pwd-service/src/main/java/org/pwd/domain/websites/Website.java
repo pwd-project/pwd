@@ -30,9 +30,15 @@ public class Website {
 
     public Website(int id, URL url) {
         Preconditions.checkArgument(url != null);
-
         this.id = id;
         this.url = url;
+    }
+
+    public Website(int id, URL url, String administrativeUnit, Address address) {
+        this.id = id;
+        this.url = url;
+        this.administrativeUnit = administrativeUnit;
+        this.address = address;
     }
 
     public Address getAddress() {
