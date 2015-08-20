@@ -18,6 +18,7 @@
                     <th>URL</th>
                     <th>Wynik</th>
                     <th>Metryki</th>
+                    <th>HTTP Status Code</th>
                 </tr>
 
                 {% for item in websiteAudits %}
@@ -30,7 +31,7 @@
                         {{ m.metricName }}: {{m.value}} &nbsp;
                         {% endfor %}
                     </td>
-
+                    <td> [{{ item.auditReport.httpStatusCode }}]</td>
                 </tr>
                 {% endfor %}
             </table>
