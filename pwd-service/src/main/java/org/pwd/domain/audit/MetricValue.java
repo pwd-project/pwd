@@ -10,9 +10,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class MetricValue {
     private final String metricName;
 
-    //empty Optional means that metric is not available.
-    //e.g. "images" metric has no value when page contains no images
-    private final Optional<Integer> value;
+    //null -> empty optional
+    private final Integer value;
+
+    public MetricValue(String metricName, int value) {
+        this(metricName, Optional.of(value));
+    }
 
     public MetricValue(String metricName, Optional<Integer> value) {
         checkArgument(!metricName.isEmpty());
@@ -20,18 +23,25 @@ public class MetricValue {
         checkArgument(!value.isPresent() || (value.get() >= 0 && value.get() <= 100));
 
         this.metricName = metricName;
-        this.value = value;
+        this.value = value.orElseGet(() -> null);
     }
 
     public String getMetricName() {
         return metricName;
     }
 
+    /**
+     * Empty means that metric is not available.
+     * e.g. "images" metric has no value when page contains no images
+     */
     public Optional<Integer> getValue() {
-        return value;
+        if (value == null) {
+            return Optional.empty();
+        }
+        return Optional.of(value);
     }
 
     public String getValueAsString() {
-        return value.map(it -> it.toString()).orElseGet(() -> "N/A");
+        return value == null ? "N/A" : value + "";
     }
 }

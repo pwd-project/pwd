@@ -29,6 +29,9 @@ class AnalysisRestClientTest extends Specification {
             },
             "htmlLang": {
               "score": 0
+            },
+            "images": {
+              "score": null
             }
           },
           "status": {
@@ -47,8 +50,9 @@ class AnalysisRestClientTest extends Specification {
       def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
 
       then:
-      response.getMetric("anyTitle").value == 100
-      response.getMetric("htmlLang").value == 0
+      response.getMetric("anyTitle").value.get() == 100
+      response.getMetric("htmlLang").value.get() == 0
+      !response.getMetric("images").value.isPresent()
       response.getHttpStatusCode() == 200
     }
 }

@@ -51,11 +51,11 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         websiteAuditPersisted.auditReport.httpStatusCode == 200
         with(websiteAuditPersisted.auditReport.metrics[0]){
             metricName == "metricA"
-            value == 0
+            value.get() == 0
         }
         with(websiteAuditPersisted.auditReport.metrics[1]){
             metricName == "metricB"
-            value == 100
+            value.get() == 100
         }
     }
 
