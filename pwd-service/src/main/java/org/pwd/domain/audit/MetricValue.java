@@ -1,5 +1,7 @@
 package org.pwd.domain.audit;
 
+import java.util.Optional;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
@@ -7,12 +9,15 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class MetricValue {
     private final String metricName;
-    private final int value;
 
-    public MetricValue(String metricName, int value) {
+    //empty Optional means that metric is not available.
+    //e.g. "images" metric has no value when page contains no images
+    private final Optional<Integer> value;
+
+    public MetricValue(String metricName, Optional<Integer> value) {
         checkArgument(!metricName.isEmpty());
-        checkArgument(value >= 0);
-        checkArgument(value <= 100);
+        checkArgument(value != null);
+        checkArgument(!value.isPresent() || (value.get() >= 0 && value.get() <= 100));
 
         this.metricName = metricName;
         this.value = value;
@@ -22,7 +27,7 @@ public class MetricValue {
         return metricName;
     }
 
-    public int getValue() {
+    public Optional<Integer> getValue() {
         return value;
     }
 }

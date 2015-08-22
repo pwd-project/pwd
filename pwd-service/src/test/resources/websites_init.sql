@@ -1,11 +1,5 @@
-delete from web_site;
-
-copy website from 'd:/websites_init.csv' delimiter ';' CSV quote '"';
-
-select * from  web_site;
-
--------------------------------------------------------------------------------
-select 'insert into website(id, city, county, voivodeship, administrative_unit, url) values ('||id||',"'||administrative_unit||'","'||url||'");' from  website;
+--copy website from 'd:/websites_init.csv' delimiter ';' CSV quote '"';
+--select 'insert into website(id, city, county, voivodeship, administrative_unit, url) values ('||id||',"'||administrative_unit||'","'||url||'");' from  website;
 
 INSERT INTO website (id, city, county, voivodeship, administrative_unit, url) VALUES (1,'Żabia Wola','grodziski','mazowieckie','Urząd Gminy Żabia Wola','http://www.zabiawola.pl');
 INSERT INTO website (id, city, county, voivodeship, administrative_unit, url) VALUES (2,'Korsze','kętrzyński','warmińsko-mazurskie','Urząd Miejski w Korszach','http://www.korsze.pl');

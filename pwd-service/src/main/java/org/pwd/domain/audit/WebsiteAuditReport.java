@@ -50,7 +50,8 @@ public class WebsiteAuditReport extends Document{
     }
 
     private double metricsAvg(){
-        return metrics.stream().mapToInt(it -> it.getValue()).summaryStatistics().getAverage();
+        return metrics.stream().filter(it -> it.getValue().isPresent())
+                .mapToInt(it -> it.getValue().get()).summaryStatistics().getAverage();
     }
 
     public List<MetricValue> getMetrics() {
@@ -70,7 +71,14 @@ public class WebsiteAuditReport extends Document{
             String metricName = metricEntry.getKey();
             JsonObject metricObject = metricEntry.getValue().getAsJsonObject();
 
-            MetricValue metricValue = new MetricValue(metricName, metricObject.get("score").getAsInt());
+            Optional<Integer> score;
+            if (metricObject.has("score")){
+                score = Optional.of(metricObject.get("score").getAsInt());
+            }
+            else{
+                score = Optional.empty();
+            }
+            MetricValue metricValue = new MetricValue(metricName, score);
 
             metrics.add(metricValue);
         }
