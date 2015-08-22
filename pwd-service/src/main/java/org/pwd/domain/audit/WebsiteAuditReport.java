@@ -69,11 +69,12 @@ public class WebsiteAuditReport extends Document{
 
         for (Map.Entry<String, JsonElement> metricEntry : analysisElement.entrySet()) {
             String metricName = metricEntry.getKey();
-            JsonObject metricObject = metricEntry.getValue().getAsJsonObject();
+            JsonObject metricElement = metricEntry.getValue().getAsJsonObject();
+            JsonElement scoreElement = metricElement.get("score");
 
             Optional<Integer> score;
-            if (metricObject.has("score")){
-                score = Optional.of(metricObject.get("score").getAsInt());
+            if (!scoreElement.isJsonNull()){
+                score = Optional.of(scoreElement.getAsInt());
             }
             else{
                 score = Optional.empty();

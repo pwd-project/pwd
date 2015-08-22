@@ -30,4 +30,8 @@ public class MetricValue {
     public Optional<Integer> getValue() {
         return value;
     }
+
+    public String getValueAsString() {
+        return value.map(it -> it.toString()).orElseGet(() -> "N/A");
+    }
 }
