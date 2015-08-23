@@ -5,9 +5,14 @@
         <div class="row mt">
             <div class="col-sm-8 col-sm-offset-2">
                 <h1>Lista serwisów</h1>
-                <form class="well">
-                    <input type="text" class="form-control" placeholder="Szukaj..."/>
+                <form class="well" action="/serwisy" method="get">
+                    <input name="query" value="{{ query }}" type="text" class="form-control" placeholder="Szukaj..."/>
                 </form>
+
+                <span>
+                    Ilość serwisów: {{ websitesCount }} z {{ websitesTotalCount }}
+                </span>
+
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
