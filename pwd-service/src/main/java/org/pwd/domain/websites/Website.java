@@ -17,6 +17,9 @@ public class Website {
     //@GeneratedValue(generator="web_site_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
 
+    // Special territorial code assignet by governance
+    private int areaCode;
+
     private URL url;
 
     private String administrativeUnit;
@@ -34,8 +37,9 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, URL url, String administrativeUnit, Address address) {
+    public Website(int id, int areaCode, URL url, String administrativeUnit, Address address) {
         this.id = id;
+        this.areaCode = areaCode;
         this.url = url;
         this.administrativeUnit = administrativeUnit;
         this.address = address;
@@ -48,6 +52,8 @@ public class Website {
     public int getId() {
         return id;
     }
+
+    public int getAreaCode() {return areaCode; }
 
     public URL getUrl() {
         return url;
