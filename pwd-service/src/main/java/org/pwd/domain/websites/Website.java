@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.net.URL;
 
@@ -18,7 +19,8 @@ public class Website {
     private int id;
 
     // Special territorial code assignet by governance
-    private int areaCode;
+    @Column(nullable = true)
+    private Integer areaCode;
 
     private URL url;
 
@@ -37,7 +39,7 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, int areaCode, URL url, String administrativeUnit, Address address) {
+    public Website(int id, Integer areaCode, URL url, String administrativeUnit, Address address) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
@@ -53,7 +55,7 @@ public class Website {
         return id;
     }
 
-    public int getAreaCode() {return areaCode; }
+    public Integer getAreaCode() {return areaCode; }
 
     public URL getUrl() {
         return url;
