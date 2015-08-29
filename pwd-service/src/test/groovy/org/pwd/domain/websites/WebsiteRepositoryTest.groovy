@@ -1,6 +1,8 @@
 package org.pwd.domain.websites
 
 import org.pwd.application.IntegrationTest
+import org.pwd.domain.audit.WebsiteAudit
+import org.pwd.domain.audit.WebsiteAuditRepository
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
@@ -11,7 +13,11 @@ class WebsiteRepositoryTest extends IntegrationTest {
     @Autowired
     WebsiteRepository websiteRepository
 
+    @Autowired
+    WebsiteAuditRepository websiteAuditRepository
+
     def setup(){
+        websiteAuditRepository.deleteAll()
         websiteRepository.deleteAll()
     }
 
