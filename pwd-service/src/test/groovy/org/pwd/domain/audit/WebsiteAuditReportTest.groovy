@@ -2,15 +2,28 @@ package org.pwd.domain.audit
 
 import spock.lang.Specification
 
+import static org.pwd.domain.audit.Metric.*
+
 /**
  * @author bartosz.walacik
  */
 class WebsiteAuditReportTest extends Specification {
 
-    def "should calc score as unweighted average"(){
+    def "should calc score as weighted average"(){
       expect:
-      new WebsiteAuditReport(200, [new MetricValue("a", 100), new MetricValue("b", 0)]).score() == 50
+      new WebsiteAuditReport(200, [anyTitle.create(30), alt.create(0)]).score() == 10
+      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(50)]).score() == 40
+      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(40), htmlLang.create(20)]).score() == 30
       new WebsiteAuditReport(200, []).score() == 0
-      new WebsiteAuditReport(200, [new MetricValue("a", 100), new MetricValue("b", Optional.empty())]).score() == 100
+      new WebsiteAuditReport(200, [anyTitle.create(100), alt.create(Optional.empty())]).score() == 100
+    }
+
+    def "should sort metric by enum ordering"() {
+        when:
+        def report = new WebsiteAuditReport(200, [alt.create(1), anyTitle.create(1)])
+
+        then:
+        report.metrics[0].metric == anyTitle
+        report.metrics[1].metric == alt
     }
 }
