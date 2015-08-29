@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.net.URL;
 
@@ -16,6 +17,10 @@ public class Website {
     //@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="web_site_id_seq", name="web_site_id_seq")
     //@GeneratedValue(generator="web_site_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
+
+    // Special territorial code assignet by governance
+    @Column(nullable = true)
+    private Integer areaCode;
 
     private URL url;
 
@@ -34,8 +39,9 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, URL url, String administrativeUnit, Address address) {
+    public Website(int id, Integer areaCode, URL url, String administrativeUnit, Address address) {
         this.id = id;
+        this.areaCode = areaCode;
         this.url = url;
         this.administrativeUnit = administrativeUnit;
         this.address = address;
@@ -48,6 +54,8 @@ public class Website {
     public int getId() {
         return id;
     }
+
+    public Integer getAreaCode() {return areaCode; }
 
     public URL getUrl() {
         return url;
