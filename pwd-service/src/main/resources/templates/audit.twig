@@ -28,7 +28,7 @@
                     <td> {{ item.auditReport.score }}</td>
                     <td>
                         {% for m in item.auditReport.metrics %}
-                        {{ m.metricName }}: {{m.valueAsString}} &nbsp;
+                        <a href="/metryki/{{ m.metricName }}">{{ m.metricName }}</a>: {{m.valueAsString}} &nbsp;
                         {% endfor %}
                     </td>
                     <td> [{{ item.auditReport.httpStatusCode }}]</td>

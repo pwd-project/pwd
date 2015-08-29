@@ -1,9 +1,7 @@
 package org.pwd.domain.websites
 
 import org.pwd.application.IntegrationTest
-import org.pwd.domain.audit.AuditRepository
 import org.springframework.beans.factory.annotation.Autowired
-import spock.lang.Specification
 
 /**
  * @author bartosz.walacik
@@ -13,7 +11,7 @@ class WebsiteRepositoryTest extends IntegrationTest {
     @Autowired
     WebsiteRepository websiteRepository
 
-    def beforeSpec(){
+    def setup(){
         websiteRepository.deleteAll()
     }
 
