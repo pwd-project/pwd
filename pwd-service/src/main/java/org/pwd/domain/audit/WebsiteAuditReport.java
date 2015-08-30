@@ -18,6 +18,7 @@ public class WebsiteAuditReport extends Document{
 
 
     private final int httpStatusCode;
+    private final int score;
     private final List<MetricValue> metrics;
 
     /**
@@ -28,6 +29,7 @@ public class WebsiteAuditReport extends Document{
 
         this.httpStatusCode = statusCodeFromJson(analysisResponse);
         this.metrics = metricsFromJson(analysisResponse);
+        this.score = metricsWeightedAvg();
     }
 
     public WebsiteAuditReport(int httpStatusCode, List<MetricValue> metrics) {
@@ -35,6 +37,7 @@ public class WebsiteAuditReport extends Document{
 
         this.httpStatusCode = httpStatusCode;
         this.metrics = new ArrayList<>(metrics);
+        this.score = metricsWeightedAvg();
     }
 
     public MetricValue getMetric(String metricName){
@@ -50,7 +53,7 @@ public class WebsiteAuditReport extends Document{
     }
 
     public int score(){
-        return (int) metricsWeightedAvg();
+        return score;
     }
 
     private int metricsWeightedAvg() {
