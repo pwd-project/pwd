@@ -47,9 +47,9 @@ For now, there are 3 envs:
 
 <tr>
   <th>Database</th>
-  <td>Postgres at `localhost:5432`</td>
-  <td>in-memory (H2)</td>
-  <td>Postgres at `TBA`</td>
+  <td>Postgres at `localhost:5432/pwd`</td>
+  <td>Postgres at `localhost:5432/pwd_integration`</td>
+  <td>Postgres at PaaS</td>
 </tr>
 
 <tr>

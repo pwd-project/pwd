@@ -13,3 +13,7 @@ spring:
 
 analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
+
+error:
+  whitelabel:
+    enabled: false
