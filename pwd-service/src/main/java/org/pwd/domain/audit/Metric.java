@@ -6,9 +6,11 @@ import java.util.Optional;
  * @author bartosz.walacik
  */
 public enum Metric {
-    anyTitle (1, "Tytuł"),
-    alt      (2, "Text alternatywny"),
-    htmlLang (1, "Język strony")
+    alt      (1, "1.1.1 Text alternatywny"),
+    sound    (1, "1.4.2 Kontrola dźwięku"),
+    anyTitle (1, "2.4.2 Tytuł strony"),
+    htmlLang (1, "3.1.1 Język strony"),
+    contact  (3, "5.1.2 Kontakt")
     ;
 
     private String namePl;

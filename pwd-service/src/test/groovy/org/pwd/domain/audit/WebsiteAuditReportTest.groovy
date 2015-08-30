@@ -11,9 +11,9 @@ class WebsiteAuditReportTest extends Specification {
 
     def "should calc score as weighted average"(){
       expect:
-      new WebsiteAuditReport(200, [anyTitle.create(30), alt.create(0)]).score() == 10
-      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(50)]).score() == 40
-      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(40), htmlLang.create(20)]).score() == 30
+      new WebsiteAuditReport(200, [anyTitle.create(30), alt.create(0)]).score() == 15
+      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(50)]).score() == 35
+      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(40), htmlLang.create(20)]).score() == 26
       new WebsiteAuditReport(200, []).score() == 0
       new WebsiteAuditReport(200, [anyTitle.create(100), alt.create(Optional.empty())]).score() == 100
     }
@@ -23,7 +23,7 @@ class WebsiteAuditReportTest extends Specification {
         def report = new WebsiteAuditReport(200, [alt.create(1), anyTitle.create(1)])
 
         then:
-        report.metrics[0].metric == anyTitle
-        report.metrics[1].metric == alt
+        report.metrics[0].metric == alt
+        report.metrics[1].metric == anyTitle
     }
 }
