@@ -14,6 +14,7 @@ import javax.transaction.Transactional
 
 import static org.pwd.domain.audit.Metric.alt
 import static org.pwd.domain.audit.Metric.anyTitle
+import static org.pwd.domain.audit.Metric.sound
 
 /**
  * @author bartosz.walacik
@@ -41,7 +42,7 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         audit = auditRepository.save(audit)
 
         def website = getOrCreateWebsite()
-        def report = new WebsiteAuditReport(200, [ alt.create(0), anyTitle.create(100)])
+        def report = new WebsiteAuditReport(200, [ alt.create(0), anyTitle.create(100), sound.create(100)])
         def websiteAudit = audit.createWebsiteAudit(website, report)
 
         when:
@@ -53,12 +54,16 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         websiteAuditPersisted.auditReport instanceof WebsiteAuditReport
         websiteAuditPersisted.auditReport.httpStatusCode == 200
         with(websiteAuditPersisted.auditReport.metrics[0]){
-            metric == anyTitle
-            value.get() == 100
-        }
-        with(websiteAuditPersisted.auditReport.metrics[1]){
             metric == alt
             value.get() == 0
+        }
+        with(websiteAuditPersisted.auditReport.metrics[1]){
+            metric == sound
+            value.get() == 100
+        }
+        with(websiteAuditPersisted.auditReport.metrics[2]){
+            metric == anyTitle
+            value.get() == 100
         }
     }
 
