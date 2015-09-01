@@ -18,7 +18,7 @@
                     <tbody>
                     {% for item in metrics %}
                         <tr>
-                            <td>{{ item.order }}</td>
+                            <td>{{ item.order +1 }}</td>
                             <td><a href="/metryki/{{ item.name }}">{{ item.namePl }}</a></td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.weight }}</td>

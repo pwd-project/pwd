@@ -10,6 +10,7 @@ public enum Metric {
     sound    (1, "1.4.2 Kontrola dźwięku"),
     anyTitle (1, "2.4.2 Tytuł strony"),
     htmlLang (1, "3.1.1 Język strony"),
+    cms      (0, "5.1.1 Używanie CMS"),
     contact  (3, "5.1.2 Kontakt")
     ;
 
