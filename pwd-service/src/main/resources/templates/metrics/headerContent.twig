@@ -1,0 +1,26 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container-fluid">
+        <div class="row mt">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Metryka {{ metric.namePl }}</h1>
+
+                <p>
+                Metryka weryfikuje, każda z sekcji z treścią jest opisana za pomocą nagłówków (tytułów), tam gdzie będzie to konieczne.
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li/> 0 jeśli strona posiada więcej niż jeden tag h1 albo tag h1 nie jest pierwszym z nagłówków
+                    <li/> 100 - 40 * (ilość nagłówków posiadających podwęzły)/(ilość wszystkich nagłówków) - 40 * (ilość pustych nagłówków)/(ilość wszystkich nagłówków)
+                    <li/> 100 jeśli strona nie posiada w ogóle nagłówków
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

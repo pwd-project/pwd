@@ -1,0 +1,24 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container-fluid">
+        <div class="row mt">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Metryka {{ metric.namePl }}</h1>
+
+                <p>
+                Metryka weryfikuje gęstość tagów formatujących.
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li/> 100 - (ilość tagów formatujących)/(ilość wszystkich tagów w body)
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
