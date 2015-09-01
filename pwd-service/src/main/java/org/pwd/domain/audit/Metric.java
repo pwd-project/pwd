@@ -7,12 +7,12 @@ import java.util.Optional;
  */
 public enum Metric {
     alt      (1, "1.1.1 Text alternatywny"),
+    formattingTags (1, "1.3.1 Informacje i jej związki"),
     sound    (1, "1.4.2 Kontrola dźwięku"),
     anyTitle (1, "2.4.2 Tytuł strony"),
-    htmlLang (1, "3.1.1 Język strony"),
-    contact  (3, "5.1.2 Kontakt"),
     headerContent (3, "2.4.10 Nagłówki sekcji"),
-    formattingTags (1, "1.3.1 Informacje i jej związki")
+    htmlLang (1, "3.1.1 Język strony"),
+    contact  (3, "5.1.2 Kontakt")
     ;
 
     private String namePl;
