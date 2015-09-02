@@ -23,7 +23,7 @@
 
                 {% for item in websiteAudits %}
                 <tr>
-                    <td> [{{ loop.index }}]</td>
+                    <td> [{{ item.id }}]</td>
                     <td><a href="{{ item.website.url }}">{{ item.website.url }}</a></td>
                     <td> {{ item.auditReport.score }}</td>
                     <td>
