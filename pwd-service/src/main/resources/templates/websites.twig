@@ -17,6 +17,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th>Rodzaj</th>
                         <th>Nazwa</th>
                         <th>Serwis</th>
                         <th>Miasto</th>
@@ -29,8 +30,9 @@
                     {% for item in websites %}
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
+                            <td>{{ item.unitType }}</td>
                             <td>{{ item.administrativeUnit }}</td>
-                            <td><a href="{{ item.url }}">{{ item.url }}</a></td>
+                            <td><a href="{{ item.url }}" target="_blank">{{ item.url }}</a></td>
                             <td>{{ item.address.city }}</td>
                             <td>{{ item.address.voivodeship }}</td>
                             <td>{{ item.address.county }}</td>

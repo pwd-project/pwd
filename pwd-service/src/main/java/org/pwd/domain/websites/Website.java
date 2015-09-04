@@ -1,6 +1,7 @@
 package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -18,13 +19,19 @@ public class Website {
     //@GeneratedValue(generator="web_site_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
 
-    // Special territorial code assignet by governance
-    @Column(nullable = true)
+    // Special territorial code assigned by governance
     private Integer areaCode;
 
     private URL url;
 
+    private String unitType;
+
     private String administrativeUnit;
+
+    private String administrativePerson;
+
+    // Email to a person who governs this unit
+    private String eMail;
 
     @Embedded
     private Address address;
@@ -39,11 +46,15 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, Integer areaCode, URL url, String administrativeUnit, Address address) {
+    public Website(int id, Integer areaCode, URL url, String unitType,
+                   String administrativeUnit, String administrativePerson, String eMail, Address address) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
+        this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
+        this.administrativePerson = administrativePerson;
+        this.eMail = eMail;
         this.address = address;
     }
 
@@ -55,13 +66,27 @@ public class Website {
         return id;
     }
 
-    public Integer getAreaCode() {return areaCode; }
+    public Integer getAreaCode() {
+        return areaCode;
+    }
 
     public URL getUrl() {
         return url;
     }
 
+    public String getUnitType() {
+        return unitType;
+    }
+
     public String getAdministrativeUnit() {
         return administrativeUnit;
+    }
+
+    public String getAdministrativePerson() {
+        return administrativePerson;
+    }
+
+    public String geteMail() {
+        return eMail;
     }
 }
