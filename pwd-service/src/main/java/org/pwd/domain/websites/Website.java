@@ -1,11 +1,9 @@
 package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Column;
 import javax.persistence.Id;
 import java.net.URL;
 
@@ -31,7 +29,7 @@ public class Website {
     private String administrativePerson;
 
     // Email to a person who governs this unit
-    private String eMail;
+    private String email;
 
     @Embedded
     private Address address;
@@ -47,14 +45,14 @@ public class Website {
     }
 
     public Website(int id, Integer areaCode, URL url, String unitType,
-                   String administrativeUnit, String administrativePerson, String eMail, Address address) {
+                   String administrativeUnit, String administrativePerson, String email, Address address) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
         this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
         this.administrativePerson = administrativePerson;
-        this.eMail = eMail;
+        this.email = email;
         this.address = address;
     }
 
@@ -86,7 +84,7 @@ public class Website {
         return administrativePerson;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 }
