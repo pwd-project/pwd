@@ -1,16 +1,18 @@
 package org.pwd.web.contact;
 
-import org.slf4j.LoggerFactory;
+import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.*;
 import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @author Sławomir Mikulski
@@ -19,16 +21,39 @@ import javax.activation.*;
 @RequestMapping("/kontakt")
 public class ContactController {
 
-    public static final String NAME_LABEL = "Imię i Nazwisko: ";
-    public static final String EMAIL_LABEL = "Email: ";
-    public static final String MOBILE_PHONE_LABEL = "Numer telefonu: ";
-    public static final String SITE_URL_LABEL = "Adres strony: ";
-    public static final String MESSAGE_LABEL = "Wiadomość: ";
+    public static final String NAME_LABEL = "Imię i Nazwisko:";
+    public static final String EMAIL_LABEL = "Email:";
+    public static final String MOBILE_PHONE_LABEL = "Numer telefonu:";
+    public static final String SITE_URL_LABEL = "Adres strony:";
+    public static final String MESSAGE_LABEL = "Wiadomość:";
 
-    public static final String MAILBOX = "smikulsk@gmail.com";
-    public static final String SUBJECT = "This is the Subject Line!";
+    public static final String SUBJECT = "Zgłoszenie ze strony PWD";
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ContactController.class);
+    private final String smtpHost;
+    private final String smtpUser;
+    private final String smtpPass;
+    private final String smtpMail;
+    private final String smtpPort;
+
+    @Autowired
+    public ContactController(@Value("${smtp.host}") String smtpHost,
+                             @Value("${smtp.username}") String smtpUser,
+                             @Value("${smtp.password}") String smtpPass,
+                             @Value("${smtp.mailbox}") String smtpMail,
+                             @Value("${smtp.port}") String smtpPort) {
+        Preconditions.checkArgument(!smtpHost.isEmpty());
+        Preconditions.checkArgument(!smtpUser.isEmpty());
+        Preconditions.checkArgument(!smtpPass.isEmpty());
+        Preconditions.checkArgument(!smtpHost.isEmpty());
+        Preconditions.checkArgument(!smtpPort.isEmpty());
+
+        this.smtpHost = smtpHost;
+        this.smtpUser = smtpUser;
+        this.smtpPass = smtpPass;
+        this.smtpMail = smtpMail;
+        this.smtpPort = smtpPort;
+    }
+
 
     @RequestMapping(method = POST)
     public String sendEmail(@RequestParam(value = "name", required = true) String name,
@@ -37,17 +62,22 @@ public class ContactController {
                             @RequestParam(value = "site", required = false) String site,
                             @RequestParam(value = "message", required = false) String message) {
 
-        // Assuming you are sending email from localhost
-        String host = "localhost";
-
         // Get system properties
         Properties properties = System.getProperties();
 
-        // Setup mail server
-        properties.setProperty("mail.smtp.host", host);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", smtpHost);
+        properties.put("mail.smtp.port", smtpPort);
+        properties.put("mail.smtp.ssl.trust", smtpHost);
 
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
+        // Get the Session object.
+        Session session = Session.getInstance(properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(smtpUser, smtpPass);
+                    }
+                });
 
         try{
             // Create a default MimeMessage object.
@@ -57,16 +87,16 @@ public class ContactController {
             msg.setFrom(new InternetAddress(email));
 
             // Set To: header field of the header.
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(MAILBOX));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(smtpMail));
 
             // Set Subject: header field
-            message.setSubject(SUBJECT);
+            msg.setSubject(SUBJECT);
 
             // Send the actual HTML message, as big as you like
-            message.setContent(composeMessage(name,email,mobile,site,message), "text/plain" );
+            msg.setContent(composeMessage(name, email, mobile, site, message), "text/plain");
 
             // Send message
-            Transport.send(message);
+            Transport.send(msg);
 
             return "email_sent";
 
@@ -76,15 +106,11 @@ public class ContactController {
         }
     }
 
-    String composeMessage(String name, String email, String mobile, String site, String message){
-        String result = "";
-
-        result.append(NAME_LABEL); result.append(name); result.append("\n");
-        result.append(EMAIL_LABEL); result.append(email); result.append("\n");
-        result.append(MOBILE_PHONE_LABEL); result.append(mobile); result.append("\n");
-        result.append(SITE_URL_LABEL); result.append(site); result.append("\n");
-        result.append(MESSAGE_LABEL); result.append(message);
-
-        return result;
+    private String composeMessage(String name, String email, String mobile, String site, String message){
+        return NAME_LABEL+" "+name+"\n"
+             + EMAIL_LABEL+" "+email+"\n"
+             + MOBILE_PHONE_LABEL+" "+mobile+"\n"
+             + SITE_URL_LABEL+" "+site+"\n"
+             + MESSAGE_LABEL+" "+message;
     }
 }
