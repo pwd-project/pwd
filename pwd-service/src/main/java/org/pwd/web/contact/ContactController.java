@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-//import java.util.*;
-//import javax.mail.*;
-//import javax.mail.internet.*;
-//import javax.activation.*;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 /**
  * @author Sławomir Mikulski
@@ -31,13 +31,13 @@ public class ContactController {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     @RequestMapping(method = POST)
-    public void sendEmail(@RequestParam(value = "name", required = true) String name,
+    public String sendEmail(@RequestParam(value = "name", required = true) String name,
                             @RequestParam(value = "email", required = true) String email,
                             @RequestParam(value = "mobile", required = false) String mobile,
                             @RequestParam(value = "site", required = false) String site,
                             @RequestParam(value = "message", required = false) String message) {
 
-    /*    // Assuming you are sending email from localhost
+        // Assuming you are sending email from localhost
         String host = "localhost";
 
         // Get system properties
@@ -67,22 +67,24 @@ public class ContactController {
 
             // Send message
             Transport.send(message);
-            System.out.println("Message sent successfully....");
+
+            return "email_sent";
+
         }catch (MessagingException mex) {
             mex.printStackTrace();
-        }*/
-        logger.debug(composeMessage(name,email,mobile,site,message));
+            return "error";
+        }
     }
 
     String composeMessage(String name, String email, String mobile, String site, String message){
-        StringBuilder stringBuilder = new StringBuilder();
+        String result = "";
 
-        stringBuilder.append(NAME_LABEL); stringBuilder.append(name); stringBuilder.append("\n");
-        stringBuilder.append(EMAIL_LABEL); stringBuilder.append(email); stringBuilder.append("\n");
-        stringBuilder.append(MOBILE_PHONE_LABEL); stringBuilder.append(mobile); stringBuilder.append("\n");
-        stringBuilder.append(SITE_URL_LABEL); stringBuilder.append(site); stringBuilder.append("\n");
-        stringBuilder.append(MESSAGE_LABEL); stringBuilder.append(message);
+        result.append(NAME_LABEL); result.append(name); result.append("\n");
+        result.append(EMAIL_LABEL); result.append(email); result.append("\n");
+        result.append(MOBILE_PHONE_LABEL); result.append(mobile); result.append("\n");
+        result.append(SITE_URL_LABEL); result.append(site); result.append("\n");
+        result.append(MESSAGE_LABEL); result.append(message);
 
-        return stringBuilder.toString();
+        return result;
     }
 }
