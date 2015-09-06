@@ -33,19 +33,19 @@ public class ContactController {
     private final String smtpUser;
     private final String smtpPass;
     private final String smtpMail;
-    private final String smtpPort;
+    private final int smtpPort;
 
     @Autowired
     public ContactController(@Value("${smtp.host}") String smtpHost,
                              @Value("${smtp.username}") String smtpUser,
                              @Value("${smtp.password}") String smtpPass,
                              @Value("${smtp.mailbox}") String smtpMail,
-                             @Value("${smtp.port}") String smtpPort) {
+                             @Value("${smtp.port}") int smtpPort) {
         Preconditions.checkArgument(!smtpHost.isEmpty());
         Preconditions.checkArgument(!smtpUser.isEmpty());
         Preconditions.checkArgument(!smtpPass.isEmpty());
         Preconditions.checkArgument(!smtpHost.isEmpty());
-        Preconditions.checkArgument(!smtpPort.isEmpty());
+        Preconditions.checkArgument(smtpPort!=0);
 
         this.smtpHost = smtpHost;
         this.smtpUser = smtpUser;
@@ -72,19 +72,14 @@ public class ContactController {
         properties.put("mail.smtp.ssl.trust", smtpHost);
 
         // Get the Session object.
-        Session session = Session.getInstance(properties,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(smtpUser, smtpPass);
-                    }
-                });
+        Session session = Session.getInstance(properties,null);
 
         try{
             // Create a default MimeMessage object.
             MimeMessage msg = new MimeMessage(session);
 
             // Set From: header field of the header.
-            msg.setFrom(new InternetAddress(email));
+            msg.setFrom(new InternetAddress(smtpUser));
 
             // Set To: header field of the header.
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(smtpMail));
@@ -96,7 +91,10 @@ public class ContactController {
             msg.setContent(composeMessage(name, email, mobile, site, message), "text/plain");
 
             // Send message
-            Transport.send(msg);
+            Transport transport = session.getTransport("smtps");
+            transport.connect(smtpHost, smtpPort, smtpUser, smtpPass);
+            transport.sendMessage(msg,msg.getAllRecipients());
+            transport.close();
 
             return "email_sent";
 
