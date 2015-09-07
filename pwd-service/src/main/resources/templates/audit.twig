@@ -28,13 +28,13 @@
                 <tbody>
                 {% for item in websiteAudits %}
                 <tr>
-                    <td> {{ item.website.areaCode }}</td>
+                    <td>{{ item.website.areaCode }}</td>
                     <td><a href="{{ item.website.url }}">{{ item.website.url }}</a></td>
-                    <td> {{ item.auditReport.score }}</td>
+                    <td>{{ item.auditReport.score }}</td>
                     {% for m in item.auditReport.metrics %}
-                    <td> {{m.valueAsString}} </td>
+                    <td>{{m.valueAsString}} </td>
                     {% endfor %}
-                    <td> [{{ item.auditReport.httpStatusCode }}]</td>
+                    <td>[{{ item.auditReport.httpStatusCode }}]</td>
                 </tr>
                 {% endfor %}
                 </tbody>
