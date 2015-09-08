@@ -12,28 +12,32 @@
                 <li>czas trwania: {{audit.durationAsString}}</li>
             </ol>
             <h2>Lista raportów dla audytowanych stron</h2>
-            <table>
+            <table class="table table-striped table-hover">
+                <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Kod</th>
                     <th>URL</th>
                     <th>Wynik</th>
-                    <th>Metryki</th>
+                    {% for item in metrics %}
+                    <th><a href="/metryki/{{ item.name }}">{{ item.name }}</a></th>
+                    {% endfor %}
                     <th>HTTP Status Code</th>
                 </tr>
+                </thead>
 
+                <tbody>
                 {% for item in websiteAudits %}
                 <tr>
-                    <td> [{{ item.id }}]</td>
+                    <td>{{ item.website.areaCode }}</td>
                     <td><a href="{{ item.website.url }}">{{ item.website.url }}</a></td>
-                    <td> {{ item.auditReport.score }}</td>
-                    <td>
-                        {% for m in item.auditReport.metrics %}
-                        <a href="/metryki/{{ m.metricName }}">{{ m.metricName }}</a>: {{m.valueAsString}} &nbsp;
-                        {% endfor %}
-                    </td>
-                    <td> [{{ item.auditReport.httpStatusCode }}]</td>
+                    <td>{{ item.auditReport.score }}</td>
+                    {% for m in item.auditReport.metrics %}
+                    <td>{{m.valueAsString}} </td>
+                    {% endfor %}
+                    <td>[{{ item.auditReport.httpStatusCode }}]</td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
     </section>
