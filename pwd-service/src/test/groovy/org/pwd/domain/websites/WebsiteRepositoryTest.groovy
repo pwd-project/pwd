@@ -23,13 +23,15 @@ class WebsiteRepositoryTest extends IntegrationTest {
 
     def "should find websites with full text search"(){
         given:
-        websiteRepository.save(new Website(10, 111, new URL("http://example.com/"), "P",
-                "Urząd Smoka Wawelskiego", "Smok", "kris@gnail.com",
-                new Address("Żyrardów", "Śląskie", "Powiat Duży")))
+        websiteRepository.save new Website(10, 111, new URL("http://example.com/"),
+                "P", "Urząd Smoka Wawelskiego", "kris@gnail.com",
+                new Address("Żyrardów", "Śląskie", "Powiat Duży"),
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
 
-        websiteRepository.save(new Website(11, 222, new URL("http://example.com/"), "W",
-                "Biuro Smoka Wawelskiego", "Smok", "kris@gnail.com",
-                new Address("Gniezno", "Mazowieckie", "Powiat Mały")))
+        websiteRepository.save(new Website(11, 222, new URL("http://example.com/"),
+                "W", "Biuro Smoka Wawelskiego", "kris@gnail.com",
+                new Address("Gniezno", "Mazowieckie", "Powiat Mały"),
+                new Person("Krzysiek", "Adamowicz", "Burmistrz")))
 
         expect:
         //query by name

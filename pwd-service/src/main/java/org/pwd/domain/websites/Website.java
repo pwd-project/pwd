@@ -26,13 +26,14 @@ public class Website {
 
     private String administrativeUnit;
 
-    private String administrativePerson;
-
     // Email to a person who governs this unit
     private String email;
 
     @Embedded
     private Address address;
+
+    @Embedded
+    private Person person;
 
     // only for Hibernate
     Website(){
@@ -44,20 +45,25 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, Integer areaCode, URL url, String unitType,
-                   String administrativeUnit, String administrativePerson, String email, Address address) {
+    public Website(int id, Integer areaCode, URL url,
+                   String unitType, String administrativeUnit, String email,
+                   Address address, Person person) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
         this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
-        this.administrativePerson = administrativePerson;
         this.email = email;
         this.address = address;
+        this.person = person;
     }
 
     public Address getAddress() {
         return address;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 
     public int getId() {
@@ -78,10 +84,6 @@ public class Website {
 
     public String getAdministrativeUnit() {
         return administrativeUnit;
-    }
-
-    public String getAdministrativePerson() {
-        return administrativePerson;
     }
 
     public String getEmail() {
