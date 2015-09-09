@@ -12,7 +12,7 @@
                                required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{ email }}"
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ email }}"
                                required>
                     </div>
                     <div class="form-group">
@@ -20,13 +20,13 @@
                                placeholder="Numer telefonu">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="site" name="site" value="{{ site }}"
+                        <input type="url" class="form-control" id="site" name="site" value="{{ site }}"
                                placeholder="Adres strony">
                     </div>
                     <div class="form-group">
                             <textarea class="form-control" type="textarea" id="message" placeholder="Wiadomość"
-                                      maxlength="140" rows="7" value="{{ message }}">
-
+                                      maxlength="140" rows="7">
+                                {{ message }}
                             </textarea>
                     </div>
 

@@ -15,11 +15,7 @@ analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
 
 smtp:
-  host: studzieniec.home.pl
-  username: kontakt@pwd.dolinagubra.pl
-  password: ????
   mailbox: kontakt@pwd.dolinagubra.pl
-  port: 465
 
 error:
   whitelabel:

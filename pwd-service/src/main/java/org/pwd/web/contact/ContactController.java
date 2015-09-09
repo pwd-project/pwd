@@ -1,16 +1,16 @@
 package org.pwd.web.contact;
 
 import com.google.common.base.Preconditions;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
+import org.springframework.web.client.RestTemplate;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -29,29 +29,21 @@ public class ContactController {
 
     public static final String SUBJECT = "Zgłoszenie ze strony PWD";
 
-    private final String smtpHost;
-    private final String smtpUser;
-    private final String smtpPass;
     private final String smtpMail;
-    private final int smtpPort;
+    private final String apiKey;
+    private final String smtpUrl;
 
     @Autowired
-    public ContactController(@Value("${smtp.host}") String smtpHost,
-                             @Value("${smtp.username}") String smtpUser,
-                             @Value("${smtp.password}") String smtpPass,
-                             @Value("${smtp.mailbox}") String smtpMail,
-                             @Value("${smtp.port}") int smtpPort) {
-        Preconditions.checkArgument(!smtpHost.isEmpty());
-        Preconditions.checkArgument(!smtpUser.isEmpty());
-        Preconditions.checkArgument(!smtpPass.isEmpty());
-        Preconditions.checkArgument(!smtpHost.isEmpty());
-        Preconditions.checkArgument(smtpPort!=0);
+    public ContactController(@Value("${smtp.mailbox}") String smtpMail,
+                             @Value("${MAILGUN_API_KEY}") String apiKey,
+                             @Value("${MAILGUN_DOMAIN}") String smtpUrl) {
+        Preconditions.checkArgument(!smtpMail.isEmpty());
+        Preconditions.checkArgument(!apiKey.isEmpty());
+        Preconditions.checkArgument(!smtpUrl.isEmpty());
 
-        this.smtpHost = smtpHost;
-        this.smtpUser = smtpUser;
-        this.smtpPass = smtpPass;
         this.smtpMail = smtpMail;
-        this.smtpPort = smtpPort;
+        this.apiKey = "api:" + apiKey;
+        this.smtpUrl = "https://api.mailgun.net/v3/" + smtpUrl + "/messages";
     }
 
 
@@ -62,43 +54,29 @@ public class ContactController {
                             @RequestParam(value = "site", required = false) String site,
                             @RequestParam(value = "message", required = false) String message) {
 
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", smtpHost);
-        properties.put("mail.smtp.port", smtpPort);
-        properties.put("mail.smtp.ssl.trust", smtpHost);
-
-        // Get the Session object.
-        Session session = Session.getInstance(properties,null);
-
         try{
-            // Create a default MimeMessage object.
-            MimeMessage msg = new MimeMessage(session);
+            RestTemplate restTemplate = new RestTemplate();
 
-            // Set From: header field of the header.
-            msg.setFrom(new InternetAddress(smtpUser));
+            HttpHeaders headers = new HttpHeaders();
+            byte[] apiKeyBytes = apiKey.getBytes();
+            byte[] base64ApiKeyBytes = Base64.encodeBase64(apiKeyBytes);
+            String base64ApiKey = new String(base64ApiKeyBytes);
 
-            // Set To: header field of the header.
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(smtpMail));
+            headers.add("Authorization","Basic " + base64ApiKey );
 
-            // Set Subject: header field
-            msg.setSubject(SUBJECT);
+            MultiValueMap<String,String> parameters = new LinkedMultiValueMap<String, String>();
+            parameters.add("from", email);
+            parameters.add("to", smtpMail);
+            parameters.add("subject",SUBJECT);
+            parameters.add("text", composeMessage(name, email, mobile, site, message));
 
-            // Send the actual HTML message, as big as you like
-            msg.setContent(composeMessage(name, email, mobile, site, message), "text/plain");
+            HttpEntity request = new HttpEntity<MultiValueMap<String, String>>(parameters,headers);
 
-            // Send message
-            Transport transport = session.getTransport("smtps");
-            transport.connect(smtpHost, smtpPort, smtpUser, smtpPass);
-            transport.sendMessage(msg,msg.getAllRecipients());
-            transport.close();
+            ResponseEntity<String> response = restTemplate.exchange(smtpUrl,HttpMethod.POST, request, String.class);
 
             return "email_sent";
 
-        }catch (MessagingException mex) {
+        }catch (RuntimeException mex) {
             mex.printStackTrace();
             return "error";
         }
