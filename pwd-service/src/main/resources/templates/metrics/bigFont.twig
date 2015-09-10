@@ -1,0 +1,25 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container-fluid">
+        <div class="row mt">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Metryka {{ metric.namePl }}</h1>
+
+                <p>
+                Metryka weryfikuje czy na stronie są mechanizmy polegające na stopniowym powiększaniu czcionki.
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li>0 jeśli nie strona posiada</li>
+                    <li>100 jeśli strona posiada</li>
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

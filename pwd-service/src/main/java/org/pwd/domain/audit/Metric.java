@@ -6,14 +6,15 @@ import java.util.Optional;
  * @author bartosz.walacik
  */
 public enum Metric {
-    alt      (1, "1.1.1 Text alternatywny"),
-    formattingTags (1, "1.3.1 Informacje i jej związki"),
-    sound    (1, "1.4.2 Kontrola dźwięku"),
-    anyTitle (1, "2.4.2 Tytuł strony"),
-    headerContent (3, "2.4.10 Nagłówki sekcji"),
-    htmlLang (1, "3.1.1 Język strony"),
-    cms      (0, "5.1.1 Używanie CMS"),
-    contact  (3, "5.1.2 Kontakt")
+    alt             (1, "1.1.1 Text alternatywny"),
+    formattingTags  (1, "1.3.1 Informacje i jej związki"),
+    sound           (1, "1.4.2 Kontrola dźwięku"),
+    bigFont         (2, "1.4.4 Zmiana rozmiaru tekstu"),
+    anyTitle        (1, "2.4.2 Tytuł strony"),
+    headerContent   (3, "2.4.10 Nagłówki sekcji"),
+    htmlLang        (1, "3.1.1 Język strony"),
+    cms             (0, "5.1.1 Używanie CMS"),
+    contact         (3, "5.1.2 Kontakt")
     ;
 
     private String namePl;
