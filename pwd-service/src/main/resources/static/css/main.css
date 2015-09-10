@@ -124,6 +124,9 @@ hr {
     font-weight: 300;
 }
 
+#footer {
+    background-color: #333333;
+}
 .footer {
     padding: 10px;
 }
