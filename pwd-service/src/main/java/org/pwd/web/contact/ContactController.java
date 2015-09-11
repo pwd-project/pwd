@@ -42,8 +42,16 @@ public class ContactController {
         Preconditions.checkArgument(!smtpUrl.isEmpty());
 
         this.smtpMail = smtpMail;
-        this.apiKey = "api:" + apiKey;
-        this.smtpUrl = "https://api.mailgun.net/v3/" + smtpUrl + "/messages";
+
+        if( !apiKey.startsWith("api:"))
+            this.apiKey = "api:" + apiKey;
+        else
+            this.apiKey = apiKey;
+
+        if( !smtpUrl.startsWith("http"))
+            this.smtpUrl = "https://api.mailgun.net/v3/" + smtpUrl + "/messages";
+        else
+            this.smtpUrl = smtpUrl;
     }
 
 

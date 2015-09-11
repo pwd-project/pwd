@@ -17,6 +17,9 @@ analysis:
 smtp:
   mailbox: kontakt@pwd.dolinagubra.pl
 
+MAILGUN_API_KEY: dummyApiKey
+MAILGUN_DOMAIN: localhost
+
 error:
   whitelabel:
     enabled: false
