@@ -25,10 +25,10 @@ class SendContactEmailTest extends Specification {
         then:
         response == "email_sent"
         verify(postRequestedFor(urlMatching("/email"))
-                .withQueryParam("from", equalTo("dummy@email.com"))
-                .withQueryParam("to", equalTo("dummy@mailbox.com"))
-                .withQueryParam("subject", equalTo(ContactController.SUBJECT))
-                .withQueryParam("text", containing("Test message"))
+                .withRequestBody(matching(".*from.*"))
+                .withRequestBody(matching(".*to.*"))
+                .withRequestBody(matching(".*subject.*"))
+                .withRequestBody(matching(".*text.*"))
         );
     }
 }
