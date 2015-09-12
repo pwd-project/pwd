@@ -80,6 +80,7 @@ hr {
 
 .navbar-default .navbar-brand {
     color: black;
+    height: 93px;
 }
 
 .navbar-default .navbar-nav > li > a {
