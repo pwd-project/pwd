@@ -9,7 +9,9 @@ import javax.persistence.Embeddable;
 public class Address {
     private String city;
 
-    /** wojewodztwo */
+    /**
+     * wojewodztwo
+     */
     private String voivodeship;
 
     /**

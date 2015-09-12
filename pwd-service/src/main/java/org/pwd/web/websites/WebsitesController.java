@@ -29,15 +29,14 @@ class WebsitesController {
 
     @RequestMapping(method = GET)
     public String getWebsites(Model model,
-                              @RequestParam(value = "query", required = false) String query)
-    {
+                              @RequestParam(value = "query", required = false) String query) {
 
         model.addAttribute("query", query);
 
         List<Website> websites;
         if (StringUtils.isEmpty(query)) {
             websites = websiteRepository.findAll();
-        }else {
+        } else {
             websites = websiteRepository.search(query);
         }
         model.addAttribute("websites", websites);

@@ -24,7 +24,7 @@ class SmokeTest extends IntegrationTest {
         def persistedWebsite = websiteRepository.getOne(1)
 
         then:
-        persistedWebsite.url ==  new URL("http://example.com/")
+        persistedWebsite.url == new URL("http://example.com/")
     }
 
 }

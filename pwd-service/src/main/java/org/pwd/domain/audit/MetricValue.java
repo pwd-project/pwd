@@ -7,7 +7,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * @author bartosz.walacik
  */
-public class MetricValue implements Comparable<MetricValue>{
+public class MetricValue implements Comparable<MetricValue> {
     private final Metric metric;
 
     //null -> empty optional

@@ -6,9 +6,9 @@ import spock.lang.Specification
 /**
  * @author bartosz.walacik
  */
-class DummyTest extends Specification{
+class DummyTest extends Specification {
 
-    def "should load jtwig resources"(){
+    def "should load jtwig resources"() {
         given:
         def res = new ClasspathJtwigResource("templates/index.twig")
         println res

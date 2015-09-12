@@ -4,7 +4,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author bartosz.walacik
@@ -24,16 +27,16 @@ public class AuditProcessStarter {
         this.auditProcess = auditProcess;
     }
 
-    public void startAuditProcess(){
+    public void startAuditProcess() {
 
-        executorService.submit( () ->
-        {
-            try {
-                auditProcess.doAudit();
-            } catch(Exception e){
-                logger.error("audit request failed", e);
-            }
-        }
+        executorService.submit(() ->
+                {
+                    try {
+                        auditProcess.doAudit();
+                    } catch (Exception e) {
+                        logger.error("audit request failed", e);
+                    }
+                }
         );
 
         logger.info("Audit request added to the queue");

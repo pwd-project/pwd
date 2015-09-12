@@ -25,7 +25,7 @@ class WebsiteAuditor {
         this.websiteAuditRepository = websiteAuditRepository;
     }
 
-    WebsiteAudit auditWebsite(Audit audit, Website website){
+    WebsiteAudit auditWebsite(Audit audit, Website website) {
 
         WebsiteAuditReport auditReport = analysisRestClient.getAnalysis(website.getUrl());
 

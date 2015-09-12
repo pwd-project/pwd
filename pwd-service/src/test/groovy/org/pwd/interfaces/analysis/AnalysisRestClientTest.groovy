@@ -16,12 +16,12 @@ class AnalysisRestClientTest extends Specification {
     WireMockRule wireMockRule = new WireMockRule(8089)
 
 
-    def "should integrate with pwd-analysis service"(){
-      given:
-      def analysisRestClient = new AnalysisRestClient('http://localhost:8089/analysis')
+    def "should integrate with pwd-analysis service"() {
+        given:
+        def analysisRestClient = new AnalysisRestClient('http://localhost:8089/analysis')
 
-      def expectedJson =
-        """
+        def expectedJson =
+                """
         {
           "analysis": {
             "anyTitle": {
@@ -43,20 +43,20 @@ class AnalysisRestClientTest extends Specification {
         }
         """
 
-      wireMockRule.stubFor(get(urlPathEqualTo("/analysis"))
-                        .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", MediaType.APPLICATION_JSON.toString())
-                        .withBody(expectedJson)))
+        wireMockRule.stubFor(get(urlPathEqualTo("/analysis"))
+                .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", MediaType.APPLICATION_JSON.toString())
+                .withBody(expectedJson)))
 
-      when:
-      def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
+        when:
+        def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
 
-      then:
-      response.metrics.size() == 3
-      response.getMetric("anyTitle").value.get() == 100
-      response.getMetric("htmlLang").value.get() == 0
-      !response.getMetric("alt").value.isPresent()
-      response.getHttpStatusCode() == 200
+        then:
+        response.metrics.size() == 3
+        response.getMetric("anyTitle").value.get() == 100
+        response.getMetric("htmlLang").value.get() == 0
+        !response.getMetric("alt").value.isPresent()
+        response.getHttpStatusCode() == 200
     }
 }

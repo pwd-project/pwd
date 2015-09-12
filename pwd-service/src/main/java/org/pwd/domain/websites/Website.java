@@ -2,6 +2,7 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Website {
     private Person person;
 
     // only for Hibernate
-    Website(){
+    Website() {
     }
 
     public Website(int id, URL url) {
