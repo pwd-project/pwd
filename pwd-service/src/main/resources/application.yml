@@ -12,7 +12,7 @@ spring:
     continue-on-error: false
 
 analysis:
-  endpoint: http://pwd-analysis.herokuapp.com/analysis
+  endpoint: https://rocky-citadel-6277.herokuapp.com/analysis
 
 error:
   whitelabel:
