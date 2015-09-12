@@ -33,11 +33,11 @@ public enum Metric {
         return new MetricValue(this, value);
     }
 
-    public static boolean exists(String metricName){
+    public static boolean exists(String metricName) {
         try {
             valueOf(metricName);
             return true;
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return false;
         }
     }
@@ -50,7 +50,7 @@ public enum Metric {
         return weight;
     }
 
-    public int getOrder(){
+    public int getOrder() {
         return ordinal();
     }
 
