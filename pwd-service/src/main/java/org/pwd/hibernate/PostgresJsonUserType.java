@@ -1,6 +1,5 @@
 package org.pwd.hibernate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hibernate.HibernateException;
@@ -8,7 +7,6 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 import org.postgresql.util.PGobject;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +19,7 @@ import java.util.Objects;
  */
 public abstract class PostgresJsonUserType<T extends Document> implements UserType {
 
-    private static final Gson gson =  new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
     public int[] sqlTypes() {

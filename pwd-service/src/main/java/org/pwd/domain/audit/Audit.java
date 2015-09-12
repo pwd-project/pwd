@@ -7,10 +7,9 @@ import org.pwd.hibernate.LocalDateTimeConverter;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
-import static org.pwd.domain.audit.AuditProcessStatus.*;
+import static org.pwd.domain.audit.AuditProcessStatus.NEW;
+import static org.pwd.domain.audit.AuditProcessStatus.STARTED;
 
 /**
  * @author bartosz.walacik
@@ -18,8 +17,8 @@ import static org.pwd.domain.audit.AuditProcessStatus.*;
 @Entity(name = "audit")
 public class Audit {
     @Id
-    @SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="audit_id_seq", name="audit_id_seq")
-    @GeneratedValue(generator="audit_id_seq", strategy= GenerationType.SEQUENCE)
+    @SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "audit_id_seq", name = "audit_id_seq")
+    @GeneratedValue(generator = "audit_id_seq", strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Convert(converter = LocalDateTimeConverter.class)
@@ -41,30 +40,30 @@ public class Audit {
         return new WebsiteAudit(website, this, auditReport);
     }
 
-    public Audit start(){
+    public Audit start() {
         Preconditions.checkState(processStatus == NEW);
         started = LocalDateTime.now();
         processStatus = STARTED;
         return this;
     }
 
-    public void done(int auditedSitesCount){
+    public void done(int auditedSitesCount) {
         Preconditions.checkState(processStatus == STARTED);
         finished = LocalDateTime.now();
         processStatus = AuditProcessStatus.DONE;
         this.auditedSitesCount = auditedSitesCount;
     }
 
-    public void broken(Exception e){
+    public void broken(Exception e) {
         finished = LocalDateTime.now();
         processStatus = AuditProcessStatus.BROKEN;
     }
 
     public Duration duration() {
-        if (started == null){
+        if (started == null) {
             return Duration.ofSeconds(0);
         }
-        if (finished == null){
+        if (finished == null) {
             return Duration.between(started, LocalDateTime.now());
         }
         return Duration.between(started, finished);
@@ -87,7 +86,7 @@ public class Audit {
     }
 
     public String durationAsString() {
-        return duration().toMinutes() +" mi "+  duration().getSeconds() % 60 +" s";
+        return duration().toMinutes() + " mi " + duration().getSeconds() % 60 + " s";
     }
 
     public int getAuditedSitesCount() {

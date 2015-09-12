@@ -6,15 +6,14 @@ import java.util.Optional;
  * @author bartosz.walacik
  */
 public enum Metric {
-    alt      (1, "1.1.1 Text alternatywny"),
-    formattingTags (1, "1.3.1 Informacje i jej związki"),
-    sound    (1, "1.4.2 Kontrola dźwięku"),
-    anyTitle (1, "2.4.2 Tytuł strony"),
-    headerContent (3, "2.4.10 Nagłówki sekcji"),
-    htmlLang (1, "3.1.1 Język strony"),
-    cms      (0, "5.1.1 Używanie CMS"),
-    contact  (3, "5.1.2 Kontakt")
-    ;
+    alt(1, "1.1.1 Text alternatywny"),
+    formattingTags(1, "1.3.1 Informacje i jej związki"),
+    sound(1, "1.4.2 Kontrola dźwięku"),
+    anyTitle(1, "2.4.2 Tytuł strony"),
+    headerContent(3, "2.4.10 Nagłówki sekcji"),
+    htmlLang(1, "3.1.1 Język strony"),
+    cms(0, "5.1.1 Używanie CMS"),
+    contact(3, "5.1.2 Kontakt");
 
     private String namePl;
     private int weight;
@@ -32,11 +31,11 @@ public enum Metric {
         return new MetricValue(this, value);
     }
 
-    public static boolean exists(String metricName){
+    public static boolean exists(String metricName) {
         try {
             valueOf(metricName);
             return true;
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return false;
         }
     }
@@ -49,7 +48,7 @@ public enum Metric {
         return weight;
     }
 
-    public int getOrder(){
+    public int getOrder() {
         return ordinal();
     }
 
