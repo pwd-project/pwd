@@ -16,8 +16,8 @@ public interface WebsiteRepository extends JpaRepository<Website, Integer> {
      * CREATE EXTENSION unaccent;
      */
     @Query(nativeQuery = true, value =
-    "SELECT * from website "+
-    "where to_tsvector(unaccent( replace(url,'.', ' ') ||' '|| coalesce(city,'') ||' '|| coalesce(county,'') || ' ' || coalesce(voivodeship,'') || ' '|| coalesce(administrative_unit,''))) "+
-    "@@ to_tsquery(unaccent(:searchPhrase)) ")
+            "SELECT * from website " +
+                    "where to_tsvector(unaccent( replace(url,'.', ' ') ||' '|| coalesce(city,'') ||' '|| coalesce(county,'') || ' ' || coalesce(voivodeship,'') || ' '|| coalesce(administrative_unit,''))) " +
+                    "@@ to_tsquery(unaccent(:searchPhrase)) ")
     List<Website> search(@Param("searchPhrase") String searchPhrase);
 }

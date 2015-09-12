@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * @author bartosz.walacik
  */
-public class WebsiteAuditReport extends Document{
+public class WebsiteAuditReport extends Document {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(WebsiteAuditReport.class);
 
 
@@ -40,19 +40,19 @@ public class WebsiteAuditReport extends Document{
         this.score = metricsWeightedAvg();
     }
 
-    public MetricValue getMetric(String metricName){
+    public MetricValue getMetric(String metricName) {
         return metrics
-               .stream()
-               .filter(it -> it.getMetricName().equals(metricName))
-               .findFirst()
-               .orElseThrow(() -> new RuntimeException("no such metric: " + metricName));
+                .stream()
+                .filter(it -> it.getMetricName().equals(metricName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("no such metric: " + metricName));
     }
 
     public int getHttpStatusCode() {
         return httpStatusCode;
     }
 
-    public int score(){
+    public int score() {
         return score;
     }
 
@@ -61,13 +61,13 @@ public class WebsiteAuditReport extends Document{
         List<MetricValue> nonEmptyMetrics =
                 metrics.stream().filter(it -> it.getValue().isPresent()).collect(Collectors.toList());
 
-        if (nonEmptyMetrics.size() == 0){
+        if (nonEmptyMetrics.size() == 0) {
             return 0;
         }
 
         int valueSum = 0;
         int weightSum = 0;
-        for (MetricValue it : nonEmptyMetrics){
+        for (MetricValue it : nonEmptyMetrics) {
             valueSum += it.getValue().get() * it.getWeight();
             weightSum += it.getWeight();
         }
@@ -93,7 +93,7 @@ public class WebsiteAuditReport extends Document{
         for (Map.Entry<String, JsonElement> metricEntry : analysisElement.entrySet()) {
             String metricName = metricEntry.getKey();
 
-            if (!Metric.exists(metricName)){
+            if (!Metric.exists(metricName)) {
                 logger.warn("ignoring unknown metric {}", metricName);
                 continue;
             }
@@ -103,10 +103,9 @@ public class WebsiteAuditReport extends Document{
             JsonElement scoreElement = metricElement.get("score");
 
             Optional<Integer> score;
-            if (!scoreElement.isJsonNull()){
+            if (!scoreElement.isJsonNull()) {
                 score = Optional.of(scoreElement.getAsInt());
-            }
-            else{
+            } else {
                 score = Optional.empty();
             }
             MetricValue metricValue = metric.create(score);

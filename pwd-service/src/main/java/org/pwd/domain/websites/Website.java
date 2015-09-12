@@ -2,9 +2,9 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Column;
 import javax.persistence.Id;
 import java.net.URL;
 
@@ -30,7 +30,7 @@ public class Website {
     private Address address;
 
     // only for Hibernate
-    Website(){
+    Website() {
     }
 
     public Website(int id, URL url) {
@@ -55,7 +55,9 @@ public class Website {
         return id;
     }
 
-    public Integer getAreaCode() {return areaCode; }
+    public Integer getAreaCode() {
+        return areaCode;
+    }
 
     public URL getUrl() {
         return url;

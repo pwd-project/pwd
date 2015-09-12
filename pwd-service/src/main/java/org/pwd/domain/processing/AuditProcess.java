@@ -39,9 +39,9 @@ class AuditProcess {
         try {
             auditWebsites(audit, websites);
             audit.done(websites.size());
-        } catch (Exception e){
+        } catch (Exception e) {
             audit.broken(e);
-            logger.error("Audit process broken by exception",e);
+            logger.error("Audit process broken by exception", e);
         }
 
         auditRepository.save(audit);
@@ -53,7 +53,7 @@ class AuditProcess {
     private void auditWebsites(Audit audit, List<Website> websites) {
         long start = System.currentTimeMillis();
         int i = 0;
-        for (Website website : websites){
+        for (Website website : websites) {
             i++;
 
             long pageStart = System.currentTimeMillis();
@@ -63,8 +63,8 @@ class AuditProcess {
 
             long pageStop = System.currentTimeMillis();
 
-            long pageAverage =  (pageStop - start) / i;
-            logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop-pageStart), pageAverage, (i*100/websites.size()) );
+            long pageAverage = (pageStop - start) / i;
+            logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
         }
     }
 
