@@ -2,14 +2,13 @@ package org.pwd.web.contact;
 
 import com.google.common.base.Preconditions;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.pwd.infrastructure.EmailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -68,13 +67,9 @@ public class ContactController {
 
             headers.add("Authorization","Basic " + base64ApiKey );
 
-            MultiValueMap<String,String> parameters = new LinkedMultiValueMap<String, String>();
-            parameters.add("from", email);
-            parameters.add("to", smtpMail);
-            parameters.add("subject",SUBJECT);
-            parameters.add("text", composeMessage(name, email, mobile, site, message));
+            EmailMessage emailMessage = new EmailMessage(email,smtpMail,SUBJECT,composeMessage(name, email, mobile, site, message));
 
-            HttpEntity request = new HttpEntity<MultiValueMap<String, String>>(parameters,headers);
+            HttpEntity request = new HttpEntity<EmailMessage>(emailMessage,headers);
 
             ResponseEntity<String> response = restTemplate.exchange(smtpUrl,HttpMethod.POST, request, String.class);
             if( response.getStatusCode() == HttpStatus.OK)
