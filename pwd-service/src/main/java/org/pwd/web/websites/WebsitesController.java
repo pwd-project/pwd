@@ -35,7 +35,7 @@ class WebsitesController {
 
         List<Website> websites;
         if (StringUtils.isEmpty(query)) {
-            websites = websiteRepository.findAll();
+            websites = websiteRepository.search("XYZ"); //websiteRepository.findAll();
         } else {
             websites = websiteRepository.search(query);
         }
