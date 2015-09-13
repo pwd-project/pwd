@@ -1,6 +1,7 @@
 package org.pwd.web.contact
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import org.junit.Rule
+import org.pwd.interfaces.mailgun.MailgunClient
 import spock.lang.Specification
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*
@@ -13,9 +14,10 @@ class SendContactEmailTest extends Specification {
 
     def "should send email with details from 'Contact' page"(){
         given:
-        def contactCtrl = new ContactController('dummy@mailbox.com','dummyApiKey','http://localhost:8089/email')
+        def mailgunClient = new MailgunClient('dummy@mailbox.com','dummyApiKey','http://localhost:8089/')
+        def contactCtrl = new ContactController(mailgunClient,'dummy@mailbox.com')
 
-        wireMockRule.stubFor(post(urlPathEqualTo("/email"))
+        wireMockRule.stubFor(post(urlPathEqualTo("/messages"))
                 .willReturn(aResponse()
                 .withStatus(200)))
 
@@ -24,7 +26,7 @@ class SendContactEmailTest extends Specification {
 
         then:
         response == "email_sent"
-        verify(postRequestedFor(urlMatching("/email"))
+        verify(postRequestedFor(urlMatching("/messages"))
                 .withRequestBody(matching(".*from.*"))
                 .withRequestBody(matching(".*to.*"))
                 .withRequestBody(matching(".*subject.*"))
