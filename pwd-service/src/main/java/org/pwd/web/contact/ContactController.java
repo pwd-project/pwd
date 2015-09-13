@@ -40,7 +40,7 @@ public class ContactController {
 
     @RequestMapping(method = POST)
     public String sendEmail(@RequestParam(value = "name", required = true) String name,
-                            @RequestParam(value = "email", required = true) String email,
+                            @RequestParam(value = "administrativeEmail", required = true) String email,
                             @RequestParam(value = "mobile", required = false) String mobile,
                             @RequestParam(value = "site", required = false) String site,
                             @RequestParam(value = "message", required = false) String message) {
