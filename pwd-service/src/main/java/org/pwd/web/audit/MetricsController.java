@@ -32,6 +32,6 @@ public class MetricsController {
 
         model.addAttribute("metric", Metric.valueOf(metricName));
 
-        return "metrics/"+metricName;
+        return "metrics/" + metricName;
     }
 }

@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Column;
 import javax.persistence.Id;
 import java.net.URL;
 
@@ -18,19 +17,25 @@ public class Website {
     //@GeneratedValue(generator="web_site_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
 
-    // Special territorial code assignet by governance
-    @Column(nullable = true)
+    // Special territorial code assigned by governance
     private Integer areaCode;
 
     private URL url;
 
+    private String unitType;
+
     private String administrativeUnit;
+
+    private String administrativeEmail;
 
     @Embedded
     private Address address;
 
+    @Embedded
+    private Person person;
+
     // only for Hibernate
-    Website(){
+    Website() {
     }
 
     public Website(int id, URL url) {
@@ -39,29 +44,48 @@ public class Website {
         this.url = url;
     }
 
-    public Website(int id, Integer areaCode, URL url, String administrativeUnit, Address address) {
+    public Website(int id, Integer areaCode, URL url,
+                   String unitType, String administrativeUnit, String administrativeEmail,
+                   Address address, Person person) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
+        this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
+        this.administrativeEmail = administrativeEmail;
         this.address = address;
+        this.person = person;
     }
 
     public Address getAddress() {
         return address;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
     public int getId() {
         return id;
     }
 
-    public Integer getAreaCode() {return areaCode; }
+    public Integer getAreaCode() {
+        return areaCode;
+    }
 
     public URL getUrl() {
         return url;
     }
 
+    public String getUnitType() {
+        return unitType;
+    }
+
     public String getAdministrativeUnit() {
         return administrativeUnit;
+    }
+
+    public String getAdministrativeEmail() {
+        return administrativeEmail;
     }
 }

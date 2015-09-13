@@ -1,40 +1,44 @@
 {% extends "layout/base.twig" %}
 
 {% block content %}
-<section class="container-fluid" style="background-color: #fff">
-    <div class="row mt">
-        <div class="col-sm-8 col-sm-offset-2">
-            <h4>Audyt {{ audit.id }} </h4>
-            <ol>
-                <li>status: {{audit.processStatus}}</li>
-                <li>ilość stron: {{audit.auditedSitesCount}}</li>
-                <li>wykonany: {{audit.finished}}</li>
-                <li>czas trwania: {{audit.durationAsString}}</li>
-            </ol>
-            <h2>Lista raportów dla audytowanych stron</h2>
-            <table>
-                <tr>
-                    <th>#</th>
-                    <th>URL</th>
-                    <th>Wynik</th>
-                    <th>Metryki</th>
-                    <th>HTTP Status Code</th>
-                </tr>
-
-                {% for item in websiteAudits %}
-                <tr>
-                    <td> [{{ item.id }}]</td>
-                    <td><a href="{{ item.website.url }}">{{ item.website.url }}</a></td>
-                    <td> {{ item.auditReport.score }}</td>
-                    <td>
-                        {% for m in item.auditReport.metrics %}
-                        <a href="/metryki/{{ m.metricName }}">{{ m.metricName }}</a>: {{m.valueAsString}} &nbsp;
+    <section class="container" style="background-color: #fff">
+        <div class="row mt">
+            <div class="col-md-12">
+                <h4>Audyt {{ audit.id }} </h4>
+                <ol>
+                    <li>status: {{ audit.processStatus }}</li>
+                    <li>ilość stron: {{ audit.auditedSitesCount }}</li>
+                    <li>wykonany: {{ audit.finished }}</li>
+                    <li>czas trwania: {{ audit.durationAsString }}</li>
+                </ol>
+                <h2>Lista raportów dla audytowanych stron</h2>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Kod</th>
+                        <th>URL</th>
+                        <th>Wynik</th>
+                        {% for item in metrics %}
+                            <th><a href="/metryki/{{ item.name }}">{{ item.name }}</a></th>
                         {% endfor %}
-                    </td>
-                    <td> [{{ item.auditReport.httpStatusCode }}]</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+                        <th>HTTP Status Code</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for item in websiteAudits %}
+                        <tr>
+                            <td>{{ item.website.areaCode }}</td>
+                            <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+                            <td>{{ item.auditReport.score }}</td>
+                            {% for m in item.auditReport.metrics %}
+                                <td>{{ m.valueAsString }} </td>
+                            {% endfor %}
+                            <td>[{{ item.auditReport.httpStatusCode }}]</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
     </section>
 {% endblock %}

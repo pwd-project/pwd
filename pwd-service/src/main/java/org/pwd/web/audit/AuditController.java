@@ -1,9 +1,6 @@
 package org.pwd.web.audit;
 
-import org.pwd.domain.audit.Audit;
-import org.pwd.domain.audit.AuditRepository;
-import org.pwd.domain.audit.WebsiteAudit;
-import org.pwd.domain.audit.WebsiteAuditRepository;
+import org.pwd.domain.audit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,6 +32,7 @@ public class AuditController {
         Audit audit = auditRepository.findOne(auditId);
         List<WebsiteAudit> websiteAudits = websiteAuditRepository.findByAudit(audit);
 
+        model.addAttribute("metrics", Arrays.asList(Metric.values()));
         model.addAttribute("audit", audit);
         model.addAttribute("websiteAudits", websiteAudits);
 

@@ -1,7 +1,6 @@
 package org.pwd.domain.websites
 
 import org.pwd.application.IntegrationTest
-import org.pwd.domain.audit.WebsiteAudit
 import org.pwd.domain.audit.WebsiteAuditRepository
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -16,18 +15,22 @@ class WebsiteRepositoryTest extends IntegrationTest {
     @Autowired
     WebsiteAuditRepository websiteAuditRepository
 
-    def setup(){
+    def setup() {
         websiteAuditRepository.deleteAll()
         websiteRepository.deleteAll()
     }
 
-    def "should find websites with full text search"(){
+    def "should find websites with full text search"() {
         given:
-        websiteRepository.save(new Website(10, 111, new URL("http://example.com/"), "Urząd Smoka Wawelskiego",
-                new Address("Żyrardów", "Śląskie", "Powiat Duży")))
+        websiteRepository.save new Website(10, 111, new URL("http://example.com/"),
+                "P", "Urząd Smoka Wawelskiego", "kris@gnail.com",
+                new Address("Żyrardów", "Śląskie", "Powiat Duży"),
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
 
-        websiteRepository.save(new Website(11, 222, new URL("http://example.com/"), "Biuro Smoka Wawelskiego",
-                new Address("Gniezno", "Mazowieckie", "Powiat Mały")))
+        websiteRepository.save(new Website(11, 222, new URL("http://example.com/"),
+                "W", "Biuro Smoka Wawelskiego", "kris@gnail.com",
+                new Address("Gniezno", "Mazowieckie", "Powiat Mały"),
+                new Person("Krzysiek", "Adamowicz", "Burmistrz")))
 
         expect:
         //query by name

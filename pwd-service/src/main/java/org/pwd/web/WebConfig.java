@@ -32,7 +32,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer(){
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
         return container -> container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error_404"));
     }
 }

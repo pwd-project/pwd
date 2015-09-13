@@ -9,13 +9,13 @@ import static org.pwd.domain.audit.Metric.*
  */
 class WebsiteAuditReportTest extends Specification {
 
-    def "should calc score as weighted average"(){
-      expect:
-      new WebsiteAuditReport(200, [anyTitle.create(30), alt.create(0)]).score() == 15
-      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(50)]).score() == 35
-      new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(40), htmlLang.create(20)]).score() == 26
-      new WebsiteAuditReport(200, []).score() == 0
-      new WebsiteAuditReport(200, [anyTitle.create(100), alt.create(Optional.empty())]).score() == 100
+    def "should calc score as weighted average"() {
+        expect:
+        new WebsiteAuditReport(200, [anyTitle.create(30), alt.create(0)]).score() == 15
+        new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(50)]).score() == 35
+        new WebsiteAuditReport(200, [anyTitle.create(20), alt.create(40), htmlLang.create(20)]).score() == 26
+        new WebsiteAuditReport(200, []).score() == 0
+        new WebsiteAuditReport(200, [anyTitle.create(100), alt.create(Optional.empty())]).score() == 100
     }
 
     def "should sort metric by enum ordering"() {
