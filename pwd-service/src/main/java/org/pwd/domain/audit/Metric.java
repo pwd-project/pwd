@@ -9,6 +9,7 @@ public enum Metric {
     alt             (1, "1.1.1 Text alternatywny"),
     formattingTags  (1, "1.3.1 Informacje i jej związki"),
     sound           (1, "1.4.2 Kontrola dźwięku"),
+    contrast        (2, "1.4.3 Kontrast"),
     bigFont         (2, "1.4.4 Zmiana rozmiaru tekstu"),
     anyTitle        (1, "2.4.2 Tytuł strony"),
     headerContent   (3, "2.4.10 Nagłówki sekcji"),

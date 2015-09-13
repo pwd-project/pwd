@@ -5,8 +5,7 @@ body {
     color: #555;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
-    margin-top: 85px;
-    margin-bottom: 85px;
+    margin-top: 51px;
 }
 
 /* Titles */
@@ -46,7 +45,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #e9484a;
+    color: #7b7b7b;
     text-decoration: none;
     outline: 0;
 }
@@ -69,27 +68,17 @@ hr {
     padding: 0;
 }
 
-.navbar {
-    min-height: 65px;
-}
-
 .navbar-default {
-    background-color: #ffffff;
+    background-color: #3498db;
     border-color: transparent;
 }
 
 .navbar-default .navbar-brand {
-    color: black;
-    height: 93px;
+    color: white;
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: black;
-}
-
-.navbar-nav>li>a {
-    padding-top: 20px;
-    padding-bottom: 15px;
+    color: white;
 }
 
 /* Helpers */
@@ -125,9 +114,6 @@ hr {
     font-weight: 300;
 }
 
-#footer {
-    background-color: #333333;
-}
 .footer {
     padding: 10px;
 }

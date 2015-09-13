@@ -10,18 +10,16 @@ import javax.persistence.Embeddable;
 public class Person {
     private String forename;
     private String surename;
-
-    /** stanowisko */
-    private String position;
+    private String jobTitle;
 
     //only for Hibernate
     Person() {
     }
 
-    public Person(String forename, String surename, String position) {
+    public Person(String forename, String surename, String jobTitle) {
         this.forename = forename;
         this.surename = surename;
-        this.position = position;
+        this.jobTitle = jobTitle;
     }
 
     public String getForename() {
@@ -32,7 +30,7 @@ public class Person {
         return surename;
     }
 
-    public String getPosition() {
-        return position;
+    public String getJobTitle() {
+        return jobTitle;
     }
 }

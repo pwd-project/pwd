@@ -2,7 +2,6 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,8 +26,7 @@ public class Website {
 
     private String administrativeUnit;
 
-    // Email to a person who governs this unit
-    private String email;
+    private String administrativeEmail;
 
     @Embedded
     private Address address;
@@ -47,14 +45,14 @@ public class Website {
     }
 
     public Website(int id, Integer areaCode, URL url,
-                   String unitType, String administrativeUnit, String email,
+                   String unitType, String administrativeUnit, String administrativeEmail,
                    Address address, Person person) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
         this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
-        this.email = email;
+        this.administrativeEmail = administrativeEmail;
         this.address = address;
         this.person = person;
     }
@@ -87,7 +85,7 @@ public class Website {
         return administrativeUnit;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAdministrativeEmail() {
+        return administrativeEmail;
     }
 }
