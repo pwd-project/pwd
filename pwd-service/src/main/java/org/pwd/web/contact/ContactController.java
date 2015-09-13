@@ -2,6 +2,8 @@ package org.pwd.web.contact;
 
 import com.google.common.base.Preconditions;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -33,25 +35,19 @@ public class ContactController {
     private final String apiKey;
     private final String smtpUrl;
 
+    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+
     @Autowired
-    public ContactController(@Value("${smtp.mailbox}") String smtpMail,
-                             @Value("${MAILGUN_API_KEY}") String apiKey,
-                             @Value("${MAILGUN_DOMAIN}") String smtpUrl) {
+    public ContactController(@Value("${mailgun.mailbox}") String smtpMail,
+                             @Value("${mailgun.apikey}") String apiKey,
+                             @Value("${mailgun.domain}") String smtpUrl) {
         Preconditions.checkArgument(!smtpMail.isEmpty());
         Preconditions.checkArgument(!apiKey.isEmpty());
         Preconditions.checkArgument(!smtpUrl.isEmpty());
 
         this.smtpMail = smtpMail;
-
-        if( !apiKey.startsWith("api:"))
-            this.apiKey = "api:" + apiKey;
-        else
-            this.apiKey = apiKey;
-
-        if( !smtpUrl.startsWith("http"))
-            this.smtpUrl = "https://api.mailgun.net/v3/" + smtpUrl + "/messages";
-        else
-            this.smtpUrl = smtpUrl;
+        this.apiKey = apiKey;
+        this.smtpUrl = smtpUrl;
     }
 
 
@@ -81,11 +77,15 @@ public class ContactController {
             HttpEntity request = new HttpEntity<MultiValueMap<String, String>>(parameters,headers);
 
             ResponseEntity<String> response = restTemplate.exchange(smtpUrl,HttpMethod.POST, request, String.class);
+            if( response.getStatusCode() == HttpStatus.OK)
+                return "email_sent";
+            else
+                return "error";
 
-            return "email_sent";
+        }catch (RuntimeException ex) {
+            ex.printStackTrace();
+            logger.error(ex.getMessage()+"\n");
 
-        }catch (RuntimeException mex) {
-            mex.printStackTrace();
             return "error";
         }
     }

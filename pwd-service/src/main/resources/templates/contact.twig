@@ -8,25 +8,24 @@
 
                 <form role="form" action="/kontakt" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Imię i Nazwisko" value="{{ name }}"
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Imię i Nazwisko"
                                required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ email }}"
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
                                required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{ mobile }}"
+                        <input type="text" class="form-control" id="mobile" name="mobile"
                                placeholder="Numer telefonu">
                     </div>
                     <div class="form-group">
-                        <input type="url" class="form-control" id="site" name="site" value="{{ site }}"
+                        <input type="url" class="form-control" id="site" name="site"
                                placeholder="Adres strony">
                     </div>
                     <div class="form-group">
                             <textarea class="form-control" name="message" id="message" placeholder="Wiadomość"
                                       maxlength="140" rows="7">
-                                {{ message }}
                             </textarea>
                     </div>
 

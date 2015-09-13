@@ -14,11 +14,10 @@ spring:
 analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
 
-smtp:
+mailgun:
   mailbox: kontakt@pwd.dolinagubra.pl
-
-MAILGUN_API_KEY: dummyApiKey
-MAILGUN_DOMAIN: localhost
+  apikey: dummyApiKey
+  domain: localhost
 
 error:
   whitelabel:

@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*
 /**
- * @author S³awomir Mikulski
+ * @author SÅ‚awomir Mikulski
  */
 class SendContactEmailTest extends Specification {
     @Rule
