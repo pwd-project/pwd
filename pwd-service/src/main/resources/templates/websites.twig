@@ -17,7 +17,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Kod</th>
                         <th>Rodzaj</th>
                         <th>Nazwa</th>
                         <th>Serwis</th>
@@ -30,7 +30,7 @@
                     <tbody>
                     {% for item in websites %}
                         <tr>
-                            <th scope="row">{{ loop.index }}</th>
+                            <th scope="row">{{ item.areaCode }}</th>
                             <td>{{ item.unitType }}</td>
                             <td>{{ item.administrativeUnit }}</td>
                             <td><a href="{{ item.url }}" target="_blank">{{ item.url }}</a></td>
