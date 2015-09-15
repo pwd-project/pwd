@@ -38,4 +38,18 @@ public class AuditController {
 
         return "audit";
     }
+
+    @RequestMapping(value = "/{auditId}/{websiteId}", method = RequestMethod.GET)
+    public String showAuditedWebsite(@PathVariable int auditId, @PathVariable int websiteId, Model model) {
+        Audit audit = auditRepository.findOne(auditId);
+        WebsiteAudit websiteAudit = websiteAuditRepository.findByAuditAndWebsiteId(audit, websiteId);
+
+        model.addAttribute("metrics", Arrays.asList(Metric.values()));
+        model.addAttribute("audit", audit);
+        model.addAttribute("websiteAudit", websiteAudit);
+
+        return "website";
+    }
+
+
 }

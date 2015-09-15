@@ -69,4 +69,7 @@ public class WebsiteAudit {
         return created;
     }
 
+    public Audit getAudit() {
+        return audit;
+    }
 }

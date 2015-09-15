@@ -3,6 +3,7 @@ package org.pwd.domain.audit;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.pwd.hibernate.Document;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
@@ -14,19 +15,14 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author bartosz.walacik
  */
 public class WebsiteAuditReport extends Document {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(WebsiteAuditReport.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(WebsiteAuditReport.class);
 
     private final int httpStatusCode;
     private final int score;
     private final List<MetricValue> metrics;
 
-    /**
-     * from pwd-analysis REST response
-     */
     public WebsiteAuditReport(JsonObject analysisResponse) {
         checkArgument(analysisResponse != null);
-
         this.httpStatusCode = statusCodeFromJson(analysisResponse);
         this.metrics = metricsFromJson(analysisResponse);
         this.score = metricsWeightedAvg();

@@ -47,14 +47,17 @@ public class Audit {
         return this;
     }
 
-    public void done(int auditedSitesCount) {
+    public void mark() {
+        this.auditedSitesCount = auditedSitesCount++;
+    }
+
+    public void done() {
         Preconditions.checkState(processStatus == STARTED);
         finished = LocalDateTime.now();
         processStatus = AuditProcessStatus.DONE;
-        this.auditedSitesCount = auditedSitesCount;
     }
 
-    public void broken(Exception e) {
+    public void broken() {
         finished = LocalDateTime.now();
         processStatus = AuditProcessStatus.BROKEN;
     }
