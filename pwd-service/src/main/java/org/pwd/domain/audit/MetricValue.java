@@ -9,8 +9,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class MetricValue implements Comparable<MetricValue> {
     private final Metric metric;
-
-    //null -> empty optional
     private final Integer value;
 
     MetricValue(Metric metric, int value) {
@@ -56,5 +54,13 @@ public class MetricValue implements Comparable<MetricValue> {
     @Override
     public int compareTo(MetricValue that) {
         return this.metric.compareTo(that.metric);
+    }
+
+    @Override
+    public String toString() {
+        return "MetricValue{" +
+                "metric=" + metric +
+                ", value=" + value +
+                '}';
     }
 }

@@ -1,0 +1,30 @@
+{% extends "layout/base.twig" %}
+
+{% block content %}
+    <section class="container" style="background-color: #fff">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>data</th>
+                        <th>wynik</th>
+                        <th>raport</th>
+                    </tr>
+                    </thead>
+                    {% for websiteAudit in websiteAudits %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ websiteAudit.created }}</td>
+                            <td>{{ websiteAudit.auditReport.score }}</td>
+                            <td>
+                                <a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}">Raport</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

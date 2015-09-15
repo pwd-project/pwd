@@ -24,7 +24,7 @@
                         <th>Miasto</th>
                         <th>Województwo</th>
                         <th>Powiat</th>
-                        <th>Audyt</th>
+                        <th>Raporty</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +37,7 @@
                             <td>{{ item.address.city }}</td>
                             <td>{{ item.address.voivodeship }}</td>
                             <td>{{ item.address.county }}</td>
-                            <td><a href="/serwisy/{{ item.id }}/audyty">Zobacz</a></td>
+                            <td><a href="/serwisy/{{ item.id }}">Zobacz</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

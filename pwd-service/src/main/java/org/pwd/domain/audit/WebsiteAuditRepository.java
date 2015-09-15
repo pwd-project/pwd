@@ -10,4 +10,8 @@ import java.util.List;
 public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Integer> {
 
     List<WebsiteAudit> findByAudit(Audit audit);
+
+    WebsiteAudit findByAuditAndWebsiteId(Audit audit, int websiteId);
+
+    List<WebsiteAudit> findByWebsiteId(int websiteId);
 }
