@@ -35,8 +35,8 @@ class AuditListController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String startAudit() {
-        auditProcessStarter.startAuditProcess();
-        return "audits";
+        int auditId = auditProcessStarter.startAuditProcess();
+        return "redirect:/audyty/" + auditId;
     }
 
     @ModelAttribute("audits")

@@ -28,9 +28,7 @@ class AuditProcess {
         this.websiteAuditor = websiteAuditor;
     }
 
-    void doAudit() {
-        Audit audit = new Audit().start();
-        auditRepository.save(audit);
+    void doAudit(Audit audit) {
 
         logger.info("Starting audit#{}  process ...", audit.getId());
 
@@ -38,9 +36,9 @@ class AuditProcess {
 
         try {
             auditWebsites(audit, websites);
-            audit.done(websites.size());
+            audit.done();
         } catch (Exception e) {
-            audit.broken(e);
+            audit.broken();
             logger.error("Audit process broken by exception", e);
         }
 
@@ -65,6 +63,9 @@ class AuditProcess {
 
             long pageAverage = (pageStop - start) / i;
             logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
+
+            audit.mark();
+            auditRepository.save(audit);
         }
     }
 
