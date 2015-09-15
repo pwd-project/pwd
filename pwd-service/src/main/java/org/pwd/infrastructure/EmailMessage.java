@@ -9,7 +9,7 @@ public final class EmailMessage {
     private final String subject;
     private final String text;
 
-    public EmailMessage(String from, String to, String subject, String text){
+    public EmailMessage(String from, String to, String subject, String text) {
         this.from = from;
         this.to = to;
         this.subject = subject;

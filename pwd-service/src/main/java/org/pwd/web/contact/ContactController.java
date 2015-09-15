@@ -19,14 +19,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/kontakt")
 public class ContactController {
 
-    public static final String NAME_LABEL = "Imię i Nazwisko:";
-    public static final String EMAIL_LABEL = "Email:";
-    public static final String MOBILE_PHONE_LABEL = "Numer telefonu:";
-    public static final String SITE_URL_LABEL = "Adres strony:";
-    public static final String MESSAGE_LABEL = "Wiadomość:";
-
-    public static final String SUBJECT = "Zgłoszenie ze strony PWD";
-
     private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     private final MailgunClient mailgunClient;
@@ -45,27 +37,16 @@ public class ContactController {
                             @RequestParam(value = "site", required = false) String site,
                             @RequestParam(value = "message", required = false) String message) {
 
-        try{
-            EmailMessage emailMessage = new EmailMessage(email,mailbox,SUBJECT,composeMessage(name, email, mobile, site, message));
-
-            if( mailgunClient.sendEmail(emailMessage) )
-                return "email_sent";
-            else
-                return "error";
-
-        }catch (RuntimeException ex) {
-            ex.printStackTrace();
-            logger.error(ex.getMessage()+"\n");
-
-            return "error";
+        EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
+        if (mailgunClient.sendEmail(emailMessage)) {
+            logger.info("Email {} was sent successfully", emailMessage);
+            return "email_sent";
         }
+        logger.warn("Email {} could not be sent", emailMessage);
+        return "error";
     }
 
-    private String composeMessage(String name, String email, String mobile, String site, String message){
-        return NAME_LABEL+" "+name+"\n"
-             + EMAIL_LABEL+" "+email+"\n"
-             + MOBILE_PHONE_LABEL+" "+mobile+"\n"
-             + SITE_URL_LABEL+" "+site+"\n"
-             + MESSAGE_LABEL+" "+message;
+    private String composeMessage(String name, String email, String mobile, String site, String message) {
+        return String.format("%s\n%s\n%s\n%s\n%s", name, email, mobile, site, message);
     }
 }
