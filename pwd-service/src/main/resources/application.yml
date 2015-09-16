@@ -10,6 +10,9 @@ spring:
     password: pwd
     initialize: false
     continue-on-error: false
+  http:
+    encoding:
+      charset: UTF-8
 
 analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
