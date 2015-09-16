@@ -41,8 +41,6 @@ class WebsitesController {
 
         List<Website> websites;
         if (StringUtils.isEmpty(query)) {
-            // Pusta lista
-            //websites = websiteRepository.findAll();
             websites = Collections.emptyList();
         } else {
             websites = websiteRepository.search(query);
