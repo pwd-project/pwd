@@ -1,12 +1,6 @@
 language: java
 jdk:
 - oraclejdk8
-deploy:
-  provider: heroku
-  api_key:
-    secure: WqcMM3GFL4zs03avVkS12xyQChOJH1cmvASg3lxqBQNaqtUjz0TTEM4oqI2W53XkU/ihGiU6gXOlN6jDMpZbGPEQv2VBlhw3lvteygdFPPzOK6Y2TqlXJl+4CPxgcsMXFT33SO62a6OXB/axefDLYpcgKjJ6XqhXoyRTEN28u/IMu60Kc++VrGMDsUza2RH6XKdEIAK4pOWv5W1/WfAUN32uGkXA+jn+tgJYU7fHHfV/75LT290h795qVodbte4jo+8jSLTBxLCV7kB5aEH+6QNxzcU7wFPryzmM8cNEPQuKCMGKAd6W9VJ7mZ1KoNynyziu9z28n2CD+Jthur9AeRLZxncb4JUiBxczT4nWTWFVHoWPmBHpCLkFiDW5+DAmhYCm7b/yfkF9Cphy0hxpm1BZyDKL+MrhzeBZmlZsAURgN2TIKyZVSqsAsGiXf+MfmnMIzMhFlHZav6Gz9lDrgfE9vL869visp73bh5wFPfMNCpJ7VzlTQYRgUGgyN4kSxIw8hew57O+Agadkxj344aKPu8mkux+ykaxP45lX8fWfZV0vIdAyVlEh7m9ou0ocncg5xveWP84Gx6XYbPE6yEwSeAJU6vkhAURgrFuxRyaCIC9jLlOCvEBIY4BecOgr6iFF8+NN46mfeFzmoLrUzep2JNYxwFW9P4QBLtGhbAY=
-  app: pwd-prod
-  on: master
 
 addons:
   postgresql: "9.4"
