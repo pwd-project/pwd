@@ -6,6 +6,7 @@ import org.pwd.domain.websites.Website;
 import org.pwd.domain.websites.WebsiteRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ class AuditProcess {
 
         logger.info("Starting audit#{}  process ...", audit.getId());
 
-        List<Website> websites = websiteRepository.findAll();
+        List<Website> websites = websiteRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
 
         try {
             auditWebsites(audit, websites);
