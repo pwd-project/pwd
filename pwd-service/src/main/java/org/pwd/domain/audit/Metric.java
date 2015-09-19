@@ -14,6 +14,7 @@ public enum Metric {
     anyTitle(1, "2.4.2 Tytuł strony"),
     headerContent(3, "2.4.10 Nagłówki sekcji"),
     htmlLang(1, "3.1.1 Język strony"),
+    labels(1, "3.3.2 Etykiety lub instrukcje"),
     cms(0, "5.1.1 Używanie CMS"),
     contact(3, "5.1.2 Kontakt");
 
