@@ -58,15 +58,19 @@ class AuditProcess {
             long pageStart = System.currentTimeMillis();
 
             logger.info(i + ". auditing website: {}", website.getUrl());
-            websiteAuditor.auditWebsite(audit, website);
 
-            long pageStop = System.currentTimeMillis();
+            try {
+                websiteAuditor.auditWebsite(audit, website);
+                long pageStop = System.currentTimeMillis();
 
-            long pageAverage = (pageStop - start) / i;
-            logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
+                long pageAverage = (pageStop - start) / i;
+                logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
 
-            audit.mark();
-            auditRepository.save(audit);
+                audit.mark();
+                auditRepository.save(audit);
+            } catch (AnalysisNotCompleteException e) {
+                logger.error("Could not finish analysis of {}", website.getUrl());
+            }
         }
     }
 

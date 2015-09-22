@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import org.pwd.domain.audit.WebsiteAuditReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.Optional;
 
 
 /**
@@ -40,11 +40,9 @@ public class AnalysisRestClient {
         retryTemplate.setRetryPolicy(timeoutRetryPolicy);
     }
 
-    public WebsiteAuditReport getAnalysis(URL websiteUrl) {
+    public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
         String response = retryTemplate.execute(request -> restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl));
         logger.info("analysis: \n" + response);
-        JsonObject json = gson.fromJson(response, JsonElement.class).getAsJsonObject();
-        return new WebsiteAuditReport(json);
+        return Optional.ofNullable(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
     }
-
 }
