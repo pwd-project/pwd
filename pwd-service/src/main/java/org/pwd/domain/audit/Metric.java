@@ -16,43 +16,51 @@ public enum Metric {
     htmlLang(1, "3.1.1 Język strony"),
     labels(1, "3.3.2 Etykiety lub instrukcje"),
     cms(0, "5.1.1 Używanie CMS"),
-    contact(3, "5.1.2 Kontakt");
+    contact(3, "5.1.2 Kontakt"),
+    nonExistentAriaRelatedElement(1, "AX_ARIA_02 Atrybut aria-labelledby"),
+    requiredAriaAttributeMissing(1, "AX_ARIA_03 Wymagane atrybuty dla elementów z rolami ARIA"),
+    badAriaAttributeValue(1, "AX_ARIA_04 Stan i poprawność właściwości elementów ARIA"),
+    requiredOwnedAriaRoleMissing(1, "AX_ARIA_08 Właściwe role elementów podrzędnych"),
+    ariaRoleNotScoped(1, "AX_ARIA_09 Zakres elementów ARIA"),
+    unsupportedAriaAttribute(1, "AX_ARIA_10 Obsługiwane atrybuty ARIA"),
+    duplicateId(1, "AX_HTML_02 Unikalność identyfikatorów elementów"),
+    multipleLabelableElementsPerLabel(1, "AX_TEXT_03 Etykietowanie elementów");
 
-    private String namePl;
-    private int weight;
+private String namePl;
+private int weight;
 
-    Metric(int weight, String namePl) {
+        Metric(int weight, String namePl) {
         this.namePl = namePl;
         this.weight = weight;
-    }
-
-    public MetricValue create(int value) {
-        return new MetricValue(this, value);
-    }
-
-    public MetricValue create(Optional<Integer> value) {
-        return new MetricValue(this, value);
-    }
-
-    public static boolean exists(String metricName) {
-        try {
-            valueOf(metricName);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
         }
-    }
 
-    public String getNamePl() {
+public MetricValue create(int value) {
+        return new MetricValue(this, value);
+        }
+
+public MetricValue create(Optional<Integer> value) {
+        return new MetricValue(this, value);
+        }
+
+public static boolean exists(String metricName) {
+        try {
+        valueOf(metricName);
+        return true;
+        } catch (IllegalArgumentException e) {
+        return false;
+        }
+        }
+
+public String getNamePl() {
         return namePl;
-    }
+        }
 
-    public int getWeight() {
+public int getWeight() {
         return weight;
-    }
+        }
 
-    public int getOrder() {
+public int getOrder() {
         return ordinal();
-    }
+        }
 
-}
+        }
