@@ -1,0 +1,25 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container">
+        <div class="row mt">
+            <div class="col-md-12">
+                <h1>Metryka {{ metric.namePl }}</h1>
+
+                <p>
+                Metryka weryfikuje, czy wszystkie elementy z rolami ARIA są we właściwym zakresie.
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li>0 jeśli nie są</li>
+                    <li>100 jeśli są</li>
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
