@@ -15,7 +15,7 @@ spring:
       charset: UTF-8
 
 analysis:
-  endpoint: https://blooming-lowlands-9234.herokuapp.com/analysis
+  endpoint: http://pwd-analysis.herokuapp.com/analysis
 
 mailgun:
   mailbox: kontakt@pwd.dolinagubra.pl
