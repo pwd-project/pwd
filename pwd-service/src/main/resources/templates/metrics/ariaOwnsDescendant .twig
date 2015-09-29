@@ -1,0 +1,25 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container">
+        <div class="row mt">
+            <div class="col-md-12">
+                <h1>Metryka {{ metric.namePl }}</h1>
+
+                <p>
+                Metryka weryfikuje, czy w przypadku, gdy hierarchia elementów wynika bezpośrednio ze struktury dokumentu nie są używane atrybuty aria-owns.
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li>0 jeśli są używane</li>
+                    <li>100 jeśli nie są używane</li>
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
