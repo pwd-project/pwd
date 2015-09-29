@@ -48,7 +48,7 @@ public class Audit {
     }
 
     public void mark() {
-        this.auditedSitesCount = auditedSitesCount++;
+        this.auditedSitesCount = auditedSitesCount + 1;
     }
 
     public void done() {

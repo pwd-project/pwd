@@ -55,8 +55,10 @@ class WebsitesController {
     @RequestMapping("/{websiteId}")
     public String getWebsiteAudits(Model model, @PathVariable("websiteId") Integer websiteId) {
         List<WebsiteAudit> websiteAudits = websiteAuditRepository.findByWebsiteId(websiteId);
+        Website website = websiteRepository.findOne(websiteId);
         Collections.reverse(websiteAudits);
         model.addAttribute("websiteAudits", websiteAudits);
+        model.addAttribute("website", website);
         return "websiteAudits";
     }
 }

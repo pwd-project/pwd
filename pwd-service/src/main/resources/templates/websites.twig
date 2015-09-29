@@ -1,18 +1,24 @@
 {% extends "layout/base.twig" %}
 
+{% block title %}Serwisy{% endblock %}
+
 {% block content %}
     <section class="container-fluid">
+
+        <div class="row mt text-center">
+            <div class="col-md-12">
+                <h2>Lista serwisów</h2>
+
+                <h3>Ranking dostępności serwisów użyteczności publicznej w Polsce</h3>
+            </div>
+        </div>
+
         <div class="row mt">
             <div class="col-sm-8 col-sm-offset-2">
-                <h1>Lista serwisów</h1>
-
                 <form class="well" action="/serwisy" method="get">
-                    <input name="query" value="{{ query }}" type="text" class="form-control" placeholder="Wprowadż nazwę miasta, powiatu lub województwa"/>
+                    <input name="query" value="{{ query }}" type="text" class="form-control"
+                           placeholder="Wprowadż nazwę miasta, powiatu lub województwa"/>
                 </form>
-
-                <span>
-                    Ilość serwisów: {{ websitesCount }} z {{ websitesTotalCount }}
-                </span>
 
                 <table class="table table-striped table-hover">
                     <thead>

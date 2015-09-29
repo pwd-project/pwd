@@ -1,9 +1,14 @@
 {% extends "layout/base.twig" %}
 
+{% block title %}Audyty{% endblock %}
+
 {% block content %}
     <section class="container" style="background-color: #fff">
         <div class="row">
             <div class="col-md-12">
+                <h1>
+                    Wyniki audytów dla <a href="{{ website.url }}">{{ website.url }}</a>
+                </h1>
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
