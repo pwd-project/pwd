@@ -3,6 +3,7 @@ package org.pwd.interfaces.analysis
 import com.github.tomakehurst.wiremock.junit.WireMockRule
 import org.junit.Rule
 import org.springframework.http.MediaType
+import org.springframework.retry.support.RetryTemplate
 import spock.lang.Specification
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*
@@ -18,7 +19,7 @@ class AnalysisRestClientTest extends Specification {
 
     def "should integrate with pwd-analysis service"() {
         given:
-        def analysisRestClient = new AnalysisRestClient('http://localhost:8089/analysis')
+        def analysisRestClient = new AnalysisRestClient('http://localhost:8089/analysis', new RetryTemplate())
 
         def expectedJson =
                 """
@@ -50,7 +51,7 @@ class AnalysisRestClientTest extends Specification {
                 .withBody(expectedJson)))
 
         when:
-        def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl"))
+        def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl")).get()
 
         then:
         response.metrics.size() == 3
