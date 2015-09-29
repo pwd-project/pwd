@@ -9,6 +9,8 @@ import org.pwd.interfaces.analysis.AnalysisRestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Does audit for one website
  *
@@ -27,9 +29,10 @@ class WebsiteAuditor {
 
     WebsiteAudit auditWebsite(Audit audit, Website website) {
 
-        WebsiteAuditReport auditReport = analysisRestClient.getAnalysis(website.getUrl());
-
-        WebsiteAudit websiteAudit = audit.createWebsiteAudit(website, auditReport);
+        Optional<WebsiteAuditReport> auditReport = analysisRestClient.getAnalysis(website.getUrl());
+        WebsiteAudit websiteAudit = auditReport
+                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport))
+                .orElseThrow(AnalysisNotCompleteException::new);
 
         return websiteAuditRepository.save(websiteAudit);
     }
