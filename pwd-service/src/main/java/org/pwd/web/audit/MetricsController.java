@@ -20,7 +20,7 @@ public class MetricsController {
     @RequestMapping(method = RequestMethod.GET)
     public String showMetrics(Model model) {
         model.addAttribute("metrics", Arrays.asList(Metric.values()));
-        return "metrics/metrics";
+        return "metrics";
     }
 
     @RequestMapping(value = "/{metricName}", method = RequestMethod.GET)
