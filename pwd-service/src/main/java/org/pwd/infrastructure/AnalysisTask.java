@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class AnalysisTask {
 
@@ -18,9 +20,9 @@ public class AnalysisTask {
         this.auditProcessStarter = auditProcessStarter;
     }
 
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "0 0 3 * * *")
     public void automatedAudit() {
-        logger.info("Started automatic audit process...");
+        logger.info("Started automatic audit process at " + LocalDateTime.now());
         auditProcessStarter.startAuditProcess();
     }
 }
