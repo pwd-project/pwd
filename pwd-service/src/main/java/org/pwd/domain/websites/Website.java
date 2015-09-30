@@ -13,8 +13,6 @@ import java.net.URL;
 @Entity(name = "website")
 public class Website {
     @Id
-    //@SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="web_site_id_seq", name="web_site_id_seq")
-    //@GeneratedValue(generator="web_site_id_seq", strategy= GenerationType.SEQUENCE)
     private int id;
 
     // Special territorial code assigned by governance
