@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://horton.elephantsql.com:5432/zgdjvsxz
-    username: zgdjvsxz
+    url: jdbc:postgresql://arinsoft.home.pl:5432/08227290_pwd
+    username: 08227290_pwd
     max-active: 2
