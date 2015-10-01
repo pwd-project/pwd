@@ -35,4 +35,8 @@ public class WebsiteRank {
     public String getUrl() {
         return url;
     }
+
+    public Integer getWebsiteId() {
+        return websiteId;
+    }
 }
