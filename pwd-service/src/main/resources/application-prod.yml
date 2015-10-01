@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://horton.elephantsql.com:5432/zgdjvsxz
-    username: zgdjvsxz
+    url: jdbc:postgresql://horton.elephantsql.com:5432/wmvyckpy
+    username: wmvyckpy
     max-active: 2
