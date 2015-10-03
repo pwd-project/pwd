@@ -32,7 +32,7 @@
                             <td>{{ item.auditReport.score }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
-                            <td><a href="/serwisy/{{ item.websiteId }}">Zobacz</a></td>
+                            <td><a href="/serwisy/{{ item.website.id }}">Zobacz</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
