@@ -34,6 +34,7 @@ class WebsiteAuditor {
                 .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport))
                 .orElseThrow(AnalysisNotCompleteException::new);
 
+
         return websiteAuditRepository.save(websiteAudit);
     }
 }

@@ -20,7 +20,7 @@ public class AnalysisTask {
         this.auditProcessStarter = auditProcessStarter;
     }
 
-    @Scheduled(cron = "0 0 3 * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void automatedAudit() {
         logger.info("Started automatic audit process at " + LocalDateTime.now());
         auditProcessStarter.startAuditProcess();

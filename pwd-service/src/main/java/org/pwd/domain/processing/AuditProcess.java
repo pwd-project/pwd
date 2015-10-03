@@ -68,6 +68,9 @@ class AuditProcess {
 
                 audit.mark();
                 auditRepository.save(audit);
+
+                logger.info("[NOTIFICATION] going to send email to {} about his webiste {}", website.getAdministrativeEmail(), website.getUrl());
+
             } catch (AnalysisNotCompleteException e) {
                 logger.error("Could not finish analysis of {}", website.getUrl());
             }
