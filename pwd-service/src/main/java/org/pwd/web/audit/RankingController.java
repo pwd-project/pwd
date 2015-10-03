@@ -1,13 +1,11 @@
 package org.pwd.web.audit;
 
 import org.pwd.domain.audit.WebsiteAuditRepository;
-import org.pwd.domain.audit.WebsiteRank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -17,8 +15,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @RequestMapping("/top-100")
 public class RankingController {
+    public static final int MAX_RECORDS = 100;
     private WebsiteAuditRepository websiteAuditRepository;
-    private final Integer maxRecords = 100;
 
     @Autowired
     public RankingController(WebsiteAuditRepository websiteAuditRepository) {
@@ -27,12 +25,7 @@ public class RankingController {
 
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
-
-        List<WebsiteRank> ranking;
-        ranking = websiteAuditRepository.getRanking(maxRecords);
-
-        model.addAttribute("ranking", ranking);
-
+        model.addAttribute("ranking", websiteAuditRepository.getTop(MAX_RECORDS));
         return "top_100";
     }
 }

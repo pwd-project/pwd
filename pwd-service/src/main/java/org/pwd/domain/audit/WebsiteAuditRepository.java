@@ -17,12 +17,11 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
 
     List<WebsiteAudit> findByWebsiteId(int websiteId);
 
-    @Query(nativeQuery = true, value =
-            "SELECT w.id as website_id, to_number(json_extract_path_text(audit_report,'score'),'999') as total_score, w.administrative_unit as name, w.url" +
-                    " FROM   website_audit wa, website w " +
-                    " WHERE  w.id = wa.website_fk" +
-                    " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
-                    " ORDER BY TOTAL_SCORE desc" +
-                    " LIMIT :maxRecords")
-    List<WebsiteRank> getRanking(@Param("maxRecords") Integer maxRecords);
+    @Query(nativeQuery = true, value = "SELECT * " +
+            " FROM   website_audit wa, website w" +
+            " WHERE  w.id = wa.website_fk" +
+            " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
+            " ORDER BY to_number(json_extract_path_text(audit_report,'score'),'999') DESC" +
+            " LIMIT :maxRecords")
+    List<WebsiteAudit> getTop(@Param("maxRecords") Integer maxRecords);
 }
