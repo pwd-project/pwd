@@ -1,9 +1,8 @@
 package org.pwd.web.audit;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.pwd.domain.audit.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,14 +43,13 @@ public class AuditController {
         return "audit";
     }
 
-    @RequestMapping(value = "/{auditId}.json", method = RequestMethod.GET)
+    @RequestMapping(value = "/{auditId}.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String showAuditAsJson(@PathVariable int auditId) {
+    public List<WebsiteAuditResponse> showAuditAsJson(@PathVariable int auditId, HttpServletResponse response) {
         Audit audit = auditRepository.findOne(auditId);
         List<WebsiteAudit> websiteAudits = websiteAuditRepository.findByAudit(audit);
-        List<WebsiteAuditResponse> websiteAuditResponse = websiteAudits.stream().map(WebsiteAuditResponse::new).collect(Collectors.toList());
-        Gson gson = new GsonBuilder().create();
-        return gson.toJson(websiteAuditResponse);
+        response.setHeader("Content-Disposition", "attachment;filename=audit_" + auditId + "_" + System.currentTimeMillis() + ".json");
+        return websiteAudits.stream().map(WebsiteAuditResponse::new).collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/{auditId}/{websiteId}", method = RequestMethod.GET)

@@ -3,3 +3,7 @@ spring:
     url: jdbc:postgresql://horton.elephantsql.com:5432/wmvyckpy
     username: wmvyckpy
     max-active: 2
+
+  jackson:
+    serialization:
+      indent_output: true
