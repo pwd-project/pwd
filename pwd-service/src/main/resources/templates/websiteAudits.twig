@@ -21,7 +21,7 @@
                     {% for websiteAudit in websiteAudits %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td>{{ websiteAudit.created | date_format("dd-MM-yyyy H:m:s")}}</td>
+                            <td>{{ websiteAudit.created }}</td>
                             <td>{{ websiteAudit.auditReport.score }}</td>
                             <td>
                                 <a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}">Raport</a>
