@@ -41,7 +41,7 @@ public class MailgunClient {
         String base64ApiKey = new String(base64ApiKeyBytes);
 
         headers.add("Authorization", "Basic " + base64ApiKey);
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     }
 
     public boolean sendEmail(EmailMessage emailMessage) {
