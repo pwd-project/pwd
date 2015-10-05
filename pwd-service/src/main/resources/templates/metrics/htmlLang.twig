@@ -4,13 +4,24 @@
     <section class="container">
         <div class="row mt">
             <div class="col-md-12">
-                <h1>Metryka {{ metric.namePl }}</h1>
+                <h1>{{ metric.namePl }}</h1>
 
-                //TBA
+                <h3>WCAG 2.0</h3>
+                <ul>
+                    <li>Język strony - wytyczna <a href="http://fdc.org.pl/wcag2/#meaning" target="_blank">3.1.1</a> </li>
+                </ul>
+
+                <h3>Opis</h3>
+                <p>
+                    Metryka weryfikuje czy strona ma określony domyślny język strony internetowej,
+                    może zostać odczytany przez program komputerowy
+                </p>
 
                 <h3>Wartości metryki</h3>
-
-                //TBA
+                <ul>
+                    <li>0 brak</li>
+                    <li>100 istnieje</li>
+                </ul>
 
                 {% include 'metric_meta.twig' %}
 

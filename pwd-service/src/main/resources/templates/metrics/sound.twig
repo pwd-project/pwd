@@ -4,14 +4,26 @@
     <section class="container">
         <div class="row mt">
             <div class="col-md-12">
-                <h1>Metryka {{ metric.namePl }}</h1>
+                <h1>{{ metric.namePl }}</h1>
 
+                <h3>WCAG 2.0</h3>
+                <ul>
+                    <li>Kontrola odtwarzania dźwięku - wytyczna <a href="http://fdc.org.pl/wcag2/#visual-audio-contrast" target="_blank">1.4.2</a> </li>
+                </ul>
+
+                <h3>Opis</h3>
                 <p>
                     Metryka weryfikuje czy zaraz po wczytaniu strony nie jest odtwarzany dźwięk.
+                    Sprawdza czy zostały użyte mechanizmy wywołujące taki efekt, przykładowo:
                 </p>
 
-                <h3>Wartości metryki</h3>
+<pre>&lt;audio controls autoplay&gt;
+  &lt;source src="plik.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</pre>
+                lub
+                <pre>&lt;bgsound src="plik.mp3"/&gt;</pre>
 
+                <h3>Wartości metryki</h3>
                 <ul>
                     <li>0 jeśli strona posiada znaczniki które powodują odtwarzanie dźwięku po wczytaniu strony</li>
                     <li>100 jeśli strona nie posiada takich mechanizmów</li>

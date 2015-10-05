@@ -6,20 +6,23 @@ import java.util.Optional;
  * @author bartosz.walacik
  */
 public enum Metric {
-    alt(1, "1.1.1 Text alternatywny"),
-    formattingTags(1, "1.3.1 Informacje i jej związki"),
-    sound(1, "1.4.2 Kontrola dźwięku"),
-    contrast(2, "1.4.3 Kontrast"),
-    bigFont(2, "1.4.4 Zmiana rozmiaru tekstu"),
-    anyTitle(1, "2.4.2 Tytuł strony"),
-    headerContent(3, "2.4.10 Nagłówki sekcji"),
-    htmlLang(1, "3.1.1 Język strony"),
-    labels(1, "3.3.2 Etykiety lub instrukcje"),
-    cms(0, "5.1.1 Używanie CMS"),
-    contact(3, "5.1.2 Kontakt"),
-    nonExistentAriaRelatedElement(1, "AX_ARIA_02 Atrybut aria-labelledby"),
-    requiredAriaAttributeMissing(1, "AX_ARIA_03 Wymagane atrybuty dla elementów z rolami ARIA"),
-    badAriaAttributeValue(1, "AX_ARIA_04 Stan i poprawność właściwości elementów ARIA"),
+    alt(            1, "Tekst alternatywny"),
+    formattingTags( 1, "Gęstość tagów formatujących"),
+    sound(          1, "Dźwięk na przy wyświetlaniu strony"),
+    contrast(       2, "Kontrast"),
+    bigFont(        2, "Zmiana rozmiaru tekstu"),
+    anyTitle(       1, "Tytuł strony"),
+    headerContent(  3, "Nagłówki sekcji"),
+    htmlLang(       1, "Język strony"),
+    labels(         1, "Etykiety lub instrukcje"),
+    contact(        3, "Kontakt"),
+    // Metryki Googlowe
+    nonExistentAriaRelatedElement(
+                    1, "Atrybut ARIA powiązany"),
+    requiredAriaAttributeMissing(
+                    1, "Wymagane atrybuty dla elementów z rolami ARIA"),
+    badAriaAttributeValue(
+                    1, "AX_ARIA_04 Stan i poprawność właściwości elementów ARIA"),
     mainRoleOnInappropriateElement(2, "AX_ARIA_05 Atrybut role=main powinien występować tylko na kluczowych elementach"),
     ariaOwnsDescendant(2, "AX_ARIA_06 Atrybut aria-owns nie powinien być używany, jeżeli własność wynika bezpośrednio z DOM"),
     multipleAriaOwners(2, "AX_ARIA_07 Identyfikator elementu nie może występować więcej niż jeden raz jako wartość atrybutu aria-owns"),

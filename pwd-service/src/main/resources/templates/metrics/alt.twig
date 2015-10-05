@@ -4,8 +4,14 @@
     <section class="container">
         <div class="row mt">
             <div class="col-md-12">
-                <h1>Metryka {{ metric.namePl }}</h1>
+                <h1>{{ metric.namePl }}</h1>
 
+                <h3>WCAG 2.0</h3>
+                <ul>
+                    <li>Treść nietekstowa - wytyczna <a href="http://fdc.org.pl/wcag2/#text-equiv" target="_blank">1.1.1</a> </li>
+                </ul>
+
+                <h3>Opis</h3>
                 <p>
                     Metryka weryfikuje czy grafiki osadzone na stronie (tagi <code>img</code>)
                     mają ustawiony atrybut <code>alt</code>.
