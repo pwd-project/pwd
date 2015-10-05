@@ -25,7 +25,7 @@
                             <td><a href="/audyty/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
                             <td>{{ item.processStatus }}</td>
                             <td>{{ item.auditedSitesCount }}</td>
-                            <td>{{ item.finished }}</td>
+                            <td>{{ item.finished | date_format("dd-MM-yyyy H:m:s") }}</td>
                             <td>{{ item.durationAsString }}</td>
                         </tr>
                     {% endfor %}
