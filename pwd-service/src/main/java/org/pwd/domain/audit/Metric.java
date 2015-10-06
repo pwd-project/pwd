@@ -6,15 +6,21 @@ import java.util.Optional;
  * @author bartosz.walacik
  */
 public enum Metric {
-    alt(1, "Tekst alternatywny"),
-    formattingTags(1, "Gęstość tagów formatujących"),
-    sound(1, "Dźwięk na przy wyświetlaniu strony"),
-    contrast(2, "Kontrast"),
+    alt(    1, "Tekst alternatywny"),
+    formattingTags(
+            1, "Gęstość tagów formatujących"),
+    sound(  1, "Dźwięk na przy wyświetlaniu strony"),
+    contrast(
+            2, "Kontrast"),
     bigFont(2, "Zmiana rozmiaru tekstu"),
-    anyTitle(1, "Tytuł strony"),
-    headerContent(3, "Nagłówki sekcji"),
-    htmlLang(1, "Język strony"),
-    labels(1, "Etykiety lub instrukcje"),
+    anyTitle(
+            1, "Tytuł strony"),
+    headerContent(
+            3, "Nagłówki sekcji"),
+    htmlLang(
+            1, "Język strony"),
+    labels( 1, "Etykiety lub instrukcje"),
+    cms(    0, "Użycie CMS"),
     contact(3, "Kontakt"),
     // Metryki Googlowe
     nonExistentAriaRelatedElement(
