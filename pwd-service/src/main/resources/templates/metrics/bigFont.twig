@@ -4,14 +4,19 @@
     <section class="container">
         <div class="row mt">
             <div class="col-md-12">
-                <h1>Metryka {{ metric.namePl }}</h1>
+                <h1>{{ metric.namePl }}</h1>
 
+                <h3>WCAG 2.0</h3>
+                <ul>
+                    <li>Zmiana rozmiaru tekstu - wytyczna <a href="http://fdc.org.pl/wcag2/#visual-audio-contrast" target="_blank">1.4.4</a> </li>
+                </ul>
+
+                <h3>Opis</h3>
                 <p>
-                Metryka weryfikuje czy na stronie są mechanizmy polegające na stopniowym powiększaniu czcionki.
+                    Metryka weryfikuje czy na stronie są mechanizmy polegające na stopniowym powiększaniu czcionki.
                 </p>
 
                 <h3>Wartości metryki</h3>
-
                 <ul>
                     <li>0 jeśli nie strona posiada</li>
                     <li>100 jeśli strona posiada</li>

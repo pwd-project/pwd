@@ -18,6 +18,11 @@ class PagesController {
         return "blog";
     }
 
+    @RequestMapping(value = "pobierz", method = GET)
+    public String pobierzPage() {
+        return "pobierz";
+    }
+
     @RequestMapping(value = "kontakt", method = GET)
     public String contactPage() {
         return "contact";
