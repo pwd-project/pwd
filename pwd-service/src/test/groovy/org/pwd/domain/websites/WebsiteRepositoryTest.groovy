@@ -37,6 +37,7 @@ class WebsiteRepositoryTest extends IntegrationTest {
         websiteRepository.search("urzad").size() == 1
         websiteRepository.search("Urząd").size() == 1
         websiteRepository.search("Smoka").size() == 2
+        websiteRepository.search("powiat maly").size() == 1
 
         //query by city
         websiteRepository.search("zyrardow").size() == 1

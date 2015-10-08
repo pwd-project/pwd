@@ -50,7 +50,7 @@ class PagesController {
         }
         averageScore /= auditList.size();
 
-        model.addAttribute("averageScore", Math.round(averageScore*10)/10.0); // round to one decimal place
+        model.addAttribute("averageScore", Math.round(averageScore*100)/100.0); // round to two decimal place
         return "index";
     }
 }
