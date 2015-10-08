@@ -18,7 +18,7 @@ analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
 
 mailgun:
-  mailbox: kontakt@pwd.dolinagubra.pl
+  mailbox: pwd_kontakt@dolinagubra.pl
   apikey: dummyApiKey
   domain: localhost
 
