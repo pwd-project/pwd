@@ -31,6 +31,8 @@
                         <th>Województwo</th>
                         <th>Powiat</th>
                         <th>Raporty</th>
+                        <th>Wynik</th>
+                        <th>Miejsce</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +46,8 @@
                             <td>{{ item.address.voivodeship }}</td>
                             <td>{{ item.address.county }}</td>
                             <td><a href="/serwisy/{{ item.id }}">Zobacz</a></td>
+                            <td>{{ currentScores.get(loop.index-1) }}</td>
+                            <td>{{ currentPlaces.get(loop.index-1) }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
