@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,25 +53,18 @@ class AuditProcess {
     private void auditWebsites(Audit audit, List<Website> websites) {
         long start = System.currentTimeMillis();
         int i = 0;
+        Collections.shuffle(websites);
         for (Website website : websites) {
-            i++;
-
             long pageStart = System.currentTimeMillis();
-
-            logger.info(i + ". auditing website: {}", website.getUrl());
-
+            logger.info(++i + ". auditing website: {}", website.getUrl());
             try {
                 websiteAuditor.auditWebsite(audit, website);
                 long pageStop = System.currentTimeMillis();
-
                 long pageAverage = (pageStop - start) / i;
                 logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
-
                 audit.mark();
                 auditRepository.save(audit);
-
                 logger.info("[NOTIFICATION] going to send email to {} about his webiste {}", website.getAdministrativeEmail(), website.getUrl());
-
             } catch (AnalysisNotCompleteException e) {
                 logger.error("Could not finish analysis of {}", website.getUrl());
             }

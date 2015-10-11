@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}PWD Online - audyt treści cyfrowych{% endblock %}">
     <meta name="author" content="PWD Team">
-    <meta name="keywords" content="internetowy walidator dostępności, audyt treści cyfrowych, szablony biip joomla, szablony bip wordpress, szablony bip drupal, templatki dla samorządów">
+    <meta name="keywords"
+          content="internetowy walidator dostępności, audyt treści cyfrowych, szablony biip joomla, szablony bip wordpress, szablony bip drupal, templatki dla samorządów">
     <link rel="shortcut icon" href="img/favicon.png">
     <title>{% block title %}Strona Główna{% endblock %} - Polski Walidator Dostępności</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +20,20 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-68570449-1', 'auto');
-      ga('send', 'pageview');
+        ga('create', 'UA-68570449-1', 'auto');
+        ga('send', 'pageview');
     </script>
 </head>
 
@@ -42,5 +50,12 @@
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/contrast.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% block inlineJs %}
+        {% endblock %}
+    });
+</script>
 </body>
 </html>

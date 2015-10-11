@@ -1,13 +1,9 @@
 package org.pwd.web.pages;
 
-import org.pwd.domain.audit.WebsiteAudit;
 import org.pwd.domain.audit.WebsiteAuditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -39,18 +35,5 @@ class PagesController {
     @RequestMapping(value = "kontakt", method = GET)
     public String contactPage() {
         return "contact";
-    }
-
-    @RequestMapping(method = GET)
-    public String indexPage(Model model){
-        List<WebsiteAudit> auditList = websiteAuditRepository.getSorted();
-        double averageScore = 0.0;
-        for (WebsiteAudit audit : auditList) {
-            averageScore += audit.getAuditReport().score();
-        }
-        averageScore /= auditList.size();
-
-        model.addAttribute("averageScore", Math.round(averageScore*100)/100.0); // round to two decimal place
-        return "index";
     }
 }

@@ -7,7 +7,8 @@
                 <div class="col-lg-6">
                     <h1>Walidator Dostępności</h1>
                     <small>
-                        Dostępność to proces a nie stan, dlatego naszym celem jest nieustanne monitorowanie serwisów internetowych i generowanie raportu dostępności.
+                        Dostępność to proces a nie stan, dlatego naszym celem jest nieustanne monitorowanie serwisów
+                        internetowych i generowanie raportu dostępności.
                     </small>
                     <br/>
                     <a href="/top-100" class="btn btn-danger">Zobacz ranking top 100</a>&nbsp;<a href="/o-projekcie"
@@ -34,12 +35,15 @@
             <div class="col-lg-4">
                 <img src="/img/odwiedziny-ico.png" width="180" alt="">
                 <h4>Odwiedziny Twojej strony</h4>
+
                 <p>
-                    Jeśli Twoja strona jest w naszej bazie Serwisów, wówczas jest systematycznie audytowana przez nasz system badania dostępności.
+                    Jeśli Twoja strona jest w naszej bazie Serwisów, wówczas jest systematycznie audytowana przez nasz
+                    system badania dostępności.
                     Pierwsza wersja silnika PWD Online korzysta z danych opublikowanych w
                     serwisie <a href="https://danepubliczne.gov.pl" target="_blank">danepubliczne.gov.pl</a>
                     i audytuje serwisy administracji publicznej dostępne na tej stronie.
-                    Jeśli Twojego serwisu nie ma z zakładce serwisy, możesz go zgłosić przez <a href="/kontakt">formularz kontaktowy</a>.
+                    Jeśli Twojego serwisu nie ma z zakładce serwisy, możesz go zgłosić przez <a href="/kontakt">formularz
+                        kontaktowy</a>.
                 </p>
             </div>
 
@@ -48,7 +52,8 @@
                 <h4>Analiza danych</h4>
 
                 <p>
-                    System PWD Online systematycznie - cyklicznie co 7 dni analizuje i sprawdza serwisy internetowe dostępne w naszej bazie danych.
+                    System PWD Online systematycznie - cyklicznie co 7 dni analizuje i sprawdza serwisy internetowe
+                    dostępne w naszej bazie danych.
                     Każdy z serwisów badany jest przez specjalny proces sprawdzania metryk serwisu.
                     Na podstawie tego badania - audytu poprzez metryki PWD przydzielane są punkty.
                     Następnie wyliczany jest wskaźnik dostępności.
@@ -72,7 +77,7 @@
         </div>
     </section>
 
-    <section class="container-fluid" style="background-color: #f9f9f9">
+    <section class="container-fluid light-section">
         <div class="row mt text-center">
             <div class="col-md-12">
                 <h2>Do pobrania</h2>
@@ -88,17 +93,38 @@
             <div class="col-md-12">
                 <h2>Globalny wskaźnik dostępności</h2>
 
-                <h3>{{ averageScore }}%</h3>
+                <h3 id="globalScore">
+                    <div class='uil-default-css' style='-webkit-transform:scale(0.31)'>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div>
+                        <div style='top:80px;left:93px;width:14px;height:40px;background:#cec9c9;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'>
+                        </div>
+                    </div>
+                </h3>
             </div>
         </div>
     </section>
 
-    <section class="container-fluid" style="background-color: #f9f9f9">
+    <section class="container-fluid light-section">
         <div class="row mt text-center">
             <div class="col-md-12">
                 <h2>Ranking PWD TOP100</h2>
+
                 <h3>Najbardziej dostępne strony użyteczności publicznej</h3>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block inlineJs %}
+    $("#globalScore").load("/ajax/average");
 {% endblock %}
