@@ -1,6 +1,7 @@
 package org.pwd.web;
 
 import com.lyncode.jtwig.mvc.JtwigViewResolver;
+import org.pwd.web.jtwig.LocalDateFormatter;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +24,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
+    public LocalDateFormatter localDateFormatter() {
+        return new LocalDateFormatter();
+    }
+
+    @Bean
     public ViewResolver viewResolver() {
         JtwigViewResolver viewResolver = new JtwigViewResolver();
         viewResolver.setPrefix("classpath:templates/");
         viewResolver.setSuffix(".twig");
         viewResolver.setEncoding("UTF-8");
+        viewResolver.configuration()
+                .render()
+                .functionRepository()
+                .include(localDateFormatter());
         return viewResolver;
     }
 

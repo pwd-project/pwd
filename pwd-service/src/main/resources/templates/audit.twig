@@ -10,7 +10,7 @@
                 <ol>
                     <li>status: {{ audit.processStatus }}</li>
                     <li>ilość stron: {{ audit.auditedSitesCount }}</li>
-                    <li>wykonany: {{ audit.finished }}</li>
+                    <li>wykonany: {{ audit.finished | localDate}}</li>
                     <li>czas trwania: {{ audit.durationAsString }}</li>
                 </ol>
                 <h2>Lista raportów dla audytowanych stron</h2>
