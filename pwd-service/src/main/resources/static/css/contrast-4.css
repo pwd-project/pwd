@@ -1,0 +1,69 @@
+/*contrast 4*/
+body{
+	background:#000;
+	color:#ffff00!important
+}
+.navbar{
+	background:#ffff00;
+	color:#000;
+	border-bottom:1px #000 solid
+}
+.navbar a{
+	color:#000!important
+}
+.tv{
+	background:#000
+}
+h1,h2,h3,h4,h5,h6{
+	color:#ffff00!important
+}
+#headerwrap p{
+	color:#ffff00
+}
+.bg-gray{
+	background:#000
+}
+.box-download div{
+	background:#000
+}
+.rank-value span{
+	color:#ffff00
+}
+.table.ranking{
+	background:#000
+}
+.table-striped > tbody > tr:nth-of-type(2n+1){
+	background:#000
+}
+.ranking th{
+	background:#000;
+	border-color:#ffff00
+}
+.ranking a{
+	color:#ffff00
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{
+	border-color:#ffff00	
+}
+.table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover a{
+	background:none!important;
+
+}
+
+.cta-1, .cta-1:hover{
+	background:#ffff00;
+	border-color:#ffff00;
+	color:#000!important
+}
+
+.cta-2, .cta-2:hover{
+	border-color:#ffff00!important;
+	color:#ffff00!important;
+	background:none
+}
+.visible-contrast a{
+	color:#ffff00;	
+}
+footer{
+	border-top:1px #ffff00 solid
+}
