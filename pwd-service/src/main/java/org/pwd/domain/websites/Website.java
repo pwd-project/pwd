@@ -2,6 +2,7 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,6 +27,12 @@ public class Website {
 
     private String administrativeEmail;
 
+    @Column(nullable = true)
+    private String usedCMS;
+
+    @Column(nullable = true)
+    private Double currentScore;
+
     @Embedded
     private Address address;
 
@@ -44,6 +51,7 @@ public class Website {
 
     public Website(int id, Integer areaCode, URL url,
                    String unitType, String administrativeUnit, String administrativeEmail,
+                   String usedCMS,
                    Address address, Person person) {
         this.id = id;
         this.areaCode = areaCode;
@@ -51,6 +59,7 @@ public class Website {
         this.unitType = unitType;
         this.administrativeUnit = administrativeUnit;
         this.administrativeEmail = administrativeEmail;
+        this.usedCMS = usedCMS;
         this.address = address;
         this.person = person;
     }
@@ -85,5 +94,9 @@ public class Website {
 
     public String getAdministrativeEmail() {
         return administrativeEmail;
+    }
+
+    public String getUsedCMS() {
+        return usedCMS;
     }
 }
