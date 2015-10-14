@@ -209,15 +209,36 @@ footer p{
 /*globalny wskaünik*/
 
 .rank-value{
-	font-size:120px;
+	font-size:140px;
 	display:inline-block;
-	margin:-30px 0 30px;
-	padding:20px 30px;
-
+	margin-top:50px;
+	margin-bottom:-30px;
+	position:relative;
+	line-height:1;
+	letter-spacing:0!important;
+	color:#fff;
+	height:360px;
+	width:360px;
+	z-index:999
+}
+.rank-value:before{
+	content:"";
+	position:absolute;
+	display:block;
+	height:360px;
+	width:360px;
+	/border:5px #ccc solid;
+	border-radius:100%;
+	left:0;
+	top:-100px;
+	background:#e9484a;
+	z-index:-1
 }
 .rank-value span{
 	color:#e9484a
 }
+
+
 /*box - download*/
 .box-download{
 	margin-bottom:60px
@@ -240,6 +261,9 @@ footer p{
 	opacity:.7
 }
 /*table - ranking */
+.table-section{
+	padding:0 2%
+}
 .table.ranking{
 	background:rgba(255,255,255,.7);
 	margin:0 0 60px
@@ -250,10 +274,12 @@ footer p{
 	padding:30px 15px!important;
 	background:#fff;
 	border-right:1px #f2f2f2 solid;
+	font-weight:500
 }
 .ranking td{
 	padding:20px 15px!important;
 	border-right:1px #f2f2f2 solid;
+	vertical-align:middle!important
 }
 .ranking th:last-child, .ranking td:last-child{
 	border-right:none
@@ -547,4 +573,40 @@ input[type="text"], input[type="email"],input[type="url"]{
 .visible-contrast ul{
 	padding:0;
 	margin:0
+}
+
+/*websites - serwisy*/
+.websites{
+	margin-bottom:30px
+}
+.cta-search{
+	padding:7px 15px 8px
+}
+/*audits*/
+.audits h4:first-of-type{
+	margin-top:20px;
+	color:#666
+}
+.audits h4{
+	color:#666
+}
+/*website - wyniki analizy*/
+.rank-header{
+	margin-bottom:100px
+}
+/*news*/
+.news h3{
+	margin-bottom:10px;
+	color:#333
+}
+.news p.date{
+	color:#e9484a;
+	font-size:14px
+}
+.news p{
+	color:#666
+}
+/*info*/
+.info h3{
+	margin-bottom:20px
 }

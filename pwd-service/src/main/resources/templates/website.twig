@@ -3,42 +3,37 @@
 {% block title %}Szczególy analizy{% endblock %}
 
 {% block content %}
-    <section class="container" style="background-color: #fff">
-        <h1 class="text-center">Wyniki analizy</h1>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <div class="box-icon">
-                        <span>
-                            {{ websiteAudit.auditReport.score }}
-                        </span>
-                    </div>
-                    <div class="info">
-                        <h4 class="text-center">
-                            {{ websiteAudit.website.url }}
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            {% for item in metrics %}
-                <div class="col-xs-12 col-sm-6">
-                    <div class="box">
-                        <div class="box-icon">
-                            <span>
-                                {{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
-                            </span>
-                        </div>
-                        <div class="info">
-                            <h4 class="text-center">
-                                <a href="/metryki/{{ item.name }}">{{ item.namePl }}</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
+    <section class="container-fluid text-center section page-header">
+		<h2>Wyniki analizy</h2>
+		<h3><a href="{{ website.url }}">{{ websiteAudit.website.url }}</a></h3>		   
+	</section>    
+	<div class="container-fluid bg-gray section text-center">
+		<h4 class="rank-header">Współczynnik dostępności serwisu</h4>
+		<h5 class="rank-value">	
+			{{ websiteAudit.auditReport.score }}
+		</h5>
+		<div class="table-responsive container">
+			<table class="table table-striped ranking">
+				<tr>
+					<th>
+						Metryka
+					</th>
+					<th>
+						Wynik
+					</th>
+				</tr>
+				{% for item in metrics %}
+				<tr>
+					<td class="text-left">
+						<a href="/metryki/{{ item.name }}">{{ item.namePl }} <i class="fa fa-info-circle"></i></a>
+						
+					</td>
+					<td class="text-left">
+						{{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
 {% endblock %}

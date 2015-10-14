@@ -12,6 +12,7 @@
     <title>{% block title %}Strona Główna{% endblock %} - Polski Walidator Dostępności</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900|Ubuntu:700,500,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -44,7 +45,6 @@
 {% block content %}
 {% endblock %}
 
-<hr/>
 
 {% include '../partials/footer.twig' %}
 
@@ -53,6 +53,7 @@
 <script src="/js/js.cookie.js"></script>
 <script src="/js/pwd.js"></script>
 <script src="/js/contrast.js"></script>
+<script src="/js/sorttable.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         {% block inlineJs %}

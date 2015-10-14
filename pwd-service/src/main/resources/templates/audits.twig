@@ -25,7 +25,11 @@
                             <td><a href="/audyty/{{ item.id }}"><code>[{{ item.id }}]</code></a></td>
                             <td>{{ item.processStatus }}</td>
                             <td>{{ item.auditedSitesCount }}</td>
-                            <td>{{ item.finished | localDate }}</td>
+                            <td>
+                            {% if item.finished is not null %}
+                                {{ item.finished | localDateTime }}
+                            {% endif %}
+                            </td>
                             <td>{{ item.durationAsString }}</td>
                         </tr>
                     {% endfor %}
