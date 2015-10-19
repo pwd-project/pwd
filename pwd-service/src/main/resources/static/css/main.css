@@ -205,7 +205,9 @@ footer {
 footer p{
 	font-size:12px
 }
-
+.maic{
+	max-width:120px
+}
 /*globalny wskaŸnik*/
 
 .rank-value{
@@ -276,6 +278,12 @@ footer p{
 	border-right:1px #f2f2f2 solid;
 	font-weight:500
 }
+th.sortable{
+	cursor:pointer
+}
+th.sortable i{
+	margin-left:5px
+}
 .ranking td{
 	padding:20px 15px!important;
 	border-right:1px #f2f2f2 solid;
@@ -287,7 +295,13 @@ footer p{
 .ranking a{
 	color:#e9484a
 }
-.ranking tr:hover
+.rank-change{
+	font-weight:bold;
+	color:#38d530
+}
+.clear{
+	clear:both
+}
 /* BLOG POST */
 .panel-google-plus {
     position: relative;
@@ -454,7 +468,9 @@ footer p{
     letter-spacing: 2px;
     text-transform: uppercase;
 }
-
+.info h3 {
+    margin:30px 0
+}
 .info > p {
     color: #717171;
     font-size: 16px;
@@ -580,7 +596,8 @@ input[type="text"], input[type="email"],input[type="url"]{
 	margin-bottom:30px
 }
 .cta-search{
-	padding:7px 15px 8px
+	padding:7px 15px 8px;
+	width:100%
 }
 /*audits*/
 .audits h4:first-of-type{
@@ -609,4 +626,7 @@ input[type="text"], input[type="email"],input[type="url"]{
 /*info*/
 .info h3{
 	margin-bottom:20px
+}
+.templates{
+	margin-top:60px
 }

@@ -3,35 +3,37 @@
 {% block title %}TOP 100{% endblock %}
 
 {% block content %}
-    <section class="container-fluid text-center section page-header">
-        <h2>Ranking TOP 100</h2>
-        <h3>100 najbardziej dostępnych serwisów</h3>
-    </section>
-
+	<section class="container-fluid text-center section page-header">     
+		<h2>Ranking Top 100</h2>
+		<h3>100 najbardziej dostępnych serwisów</h3>
+	</section>
+	
 	<div class="container-fluid bg-gray section ">
-        <div class="col-sm-8 col-sm-offset-2">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Punktacja</th>
-                    <th>Nazwa</th>
-                    <th>Serwis</th>
-                    <th>Raporty</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in ranking %}
-                    <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>{{ item.auditReport.score }}</td>
-                        <td>{{ item.website.administrativeUnit }}</td>
-                        <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
-                        <td><a href="/serwisy/{{ item.website.id }}">Zobacz</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+		<div class="table-responsive text-left container">
+			 <table class="table table-striped table-hover ranking">
+				<thead>
+					<tr>
+						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
+						<th>pkt.</th>
+						<th>kategoria</th>
+						<th>nazwa</th>
+						<th>url</th>
+						<th>Raporty</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for item in ranking %}
+					<tr>
+						<th scope="row">{{ loop.index }}</th>
+						<td>{{ item.auditReport.score }}</td>
+						<td>{{ item.website.administrativeUnit }}</td>
+						<td>nazwa</td>
+						<td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+						<td><a href="/serwisy/{{ item.website.id }}"><i class="fa fa-file-text"></i></a></td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div> 
     </div>
 {% endblock %}

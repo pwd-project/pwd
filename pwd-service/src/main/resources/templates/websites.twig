@@ -11,8 +11,9 @@
 	<div class="container-fluid bg-gray section">
 		<div class="table-section">
 			<form action="/serwisy" method="get" class="websites clearfix row">
-				<div class="col-sm-10">
+				<div class="col-sm-6 col-sm-offset-2">
 					<input name="query" value="{{ query }}" type="text" class="form-control" placeholder="Wprowadź nazwę miasta, powiatu lub województwa">
+					<p>Opcje wyszukiwania: <br /><strong>OR</strong>: np. "mazowieckie|świętokrzyskie", <strong>AND</strong>: np. "Warszawa&amp;Kraków"</p>
 				</div>
 				<div class="col-sm-2">
 					<input type="submit" value="Szukaj" class="cta cta-1 cta-search">
@@ -24,12 +25,12 @@
                 <thead>
                 {% if websites %}
                 <tr>
-					<th class="text-center"><img src="/img/rank.png" alt="Pozycja w rankingu"></th>
-					<th>Nazwa</th>
-					<th>Miasto</th>
-					<th>Województwo</th>
-					<th>Powiat</th>
-					<th>Pkt.</th>
+					<th class="text-center sortable"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"><i class="fa fa-sort"></i></th>
+					<th class="sortable">Nazwa <i class="fa fa-sort"></i></th>			
+					<th class="sortable">Miasto <i class="fa fa-sort"></i></th>
+					<th class="sortable">Województwo <i class="fa fa-sort"></i></th>
+					<th class="sortable">Powiat <i class="fa fa-sort"></i></th>
+					<th class="sortable">Pkt. <i class="fa fa-sort"></i></th>
 					<th>Url</th>
 					<th>Raporty</th>
                 </tr>
@@ -38,7 +39,7 @@
                 <tbody>
                 {% for item in websites %}
                     <tr>
-                        <td>{{ currentPlaces.get(loop.index-1) }}</td>
+                        <td class="text-center">{{ currentPlaces.get(loop.index-1) }}</td>
                         <td>{{ item.administrativeUnit }}</td>
                         <td>{{ item.address.city }}</td>
                         <td>{{ item.address.voivodeship }}</td>

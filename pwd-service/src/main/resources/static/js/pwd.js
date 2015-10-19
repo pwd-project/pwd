@@ -25,12 +25,14 @@ $(document).ready(function() {
 		
 		});
 		$('.contrast-1').click(function() {
+			$('.rank-ico').attr('src','img/rank.png');
 			$('.visible-regular').show();
 			$('.visible-contrast').hide();
 			$('#contrast-style').remove();
 			Cookies.set('style', '1');
 		});
 		$('.contrast-2').click(function() {
+			$('.rank-ico').attr('src','img/rank-white.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();
@@ -38,6 +40,7 @@ $(document).ready(function() {
 			Cookies.set('style', '2');
 		});
 		$('.contrast-3').click(function() {
+			$('.rank-ico').attr('src','img/rank.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();
@@ -45,6 +48,7 @@ $(document).ready(function() {
 			Cookies.set('style', '3');
 		});
 		$('.contrast-4').click(function() {
+			$('.rank-ico').attr('src','img/rank-yellow.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();

@@ -11,8 +11,12 @@ body{
 .navbar a{
 	color:#000!important
 }
-.tv{
-	background:#ffff00
+.tv {
+	background:#ffff00;
+}
+.navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:hover {
+	background:#000!important;
+	color:#fff!important
 }
 h1,h2,h3,h4,h5,h6{
 	color:#000!important
@@ -61,4 +65,7 @@ h1,h2,h3,h4,h5,h6{
 }
 footer{
 	border-top:1px #000 solid
+}
+.rank-change{
+	color:#000
 }

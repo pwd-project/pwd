@@ -5,33 +5,32 @@
 {% block content %}
 	<section class="container-fluid text-center section page-header audits">
 		<h2>Wyniki audytów dla</h2>
-		<h3><a href="{{ website.url }}">{{ website.url }}</a></h3>
-		<h4>Aktualna dostępność: <strong>{{ currentScore }}</strong></h4>     
-		<h4>Aktualne miejsce w rankingu: <strong>{{ currentPlace }}</strong></h4>   	
+		<h3><a target="_blank" href="{{ website.url }}">{{ website.url }}</a></h3>
+		<h4>Aktualna dostępność: XX</h4>     
+		<h4>Aktualne miejsce w rankingu: YY</h4>   	
 	</section>    
 	<div class="container-fluid bg-gray section ">
-		<div class="container clearfix">
-			
+		<div class="container clearfix">	
 			<div class="table-responsive ranking">
 				<table class="table table-striped table-hover">
 					<thead>
-					<tr>
-						<th>#</th>
-						<th>data</th>
-						<th>wynik</th>
-						<th>raport</th>
-					</tr>
+						<tr>
+							<th>data</th>
+							<th>wynik</th>
+							<th>raport</th>
+						</tr>
 					</thead>
+					<tbody>
 					{% for websiteAudit in websiteAudits %}
 						<tr>
-							<td>{{ loop.index }}</td>
-							<td>{{ websiteAudit.created | localDate }}</td>
+							<td>{{ websiteAudit.created }}</td>
 							<td>{{ websiteAudit.auditReport.score }}</td>
 							<td>
 								<a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}" title="Raport"><i class="fa fa-file-text"></i></a>
 							</td>
 						</tr>
 					{% endfor %}
+					</tbody>	
 				</table>
 			</div>
 		</div>
