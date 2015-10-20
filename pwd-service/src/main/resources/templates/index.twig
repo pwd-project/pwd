@@ -76,7 +76,7 @@
 				<div>
 					<figure>
 						<a href="img/szablon-pwd-t1-1-prev.jpg" data-lightbox="image-1" data-title="Szablon PWD T1.1">
-							<img src="/img/szablon-pwd-t1-1.jpg" class="img-responsive" alt="Szablon PWD T1.1">
+							<img src="/img/szablony/szablon-pwd-t1-1.jpg" class="img-responsive" alt="Szablon PWD T1.1">
 						</a>
 					</figure>
 					<h5>
@@ -115,7 +115,7 @@
 				<div>
 					<figure>
 						<a href="img/szablon-pwd-t3-1-prev.jpg" data-lightbox="image-1" data-title="Szablon PWD T3.1">
-							<img src="/img/szablon-pwd-t3-1.jpg" class="img-responsive" alt="Szablon PWD T3.1">
+							<img src="/img/szablony/szablon-pwd-t3-1.jpg" class="img-responsive" alt="Szablon PWD T3.1">
 						</a>
 					</figure>
 					<h5>
@@ -154,7 +154,7 @@
 				<div>
 					<figure>
 						<a href="img/szablon-pwd-t6-1-prev.jpg" data-lightbox="image-1" data-title="Szablon PWD T6.1">
-							<img src="/img/szablon-pwd-t6-1.jpg" class="img-responsive" alt="Szablon PWD T6.1">
+							<img src="/img/szablony/szablon-pwd-t6-1.jpg" class="img-responsive" alt="Szablon PWD T6.1">
 						</a>
 					</figure>
 					<h5>
@@ -247,6 +247,40 @@
 			</a> 
         </div>
     </section>
+
+	<section class="container-fluid text-center section" >
+        <div class="container text-center ">
+			<h2>największa poprawa</h2>
+			<h3>serwisy, które w ostatnim tygodniu poczyniły największy postęp</h3>
+
+			<div class="table-responsive text-left">
+				<table class="table table-striped table-hover ranking">
+                    <thead>
+					<tr>
+						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
+						<th>pkt.</th>
+						<th>zmiana</th>
+						<th>nazwa</th>
+						<th>url</th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    {% for item in rankingTopChange %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ item.auditReport.score }}</td>
+                            <td>{{ item.scoreChange }}</td>
+                            <td>{{ item.website.administrativeUnit }}</td>
+                            <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+				</table>
+			</div>
+
+        </div>
+    </section>
+
 {% endblock %}
 
 {% block inlineJs %}

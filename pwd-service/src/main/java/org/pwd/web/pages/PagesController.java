@@ -42,6 +42,7 @@ class PagesController {
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
         model.addAttribute("rankingTop", websiteAuditRepository.getTop(TOP_RECORDS));
+        model.addAttribute("rankingTopChange", websiteAuditRepository.getTopChange(TOP_RECORDS));
         return "index";
     }
 
