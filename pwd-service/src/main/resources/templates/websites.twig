@@ -30,29 +30,29 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     {% if websites %}
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Serwis</th>
-                        <th>Miejscowość</th>
-                        <th>Województwo</th>
-                        <th>Powiat</th>
-                        <th>Wynik</th>
-                        <th>Miejsce</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Serwis</th>
+                            <th>Miejscowość</th>
+                            <th>Województwo</th>
+                            <th>Powiat</th>
+                            <th>Wynik</th>
+                            <th>Miejsce</th>
+                            <th></th>
+                        </tr>
                     {% endif %}
                     </thead>
                     <tbody>
-                    {% for item in websites %}
+                    {% for item in websitesAudits %}
                         <tr>
-                            <td>{{ item.administrativeUnit }}</td>
-                            <td><a href="{{ item.url }}" target="_blank">{{ item.url }}</a></td>
-                            <td>{{ item.address.city }}</td>
-                            <td>{{ item.address.voivodeship }}</td>
-                            <td>{{ item.address.county }}</td>
-                            <td>{{ currentScores.get(loop.index-1) }}</td>
-                            <td>{{ currentPlaces.get(loop.index-1) }}</td>
-                            <td><a href="/serwisy/{{ item.id }}"><img src="/img/proces-raport.png" alt=""></a></td>
+                            <td>{{ item.website.administrativeUnit }}</td>
+                            <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+                            <td>{{ item.website.address.city }}</td>
+                            <td>{{ item.website.address.voivodeship }}</td>
+                            <td>{{ item.website.address.county }}</td>
+                            <td>{{ item.score }}</td>
+                            <td>{{ loop.index }}</td>
+                            <td><a href="/serwisy/{{ item.website.id }}"><img src="/img/proces-raport.png" alt=""></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

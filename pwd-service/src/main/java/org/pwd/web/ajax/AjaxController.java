@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -23,13 +24,12 @@ class AjaxController {
     }
 
     @RequestMapping(value = "/average", method = GET)
-    public double averageScore() {
-        List<WebsiteAudit> auditList = websiteAuditRepository.getSorted();
-        double averageScore = 0.0;
-        for (WebsiteAudit audit : auditList) {
-            averageScore += audit.getAuditReport().score();
-        }
-        averageScore /= auditList.size();
-        return Math.round(averageScore * 100) / 100.0;
+    public String averageScore() {
+        List<WebsiteAudit> auditList = websiteAuditRepository.findAll();
+        double avg = auditList.stream()
+                .mapToDouble(p -> p.getAuditReport().score())
+                .average()
+                .getAsDouble();
+        return new DecimalFormat("#.00").format(avg);
     }
 }

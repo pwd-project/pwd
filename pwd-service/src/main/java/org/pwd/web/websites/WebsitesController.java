@@ -1,5 +1,7 @@
 package org.pwd.web.websites;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pwd.domain.audit.WebsiteAudit;
 import org.pwd.domain.audit.WebsiteAuditRepository;
 import org.pwd.domain.websites.Website;
@@ -7,28 +9,21 @@ import org.pwd.domain.websites.WebsiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-/**
- * @author bartosz.walacik
- */
 @Controller
 @RequestMapping("/serwisy")
 class WebsitesController {
 
     private WebsiteRepository websiteRepository;
     private WebsiteAuditRepository websiteAuditRepository;
-    private HashMap<Integer,Integer> placesMap;
 
     @Autowired
     public WebsitesController(WebsiteRepository websiteRepository, WebsiteAuditRepository websiteAuditRepository) {
@@ -37,29 +32,17 @@ class WebsitesController {
     }
 
     @RequestMapping(method = GET)
-    public String getWebsites(Model model,
-                              @RequestParam(value = "query", required = false) String query) {
-
-        model.addAttribute("query", query);
-
-        List<Website> websites;
-        ArrayList<Integer> currentScores = new ArrayList<Integer>();
-        ArrayList<Integer> currentPlaces = new ArrayList<Integer>();
+    public String getWebsites(Model model, @RequestParam(value = "query", required = false) String query) {
+        List<WebsiteAudit> websitesAudits;
         if (StringUtils.isEmpty(query)) {
-            websites = Collections.emptyList();
+            websitesAudits = Collections.emptyList();
         } else {
-            initPlacesMap();
-            websites = websiteRepository.search(query);
-            for(Website website : websites){
-                currentScores.add(getCurrentScore(website.getId()));
-                currentPlaces.add(getCurrentPlace(website.getId()));
-            }
+            websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(query));
         }
-        model.addAttribute("websites", websites);
+        model.addAttribute("query", query);
+        model.addAttribute("websitesAudits", websitesAudits);
         model.addAttribute("websitesTotalCount", websiteRepository.count());
-        model.addAttribute("websitesCount", websites.size());
-        model.addAttribute("currentScores", currentScores);
-        model.addAttribute("currentPlaces", currentPlaces);
+        model.addAttribute("websitesCount", websitesAudits.size());
 
         return "websites";
     }
@@ -71,28 +54,7 @@ class WebsitesController {
         Collections.reverse(websiteAudits);
         model.addAttribute("websiteAudits", websiteAudits);
         model.addAttribute("website", website);
-        model.addAttribute("currentScore",getCurrentScore(websiteId));
-        model.addAttribute("currentPlace",getCurrentPlace(websiteId));
+
         return "websiteAudits";
-    }
-
-    private int getCurrentScore(int websiteId) {
-        WebsiteAudit lastAudit = websiteAuditRepository.getCurrentScore(websiteId);
-        return lastAudit.getAuditReport().score();
-    }
-
-    private int getCurrentPlace(int websiteId) {
-        if( placesMap == null ) initPlacesMap();
-        return placesMap.get(websiteId);
-    }
-
-    private void initPlacesMap() {
-        placesMap = new HashMap<Integer, Integer>();
-        List<WebsiteAudit> sortedWebsiteAudits = websiteAuditRepository.getSorted();
-        int place = 1;
-        for(WebsiteAudit websiteAudit : sortedWebsiteAudits){
-            placesMap.put(websiteAudit.getWebsite().getId(),place);
-            ++place;
-        }
     }
 }

@@ -18,7 +18,7 @@ public class WebsiteAuditReport extends Document {
     private static final Logger logger = LoggerFactory.getLogger(WebsiteAuditReport.class);
 
     private final int httpStatusCode;
-    private final int score;
+    private final double score;
     private final List<MetricValue> metrics;
 
     public WebsiteAuditReport(JsonObject analysisResponse) {
@@ -48,14 +48,13 @@ public class WebsiteAuditReport extends Document {
         return httpStatusCode;
     }
 
-    public int score() {
+    public double score() {
         return score;
     }
 
-    private int metricsWeightedAvg() {
+    private double metricsWeightedAvg() {
 
-        List<MetricValue> nonEmptyMetrics =
-                metrics.stream().filter(it -> it.getValue().isPresent()).collect(Collectors.toList());
+        List<MetricValue> nonEmptyMetrics = metrics.stream().filter(it -> it.getValue().isPresent()).collect(Collectors.toList());
 
         if (nonEmptyMetrics.size() == 0) {
             return 0;
