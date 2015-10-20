@@ -42,13 +42,13 @@
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             </button>
             <ul class="nav navbar-nav navbar-right">
-				<li><a href="/top-100">Ranking</a></li>
-				<li><a href="/serwisy">Serwisy</a></li>
-                <li><a href="/metryki">Metryki</a></li>
-                <li><a href="/aktualnosci">Aktualności</a></li>
-                <li><a href="/o-projekcie">O projekcie</a></li>
-                <li><a href="/pobierz">Pobierz</a></li>
-                <li><a href="/kontakt">Kontakt</a></li>
+                <li><a {% if (request.requestURI == "/top-100") %} class="current"{% endif %} href="/top-100">RANKING</a></li>
+                <li><a {% if (request.requestURI == "/serwisy") %} class="current"{% endif %} href="/serwisy">SERWISY</a></li>
+                <li><a {% if (request.requestURI == "/metryki") %} class="current"{% endif %} href="/metryki">METRYKI</a></li>
+                <li><a {% if (request.requestURI == "/aktualnosci") %} class="current"{% endif %} href="/aktualnosci">AKTUALNOŚCI</a></li>
+                <li><a {% if (request.requestURI == "/o-projekcie") %} class="current"{% endif %} href="/o-projekcie">O PROJEKCIE</a></li>
+                <li><a {% if (request.requestURI == "/pobierz") %} class="current"{% endif %} href="/pobierz">POBIERZ</a></li>
+                <li><a {% if (request.requestURI == "/kontakt") %} class="current"{% endif %} href="/kontakt">KONTAKT</a></li>
             </ul>
         </div>
     </div>
