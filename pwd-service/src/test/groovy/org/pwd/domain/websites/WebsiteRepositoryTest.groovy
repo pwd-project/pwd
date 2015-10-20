@@ -34,19 +34,19 @@ class WebsiteRepositoryTest extends IntegrationTest {
 
         expect:
         //query by name
-        websiteRepository.search("urzad").size() == 1
-        websiteRepository.search("Urząd").size() == 1
-        websiteRepository.search("Smoka").size() == 2
-        websiteRepository.search("powiat maly").size() == 1
+        websiteAuditRepository.search("urzad").size() == 1
+        websiteAuditRepository.search("Urząd").size() == 1
+        websiteAuditRepository.search("Smoka").size() == 2
+        websiteAuditRepository.search("powiat maly").size() == 1
 
         //query by city
-        websiteRepository.search("zyrardow").size() == 1
+        websiteAuditRepository.search("zyrardow").size() == 1
         //query by voivodeship
-        websiteRepository.search("Mazowieckie").size() == 1
+        websiteAuditRepository.search("Mazowieckie").size() == 1
 
         //query by county
-        websiteRepository.search("duzy").size() == 1
-        websiteRepository.search("powiat").size() == 2
+        websiteAuditRepository.search("duzy").size() == 1
+        websiteAuditRepository.search("powiat").size() == 2
 
     }
 }
