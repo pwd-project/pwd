@@ -227,15 +227,21 @@
 						<th>pkt.</th>
 						<th>nazwa</th>
 						<th>url</th>
+						<th>Raporty</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in rankingTop %}
                         <tr>
-                            <th scope="row">{{ loop.index }}</th>
+							<td class="text-center">{{ loop.index }}</td>
                             <td>{{ item.auditReport.score }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+							<td>
+								<a href="/serwisy/{{ item.website.id }}">
+									<i class="fa fa-file-text"></i>
+								</a>
+							</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -259,25 +265,28 @@
 					<tr>
 						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
 						<th>pkt.</th>
-						<th>zmiana</th>
 						<th>nazwa</th>
 						<th>url</th>
+						<th>Raporty</th>
 					</tr>
                     </thead>
                     <tbody>
                     {% for item in rankingTopChange %}
                         <tr>
-                            <th scope="row">{{ loop.index }}</th>
+							<td class="text-center">{{ loop.index }}</td>
                             <td>{{ item.auditReport.score }}</td>
-                            <td>{{ item.scoreChange }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
+							<td>
+								<a href="/serwisy/{{ item.website.id }}">
+									<i class="fa fa-file-text"></i>
+								</a>
+							</td>
                         </tr>
                     {% endfor %}
                     </tbody>
 				</table>
 			</div>
-
         </div>
     </section>
 
