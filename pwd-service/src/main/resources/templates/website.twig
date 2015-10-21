@@ -5,7 +5,7 @@
 {% block content %}
     <section class="container-fluid text-center section page-header">
 		<h2>Wyniki analizy</h2>
-		<h3><a href="{{ website.url }}">{{ websiteAudit.website.url }}</a></h3>		   
+		<h3><a target="_blank" href="{{ website.url }}">{{ websiteAudit.website.url }}</a></h3>     
 	</section>    
 	<div class="container-fluid bg-gray section text-center">
 		<h4 class="rank-header">Współczynnik dostępności serwisu</h4>
@@ -16,7 +16,19 @@
 			<table class="table table-striped ranking">
 				<tr>
 					<th>
-						Metryka
+						Lp.
+					</th>
+					<th>
+						Nazwa
+					</th>
+					<th>
+						Kod
+					</th>
+					<th>
+						Wytyczna
+					</th>
+					<th>
+						Waga
 					</th>
 					<th>
 						Wynik
@@ -25,8 +37,20 @@
 				{% for item in metrics %}
 				<tr>
 					<td class="text-left">
-						<a href="/metryki/{{ item.name }}">{{ item.namePl }} <i class="fa fa-info-circle"></i></a>
-						
+						{{ loop.index }}.
+					</td>
+				
+					<td class="text-left">
+						<a href="/metryki/{{ item.name }}">{{ item.namePl }} </a>
+					</td>
+					<td class="text-left">
+						{{ item.name }}
+					</td>
+					<td class="text-left">
+						<a href="{{ metric.guidelineHref }}" target="_blank">{{ metric.guidelineName }}</a>
+					</td>
+					<td class="text-left">
+						{{ metric.weight }}
 					</td>
 					<td class="text-left">
 						{{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
