@@ -43,8 +43,8 @@
             </button>
             <ul class="nav navbar-nav navbar-right">
                 <li><a {% if (request.requestURI == "/top-100") %} class="current"{% endif %} href="/top-100">Ranking</a></li>
-                <li><a {% if (request.requestURI == "/serwisy") %} class="current"{% endif %} href="/serwisy">Serwisy</a></li>
-                <li><a {% if (request.requestURI == "/metryki") %} class="current"{% endif %} href="/metryki">Metryki</a></li>
+                <li><a {% if (("/serwisy" in request.requestURI) or ("/audyty" in request.requestURI)) %} class="current"{% endif %} href="/serwisy">Serwisy</a></li>
+                <li><a {% if ("/metryki" in request.requestURI ) %} class="current"{% endif %} href="/metryki">Metryki</a></li>
                 <li><a {% if (request.requestURI == "/aktualnosci") %} class="current"{% endif %} href="/aktualnosci">Aktualności</a></li>
                 <li><a {% if (request.requestURI == "/o-projekcie") %} class="current"{% endif %} href="/o-projekcie">O projekcie</a></li>
                 <li><a {% if (request.requestURI == "/pobierz") %} class="current"{% endif %} href="/pobierz">Pobierz</a></li>

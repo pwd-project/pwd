@@ -5,7 +5,7 @@
 {% block content %}
     <section class="container-fluid text-center section page-header">
 		<h2>Wyniki analizy</h2>
-		<h3><a target="_blank" href="{{ website.url }}">{{ websiteAudit.website.url }}</a></h3>     
+		<h3><a target="_blank" href="{{ websiteAudit.website.url }}">{{ websiteAudit.website.url }}</a></h3>
 	</section>    
 	<div class="container-fluid bg-gray section text-center">
 		<h4 class="rank-header">Współczynnik dostępności serwisu</h4>
@@ -47,10 +47,10 @@
 						{{ item.name }}
 					</td>
 					<td class="text-left">
-						<a href="{{ metric.guidelineHref }}" target="_blank">{{ metric.guidelineName }}</a>
+						<a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a>
 					</td>
 					<td class="text-left">
-						{{ metric.weight }}
+						{{ item.weight }}
 					</td>
 					<td class="text-left">
 						{{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
