@@ -22,7 +22,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
-            " ORDER BY to_number(json_extract_path_text(audit_report,'score'),'999') DESC" +
+            " ORDER BY wa.audit_score DESC" +
             " LIMIT :maxRecords")
     List<WebsiteAudit> getTop(@Param("maxRecords") Integer maxRecords);
 
@@ -56,7 +56,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
-            " ORDER BY to_number(json_extract_path_text(audit_report,'score'),'999') DESC")
+            " ORDER BY wa.audit_score DESC")
     List<WebsiteAudit> getSorted();
 
     @Query(nativeQuery = true, value =
