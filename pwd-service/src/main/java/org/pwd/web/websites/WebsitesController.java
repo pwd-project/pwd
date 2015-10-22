@@ -86,7 +86,7 @@ class WebsitesController {
 
     private int getCurrentPlace(int websiteId) {
         if( placesMap == null ) initPlacesMap();
-        return placesMap.get(websiteId);
+        return placesMap.getOrDefault(websiteId,placesMap.size());
     }
 
     private void initPlacesMap() {
