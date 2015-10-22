@@ -15,7 +15,6 @@
 					<tr>
 						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
 						<th>pkt.</th>
-						<th>kategoria</th>
 						<th>nazwa</th>
 						<th>url</th>
 						<th>Raporty</th>
@@ -24,10 +23,9 @@
 				<tbody>
 				{% for item in ranking %}
 					<tr>
-						<th scope="row">{{ loop.index }}</th>
+						<th scope="row">{{ loop.index }}.</th>
 						<td>{{ item.auditReport.score }}</td>
 						<td>{{ item.website.administrativeUnit }}</td>
-						<td>nazwa</td>
 						<td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
 						<td><a href="/serwisy/{{ item.website.id }}"><i class="fa fa-file-text"></i></a></td>
 					</tr>

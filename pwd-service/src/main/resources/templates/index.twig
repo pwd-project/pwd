@@ -26,7 +26,7 @@
         <div class="container text-center">
             <div class="col-lg-4 column">
                 <img src="/img/odwiedziny-ico.png" class="img-responsive" alt="Odwiedzny Twojej strony">
-                <h4>Odwiedzny Twojej strony</h4>
+                <h4>Odwiedziny Twojej strony</h4>
                 <p>
                     Jeśli Twoja strona jest w naszej bazie Serwisów, wówczas jest systematycznie audytowana przez nasz
                     system badania dostępności.
@@ -233,7 +233,7 @@
                     <tbody>
                     {% for item in rankingTop %}
                         <tr>
-							<td class="text-center">{{ loop.index }}</td>
+							<td class="text-center">{{ loop.index }}.</td>
                             <td>{{ item.auditReport.score }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
@@ -256,7 +256,7 @@
 
 	<section class="container-fluid text-center section" >
         <div class="container text-center ">
-			<h2>największa poprawa</h2>
+			<h2>największy awans w rankingu</h2>
 			<h3>serwisy, które w ostatnim tygodniu poczyniły największy postęp</h3>
 
 			<div class="table-responsive text-left">
@@ -273,7 +273,7 @@
                     <tbody>
                     {% for item in rankingTopChange %}
                         <tr>
-							<td class="text-center">{{ loop.index }}</td>
+							<td class="text-center">{{ loop.index }}.</td>
                             <td>{{ item.auditReport.score }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
