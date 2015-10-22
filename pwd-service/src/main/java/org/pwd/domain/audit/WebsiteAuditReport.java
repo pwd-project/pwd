@@ -44,6 +44,12 @@ public class WebsiteAuditReport extends Document {
                 .orElseThrow(() -> new RuntimeException("no such metric: " + metricName));
     }
 
+    public boolean hasMetric(String metricName) {
+        return metrics
+                .stream()
+                .filter(it -> it.getMetricName().equals(metricName)).count() > 0;
+    }
+
     public int getHttpStatusCode() {
         return httpStatusCode;
     }

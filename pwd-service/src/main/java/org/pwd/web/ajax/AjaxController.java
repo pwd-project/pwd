@@ -25,7 +25,7 @@ class AjaxController {
 
     @RequestMapping(value = "/average", method = GET)
     public String averageScore() {
-        List<WebsiteAudit> auditList = websiteAuditRepository.findAll();
+        List<WebsiteAudit> auditList = websiteAuditRepository.getSorted();
         double avg = auditList.stream()
                 .mapToDouble(p -> p.getAuditReport().score())
                 .average()

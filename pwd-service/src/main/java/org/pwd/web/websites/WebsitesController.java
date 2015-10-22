@@ -39,10 +39,12 @@ class WebsitesController {
         } else {
             websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(query));
         }
+
         model.addAttribute("query", query);
         model.addAttribute("websitesAudits", websitesAudits);
         model.addAttribute("websitesTotalCount", websiteRepository.count());
         model.addAttribute("websitesCount", websitesAudits.size());
+        model.addAttribute("currentPlaces", getCurrentRanking());
 
         return "websites";
     }
@@ -54,7 +56,18 @@ class WebsitesController {
         Collections.reverse(websiteAudits);
         model.addAttribute("websiteAudits", websiteAudits);
         model.addAttribute("website", website);
+        model.addAttribute("currentScore", getCurrentScore(websiteId));
+        model.addAttribute("currentPlaces", getCurrentRanking());
 
         return "websiteAudits";
+    }
+
+    private List<WebsiteAudit> getCurrentRanking() {
+        return websiteAuditRepository.getSorted();
+    }
+
+    private double getCurrentScore(int websiteId) {
+        WebsiteAudit lastAudit = websiteAuditRepository.getCurrentScore(websiteId);
+        return lastAudit.getAuditReport().score();
     }
 }

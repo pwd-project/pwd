@@ -50,8 +50,8 @@
                             <td>{{ item.website.address.city }}</td>
                             <td>{{ item.website.address.voivodeship }}</td>
                             <td>{{ item.website.address.county }}</td>
-                            <td>{{ item.score }}</td>
-                            <td>{{ loop.index }}</td>
+                            <td>{{ item.auditReport.score }}</td>
+                            <td>{{ currentPlaces.indexOf(item)+1 }}</td>
                             <td><a href="/serwisy/{{ item.website.id }}"><img src="/img/proces-raport.png" alt=""></a></td>
                         </tr>
                     {% endfor %}
