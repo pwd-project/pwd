@@ -1,7 +1,7 @@
 body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
-    font-size: 1.6em;
+    font-size: 16px;
     color: #555;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -67,9 +67,9 @@ a {
 
 a:hover,
 a:focus {
-    color: #333;
-    text-decoration: none;
-    outline: 0;
+    /color: #333;
+    text-decoration: underline;
+    /outline: 0;
 }
 
 a:before,
@@ -92,6 +92,7 @@ hr {
 .navbar-brand > img{
 	width:190px
 }
+
 .navbar{
 	margin-bottom:0;
 	height:62px
@@ -114,7 +115,7 @@ hr {
 	padding:20px 15px 22px;
 	margin-left:1px
 }
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current{
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:focus{
 	background:#e9484a;
 	color:#fff
 }
@@ -200,13 +201,14 @@ hr {
 /*footer*/
 footer {
     padding: 15px;
-	
+	border-top:1px #f2f2f2 solid
 }
 footer p{
 	font-size:12px
 }
 .maic{
-	max-width:120px
+	max-width:120px;
+	margin-left:15px
 }
 /*globalny wskaŸnik*/
 
@@ -492,6 +494,9 @@ th.sortable i{
     color: #fff;
     transition: all 0.5s ease 0s;
 }
+.info li{
+	font-size: 16px;
+}
 
 /*buttons*/
 .cta{
@@ -548,6 +553,9 @@ input[type="text"], input[type="email"],input[type="url"]{
 	padding:10px;
 	margin-bottom:1px;
 	
+}
+.icons span:focus, .icons a:focus{
+	border:1px red solid
 }
 .font{
 	position:relative
@@ -629,4 +637,145 @@ input[type="text"], input[type="email"],input[type="url"]{
 }
 .templates{
 	margin-top:60px
+}
+
+
+
+/*rwd*/
+.navbar-toggle{
+	border-radius:0;
+	/margin-right:0;
+	margin-top:13px;
+	border:1px #e9484a solid!important;
+	background:#e9484a!important;
+}
+.navbar-toggle:hover{
+	
+	color:#fff
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background-color:#fff!important
+}
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{
+	max-height:none
+}
+
+@media only screen and (max-width: 1150px) {
+	.container{
+		width:1070px
+	}
+	h2{
+		max-width:85%;
+		margin:0 auto
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.container{
+		width:inherit
+	}
+	.navbar-default .navbar-nav > li > a{
+		padding:20px 12px 22px
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.navbar-default .navbar-nav > li > a{
+		padding:20px 8px 22px;
+		font-size:11px
+	}
+	.tv{
+		padding-top:30px
+	}
+	.box-download figure img{
+		width:100%
+	}
+	footer img.pull-right{
+		float:none!important;
+		display:inline-block
+	}
+	.maic{
+		margin:0 15px 0 0
+	}
+	.font{
+		display:none!important
+	}
+	
+}
+
+@media only screen and (max-width: 768px) {
+	.navbar-nav{
+		background:#fff;
+		margin-top:0;
+		z-index:999;
+		box-shadow:0 0 5px #000
+	}
+	.navbar-default .navbar-nav > li > a{
+		padding:15px 15px 17px;
+		font-size:15px
+	}
+	.icons{
+		top:13px;
+		right:100px
+	}
+	.icons span, .icons a{
+		float:left;
+		margin-left:5px
+	}
+	
+}
+
+@media only screen and (max-width: 600px) {
+
+}
+
+@media only screen and (max-width: 480px) {
+	#headerwrap h1{
+		font-size:50px
+	}
+	.tv{
+		padding:0 0 30px 0
+	}
+	.cta-1{
+		margin-bottom:15px
+	}
+	#headerwrap p{
+		max-width:unset
+	}
+	h2{
+		font-size:28px
+	}
+	.section h3{
+		margin-bottom:30px
+	}
+	.rank-value{
+		font-size:90px;
+		color:red;
+		height:auto;
+		width:auto;
+		margin:0px 0 30px 0
+	}
+	.rank-value::before{
+		display:none;
+		
+	}
+	.icons{
+		right:90px
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	#headerwrap h1{
+		font-size:36px
+	}
+	.icons{
+		position:static;
+		margin-right:15px;
+		float:right
+		
+	}
+	.icons span, .icons a{
+		margin-top:15px
+	}
+	
 }
