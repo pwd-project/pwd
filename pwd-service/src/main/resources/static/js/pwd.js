@@ -6,19 +6,19 @@ $(document).ready(function() {
 		});
 		var plus = 0;
 		$('.font-basic').click(function() {
-			$('p, span, h1, h2, h3, h4, h5, h6').removeAttr('style');
+			$('p, span, h1, h2, h3, h4, h5:not(".rank-value"), h6, ul, li, td, th').removeAttr('style');
 			plus=0;
 		});
 		$('.font-plus').click(function() {
-			$('p, span, h1, h2, h3, h4, h5, h6').removeAttr('style');
-			$('p, .section span, h1, h2, h3, h4, h5, h6').css("font-size", function() {
+			$('p, span, h1, h2, h3, h4, h5:not(".rank-value"), h6, ul, li, td, th').removeAttr('style');
+			$('p, .section span, h1, h2, h3, h4, h5:not(".rank-value"), h6, ul, li, td, th').css("font-size", function() {
 				plus=plus+1;
 				return parseInt($(this).css('font-size')) * 1.5 + 'px';		
 			});
 		});
 		$('.font-plus-plus').click(function() {
-			$('p,  span, h1, h2, h3, h4, h5, h6').removeAttr('style');
-			$('p, .section span, h1, h2, h3, h4, h5, h6').css("font-size", function() {
+			$('p,  span, h1, h2, h3, h4, h5:not(".rank-value"), h6, ul, li, td, th').removeAttr('style');
+			$('p, .section span, h1, h2, h3, h4, h5:not(".rank-value"), h6, ul, li, td, th').css("font-size", function() {
 				
 				return parseInt($(this).css('font-size')) * 2 + 'px';		
 			});
@@ -64,4 +64,7 @@ $(document).ready(function() {
 			$('head').append('<link id="contrast-style" rel="stylesheet" href="css/contrast-'+style+'.css" type="text/css" />');
 		}
 		
+		
 	});
+
+		

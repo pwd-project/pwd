@@ -1,4 +1,16 @@
 /*contrast 3*/
+a{
+	color:#000
+}
+.rank-value::before{
+	background:#ffff00
+}
+.rank-value{
+	color:#000!important
+}
+.news p.date, .news p{
+	color:#000
+}
 body{
 	background:#ffff00;
 	color:#000!important
