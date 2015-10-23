@@ -78,12 +78,15 @@ class WebsitesController {
 
     private int getCurrentScore(int websiteId) {
         WebsiteAudit lastAudit = websiteAuditRepository.getCurrentScore(websiteId);
-        return lastAudit.getAuditReport().score();
+        if (lastAudit == null)
+            return 0;
+        else
+            return lastAudit.getAuditReport().score();
     }
 
     private int getCurrentPlace(int websiteId) {
         if( placesMap == null ) initPlacesMap();
-        return placesMap.get(websiteId);
+        return placesMap.getOrDefault(websiteId,placesMap.size());
     }
 
     private void initPlacesMap() {

@@ -1,0 +1,81 @@
+/*contrast 2*/
+a{
+	color:#fff
+}
+.rank-value::before{
+	background:#fff
+}
+.rank-value{
+	color:#000!important
+}
+.news p.date, .news p{
+	color:#fff
+}
+body{
+	background:#000;
+	color:#fff
+}
+.navbar{
+	background:#fff;
+	/color:#000;
+	border-bottom:1px #fff solid
+}
+.navbar-default .navbar-nav > li > a{
+	color:#000
+}
+.tv, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current{
+	background:#000
+}
+h1,h2,h3,h4,h5,h6{
+	color:#fff!important
+}
+.bg-gray{
+	background:#000
+}
+.box-download div{
+	background:#000
+}
+.rank-value span{
+	color:#fff
+}
+.table.ranking{
+	background:#000
+}
+.table-striped > tbody > tr:nth-of-type(2n+1){
+	background:#000
+}
+.ranking th{
+	background:#000
+}
+.ranking a{
+	color:#fff
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{
+	border-color:#fff	
+}
+.table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover a{
+	background:none!important;
+
+}
+.cta-1, .cta-1:hover{
+	background:#fff;
+	border-color:#fff;
+	color:#000!important
+}
+
+.cta-2, .cta-2:hover{
+	border-color:#fff!important;
+	color:#fff!important;
+	background:none
+}
+.visible-contrast a{
+	color:#fff;	
+}
+footer{
+	border-top:1px #fff solid;
+	background:#fff;
+	color:#000
+}
+.rank-change{
+	color:#fff
+}

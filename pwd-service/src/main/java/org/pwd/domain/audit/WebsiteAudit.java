@@ -37,6 +37,9 @@ public class WebsiteAudit {
     @JoinColumn(name = "audit_fk")
     private Audit audit;
 
+    @Column(nullable = true)
+    private float auditScore;
+
     //only for Hibernate
     WebsiteAudit() {
     }
@@ -51,6 +54,7 @@ public class WebsiteAudit {
         this.audit = audit;
 
         created = LocalDateTime.now();
+        auditScore = auditReport.score();
     }
 
     public int getId() {
@@ -71,5 +75,9 @@ public class WebsiteAudit {
 
     public Audit getAudit() {
         return audit;
+    }
+
+    public float getAuditScore() {
+        return auditScore;
     }
 }

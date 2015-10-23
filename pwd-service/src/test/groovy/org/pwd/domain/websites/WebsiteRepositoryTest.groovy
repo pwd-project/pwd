@@ -24,11 +24,13 @@ class WebsiteRepositoryTest extends IntegrationTest {
         given:
         websiteRepository.save new Website(10, 111, new URL("http://example.com/"),
                 "P", "Urząd Smoka Wawelskiego", "kris@gnail.com",
+                "Wordpress",
                 new Address("Żyrardów", "Śląskie", "Powiat Duży"),
                 new Person("Krzysiek", "Adamowicz", "Burmistrz"))
 
         websiteRepository.save(new Website(11, 222, new URL("http://example.com/"),
                 "W", "Biuro Smoka Wawelskiego", "kris@gnail.com",
+                "Wordpress",
                 new Address("Gniezno", "Mazowieckie", "Powiat Mały"),
                 new Person("Krzysiek", "Adamowicz", "Burmistrz")))
 
