@@ -30,8 +30,8 @@ class PagesController {
     }
 
     @RequestMapping(value = "pobierz", method = GET)
-    public String pobierzPage() {
-        return "pobierz";
+    public String downloadPage() {
+        return "download";
     }
 
     @RequestMapping(value = "kontakt", method = GET)
