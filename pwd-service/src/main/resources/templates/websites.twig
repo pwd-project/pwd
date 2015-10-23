@@ -55,6 +55,11 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% if not websites and query is not null %}
+				<div class="col-sm-6 col-sm-offset-2">
+					<h3>Brak wyników wyszukiwania</h3>
+				</div>
+            {% endif %}
 			</div>
         </div>
     </div>
