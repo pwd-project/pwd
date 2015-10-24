@@ -15,7 +15,11 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
 
     WebsiteAudit findByAuditAndWebsiteId(Audit audit, int websiteId);
 
-    List<WebsiteAudit> findByWebsiteId(int websiteId);
+    @Query(nativeQuery = true, value = "SELECT * " +
+            " FROM   website_audit wa" +
+            " WHERE  wa.website_fk = :websiteId" +
+            " ORDER BY created")
+    List<WebsiteAudit> findByWebsiteId(@Param("websiteId") int websiteId);
 
     @Query(nativeQuery = true, value =
             " SELECT wa.* " +
@@ -37,7 +41,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT MAX(a1.id)" +
             " FROM   audit a1" +
             " WHERE  a1.process_status = 'DONE'" +
-            " AND    a1.id < (SELECT MAX(a2.id) FROM audit a2 where a2.process_status = 'DONE')" +
+            " AND    a1.id = (SELECT MAX(a2.id) FROM audit a2 where a2.process_status = 'DONE')" +
             " )" +
             " AND    w.id = wap.website_fk" +
             " AND    wap.audit_fk = " +
