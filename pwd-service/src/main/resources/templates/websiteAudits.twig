@@ -6,8 +6,8 @@
 	<section class="container-fluid text-center section page-header audits">
 		<h2>Wyniki audytów dla</h2>
 		<h3><a target="_blank" href="{{ website.url }}">{{ website.url }}</a></h3>
-		<h4>Aktualna dostępność: <strong>{{ currentScore }}</strong></h4>
-		<h4>Aktualne miejsce w rankingu: <strong>{{ currentPlace }}</strong></h4>
+		<h4>Aktualna dostępność: <strong>{{ currentScore|number_format(2, ',', ' ') }}</strong></h4>
+		<h4>Aktualne miejsce w rankingu: <strong>{{ currentPlaces.indexOf(websiteAudits|first)+1 }}</strong></h4>
 	</section>    
 	<div class="container-fluid bg-gray section ">
 		<div class="container clearfix">	
@@ -24,7 +24,7 @@
 					{% for websiteAudit in websiteAudits %}
 						<tr>
 							<td>{{ websiteAudit.created  | localDate }}</td>
-							<td>{{ websiteAudit.auditReport.score }}</td>
+							<td>{{ websiteAudit.auditReport.score|number_format(2, ',', ' ') }}</td>
 							<td>
 								<a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}" title="Raport"><i class="fa fa-file-text"></i></a>
 							</td>

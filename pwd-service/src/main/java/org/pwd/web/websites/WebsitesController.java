@@ -68,6 +68,9 @@ class WebsitesController {
 
     private double getCurrentScore(int websiteId) {
         WebsiteAudit lastAudit = websiteAuditRepository.getCurrentScore(websiteId);
-        return lastAudit.getAuditReport().score();
+        if (lastAudit == null)
+            return 0;
+        else
+            return lastAudit.getAuditReport().score();
     }
 }

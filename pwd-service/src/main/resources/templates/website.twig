@@ -10,7 +10,7 @@
 	<div class="container-fluid bg-gray section text-center">
 		<h4 class="rank-header">Współczynnik dostępności serwisu</h4>
 		<h5 class="rank-value">	
-			{{ websiteAudit.auditReport.score }}
+			{{ websiteAudit.auditReport.score|number_format(2, ',', ' ') }}
 		</h5>
 		<div class="table-responsive container">
 			<table class="table table-striped ranking">
