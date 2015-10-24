@@ -24,20 +24,22 @@
         </div>
         <div class="row">
             {% for item in metrics %}
-                <div class="col-xs-12 col-sm-6">
-                    <div class="box">
-                        <div class="box-icon">
+                {% if websiteAudit.auditReport.hasMetric(item.name) %}
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="box">
+                            <div class="box-icon">
                             <span>
                                 {{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
                             </span>
-                        </div>
-                        <div class="info">
-                            <h4 class="text-center">
-                                <a href="/metryki/{{ item.name }}">{{ item.namePl }}</a>
-                            </h4>
+                            </div>
+                            <div class="info">
+                                <h4 class="text-center">
+                                    <a href="/metryki/{{ item.name }}">{{ item.namePl }}</a>
+                                </h4>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </section>

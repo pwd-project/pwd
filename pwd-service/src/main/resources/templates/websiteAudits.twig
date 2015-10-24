@@ -12,7 +12,7 @@
                     </h1>
                     <p>
                         Aktualna dostępność: <strong>{{ currentScore }}</strong><br/>
-                        Aktualne miejsce w rankingu: <strong>{{ currentPlace }}</strong>
+                        Aktualne miejsce w rankingu: <strong>{{ currentPlaces.indexOf(websiteAudits|first)+1 }}</strong>
                     </p>
                 </div>
                 <table class="table table-striped table-hover">
@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ websiteAudit.created | localDate }}</td>
-                            <td>{{ websiteAudit.auditReport.score }}</td>
+                            <td>{{ websiteAudit.auditReport.score|number_format(2, ',', ' ') }}</td>
                             <td>
                                 <a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}">Raport</a>
                             </td>

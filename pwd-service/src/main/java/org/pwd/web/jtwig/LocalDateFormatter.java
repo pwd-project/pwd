@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateFormatter {
     @JtwigFunction(name = "localDate")
     public String localDate(@Parameter LocalDateTime inputDate) {
+        if (inputDate == null) return "";
         return inputDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
