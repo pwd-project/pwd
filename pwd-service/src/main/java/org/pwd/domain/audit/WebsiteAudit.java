@@ -38,7 +38,7 @@ public class WebsiteAudit {
     private Audit audit;
 
     @Column(nullable = true)
-    private float auditScore;
+    private double auditScore;
 
     //only for Hibernate
     WebsiteAudit() {
@@ -77,7 +77,7 @@ public class WebsiteAudit {
         return audit;
     }
 
-    public float getAuditScore() {
+    public double getAuditScore() {
         return auditScore;
     }
 }
