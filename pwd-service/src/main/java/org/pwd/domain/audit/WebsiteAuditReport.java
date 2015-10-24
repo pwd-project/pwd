@@ -73,7 +73,7 @@ public class WebsiteAuditReport extends Document {
             weightSum += it.getWeight();
         }
 
-        return valueSum / weightSum;
+        return 1.0 * valueSum / weightSum;
     }
 
     public List<MetricValue> getMetrics() {
