@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ websiteAudit.created | localDate }}</td>
-                            <td>{{ websiteAudit.auditReport.score }}</td>
+                            <td>{{ websiteAudit.auditReport.score|number_format(2, ',', ' ') }}</td>
                             <td>
                                 <a href="/audyty/{{ websiteAudit.audit.id }}/{{ websiteAudit.website.id }}">Raport</a>
                             </td>

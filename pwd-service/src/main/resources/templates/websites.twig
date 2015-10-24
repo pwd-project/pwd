@@ -50,7 +50,7 @@
                             <td>{{ item.website.address.city }}</td>
                             <td>{{ item.website.address.voivodeship }}</td>
                             <td>{{ item.website.address.county }}</td>
-                            <td>{{ item.auditReport.score }}</td>
+                            <td>{{ item.auditReport.score|number_format(2, ',', ' ') }}</td>
                             <td>{{ currentPlaces.indexOf(item)+1 }}</td>
                             <td><a href="/serwisy/{{ item.website.id }}"><img src="/img/proces-raport.png" alt=""></a></td>
                         </tr>
