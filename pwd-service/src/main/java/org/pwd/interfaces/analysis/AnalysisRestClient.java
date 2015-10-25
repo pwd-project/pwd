@@ -38,7 +38,7 @@ public class AnalysisRestClient {
 
     public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
         String response = retryTemplate.execute(request -> restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl));
-        logger.info("analysis: \n" + response);
+        //logger.info("analysis: \n" + response);
         return Optional.ofNullable(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
     }
 }

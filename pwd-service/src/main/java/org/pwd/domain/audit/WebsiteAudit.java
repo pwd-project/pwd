@@ -40,6 +40,9 @@ public class WebsiteAudit {
     @Column(nullable = true)
     private double auditScore;
 
+    @Column(nullable = true)
+    private String cmsUsed;
+
     //only for Hibernate
     WebsiteAudit() {
     }
@@ -55,6 +58,7 @@ public class WebsiteAudit {
 
         created = LocalDateTime.now();
         auditScore = auditReport.score();
+        cmsUsed = auditReport.cms();
     }
 
     public int getId() {
@@ -79,5 +83,9 @@ public class WebsiteAudit {
 
     public double getAuditScore() {
         return auditScore;
+    }
+
+    public String getCmsUsed() {
+        return cmsUsed;
     }
 }

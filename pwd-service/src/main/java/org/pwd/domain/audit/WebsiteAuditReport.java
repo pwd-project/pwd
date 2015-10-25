@@ -2,6 +2,7 @@ package org.pwd.domain.audit;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import org.pwd.hibernate.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class WebsiteAuditReport extends Document {
 
     private final int httpStatusCode;
     private final double score;
+    private final String cms;
     private final List<MetricValue> metrics;
 
     public WebsiteAuditReport(JsonObject analysisResponse) {
@@ -26,6 +28,7 @@ public class WebsiteAuditReport extends Document {
         this.httpStatusCode = statusCodeFromJson(analysisResponse);
         this.metrics = metricsFromJson(analysisResponse);
         this.score = metricsWeightedAvg();
+        this.cms = cmsFromJson(analysisResponse);
     }
 
     public WebsiteAuditReport(int httpStatusCode, List<MetricValue> metrics) {
@@ -34,6 +37,7 @@ public class WebsiteAuditReport extends Document {
         this.httpStatusCode = httpStatusCode;
         this.metrics = new ArrayList<>(metrics);
         this.score = metricsWeightedAvg();
+        this.cms = "X";
     }
 
     public MetricValue getMetric(String metricName) {
@@ -56,6 +60,10 @@ public class WebsiteAuditReport extends Document {
 
     public double score() {
         return score;
+    }
+
+    public String cms() {
+        return cms;
     }
 
     private double metricsWeightedAvg() {
@@ -86,6 +94,20 @@ public class WebsiteAuditReport extends Document {
         return analysisResponse.getAsJsonObject("status").getAsJsonPrimitive("responseCode").getAsInt();
     }
 
+    private String cmsFromJson(JsonObject analysisResponse) {
+        JsonObject obj = analysisResponse.getAsJsonObject("analysis");
+        if (obj != null) {
+            obj = obj.getAsJsonObject("cms");
+            if (obj != null) {
+                JsonPrimitive objp = obj.getAsJsonPrimitive("cms");
+                if (objp != null) {
+                    return objp.getAsString();
+                }
+            }
+        }
+        return "";
+    }
+
     private List<MetricValue> metricsFromJson(JsonObject analysisResponse) {
 
         List<MetricValue> metrics = new ArrayList<>();
@@ -94,7 +116,7 @@ public class WebsiteAuditReport extends Document {
         for (Map.Entry<String, JsonElement> metricEntry : analysisElement.entrySet()) {
             String metricName = metricEntry.getKey();
 
-            if (!Metric.exists(metricName)) {
+            if ((!Metric.exists(metricName)) && (metricName != "cms")) {
                 logger.warn("ignoring unknown metric {}", metricName);
                 continue;
             }

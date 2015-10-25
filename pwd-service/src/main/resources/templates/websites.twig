@@ -33,6 +33,7 @@
 					<th class="sortable">Pkt.<i class="fa fa-sort"></i></th>
 					<th>Url</th>
 					<th>Raporty</th>
+					<th>CMS</th>
                 </tr>
                 {% endif %}
                 </thead>
@@ -51,6 +52,13 @@
 							</a>
 						</td>
 						<td><a href="/serwisy/{{ item.website.id }}" title="Raporty"><i class="fa fa-file-text"></i></a></td>
+						<td>
+                            {% if item.cmsUsed|length > 0 %}
+							<a href="" title="{{ item.cmsUsed }}">
+								<i class="fa fa-flag"></i>
+							</a>
+							{% endif %}
+						</td>
                     </tr>
                 {% endfor %}
                 </tbody>
