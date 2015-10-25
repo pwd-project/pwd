@@ -58,7 +58,7 @@ class AnalysisRestClientTest extends Specification {
         def response = analysisRestClient.getAnalysis(new URL("http://allegro.pl")).get()
 
         then:
-        response.metrics.size() == 3
+        response.metrics.size() == 4
         response.getMetric("anyTitle").value.get() == 100
         response.getMetric("htmlLang").value.get() == 0
         !response.getMetric("alt").value.isPresent()

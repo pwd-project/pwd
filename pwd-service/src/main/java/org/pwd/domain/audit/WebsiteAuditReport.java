@@ -41,6 +41,9 @@ public class WebsiteAuditReport extends Document {
     }
 
     public MetricValue getMetric(String metricName) {
+        if (!hasMetric(metricName)) {
+            return new MetricValue(Metric.alt,0);
+        }
         return metrics
                 .stream()
                 .filter(it -> it.getMetricName().equals(metricName))
