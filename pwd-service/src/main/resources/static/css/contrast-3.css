@@ -1,0 +1,83 @@
+/*contrast 3*/
+a{
+	color:#000
+}
+.rank-value::before{
+	background:#ffff00
+}
+.rank-value{
+	color:#000!important
+}
+.news p.date, .news p{
+	color:#000
+}
+body{
+	background:#ffff00;
+	color:#000!important
+}
+.navbar{
+	background:#ffff00;
+	color:#000;
+	border-bottom:1px #000 solid
+}
+.navbar a{
+	color:#000!important
+}
+.tv {
+	background:#ffff00;
+}
+.navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:hover {
+	background:#000!important;
+	color:#fff!important
+}
+h1,h2,h3,h4,h5,h6{
+	color:#000!important
+}
+#headerwrap p{
+	color:#000
+}
+.bg-gray{
+	background:#ffff00
+}
+.box-download div{
+	background:#ffff00
+}
+.table.ranking{
+	background:#ffff00
+}
+.table-striped > tbody > tr:nth-of-type(2n+1){
+	background:#ffff00
+}
+.ranking th{
+	background:#ffff00;
+	border-color:#000
+}
+.ranking a{
+	color:#000
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{
+	border-color:#000	
+}
+.table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover a{
+	background:none!important;
+
+}
+
+.cta-1{
+	background:#000;
+	border-color:#000;
+	color:#ffff00!important
+}
+.cta-2{
+	border-color:#000!important;
+	color:#000!important
+}
+.visible-contrast a{
+	color:#000;	
+}
+footer{
+	border-top:1px #000 solid
+}
+.rank-change{
+	color:#000
+}

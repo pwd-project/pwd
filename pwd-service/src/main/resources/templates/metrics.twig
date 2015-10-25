@@ -1,37 +1,36 @@
 {% extends "layout/base.twig" %}
 
 {% block content %}
-    <section class="container-fluid">
-        <div class="row mt text-center">
-            <div class="col-md-12">
-                <h2>Metryki</h2>
-
-                <h3>Lista naszych metryk</h3>
-            </div>
-        </div>
-        <div class="row mt">
-            <div class="col-sm-8 col-sm-offset-2">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nazwa</th>
-                        <th>Kod</th>
-                        <th>Waga</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in metrics %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td><a href="/metryki/{{ item.name }}">{{ item.namePl }}</a></td>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.weight }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+	<section class="container-fluid text-center section page-header">
+		<h2>Metryki</h2>
+		<h3>Lista naszych metryk</h3>		   
+	</section>    
+	<div class="container-fluid bg-gray section ">
+		<div class="container">			
+			<div class="table-responsive">
+				<table class="table table-striped table-hover ranking">
+					<thead>
+					<tr>
+						<th>Lp.</th>
+						<th>Nazwa</th>
+						<th>Kod</th>
+						<th>Wytyczna</th>
+						<th>Waga</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for item in metrics %}
+						<tr>
+							<td>{{ loop.index }}.</td>
+							<td><a href="/metryki/{{ item.name }}">{{ item.namePl }}</a></td>
+							<td>{{ item.name }}</td>
+							<td><a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a></td>
+							<td>{{ item.weight }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 {% endblock %}

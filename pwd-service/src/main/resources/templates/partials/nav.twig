@@ -1,3 +1,29 @@
+<!-- fonty, kontrasty -->
+<div class="icons">
+	<span class="font font-basic" title="Podstawowy rozmiar tekstu">
+	A
+	</span>
+	<span class="font font-plus" title="Powiększ tekst o 50%">
+	A<em>+</em>
+	</span>
+	<span class="font font-plus-plus" title="Powiększ tekst o 100%">
+	A<em>++</em>
+	</span>
+	
+	<span class="contrast contrast-1" title="Podstawowy kontrast">
+	K
+	</span>
+	<span class="contrast contrast-2"  title="Biały tekst na czarnym tle">
+	K
+	</span>
+	<span class="contrast contrast-3"  title="Czarny tekst na źółtym tle">
+	K
+	</span>
+	<span class="contrast contrast-4" title="Żółty tekst na czarnym tle">
+	K
+	</span>
+</div>
+
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -16,13 +42,13 @@
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             </button>
             <ul class="nav navbar-nav navbar-right">
-                <li><a {% if (request.requestURI == "/top-100") %} class="current"{% endif %} href="/top-100">RANKING</a></li>
-                <li><a {% if (request.requestURI == "/serwisy") %} class="current"{% endif %} href="/serwisy">SERWISY</a></li>
-                <li><a {% if (request.requestURI == "/metryki") %} class="current"{% endif %} href="/metryki">METRYKI</a></li>
-                <li><a {% if (request.requestURI == "/aktualnosci") %} class="current"{% endif %} href="/aktualnosci">AKTUALNOŚCI</a></li>
-                <li><a {% if (request.requestURI == "/o-projekcie") %} class="current"{% endif %} href="/o-projekcie">O PROJEKCIE</a></li>
-                <li><a {% if (request.requestURI == "/pobierz") %} class="current"{% endif %} href="/pobierz">POBIERZ</a></li>
-                <li><a {% if (request.requestURI == "/kontakt") %} class="current"{% endif %} href="/kontakt">KONTAKT</a></li>
+                <li><a {% if (request.requestURI == "/top-100") %} class="current"{% endif %} href="/top-100">Ranking</a></li>
+                <li><a {% if (("/serwisy" in request.requestURI) or ("/audyty" in request.requestURI)) %} class="current"{% endif %} href="/serwisy">Serwisy</a></li>
+                <li><a {% if ("/metryki" in request.requestURI ) %} class="current"{% endif %} href="/metryki">Metryki</a></li>
+                <li><a {% if (request.requestURI == "/aktualnosci") %} class="current"{% endif %} href="/aktualnosci">Aktualności</a></li>
+                <li><a {% if (request.requestURI == "/o-projekcie") %} class="current"{% endif %} href="/o-projekcie">O projekcie</a></li>
+                <li><a {% if (request.requestURI == "/pobierz") %} class="current"{% endif %} href="/pobierz">Pobierz</a></li>
+                <li><a {% if (request.requestURI == "/kontakt") %} class="current"{% endif %} href="/kontakt">Kontakt</a></li>
             </ul>
         </div>
     </div>
