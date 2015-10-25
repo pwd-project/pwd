@@ -3,6 +3,7 @@ package org.pwd.web.pages;
 import org.pwd.domain.audit.WebsiteAuditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -10,6 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @RequestMapping(value = "/")
 class PagesController {
+    public static final int TOP_RECORDS = 5;
     private WebsiteAuditRepository websiteAuditRepository;
 
     @Autowired
@@ -28,12 +30,20 @@ class PagesController {
     }
 
     @RequestMapping(value = "pobierz", method = GET)
-    public String pobierzPage() {
-        return "pobierz";
+    public String downloadPage() {
+        return "download";
     }
 
     @RequestMapping(value = "kontakt", method = GET)
     public String contactPage() {
         return "contact";
     }
+
+    @RequestMapping(method = GET)
+    public String getWebsites(Model model) {
+        model.addAttribute("rankingTop", websiteAuditRepository.getTop(TOP_RECORDS));
+        model.addAttribute("rankingTopChange", websiteAuditRepository.getTopChange(TOP_RECORDS));
+        return "index";
+    }
+
 }
