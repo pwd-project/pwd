@@ -43,7 +43,8 @@ public class ContactController {
 
         EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
         ContactRequest contactRequest = new ContactRequest(name,email,mobile,site,message);
-        contactRequestRepository.save(contactRequest);
+        contactRequest = contactRequestRepository.save(contactRequest);
+        logger.info("New created record id: {}",contactRequest.getId());
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
             return "email_sent";
