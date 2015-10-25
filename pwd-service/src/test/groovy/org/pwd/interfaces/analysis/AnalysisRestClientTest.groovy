@@ -34,6 +34,10 @@ class AnalysisRestClientTest extends Specification {
             "alt": {
               "score": null
             },
+            "cms": {
+              "cms": "WordPress",
+              "score": 100
+            },
             "unknown-metric": {
               "score": null
             }
