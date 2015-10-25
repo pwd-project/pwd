@@ -22,6 +22,7 @@ public enum Metric {
     labels( 1, "Etykiety lub instrukcje", "3.3.2", "http://fdc.org.pl/wcag2/#minimize-error"),
     contact(3, "Kontakt", "", ""),
     // Metryki Googlowe
+    cms(    0, "Użycie CMS", "", ""),
     aria(   1, "Elementy ARIA z rolami muszą być poprawne", "AX_ARIA_01", "https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_aria_01"),
     nonExistentAriaRelatedElement(
             1, "Atrybut ARIA powiązany", "AX_ARIA_02", "https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_aria_02"),
