@@ -1,5 +1,7 @@
 package org.pwd.web.contact;
 
+import org.pwd.domain.contact.ContactRequest;
+import org.pwd.domain.contact.ContactRequestRepository;
 import org.pwd.infrastructure.EmailMessage;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
@@ -23,11 +25,13 @@ public class ContactController {
 
     private final MailgunClient mailgunClient;
     private final String mailbox;
+    private final ContactRequestRepository contactRequestRepository;
 
     @Autowired
-    public ContactController(MailgunClient mailgunClient, @Value("${mailgun.mailbox}") String mailbox) {
+    public ContactController(MailgunClient mailgunClient, @Value("${mailgun.mailbox}") String mailbox, ContactRequestRepository contactRequestRepository) {
         this.mailgunClient = mailgunClient;
         this.mailbox = mailbox;
+        this.contactRequestRepository = contactRequestRepository;
     }
 
     @RequestMapping(method = POST)
@@ -38,6 +42,8 @@ public class ContactController {
                             @RequestParam(value = "message", required = false) String message) {
 
         EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
+        ContactRequest contactRequest = new ContactRequest(name,email,mobile,site,message);
+        contactRequestRepository.save(contactRequest);
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
             return "email_sent";
