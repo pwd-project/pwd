@@ -18,6 +18,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
     @Query(nativeQuery = true, value = "SELECT * " +
             " FROM   website_audit wa" +
             " WHERE  wa.website_fk = :websiteId" +
+            " AND    wa.process_status = 'DONE' " +
             " ORDER BY created")
     List<WebsiteAudit> findByWebsiteId(@Param("websiteId") int websiteId);
 
