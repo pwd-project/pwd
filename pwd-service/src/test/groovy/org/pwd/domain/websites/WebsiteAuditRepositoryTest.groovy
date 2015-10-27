@@ -1,11 +1,7 @@
 package org.pwd.domain.websites
 
 import org.pwd.application.IntegrationTest
-import org.pwd.domain.audit.Audit
-import org.pwd.domain.audit.AuditRepository
-import org.pwd.domain.audit.WebsiteAudit
-import org.pwd.domain.audit.WebsiteAuditReport
-import org.pwd.domain.audit.WebsiteAuditRepository
+import org.pwd.domain.audit.*
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
