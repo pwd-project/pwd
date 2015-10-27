@@ -37,11 +37,16 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
                 "W", "Biuro Smoka Wawelskiego", "kris@gnail.com",
                 new Address("Gniezno", "Mazowieckie", "Powiat Mały"),
                 new Person("Krzysiek", "Adamowicz", "Burmistrz"))
+        def website3 = new Website(13, 333, new URL("http://example.com/"),
+                "W", "Biuro Świnki Peppy", "kris@gnail.com",
+                new Address("Łódź", "łódzkie", "Gmina"),
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
 
-        websiteRepository.save([website1,website2])
+        websiteRepository.save([website1,website2,website3])
 
         websiteAuditRepository.save(new WebsiteAudit(website1, audit, new WebsiteAuditReport(200, [])))
         websiteAuditRepository.save(new WebsiteAudit(website2, audit, new WebsiteAuditReport(200, [])))
+        websiteAuditRepository.save(new WebsiteAudit(website3, audit, new WebsiteAuditReport(200, [])))
 
         audit.done()
         auditRepository.save(audit)
@@ -51,16 +56,17 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         websiteAuditRepository.search("urzad").size() == 1
         websiteAuditRepository.search("Urząd").size() == 1
         websiteAuditRepository.search("Smoka").size() == 2
-        websiteAuditRepository.search("powiat maly").size() == 1
+        websiteAuditRepository.search("powiat&maly").size() == 1
 
         //query by city
         websiteAuditRepository.search("zyrardow").size() == 1
+        websiteAuditRepository.search("łódz").size() == 1
         //query by voivodeship
         websiteAuditRepository.search("Mazowieckie").size() == 1
-
         //query by county
         websiteAuditRepository.search("duzy").size() == 1
         websiteAuditRepository.search("powiat").size() == 2
-
+        //query by http
+        websiteAuditRepository.search("http:").size() == 0
     }
 }

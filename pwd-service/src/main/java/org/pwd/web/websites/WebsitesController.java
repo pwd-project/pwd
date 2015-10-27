@@ -43,10 +43,11 @@ class WebsitesController {
     @RequestMapping(method = GET)
     public String getWebsites(Model model, @RequestParam(value = "query", required = false) String query) {
         List<WebsiteAudit> websitesAudits;
-        String uquery = unaccent(query);
+
         if (StringUtils.isEmpty(query)) {
             websitesAudits = Collections.emptyList();
         } else {
+            String uquery = unaccent(query).replace("/","").trim().replaceAll(" +"," ").replace(' ','&');
             websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(uquery));
         }
 
