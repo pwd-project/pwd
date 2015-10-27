@@ -6,6 +6,8 @@ import org.pwd.domain.audit.WebsiteAudit;
 import org.pwd.domain.audit.WebsiteAuditRepository;
 import org.pwd.domain.websites.Website;
 import org.pwd.domain.websites.WebsiteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("/serwisy")
 class WebsitesController {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebsitesController.class);
     private WebsiteRepository websiteRepository;
     private WebsiteAuditRepository websiteAuditRepository;
 
@@ -37,9 +40,11 @@ class WebsitesController {
         if (StringUtils.isEmpty(query)) {
             websitesAudits = Collections.emptyList();
         } else {
+            logger.info("Search z¹bki 1 {}", query);
             websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(query));
         }
 
+        logger.info("Search z¹bki 2 {}", query);
         model.addAttribute("query", query);
         model.addAttribute("websitesAudits", websitesAudits);
         model.addAttribute("websitesTotalCount", websiteRepository.count());
