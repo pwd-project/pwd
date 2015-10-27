@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.Normalizer;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,11 @@ class WebsitesController {
     private WebsiteRepository websiteRepository;
     private WebsiteAuditRepository websiteAuditRepository;
 
+    public static String unaccent(String src) {
+        return Normalizer
+                .normalize(src, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
+    }
     @Autowired
     public WebsitesController(WebsiteRepository websiteRepository, WebsiteAuditRepository websiteAuditRepository) {
         this.websiteRepository = websiteRepository;
@@ -37,14 +43,13 @@ class WebsitesController {
     @RequestMapping(method = GET)
     public String getWebsites(Model model, @RequestParam(value = "query", required = false) String query) {
         List<WebsiteAudit> websitesAudits;
+        String uquery = unaccent(query);
         if (StringUtils.isEmpty(query)) {
             websitesAudits = Collections.emptyList();
         } else {
-            logger.info("Search z¹bki 1 {}", query);
-            websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(query));
+            websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(uquery));
         }
 
-        logger.info("Search z¹bki 2 {}", query);
         model.addAttribute("query", query);
         model.addAttribute("websitesAudits", websitesAudits);
         model.addAttribute("websitesTotalCount", websiteRepository.count());

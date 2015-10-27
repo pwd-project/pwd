@@ -55,7 +55,6 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
 
         //query by city
         websiteAuditRepository.search("zyrardow").size() == 1
-        websiteAuditRepository.search("Łódź").size() == 4
         //query by voivodeship
         websiteAuditRepository.search("Mazowieckie").size() == 1
 
