@@ -47,8 +47,11 @@ class WebsitesController {
         if (StringUtils.isEmpty(query)) {
             websitesAudits = Collections.emptyList();
         } else {
-            String uquery = unaccent(query).replace("/","").trim().replaceAll(" +"," ").replace(' ','&');
-            websitesAudits = websiteAuditRepository.search(StringEscapeUtils.escapeJava(uquery));
+            try {
+                websitesAudits = websiteAuditRepository.search(query);
+            } catch (Exception exception) {
+                websitesAudits = Collections.emptyList();
+            }
         }
 
         model.addAttribute("query", query);
