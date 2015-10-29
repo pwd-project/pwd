@@ -28,7 +28,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
-            " ORDER BY wa.audit_score DESC" +
+            " ORDER BY wa.audit_score DESC, w.id " +
             " LIMIT :maxRecords")
     List<WebsiteAudit> getTop(@Param("maxRecords") Integer maxRecords);
 
