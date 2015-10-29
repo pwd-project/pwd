@@ -13,12 +13,12 @@
 				<form role="form" action="/kontakt" method="post">
 					<div class="form-group">
 						<input type="text" class="form-control" id="name" name="name" size="50"
-							placeholder="Imię i nazwisko *"
+							placeholder="Imię i nazwisko (wymagane)"
 							required>
 					</div>
 					<div class="form-group">
 						<input type="email" class="form-control" id="administrativeEmail" name="administrativeEmail" size="50"
-							   placeholder="Email *"
+							   placeholder="Email (wymagane)"
 							   required>
 					</div>
 					<div class="form-group">
@@ -31,7 +31,7 @@
 					</div>
 					<div class="form-group">
 							<textarea class="form-control" name="message" id="message" placeholder="Wiadomość"
-									  maxlength="200" rows="7"></textarea>
+									  maxlength="255" rows="7"></textarea>
 					</div>
 					<button type="submit" id="submit" name="submit" class="btn pull-right cta cta-1">Wyślij</button>
 			</form>

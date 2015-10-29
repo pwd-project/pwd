@@ -1,5 +1,7 @@
 {% extends 'layout/base.twig' %}
 
+{% block title %}Strona główna{% endblock %}
+
 {% block content %}
     <section id="headerwrap">
 		 <div class="tv">
@@ -10,7 +12,7 @@
 						<p>
 							Dostępność to proces a nie stan, dlatego naszym celem jest nieustanne monitorowanie serwisów
 
-							internetowych i generowanie raportu dostępności.
+							internetowych i generowanie raportów dostępności.
 						</p>           
 						<a href="/top-100" class="btn cta cta-1">Zobacz ranking top 100</a>
 						<a href="/o-projekcie" class="btn cta cta-2">O projekcie</a>
@@ -25,7 +27,7 @@
 		<h3>Zobacz jak wygląda nasz proces analizy</h3>
         <div class="container text-center">
             <div class="col-lg-4 column">
-                <img src="/img/odwiedziny-ico.png" class="img-responsive" alt="Odwiedzny Twojej strony">
+                <img src="/img/odwiedziny-ico.png" class="img-responsive" alt="Odwiedziny Twojej strony">
                 <h4>Odwiedziny Twojej strony</h4>
                 <p>
                     Jeśli Twoja strona jest w naszej bazie Serwisów, wówczas jest systematycznie audytowana przez nasz
@@ -33,8 +35,8 @@
                     Pierwsza wersja silnika PWD Online korzysta z danych opublikowanych w
                     serwisie <a href="https://danepubliczne.gov.pl" target="_blank">danepubliczne.gov.pl</a>
                     i audytuje serwisy administracji publicznej dostępne na tej stronie.
-                    Jeśli Twojego serwisu nie ma z zakładce serwisy, możesz go zgłosić przez <a href="/kontakt">formularz
-                        kontaktowy</a>.
+                    Jeśli Twojego serwisu nie ma z zakładce serwisy, możesz go zgłosić przez
+                    <a href="/kontakt">formularz kontaktowy</a>.
                 </p>
             </div>
 
@@ -42,10 +44,10 @@
                 <img src="/img/analiza-ico.png" class="img-responsive" alt="Analiza danych">
                 <h4>Analiza danych</h4>
                 <p>
-                    System PWD Online systematycznie - cyklicznie co 7 dni analizuje i sprawdza serwisy internetowe
+                    System PWD Online cyklicznie, co 7 dni, analizuje i sprawdza serwisy internetowe
                     dostępne w naszej bazie danych.
-                    Każdy z serwisów badany jest przez specjalny proces sprawdzania metryk serwisu.
-                    Na podstawie tego badania - audytu poprzez metryki PWD przydzielane są punkty.
+                    Każdy z serwisów badany jest przez specjalny proces wykorzystujący metryki PWD.
+                    Na podstawie tego badania przydzielane są punkty
                     Następnie wyliczany jest wskaźnik dostępności.
                     Wskaźnik ten jest publikowany i brany pod uwagę w tworzeniu Rankingu PWD.
                 </p>
@@ -216,7 +218,7 @@
 
     <section class="container-fluid text-center section bg-gray" >
         <div class="container text-center ">
-			<h2>Ranking PWD TOP100</h2>
+			<h2>Ranking top 100</h2>
 			<h3>Najbardziej dostępne strony użyteczności publicznej</h3>
 
 			<div class="table-responsive text-left">
