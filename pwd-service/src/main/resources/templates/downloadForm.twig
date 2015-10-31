@@ -1,0 +1,46 @@
+{% extends "layout/base.twig" %}
+
+{% block title %}Pobierz{% endblock %}
+
+{% block content %}
+<section class="container-fluid text-center section page-header">  
+	<h2>{{ template.namePl }} - {{ cms }}</h2>
+	<h3>{{ template.description }}</h3>
+</section>		
+		
+<div class="container-fluid bg-gray section info">
+	<article class="container">
+		<p>
+			Proszę uzupełnić poniższy formularz i postępować zgodnie z instrukcją przesłaną w wiadomości email .
+		</p>
+    </article>
+
+	<div class="container-fluid bg-gray section ">
+		<div class="container clearfix">
+			<div class="col-sm-8 col-sm-offset-2 ">
+				<form role="form" action="/download" method="post">
+					<input type="text" class="hidden" id="templateName" name="templateName" value="{{ template.namePl }}" required>
+					<input type="text" class="hidden" id="cms" name="cms" value="{{ cms }}" required>
+					<div class="form-group">
+						<input type="text" class="form-control" id="unit" name="unit" size="100"
+							placeholder="Nazwa Urzędu (wymagane)"
+							required>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="city" name="city" size="50"
+							   placeholder="Miasto">
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" id="administrativeEmail" name="administrativeEmail" size="50"
+							   placeholder="Email (wymagane)"
+							   required>
+					</div>
+					<input type="text" class="hidden" name="emailh">
+					<button type="submit" id="submit" name="submit" class="btn pull-right cta cta-1">Wyślij</button>
+			</form>
+        	</div>
+        </div>
+    </diiv>
+</div>
+
+{% endblock %}

@@ -1,10 +1,13 @@
 package org.pwd.web.pages;
 
 import org.pwd.domain.audit.WebsiteAuditRepository;
+import org.pwd.domain.download.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -41,6 +44,9 @@ class PagesController {
 
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
+        model.addAttribute("temp1", Template.valueOf("t11"));
+        model.addAttribute("temp2", Template.valueOf("t31"));
+        model.addAttribute("temp3", Template.valueOf("t61"));
         model.addAttribute("rankingTop", websiteAuditRepository.getTop(TOP_RECORDS));
         model.addAttribute("rankingTopChange", websiteAuditRepository.getTopChange(TOP_RECORDS));
         return "index";
