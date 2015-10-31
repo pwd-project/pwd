@@ -1,4 +1,6 @@
 $(document).ready(function() {
+		
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$(window).on("keydown", this, function (event) {
 			if (event.keyCode == 116) {
 				Cookies.remove('style');

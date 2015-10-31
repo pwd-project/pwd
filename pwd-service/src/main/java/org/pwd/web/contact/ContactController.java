@@ -39,7 +39,12 @@ public class ContactController {
                             @RequestParam(value = "administrativeEmail", required = true) String email,
                             @RequestParam(value = "mobile", required = false) String mobile,
                             @RequestParam(value = "site", required = false) String site,
-                            @RequestParam(value = "message", required = false) String message) {
+                            @RequestParam(value = "message", required = false) String message,
+                            @RequestParam(value = "emailh", required = false) String emailh) {
+
+        if (!emailh.isEmpty()) {
+            return "error";
+        }
 
         EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
         ContactRequest contactRequest = new ContactRequest(name,email,mobile,site,message);
