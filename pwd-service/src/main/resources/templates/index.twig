@@ -282,5 +282,8 @@
 {% endblock %}
 
 {% block inlineJs %}
-    $("#globalScore").load("/ajax/average");
+    $.getJSON("/api/gwd", function(data) {
+        var score = parseFloat(Math.round(data.score * 100) / 100).toFixed(2);
+        $("#globalScore").html(score);
+    });
 {% endblock %}
