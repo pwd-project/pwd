@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @author kadamowi
  */
 @Controller
-@RequestMapping("/download")
+@RequestMapping("/pobierz")
 public class DownloadController {
 
     private static final Logger logger = LoggerFactory.getLogger(DownloadController.class);
@@ -47,7 +47,7 @@ public class DownloadController {
     }
 
     @RequestMapping(value = "/{templateName}/{cmsName}", method = RequestMethod.GET)
-    public String showTemplateForm(@PathVariable String templateName, @PathVariable String cmsName, Model model) {
+    public String showTemplateDownloadForm(@PathVariable String templateName, @PathVariable String cmsName, Model model) {
 
         model.addAttribute("template", Template.valueOf(templateName));
         model.addAttribute("cms",cmsName);
@@ -80,6 +80,6 @@ public class DownloadController {
 
     private String composeMessage(String name, String cms) {
         logger.info("Szablon: {}",name+" "+cms);
-        return String.format("Wybra³eœ szablon %s do systemu %s\n Wkrótce udostêpnimy szablony", name, cms);
+        return String.format("WybraÅ‚eÅ› szablon %s do systemu %s\n WkrÃ³tce udostÄ™pnimy szablony", name, cms);
     }
 }

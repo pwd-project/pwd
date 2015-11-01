@@ -32,11 +32,6 @@ class PagesController {
         return "blog";
     }
 
-    @RequestMapping(value = "pobierz", method = GET)
-    public String downloadPage() {
-        return "download";
-    }
-
     @RequestMapping(value = "kontakt", method = GET)
     public String contactPage() {
         return "contact";
@@ -44,9 +39,9 @@ class PagesController {
 
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
-        model.addAttribute("temp1", Template.valueOf("t11"));
-        model.addAttribute("temp2", Template.valueOf("t31"));
-        model.addAttribute("temp3", Template.valueOf("t61"));
+        model.addAttribute("template1", Template.valueOf("T11"));
+        model.addAttribute("template2", Template.valueOf("T31"));
+        model.addAttribute("template3", Template.valueOf("T61"));
         model.addAttribute("rankingTop", websiteAuditRepository.getTop(TOP_RECORDS));
         model.addAttribute("rankingTopChange", websiteAuditRepository.getTopChange(TOP_RECORDS));
         return "index";

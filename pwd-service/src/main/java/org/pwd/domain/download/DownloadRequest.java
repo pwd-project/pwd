@@ -15,11 +15,11 @@ public class DownloadRequest {
     @GeneratedValue(generator = "download_request_id_seq", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    String templateName;
-    String cms;
-    String unitName;
-    String city;
-    String administrativeEmail;
+    private String templateName;
+    private String cms;
+    private String unitName;
+    private String city;
+    private String administrativeEmail;
 
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime created;
