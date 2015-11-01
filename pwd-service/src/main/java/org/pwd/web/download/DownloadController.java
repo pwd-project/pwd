@@ -59,12 +59,7 @@ public class DownloadController {
                             @RequestParam(value = "cms", required = true) String cms,
                             @RequestParam(value = "unit", required = true) String unit,
                             @RequestParam(value = "city", required = true) String city,
-                            @RequestParam(value = "administrativeEmail", required = true) String email,
-                            @RequestParam(value = "emailh", required = false) String emailh) {
-
-        if (!emailh.isEmpty()) {
-            return "error";
-        }
+                            @RequestParam(value = "administrativeEmail", required = true) String email) {
 
         EmailMessage emailMessage = new EmailMessage(mailbox, email, "Szablon CMS ze strony PWD", composeMessage(name,cms));
         DownloadRequest downloadRequest = new DownloadRequest(name,cms,unit,city,email);

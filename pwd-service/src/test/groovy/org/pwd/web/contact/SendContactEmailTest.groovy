@@ -36,7 +36,7 @@ class SendContactEmailTest extends IntegrationTest {
                 .withStatus(200)))
 
         when:
-        def response = contactCtrl.sendEmail("dummyName","dummy@email.com","dummyNumber","http://dummmy.site.com","Test message","")
+        def response = contactCtrl.sendEmail("dummyName","dummy@email.com","dummyNumber","http://dummmy.site.com","Test message")
 
         then:
         response == "email_sent"
