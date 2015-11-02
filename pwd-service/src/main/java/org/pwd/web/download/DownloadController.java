@@ -3,19 +3,17 @@ package org.pwd.web.download;
 import org.pwd.domain.download.DownloadRequest;
 import org.pwd.domain.download.DownloadRequestRepository;
 import org.pwd.domain.download.Template;
-import org.pwd.infrastructure.EmailMessage;
+import org.pwd.domain.contact.EmailMessage;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

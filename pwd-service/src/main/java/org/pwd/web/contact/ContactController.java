@@ -2,7 +2,7 @@ package org.pwd.web.contact;
 
 import org.pwd.domain.contact.ContactRequest;
 import org.pwd.domain.contact.ContactRequestRepository;
-import org.pwd.infrastructure.EmailMessage;
+import org.pwd.domain.contact.EmailMessage;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -35,7 +37,7 @@ public class ContactController {
     }
 
     @RequestMapping(method = POST)
-    public String sendEmail(@ModelAttribute ContactRequest contactRequest) {
+    public String sendEmail(ContactRequest contactRequest, HttpServletRequest request) {
         logger.info("New contact record {}", contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
 

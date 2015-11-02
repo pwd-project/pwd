@@ -3,3 +3,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/pwd_integration
 server:
     port: 8081
+
+mailgun:
+  domain: http://localhost:8089

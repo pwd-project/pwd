@@ -19,7 +19,7 @@ analysis:
 
 mailgun:
   apikey: dummyApiKey
-  domain: localhost
+  domain: http://localhost
 
 error:
   whitelabel:
