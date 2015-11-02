@@ -18,10 +18,12 @@ analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
 
 mailgun:
-  mailbox: pwd_kontakt@dolinagubra.pl
   apikey: dummyApiKey
-  domain: localhost
+  domain: http://localhost
 
 error:
   whitelabel:
     enabled: false
+
+pwd:
+  mailbox: pwd_kontakt@dolinagubra.pl

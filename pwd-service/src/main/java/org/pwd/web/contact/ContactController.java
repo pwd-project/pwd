@@ -2,15 +2,17 @@ package org.pwd.web.contact;
 
 import org.pwd.domain.contact.ContactRequest;
 import org.pwd.domain.contact.ContactRequestRepository;
-import org.pwd.infrastructure.EmailMessage;
+import org.pwd.domain.contact.EmailMessage;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -28,28 +30,22 @@ public class ContactController {
     private final ContactRequestRepository contactRequestRepository;
 
     @Autowired
-    public ContactController(MailgunClient mailgunClient, @Value("${mailgun.mailbox}") String mailbox, ContactRequestRepository contactRequestRepository) {
+    public ContactController(MailgunClient mailgunClient, @Value("${pwd.mailbox}") String mailbox, ContactRequestRepository contactRequestRepository) {
         this.mailgunClient = mailgunClient;
         this.mailbox = mailbox;
         this.contactRequestRepository = contactRequestRepository;
     }
 
     @RequestMapping(method = POST)
-    public String sendEmail(@RequestParam(value = "name", required = true) String name,
-                            @RequestParam(value = "administrativeEmail", required = true) String email,
-                            @RequestParam(value = "mobile", required = false) String mobile,
-                            @RequestParam(value = "site", required = false) String site,
-                            @RequestParam(value = "message", required = false) String message,
-                            @RequestParam(value = "emailh", required = false) String emailh) {
-
-        if (!emailh.isEmpty()) {
-            return "error";
-        }
-
-        EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
-        ContactRequest contactRequest = new ContactRequest(name,email,mobile,site,message);
+    public String sendEmail(ContactRequest contactRequest, HttpServletRequest request) {
+        logger.info("New contact record {}", contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
-        logger.info("New created record id: {}",contactRequest.getId());
+
+        EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
+                contactRequest.getName(), contactRequest.getAdministrativeEmail(), contactRequest.getMobile(),
+                contactRequest.getSite(), contactRequest.getMessage())
+        );
+
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
             return "email_sent";

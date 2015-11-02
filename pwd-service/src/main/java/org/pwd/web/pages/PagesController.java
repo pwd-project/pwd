@@ -1,10 +1,13 @@
 package org.pwd.web.pages;
 
 import org.pwd.domain.audit.WebsiteAuditRepository;
+import org.pwd.domain.download.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -29,11 +32,6 @@ class PagesController {
         return "blog";
     }
 
-    @RequestMapping(value = "pobierz", method = GET)
-    public String downloadPage() {
-        return "download";
-    }
-
     @RequestMapping(value = "kontakt", method = GET)
     public String contactPage() {
         return "contact";
@@ -41,6 +39,9 @@ class PagesController {
 
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
+        model.addAttribute("template1", Template.valueOf("T11"));
+        model.addAttribute("template2", Template.valueOf("T31"));
+        model.addAttribute("template3", Template.valueOf("T61"));
         model.addAttribute("rankingTop", websiteAuditRepository.getTop(TOP_RECORDS));
         model.addAttribute("rankingTopChange", websiteAuditRepository.getTopChange(TOP_RECORDS));
         return "index";

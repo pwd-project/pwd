@@ -1,8 +1,5 @@
-package org.pwd.infrastructure;
+package org.pwd.domain.contact;
 
-/**
- * @author Sławomir Mikulski
- */
 public final class EmailMessage {
     private final String from;
     private final String to;

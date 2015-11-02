@@ -2,7 +2,7 @@ package org.pwd.interfaces.mailgun;
 
 import com.google.common.base.Preconditions;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.pwd.infrastructure.EmailMessage;
+import org.pwd.domain.contact.EmailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class MailgunClient {
     private final String url;
 
     @Autowired
-    public MailgunClient(@Value("${mailgun.mailbox}") String mailbox,
+    public MailgunClient(@Value("${pwd.mailbox}") String mailbox,
                          @Value("${mailgun.apikey}") String apiKey,
                          @Value("${mailgun.domain}") String domain) {
         Preconditions.checkArgument(!mailbox.isEmpty());
