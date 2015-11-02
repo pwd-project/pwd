@@ -28,7 +28,7 @@ public class DownloadRequest {
     public DownloadRequest() {
     }
 
-    public DownloadRequest(String templateName, String cms, String unitName, String city, String administrativeEmail){
+    public DownloadRequest(String templateName, String cms, String unitName, String city, String administrativeEmail) {
         this.templateName = templateName;
         this.cms = cms;
         this.unitName = unitName;
@@ -63,5 +63,38 @@ public class DownloadRequest {
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public void setCms(String cms) {
+        this.cms = cms;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAdministrativeEmail(String administrativeEmail) {
+        this.administrativeEmail = administrativeEmail;
+    }
+
+    @Override
+    public String toString() {
+        return "DownloadRequest{" +
+                "id=" + id +
+                ", templateName='" + templateName + '\'' +
+                ", cms='" + cms + '\'' +
+                ", unitName='" + unitName + '\'' +
+                ", city='" + city + '\'' +
+                ", administrativeEmail='" + administrativeEmail + '\'' +
+                ", created=" + created +
+                '}';
     }
 }

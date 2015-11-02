@@ -15,11 +15,11 @@ public class ContactRequest {
     @GeneratedValue(generator = "contact_request_id_seq", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    String name;
-    String administrativeEmail;
-    String mobile;
-    String site;
-    String message;
+    private String name;
+    private String administrativeEmail;
+    private String mobile;
+    private String site;
+    private String message;
 
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime created;
@@ -28,11 +28,11 @@ public class ContactRequest {
     public ContactRequest() {
     }
 
-    public ContactRequest(String name, String administrativeEmail, String mobile, String site, String message){
+    public ContactRequest(String name, String administrativeEmail, String mobile, String site, String message) {
         this.name = name;
         this.administrativeEmail = administrativeEmail;
         this.mobile = mobile;
-        this.site  = site;
+        this.site = site;
         this.message = message;
         this.created = LocalDateTime.now();
     }
@@ -63,5 +63,25 @@ public class ContactRequest {
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAdministrativeEmail(String administrativeEmail) {
+        this.administrativeEmail = administrativeEmail;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -28,23 +28,22 @@ public class ContactController {
     private final ContactRequestRepository contactRequestRepository;
 
     @Autowired
-    public ContactController(MailgunClient mailgunClient, @Value("${mailgun.mailbox}") String mailbox, ContactRequestRepository contactRequestRepository) {
+    public ContactController(MailgunClient mailgunClient, @Value("${pwd.mailbox}") String mailbox, ContactRequestRepository contactRequestRepository) {
         this.mailgunClient = mailgunClient;
         this.mailbox = mailbox;
         this.contactRequestRepository = contactRequestRepository;
     }
 
     @RequestMapping(method = POST)
-    public String sendEmail(@RequestParam(value = "name", required = true) String name,
-                            @RequestParam(value = "administrativeEmail", required = true) String email,
-                            @RequestParam(value = "mobile", required = false) String mobile,
-                            @RequestParam(value = "site", required = false) String site,
-                            @RequestParam(value = "message", required = false) String message) {
-
-        EmailMessage emailMessage = new EmailMessage(email, mailbox, "Zgłoszenie ze strony PWD", composeMessage(name, email, mobile, site, message));
-        ContactRequest contactRequest = new ContactRequest(name,email,mobile,site,message);
+    public String sendEmail(@ModelAttribute ContactRequest contactRequest) {
+        logger.info("New contact record {}", contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
-        logger.info("New created record id: {}",contactRequest.getId());
+
+        EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
+                contactRequest.getName(), contactRequest.getAdministrativeEmail(), contactRequest.getMobile(),
+                contactRequest.getSite(), contactRequest.getMessage())
+        );
+
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
             return "email_sent";

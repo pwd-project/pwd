@@ -26,7 +26,7 @@ public class MailgunClient {
     private final String url;
 
     @Autowired
-    public MailgunClient(@Value("${mailgun.mailbox}") String mailbox,
+    public MailgunClient(@Value("${pwd.mailbox}") String mailbox,
                          @Value("${mailgun.apikey}") String apiKey,
                          @Value("${mailgun.domain}") String domain) {
         Preconditions.checkArgument(!mailbox.isEmpty());
