@@ -33,7 +33,7 @@ class WebsiteAuditor {
         Double prevScore = websiteAuditRepository.getPreviousScore(website.getId());
         
         if (prevScore == null) {
-            prevScore = 0;
+            prevScore = new Double("0");
         }
 
         WebsiteAudit websiteAudit = auditReport
