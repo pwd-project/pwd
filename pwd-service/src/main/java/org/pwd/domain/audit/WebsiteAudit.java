@@ -50,7 +50,7 @@ public class WebsiteAudit {
     WebsiteAudit() {
     }
 
-    WebsiteAudit(Website website, Audit audit, WebsiteAuditReport auditReport, double auditPrevScore) {
+    WebsiteAudit(Website website, Audit audit, WebsiteAuditReport auditReport, Double auditPrevScore) {
         Preconditions.checkArgument(auditReport != null);
         Preconditions.checkArgument(website != null);
         Preconditions.checkArgument(audit != null);

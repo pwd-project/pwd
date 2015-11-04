@@ -61,7 +61,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
     WebsiteAudit getCurrentScore(@Param("websiteId") int websiteId);
 
     @Query(nativeQuery = true, value =
-            " SELECT NVL(MAX(wa.audit_score),0) " +
+            " SELECT NULLIF(MAX(wa.audit_score),0) " +
             " FROM   website_audit wa " +
             " WHERE  wa.website_fk = :websiteId" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit WHERE process_status = 'DONE' AND finished < current_date - interval '7 days' )")
