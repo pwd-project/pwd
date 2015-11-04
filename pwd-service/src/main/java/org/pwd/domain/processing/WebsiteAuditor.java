@@ -30,7 +30,11 @@ class WebsiteAuditor {
     WebsiteAudit auditWebsite(Audit audit, Website website) {
 
         Optional<WebsiteAuditReport> auditReport = analysisRestClient.getAnalysis(website.getUrl());
-        double prevScore = websiteAuditRepository.getPreviousScore(website.getId());
+        Double prevScore = websiteAuditRepository.getPreviousScore(website.getId());
+        
+        if (prevScore == null) {
+            prevScore = 0;
+        }
 
         WebsiteAudit websiteAudit = auditReport
                 .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,prevScore))
