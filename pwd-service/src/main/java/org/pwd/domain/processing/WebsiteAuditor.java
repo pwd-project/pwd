@@ -30,8 +30,10 @@ class WebsiteAuditor {
     WebsiteAudit auditWebsite(Audit audit, Website website) {
 
         Optional<WebsiteAuditReport> auditReport = analysisRestClient.getAnalysis(website.getUrl());
+        double prevScore = websiteAuditRepository.getPreviousScore(website.getId());
+
         WebsiteAudit websiteAudit = auditReport
-                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,websiteAuditRepository.getPreviousScore(website.getId())))
+                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,prevScore))
                 .orElseThrow(AnalysisNotCompleteException::new);
 
 
