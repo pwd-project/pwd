@@ -43,11 +43,14 @@ public class WebsiteAudit {
     @Column(nullable = true)
     private String cmsUsed;
 
+    @Column(nullable = true)
+    private double auditPrevScore;
+
     //only for Hibernate
     WebsiteAudit() {
     }
 
-    WebsiteAudit(Website website, Audit audit, WebsiteAuditReport auditReport) {
+    WebsiteAudit(Website website, Audit audit, WebsiteAuditReport auditReport, double auditPrevScore) {
         Preconditions.checkArgument(auditReport != null);
         Preconditions.checkArgument(website != null);
         Preconditions.checkArgument(audit != null);
@@ -58,6 +61,7 @@ public class WebsiteAudit {
 
         created = LocalDateTime.now();
         auditScore = auditReport.score();
+        this.auditPrevScore = auditPrevScore;
         cmsUsed = auditReport.cms();
     }
 
@@ -83,6 +87,10 @@ public class WebsiteAudit {
 
     public double getAuditScore() {
         return auditScore;
+    }
+
+    public double getAuditPrevScore() {
+        return auditPrevScore;
     }
 
     public String getCmsUsed() {

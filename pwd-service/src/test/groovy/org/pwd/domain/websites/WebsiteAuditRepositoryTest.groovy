@@ -44,9 +44,9 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
 
         websiteRepository.save([website1,website2,website3])
 
-        websiteAuditRepository.save(new WebsiteAudit(website1, audit, new WebsiteAuditReport(200, [])))
-        websiteAuditRepository.save(new WebsiteAudit(website2, audit, new WebsiteAuditReport(200, [])))
-        websiteAuditRepository.save(new WebsiteAudit(website3, audit, new WebsiteAuditReport(200, [])))
+        websiteAuditRepository.save(new WebsiteAudit(website1, audit, new WebsiteAuditReport(200, []),20))
+        websiteAuditRepository.save(new WebsiteAudit(website2, audit, new WebsiteAuditReport(200, []),20))
+        websiteAuditRepository.save(new WebsiteAudit(website3, audit, new WebsiteAuditReport(200, []),20))
 
         audit.done()
         auditRepository.save(audit)

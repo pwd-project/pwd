@@ -31,7 +31,7 @@ class WebsiteAuditor {
 
         Optional<WebsiteAuditReport> auditReport = analysisRestClient.getAnalysis(website.getUrl());
         WebsiteAudit websiteAudit = auditReport
-                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport))
+                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,websiteAuditRepository.getPreviousScore(website.getId())))
                 .orElseThrow(AnalysisNotCompleteException::new);
 
 
