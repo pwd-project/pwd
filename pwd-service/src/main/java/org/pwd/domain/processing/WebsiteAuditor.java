@@ -35,9 +35,10 @@ class WebsiteAuditor {
         if (prevScore == null) {
             prevScore = new Double("0");
         }
+        final Double prev = prevScore;
 
         WebsiteAudit websiteAudit = auditReport
-                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,prevScore))
+                .map(websiteAuditReport -> audit.createWebsiteAudit(website, websiteAuditReport,prev))
                 .orElseThrow(AnalysisNotCompleteException::new);
 
 
