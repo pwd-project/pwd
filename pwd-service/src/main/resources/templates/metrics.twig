@@ -27,7 +27,7 @@
 							<td><a href="/metryki/{{ item.name }}">{{ item.namePl }}</a></td>
 							<td>{{ item.name }}</td>
 							<td><a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a></td>
-							<td>{{ item.weight }}</td>
+							<td>{{ item.getWeightString }}</td>
 						</tr>
 					{% endfor %}
 					</tbody>
