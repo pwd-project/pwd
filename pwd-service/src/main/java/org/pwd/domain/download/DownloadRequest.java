@@ -19,7 +19,9 @@ public class DownloadRequest {
     private String cms;
     private String unitName;
     private String city;
+    private String name;
     private String administrativeEmail;
+    private String mobile;
 
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime created;
@@ -85,14 +87,32 @@ public class DownloadRequest {
         this.administrativeEmail = administrativeEmail;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     @Override
     public String toString() {
         return "DownloadRequest{" +
                 "id=" + id +
                 ", templateName='" + templateName + '\'' +
                 ", cms='" + cms + '\'' +
+                ", name='" + name + '\'' +
                 ", unitName='" + unitName + '\'' +
                 ", city='" + city + '\'' +
+                ", mobile='" + mobile + '\'' +
                 ", administrativeEmail='" + administrativeEmail + '\'' +
                 ", created=" + created +
                 '}';

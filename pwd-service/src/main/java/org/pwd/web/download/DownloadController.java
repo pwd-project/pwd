@@ -67,6 +67,6 @@ public class DownloadController {
     }
 
     private String composeMessage(String name, String cms) {
-        return String.format("Wybrałeś szablon %s do systemu %s\n Wkrótce udostępnimy szablony.", name, cms);
+        return String.format("Wybrałeś szablon %s do systemu %s\nWkrótce udostępnimy szablony.", name, cms);
     }
 }

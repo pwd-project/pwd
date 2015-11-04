@@ -41,7 +41,7 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
 
         def website = getOrCreateWebsite()
         def report = new WebsiteAuditReport(200, [alt.create(0), anyTitle.create(100), sound.create(100)])
-        def websiteAudit = audit.createWebsiteAudit(website, report)
+        def websiteAudit = audit.createWebsiteAudit(website, report, 20)
 
         when:
         websiteAudit = websiteAuditRepository.save(websiteAudit)

@@ -36,8 +36,8 @@ public class Audit {
         this.processStatus = NEW;
     }
 
-    public WebsiteAudit createWebsiteAudit(Website website, WebsiteAuditReport auditReport) {
-        return new WebsiteAudit(website, this, auditReport);
+    public WebsiteAudit createWebsiteAudit(Website website, WebsiteAuditReport auditReport, double auditPrevScore) {
+        return new WebsiteAudit(website, this, auditReport, auditPrevScore);
     }
 
     public Audit start() {
