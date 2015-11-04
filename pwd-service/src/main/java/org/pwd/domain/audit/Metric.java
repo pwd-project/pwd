@@ -108,4 +108,13 @@ public enum Metric {
         return ordinal();
     }
 
+    public String getWeightString() {
+        switch (weight) {
+            case 1: return "A";
+            case 2: return "AA";
+            case 3: return "AAA";
+            default: return "";
+        }
+    }
+
 }
