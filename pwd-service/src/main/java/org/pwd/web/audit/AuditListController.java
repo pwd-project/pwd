@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * @author bartosz.walacik
@@ -54,22 +55,27 @@ class AuditListController {
     @RequestMapping(value="/email", method = RequestMethod.POST)
     public String sendEmails() {
         try {
-            Audit audit = auditRepository.findAll(new Sort(Sort.Direction.DESC, "id")).stream()
+            Optional<Audit> audit = auditRepository.findAll(new Sort(Sort.Direction.DESC, "id")).stream()
                     .filter(a -> a.getProcessStatus() == AuditProcessStatus.DONE)
-                    .findFirst()
-                    .orElseGet(() -> null);
-            if (audit != null) {
-                logger.info("Trying to send email for audit {}", audit.getId());
-                websiteAuditRepository.findByAudit(audit).stream()
-                        .filter(websiteAudit -> websiteAudit.getAuditScore() > 0 && websiteAudit.getWebsite().getAdministrativeEmail() != null && websiteAudit.getWebsite().getId() >= 2826)
+                    .findFirst();
+            if (audit.isPresent()) {
+                logger.info("Trying to send email for audit {}", audit.get().getId());
+                websiteAuditRepository.findByAudit(audit.get()).stream()
+                        .filter(getWebsiteAuditFilterPredicate())
                         .forEach(websiteAudit1 -> sendEmail(websiteAudit1));
             }
         }
         catch(Exception ex) {
-            logger.info(ex.getMessage());
+            logger.error(ex.getMessage());
             return "error";
         }
         return "email_audits";
+    }
+
+    private Predicate<WebsiteAudit> getWebsiteAuditFilterPredicate() {
+        return  websiteAudit -> websiteAudit.getAuditScore() > 0 &&
+                websiteAudit.getWebsite().getAdministrativeEmail() != null &&
+                websiteAudit.getWebsite().getId() >= 2826;
     }
 
     private void sendEmail(WebsiteAudit websiteAudit) {
