@@ -61,7 +61,7 @@ class AuditListController {
             if (audit != null) {
                 logger.info("Trying to send email for audit {}", audit.getId());
                 websiteAuditRepository.findByAudit(audit).stream()
-                        .filter(websiteAudit -> websiteAudit.getAuditScore() > 0 && websiteAudit.getWebsite().getAdministrativeEmail() != null)
+                        .filter(websiteAudit -> websiteAudit.getAuditScore() > 0 && websiteAudit.getWebsite().getAdministrativeEmail() != null && websiteAudit.getWebsite().getId() >= 2827)
                         .forEach(websiteAudit1 -> sendEmail(websiteAudit1));
             }
         }
@@ -69,7 +69,7 @@ class AuditListController {
             logger.info(ex.getMessage());
             return "error";
         }
-        return "email_audits.twig";
+        return "email_audits";
     }
 
     private void sendEmail(WebsiteAudit websiteAudit) {
