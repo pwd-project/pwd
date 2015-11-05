@@ -61,7 +61,7 @@ class AuditListController {
             if (audit != null) {
                 logger.info("Trying to send email for audit {}", audit.getId());
                 websiteAuditRepository.findByAudit(audit).stream()
-                        .filter(websiteAudit -> websiteAudit.getAuditScore() > 0 && websiteAudit.getWebsite().getAdministrativeEmail() != null && websiteAudit.getWebsite().getId() >= 2827)
+                        .filter(websiteAudit -> websiteAudit.getAuditScore() > 0 && websiteAudit.getWebsite().getAdministrativeEmail() != null && websiteAudit.getWebsite().getId() >= 2826)
                         .forEach(websiteAudit1 -> sendEmail(websiteAudit1));
             }
         }
