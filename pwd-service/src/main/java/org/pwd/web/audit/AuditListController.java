@@ -61,7 +61,7 @@ class AuditListController {
             if (audit.isPresent()) {
                 logger.info("Trying to send email for audit {}", audit.get().getId());
                 websiteAuditRepository.findByAudit(audit.get()).stream()
-                        .filter(getWebsiteAuditFilterPredicate())
+                        .filter(auditsWithScoreAndEmail())
                         .forEach(websiteAudit1 -> sendEmail(websiteAudit1));
             }
         }
@@ -72,14 +72,14 @@ class AuditListController {
         return "email_audits";
     }
 
-    private Predicate<WebsiteAudit> getWebsiteAuditFilterPredicate() {
+    private Predicate<WebsiteAudit> auditsWithScoreAndEmail() {
         return  websiteAudit -> websiteAudit.getAuditScore() > 0 &&
                 websiteAudit.getWebsite().getAdministrativeEmail() != null &&
-                websiteAudit.getWebsite().getId() >= 2826;
+                websiteAudit.getWebsite().getId() >= 2826;//ten warunek jest tymczasowy
     }
 
     private void sendEmail(WebsiteAudit websiteAudit) {
-        EmailMessage emailMessage = new EmailMessage("noreplay@pwd.dolinagubra.pl", websiteAudit.getWebsite().getAdministrativeEmail(),
+        EmailMessage emailMessage = new EmailMessage("noreply@pwd.dolinagubra.pl", websiteAudit.getWebsite().getAdministrativeEmail(),
                 "Wyniki audytu ze strony PWD", composeMessage(websiteAudit.getAudit(), websiteAudit.getWebsite()));
 
         if (mailgunClient.sendEmail(emailMessage)) {
