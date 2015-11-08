@@ -103,9 +103,7 @@ class AuditListController {
 
         StringBuilder result = new StringBuilder("");
 
-        //Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
+        File file = getFileFromResourceFolder(fileName);
 
         try (Scanner scanner = new Scanner(file)) {
 
@@ -121,6 +119,11 @@ class AuditListController {
         }
 
         return result.toString();
+    }
+
+    private File getFileFromResourceFolder(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return new File(classLoader.getResource(fileName).getFile());
     }
 
     @ModelAttribute("audits")

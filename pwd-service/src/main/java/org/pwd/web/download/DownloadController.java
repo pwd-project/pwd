@@ -56,7 +56,7 @@ public class DownloadController {
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
         EmailMessage emailMessage = new EmailMessage("noreplay@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms()), false);
+                "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms()));
 
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);

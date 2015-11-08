@@ -49,10 +49,12 @@ public class MailgunClient {
         formData.add("from", emailMessage.getFrom());
         formData.add("to", emailMessage.getTo());
         formData.add("subject", emailMessage.getSubject());
-        if(emailMessage.getIsHTML())
+        if(emailMessage.getIsHTML()) {
             formData.add("html", emailMessage.getText());
-        else
+        }
+        else {
             formData.add("text", emailMessage.getText());
+        }
         HttpEntity request = new HttpEntity<>(formData, headers);
 
         try {

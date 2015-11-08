@@ -1,5 +1,6 @@
 package org.pwd.web.contact;
 
+import org.parboiled.common.Preconditions;
 import org.pwd.domain.contact.ContactRequest;
 import org.pwd.domain.contact.ContactRequestRepository;
 import org.pwd.domain.contact.EmailMessage;
@@ -38,13 +39,18 @@ public class ContactController {
 
     @RequestMapping(method = POST)
     public String sendEmail(ContactRequest contactRequest, HttpServletRequest request) {
+        Preconditions.checkArgument(contactRequest.getName().length()<=50);
+        Preconditions.checkArgument(contactRequest.getAdministrativeEmail().length()<=50);
+        Preconditions.checkArgument(contactRequest.getMobile().length()<=12);
+        Preconditions.checkArgument(contactRequest.getSite().length()<=50);
+        Preconditions.checkArgument(contactRequest.getMessage().length()<=255);
+
         logger.info("New contact record {}", contactRequest);
-        contactRequest = truncateRequest(contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
 
         EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
                 contactRequest.getName(), contactRequest.getAdministrativeEmail(), contactRequest.getMobile(),
-                contactRequest.getSite(), contactRequest.getMessage()),false
+                contactRequest.getSite(), contactRequest.getMessage())
         );
 
         if (mailgunClient.sendEmail(emailMessage)) {
@@ -53,14 +59,6 @@ public class ContactController {
         }
         logger.warn("Email {} could not be sent", emailMessage);
         return "error";
-    }
-
-    private ContactRequest truncateRequest(ContactRequest contactRequest) {
-        return new ContactRequest(contactRequest.getName().substring(0,Math.min(contactRequest.getName().length(),50)),
-                contactRequest.getAdministrativeEmail().substring(0,Math.min(contactRequest.getAdministrativeEmail().length(),50)),
-                contactRequest.getMobile().substring(0,Math.min(contactRequest.getMobile().length(),12)),
-                contactRequest.getSite().substring(0,Math.min(contactRequest.getSite().length(),50)),
-                contactRequest.getMessage().substring(0,Math.min(contactRequest.getMessage().length(),255)));
     }
 
     private String composeMessage(String name, String email, String mobile, String site, String message) {
