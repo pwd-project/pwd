@@ -43,7 +43,7 @@ public class ContactController {
 
         EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
                 contactRequest.getName(), contactRequest.getAdministrativeEmail(), contactRequest.getMobile(),
-                contactRequest.getSite(), contactRequest.getMessage())
+                contactRequest.getSite(), contactRequest.getMessage()),false
         );
 
         if (mailgunClient.sendEmail(emailMessage)) {

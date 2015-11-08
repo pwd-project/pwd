@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.function.Predicate;
 
 /**
@@ -80,7 +83,7 @@ class AuditListController {
 
     private void sendEmail(WebsiteAudit websiteAudit) {
         EmailMessage emailMessage = new EmailMessage("noreply@pwd.dolinagubra.pl", websiteAudit.getWebsite().getAdministrativeEmail(),
-                "Wyniki audytu ze strony PWD", composeMessage(websiteAudit.getAudit(), websiteAudit.getWebsite()));
+                "Wyniki audytu ze strony PWD", composeMessage(websiteAudit.getAudit(), websiteAudit.getWebsite()), true);
 
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
@@ -91,8 +94,33 @@ class AuditListController {
     }
 
     private String composeMessage(Audit audit, Website website) {
-        return String.format("Wyniki audytu %d dla strony %s\nhttp://pwd.dolinagubra.pl/audyty/%d/%d", audit.getId(),
+        String email_text = getFile("static/pages/AuditEmailTemplate.html");
+        return String.format(email_text, audit.getId(),
                 website.getUrl(),audit.getId(), website.getId());
+    }
+
+    private String getFile(String fileName) {
+
+        StringBuilder result = new StringBuilder("");
+
+        //Get file from resources folder
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+
+        try (Scanner scanner = new Scanner(file)) {
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                result.append(line).append("\n");
+            }
+
+            scanner.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result.toString();
     }
 
     @ModelAttribute("audits")
