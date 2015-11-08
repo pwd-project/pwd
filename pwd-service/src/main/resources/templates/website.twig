@@ -50,7 +50,7 @@
 						<a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a>
 					</td>
 					<td class="text-left">
-						{{ item.weight }}
+					    {{ item.getWeightString }}
 					</td>
 					<td class="text-left">
 						{{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
