@@ -39,6 +39,7 @@ public class ContactController {
     @RequestMapping(method = POST)
     public String sendEmail(ContactRequest contactRequest, HttpServletRequest request) {
         logger.info("New contact record {}", contactRequest);
+        contactRequest = truncateRequest(contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
 
         EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
@@ -52,6 +53,14 @@ public class ContactController {
         }
         logger.warn("Email {} could not be sent", emailMessage);
         return "error";
+    }
+
+    private ContactRequest truncateRequest(ContactRequest contactRequest) {
+        return new ContactRequest(contactRequest.getName().substring(0,Math.min(contactRequest.getName().length(),50)),
+                contactRequest.getAdministrativeEmail().substring(0,Math.min(contactRequest.getAdministrativeEmail().length(),50)),
+                contactRequest.getMobile().substring(0,Math.min(contactRequest.getMobile().length(),12)),
+                contactRequest.getSite().substring(0,Math.min(contactRequest.getSite().length(),50)),
+                contactRequest.getMessage().substring(0,Math.min(contactRequest.getMessage().length(),255)));
     }
 
     private String composeMessage(String name, String email, String mobile, String site, String message) {
