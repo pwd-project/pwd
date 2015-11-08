@@ -82,6 +82,7 @@
 						</a>
 					</figure>
 					<h5>{{ template1.namePl }}</h5>
+					<p>{{ template1.description }}</p>
 					<p>pobierz wersję dla:</p>
 					<div class="visible-regular clearfix">
 						<a href="/pobierz/{{ template1.name }}/WordPress" class="col-md-4">
@@ -111,6 +112,7 @@
 						</a>
 					</figure>
 					<h5>{{ template2.namePl }}</h5>
+					<p>{{ template2.description }}</p>
 					<p>pobierz wersję dla:</p>
 					<div class="visible-regular clearfix">
 						<a href="/pobierz/{{ template2.name }}/WordPress" class="col-md-4">
@@ -140,6 +142,7 @@
 						</a>
 					</figure>
 					<h5>{{ template3.namePl }}</h5>
+					<p>{{ template3.description }}</p>
 					<p>pobierz wersję dla:</p>
 					<div class="visible-regular clearfix">
 						<a href="/pobierz/{{ template3.name }}/WordPress" class="col-md-4">
@@ -224,7 +227,6 @@
 					<tr>
 						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
 						<th>pkt.</th>
-						<th>pop.</th>
 						<th>nazwa</th>
 						<th>url</th>
 						<th>Raporty</th>
@@ -234,8 +236,9 @@
                     {% for item in rankingTopChange %}
                         <tr>
 							<td class="text-center">{{ loop.index }}.</td>
-                            <td>{{ item.auditReport.score|number_format(2, ',', ' ') }}</td>
-                            <td>{{ item.auditPrevScore|number_format(2, ',', ' ') }}</td>
+                            <td>
+                                {{ item.auditReport.score|number_format(2, ',', ' ') }} ({{ item.auditPrevScore|number_format(2, ',', ' ') }})
+                            </td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
 							<td>
@@ -255,7 +258,7 @@
 
 {% block inlineJs %}
     $.getJSON("/api/gwd", function(data) {
-        var score = parseFloat(Math.round(data.score * 100) / 100).toFixed(2);
+        var score = parseFloat(Math.round(data.score * 100) / 100).toFixed(2).toString().replace(".",",");
         $("#globalScore").html(score);
     });
 {% endblock %}
