@@ -1,5 +1,10 @@
 package org.pwd.web.audit;
 
+import com.lyncode.jtwig.JtwigModelMap;
+import com.lyncode.jtwig.JtwigTemplate;
+import com.lyncode.jtwig.configuration.JtwigConfiguration;
+import com.lyncode.jtwig.mvc.JtwigViewResolver;
+import com.lyncode.jtwig.resource.FileJtwigResource;
 import org.pwd.domain.audit.*;
 import org.pwd.domain.contact.EmailMessage;
 import org.pwd.domain.processing.AuditProcessStarter;
@@ -83,7 +88,7 @@ class AuditListController {
 
     private void sendEmail(WebsiteAudit websiteAudit) {
         EmailMessage emailMessage = new EmailMessage("noreply@pwd.dolinagubra.pl", websiteAudit.getWebsite().getAdministrativeEmail(),
-                "Wyniki audytu ze strony PWD", composeMessage(websiteAudit.getAudit(), websiteAudit.getWebsite()), true);
+                "Wyniki audytu ze strony PWD", getEmailMessageTemplate(), getEmailMessageModelMap(websiteAudit.getAudit(), websiteAudit.getWebsite()));
 
         if (mailgunClient.sendEmail(emailMessage)) {
             logger.info("Email {} was sent successfully", emailMessage);
@@ -93,37 +98,23 @@ class AuditListController {
         throw new RuntimeException("Could send email for audit " + websiteAudit.getId());
     }
 
-    private String composeMessage(Audit audit, Website website) {
-        String email_text = getFile("static/pages/AuditEmailTemplate.html");
-        return String.format(email_text, audit.getId(),
-                website.getUrl(),audit.getId(), website.getId());
-    }
-
-    private String getFile(String fileName) {
-
-        StringBuilder result = new StringBuilder("");
-
-        File file = getFileFromResourceFolder(fileName);
-
-        try (Scanner scanner = new Scanner(file)) {
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                result.append(line).append("\n");
-            }
-
-            scanner.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result.toString();
-    }
-
     private File getFileFromResourceFolder(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         return new File(classLoader.getResource(fileName).getFile());
+    }
+
+    private JtwigTemplate getEmailMessageTemplate(){
+        return new JtwigTemplate(
+                new FileJtwigResource(getFileFromResourceFolder("templates/emails/AuditEmail.twig")),
+                new JtwigConfiguration()
+        );
+    }
+
+    private JtwigModelMap getEmailMessageModelMap(Audit audit, Website website) {
+        return new JtwigModelMap()
+                .withModelAttribute("auditId", audit.getId())
+                .withModelAttribute("websiteUrl", website.getUrl())
+                .withModelAttribute("websiteId", website.getId());
     }
 
     @ModelAttribute("audits")
