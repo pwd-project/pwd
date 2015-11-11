@@ -1,5 +1,6 @@
 package org.pwd.web.download;
 
+import org.pwd.domain.contact.PlainTextEmailMessage;
 import org.pwd.domain.download.DownloadRequest;
 import org.pwd.domain.download.DownloadRequestRepository;
 import org.pwd.domain.download.Template;
@@ -55,14 +56,14 @@ public class DownloadController {
         logger.info("New download request: {}", downloadRequest);
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
-        EmailMessage emailMessage = new EmailMessage("noreplay@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
+        PlainTextEmailMessage plainTextEmailMessage = new PlainTextEmailMessage("noreplay@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms()));
 
-        if (mailgunClient.sendEmail(emailMessage)) {
-            logger.info("Email {} was sent successfully", emailMessage);
+        if (mailgunClient.sendEmail(plainTextEmailMessage)) {
+            logger.info("Email {} was sent successfully", plainTextEmailMessage);
             return "email_download";
         }
-        logger.warn("Email {} could not be sent", emailMessage);
+        logger.warn("Email {} could not be sent", plainTextEmailMessage);
         return "error";
     }
 

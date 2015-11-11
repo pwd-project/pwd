@@ -4,6 +4,7 @@ import org.parboiled.common.Preconditions;
 import org.pwd.domain.contact.ContactRequest;
 import org.pwd.domain.contact.ContactRequestRepository;
 import org.pwd.domain.contact.EmailMessage;
+import org.pwd.domain.contact.PlainTextEmailMessage;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,16 +49,16 @@ public class ContactController {
         logger.info("New contact record {}", contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
 
-        EmailMessage emailMessage = new EmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
+        PlainTextEmailMessage plainTextEmailMessage = new PlainTextEmailMessage(contactRequest.getAdministrativeEmail(), mailbox, "Zgłoszenie ze strony PWD", composeMessage(
                 contactRequest.getName(), contactRequest.getAdministrativeEmail(), contactRequest.getMobile(),
                 contactRequest.getSite(), contactRequest.getMessage())
         );
 
-        if (mailgunClient.sendEmail(emailMessage)) {
-            logger.info("Email {} was sent successfully", emailMessage);
+        if (mailgunClient.sendEmail(plainTextEmailMessage)) {
+            logger.info("Email {} was sent successfully", plainTextEmailMessage);
             return "email_sent";
         }
-        logger.warn("Email {} could not be sent", emailMessage);
+        logger.warn("Email {} could not be sent", plainTextEmailMessage);
         return "error";
     }
 
