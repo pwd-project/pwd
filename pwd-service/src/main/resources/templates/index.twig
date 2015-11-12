@@ -35,7 +35,7 @@
                     Pierwsza wersja silnika PWD Online korzysta z danych opublikowanych w
                     serwisie <a href="https://danepubliczne.gov.pl" target="_blank">danepubliczne.gov.pl</a>
                     i audytuje serwisy administracji publicznej dostępne na tej stronie.
-                    Jeśli Twojego serwisu nie ma z zakładce serwisy, możesz go zgłosić przez
+                    Jeśli Twojego serwisu nie ma w zakładce serwisy, możesz go zgłosić przez
                     <a href="/kontakt">formularz kontaktowy</a>.
                 </p>
             </div>
@@ -47,7 +47,7 @@
                     System PWD Online cyklicznie, co 7 dni, analizuje i sprawdza serwisy internetowe
                     dostępne w naszej bazie danych.
                     Każdy z serwisów badany jest przez specjalny proces wykorzystujący metryki PWD.
-                    Na podstawie tego badania przydzielane są punkty
+                    Na podstawie tego badania przydzielane są punkty.
                     Następnie wyliczany jest wskaźnik dostępności.
                     Wskaźnik ten jest publikowany i brany pod uwagę w tworzeniu Rankingu PWD.
                 </p>
@@ -76,11 +76,11 @@
 
 			<div class="box-download col-md-4 text-left">
 				<div>
-					<figure>
+					<div>
 						<a href="/img/szablony/{{ template1.imageName }}-prev.jpg" data-lightbox="templates" data-title="{{ template1.namePl }}">
 							<img src="/img/szablony/{{ template1.imageName }}.jpg" class="img-responsive" alt="{{ template1.namePl }}">
 						</a>
-					</figure>
+					</div>
 					<h5>{{ template1.namePl }}</h5>
 					<p>{{ template1.description }}</p>
 					<p>pobierz wersję dla:</p>
@@ -106,11 +106,11 @@
 			</div>
 			<div class="box-download col-md-4 text-left">
 				<div>
-					<figure>
+					<div>
 						<a href="/img/szablony/{{ template2.imageName }}-prev.jpg" data-lightbox="templates" data-title="{{ template2.namePl }}">
 							<img src="/img/szablony/{{ template2.imageName }}.jpg" class="img-responsive" alt="{{ template2.namePl }}">
 						</a>
-					</figure>
+					</div>
 					<h5>{{ template2.namePl }}</h5>
 					<p>{{ template2.description }}</p>
 					<p>pobierz wersję dla:</p>
@@ -136,11 +136,11 @@
 			</div>
 			<div class="box-download col-md-4 text-left">
 				<div>
-					<figure>
+					<div>
 						<a href="/img/szablony/{{ template3.imageName }}-prev.jpg" data-lightbox="templates" data-title="{{ template3.namePl }}">
 							<img src="/img/szablony/{{ template3.imageName }}.jpg" class="img-responsive" alt="{{ template3.namePl }}">
 						</a>
-					</figure>
+					</div>
 					<h5>{{ template3.namePl }}</h5>
 					<p>{{ template3.description }}</p>
 					<p>pobierz wersję dla:</p>
@@ -171,9 +171,9 @@
 	<section class="section container text-center">
 		<h2>Globalny wskaźnik dostępności</h2>
 		<h3>PWD Rank</h3>
-		<h5 class="rank-value" id="globalScore">
+		<div class="rank-value" id="globalScore">
 			<img src="/img/loading.gif" alt="loading" />
-		</h5>
+		</div>
 	</section>
 
     <section class="container-fluid text-center section bg-gray" >
@@ -189,7 +189,7 @@
 						<th>pkt.</th>
 						<th>nazwa</th>
 						<th>url</th>
-						<th>Raporty</th>
+						<th>Raport</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -201,7 +201,7 @@
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
 							<td>
 								<a href="/serwisy/{{ item.website.id }}">
-									<i class="fa fa-file-text"></i>
+									<div class="fa fa-file-text"></div>
 								</a>
 							</td>
                         </tr>
@@ -229,7 +229,7 @@
 						<th>pkt.</th>
 						<th>nazwa</th>
 						<th>url</th>
-						<th>Raporty</th>
+						<th>Raport</th>
 					</tr>
                     </thead>
                     <tbody>
@@ -243,7 +243,7 @@
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
 							<td>
 								<a href="/serwisy/{{ item.website.id }}">
-									<i class="fa fa-file-text"></i>
+									<div class="fa fa-file-text"></div>
 								</a>
 							</td>
                         </tr>

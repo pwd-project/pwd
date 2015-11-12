@@ -16,7 +16,7 @@
 				<p>Dostępne dodatkowe opcje wyszukiwania | lub &amp;: np. "mazowieckie|świętokrzyskie", "łódzkie&amp;powiat"</p>
 			</div>
 			<div class="col-sm-2">
-				<input type="submit" value="Szukaj" class="cta cta-1 cta-search">
+				<input title="Szukaj" type="submit" value="Szukaj" class="cta cta-1 cta-search">
 			</div>
 		</form>
 
@@ -25,15 +25,15 @@
 				<thead>
 				{% if websitesAudits %}
 				<tr>
-					<th class="text-center sortable"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"><i class="fa fa-sort"></i></th>
-					<th class="sortable">Nazwa<i class="fa fa-sort"></i></th>
-					<th class="sortable">Miejscowość<i class="fa fa-sort"></i></th>
-					<th class="sortable">Województwo<i class="fa fa-sort"></i></th>
-					<th class="sortable">Powiat<i class="fa fa-sort"></i></th>
-					<th class="sortable">Pkt.<i class="fa fa-sort"></i></th>
-					<th>Url</th>
-					<th>Rap.</th>
-					<th>CMS</th>
+					<th class="text-center sortable"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"><div class="fa fa-sort"></div></th>
+					<th class="sortable">Nazwa<div class="fa fa-sort"></div></th>
+					<th class="sortable">Miejscowość<div class="fa fa-sort"></div></th>
+					<th class="sortable">Województwo<div class="fa fa-sort"></div></th>
+					<th class="sortable">Powiat<div class="fa fa-sort"></div></th>
+					<th class="sortable">Pkt.<div class="fa fa-sort"></div></th>
+					<th class="sorttable_nosort">Url</th>
+					<th class="sorttable_nosort">Rap.</th>
+					<th class="sorttable_nosort">CMS</th>
 				</tr>
 				{% endif %}
 				</thead>
@@ -48,14 +48,14 @@
 						<td>{{ item.auditReport.score|number_format(2, ',', ' ') }}</td>
 						<td>
 							<a href="{{ item.website.url }}" target="_blank" title="{{ item.website.url }}" data-toggle="tooltip">
-								<i class="fa fa-link"></i>
+								<div class="fa fa-link"></div>
 							</a>
 						</td>
-						<td><a href="/serwisy/{{ item.website.id }}" title="Raporty" data-toggle="tooltip"><i class="fa fa-file-text"></i></a></td>
+						<td><a href="/serwisy/{{ item.website.id }}" title="Raporty" data-toggle="tooltip"><div class="fa fa-file-text"></div></a></td>
 						<td>
 							{% if item.cmsUsed|length > 0 %}
-							<a href="" title="{{ item.cmsUsed }}" data-toggle="tooltip">
-								<i class="fa fa-info-circle"></i>
+							<a title="{{ item.cmsUsed }}" data-toggle="tooltip">
+								<div class="fa fa-info-circle"></div>
 							</a>
 							{% endif %}
 						</td>
@@ -73,4 +73,5 @@
 	</div>
 </div>
 <script src="/js/sorttable.js"></script>
+<script>sorttable.sort_alpha = function(a,b) { return a[0].localeCompare(b[0], 'pl'); }</script>
 {% endblock %}

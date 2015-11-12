@@ -214,7 +214,7 @@ footer p{
 	max-width:120px;
 	margin-left:15px
 }
-/*globalny wskaŸnik*/
+/*globalny wskaï¿½nik*/
 
 .rank-value{
 	font-size:140px;
@@ -291,6 +291,9 @@ footer p{
 	background:#fff;
 	border-right:1px #f2f2f2 solid;
 	font-weight:500
+}
+.ranking th:nth-child(4){
+	width:180px
 }
 th.sortable{
 	cursor:pointer
@@ -550,7 +553,9 @@ input[type="text"], input[type="email"],input[type="url"]{
 	border:1px #ccc solid;
 	box-shadow:none
 }
-
+textarea.form-control{
+	font-size:1em
+}
 /*ikony zmiany fontu i kontrastu*/
 .icons{
 	position:fixed;

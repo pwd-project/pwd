@@ -26,9 +26,9 @@ body{
 .tv{
 	background:#000
 }
-.navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 	background:#000!important;
-	color:#fff!important
+	color:#ffff00!important
 }
 h1,h2,h3,h4,h5,h6{
 	color:#ffff00!important
@@ -45,8 +45,9 @@ h1,h2,h3,h4,h5,h6{
 .rank-value span{
 	color:#ffff00
 }
-.table.ranking{
-	background:#000
+.table.ranking, , .table{
+	background:#000;
+	border:1px #ffff00 solid
 }
 .table-striped > tbody > tr:nth-of-type(2n+1){
 	background:#000
@@ -66,13 +67,13 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
-.cta-1, .cta-1:hover{
-	background:#ffff00;
+.cta-1, .cta-1:hover, .cta-1:focus{
+	background:#000;
 	border-color:#ffff00;
-	color:#000!important
+	color:#ffff00!important
 }
 
-.cta-2, .cta-2:hover{
+.cta-2, .cta-2:hover, .cta-2:focus{
 	border-color:#ffff00!important;
 	color:#ffff00!important;
 	background:none
@@ -85,4 +86,35 @@ footer{
 }
 .rank-change{
 	color:#ffff00
+}
+
+.alert{
+	background:#000;
+	color:#ffff00;
+	border:1px #ffff00 solid
+}
+.close, .close:hover{
+	color:#ffff00!important;
+	opacity:1
+}
+
+.form-control{
+	background:#000;
+	color:#ffff00;
+	border-color:#ffff00
+}
+::-webkit-input-placeholder {
+   color: #ffff00!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #ffff00!important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #ffff00!important;  
+}
+
+:-ms-input-placeholder {  
+   color: #ffff00!important;  
 }

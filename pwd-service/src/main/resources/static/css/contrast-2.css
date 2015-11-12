@@ -2,6 +2,12 @@
 a{
 	color:#fff
 }
+a:focus{
+
+	color:#fff;
+	text-decoration: none;
+}
+
 .rank-value::before{
 	background:#fff
 }
@@ -23,7 +29,7 @@ body{
 .navbar-default .navbar-nav > li > a{
 	color:#000
 }
-.tv, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current{
+.tv, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:focus{
 	background:#000
 }
 h1,h2,h3,h4,h5,h6{
@@ -38,8 +44,9 @@ h1,h2,h3,h4,h5,h6{
 .rank-value span{
 	color:#fff
 }
-.table.ranking{
-	background:#000
+.table.ranking, .table{
+	background:#000;
+	border:1px #fff solid
 }
 .table-striped > tbody > tr:nth-of-type(2n+1){
 	background:#000
@@ -57,13 +64,13 @@ h1,h2,h3,h4,h5,h6{
 	background:none!important;
 
 }
-.cta-1, .cta-1:hover{
-	background:#fff;
+.cta-1, .cta-1:hover, .cta-1:focus{
+	background:#000;
 	border-color:#fff;
-	color:#000!important
+	color:#fff!important
 }
 
-.cta-2, .cta-2:hover{
+.cta-2, .cta-2:hover, .cta-2:focus{
 	border-color:#fff!important;
 	color:#fff!important;
 	background:none
@@ -76,6 +83,40 @@ footer{
 	background:#fff;
 	color:#000
 }
+footer a{
+	color:#000
+}
 .rank-change{
 	color:#fff
+}
+
+.alert{
+	background:#000;
+	color:#fff;
+	border:1px #fff solid
+}
+.close, .close:hover{
+	color:#fff!important;
+	opacity:1
+}
+
+.form-control{
+	border-color:#fff;
+	background:#000;
+	color:#fff!important
+}
+::-webkit-input-placeholder {
+   color: #fff!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #fff!important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff!important;  
+}
+
+:-ms-input-placeholder {  
+   color: #fff!important;  
 }
