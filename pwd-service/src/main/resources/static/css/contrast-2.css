@@ -3,14 +3,11 @@ a{
 	color:#fff
 }
 a:focus{
-	outline: #000 dotted 2px;
+
 	color:#fff;
 	text-decoration: none;
+}
 
-}
-.navbar-default .navbar-nav > li > a:focus{
-	background:#000
-}
 .rank-value::before{
 	background:#fff
 }
@@ -32,7 +29,7 @@ body{
 .navbar-default .navbar-nav > li > a{
 	color:#000
 }
-.tv, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current{
+.tv, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.current, .navbar-default .navbar-nav > li > a:focus{
 	background:#000
 }
 h1,h2,h3,h4,h5,h6{
@@ -47,7 +44,7 @@ h1,h2,h3,h4,h5,h6{
 .rank-value span{
 	color:#fff
 }
-.table.ranking{
+.table.ranking, .table{
 	background:#000;
 	border:1px #fff solid
 }
@@ -109,17 +106,17 @@ footer a{
 	color:#fff!important
 }
 ::-webkit-input-placeholder {
-   color: #000!important;
+   color: #fff!important;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: #000!important;  
+   color: #fff!important;  
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #000!important;  
+   color: #fff!important;  
 }
 
 :-ms-input-placeholder {  
-   color: #000!important;  
+   color: #fff!important;  
 }

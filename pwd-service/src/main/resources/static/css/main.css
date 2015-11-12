@@ -553,7 +553,9 @@ input[type="text"], input[type="email"],input[type="url"]{
 	border:1px #ccc solid;
 	box-shadow:none
 }
-
+textarea.form-control{
+	font-size:1em
+}
 /*ikony zmiany fontu i kontrastu*/
 .icons{
 	position:fixed;
