@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
-<p>Wyniki audytu {{ auditId }} dla strony {{ websiteUrl }}</p>
+<img src="http://pwd.dolinagubra.pl/img/pwd-online-logo.svg" border="0" align="left" />
+<p>Wyniki audytu z dnia {{ auditFinished  | localDate }} dla strony {{ websiteUrl }}</p>
 <p><a href="http://pwd.dolinagubra.pl/audyty/{{auditId}}/{{websiteId}}">Zobacz</a></p>
 </body>
 </html>
