@@ -110,6 +110,7 @@ class AuditListController {
     private JtwigModelMap getEmailMessageModelMap(Audit audit, Website website) {
         return new JtwigModelMap()
                 .withModelAttribute("auditId", audit.getId())
+                .withModelAttribute("auditFinished", audit.getFinished())
                 .withModelAttribute("websiteUrl", website.getUrl())
                 .withModelAttribute("websiteId", website.getId());
     }
