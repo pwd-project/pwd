@@ -199,11 +199,7 @@
                             <td>{{ item.auditReport.score|number_format(2, ',', ' ') }}</td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
-							<td>
-								<a href="/serwisy/{{ item.website.id }}">
-									<div class="fa fa-file-text"></div>
-								</a>
-							</td>
+                            <td><a href="/serwisy/{{ item.website.id }}" title="Raport" data-toggle="tooltip"><div class="fa fa-file-text"></div></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -241,11 +237,7 @@
                             </td>
                             <td>{{ item.website.administrativeUnit }}</td>
                             <td><a href="{{ item.website.url }}" target="_blank">{{ item.website.url }}</a></td>
-							<td>
-								<a href="/serwisy/{{ item.website.id }}">
-									<div class="fa fa-file-text"></div>
-								</a>
-							</td>
+                            <td><a href="/serwisy/{{ item.website.id }}" title="Raport" data-toggle="tooltip"><div class="fa fa-file-text"></div></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
