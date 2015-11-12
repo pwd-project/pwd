@@ -3,6 +3,8 @@ package org.pwd.interfaces.mailgun;
 import com.google.common.base.Preconditions;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.pwd.domain.contact.EmailMessage;
+import org.pwd.domain.contact.HtmlEmailMessage;
+import org.pwd.domain.contact.PlainTextEmailMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +46,27 @@ public class MailgunClient {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     }
 
-    public boolean sendEmail(EmailMessage emailMessage) {
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+    public boolean sendEmail(PlainTextEmailMessage plainTextEmailMessage) {
+        MultiValueMap<String, String> formData = createFormData(plainTextEmailMessage);
+        formData.add("text", plainTextEmailMessage.getText());
+        return sendEmail(formData);
+    }
+
+    public boolean sendEmail(HtmlEmailMessage htmlEmailMessage) {
+        MultiValueMap<String, String> formData = createFormData(htmlEmailMessage);
+        formData.add("html", htmlEmailMessage.getHtml());
+        return sendEmail(formData);
+    }
+
+    private MultiValueMap<String, String> createFormData(EmailMessage emailMessage) {
+        LinkedMultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("from", emailMessage.getFrom());
         formData.add("to", emailMessage.getTo());
         formData.add("subject", emailMessage.getSubject());
-        formData.add("text", emailMessage.getText());
+        return formData;
+    }
+
+    private boolean sendEmail(MultiValueMap<String, String> formData) {
         HttpEntity request = new HttpEntity<>(formData, headers);
 
         try {
