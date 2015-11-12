@@ -1,19 +1,15 @@
 package org.pwd.domain.contact;
 
-import com.lyncode.jtwig.JtwigModelMap;
-import com.lyncode.jtwig.JtwigTemplate;
-import com.lyncode.jtwig.exception.CompileException;
-import com.lyncode.jtwig.exception.ParseException;
-import com.lyncode.jtwig.exception.RenderException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public abstract class EmailMessage {
-    protected String from;
-    protected String to;
-    protected String subject;
+    private final String from;
+    private final String to;
+    private final String subject;
 
-    protected EmailMessage(){}
+    protected EmailMessage(String from, String to, String subject){
+        this.from = from;
+        this.to = to;
+        this.subject = subject;
+    }
 
     public String getFrom() {
         return from;

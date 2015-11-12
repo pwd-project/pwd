@@ -9,13 +9,11 @@ import org.slf4j.LoggerFactory;
  * @author Sławomir Mikulski
  */
 public class HtmlEmailMessage extends EmailMessage {
-    private static final Logger logger = LoggerFactory.getLogger(EmailMessage.class);
+    private static final Logger logger = LoggerFactory.getLogger(HtmlEmailMessage.class);
     private final String html;
 
     public HtmlEmailMessage(String from, String to, String subject, JtwigTemplate jtwigTemplate, JtwigModelMap modelMap) {
-        this.from = from;
-        this.to = to;
-        this.subject = subject;
+        super(from,to,subject);
         this.html = renderTemplateIntoText(jtwigTemplate, modelMap);
     }
 
@@ -29,8 +27,8 @@ public class HtmlEmailMessage extends EmailMessage {
             result = jtwigTemplate.output(modelMap);
         }
         catch (Exception ex){
-            result = "";
             logger.error("Cannot render email text template: {}. Error: {}", jtwigTemplate, ex.getMessage());
+            throw new RuntimeException("Cannot render email text template");
         }
         return result;
     }

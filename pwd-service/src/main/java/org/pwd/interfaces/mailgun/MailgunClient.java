@@ -47,23 +47,23 @@ public class MailgunClient {
     }
 
     public boolean sendEmail(PlainTextEmailMessage plainTextEmailMessage) {
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-        setCommonFormData(plainTextEmailMessage, formData);
+        MultiValueMap<String, String> formData = createFormData(plainTextEmailMessage);
         formData.add("text", plainTextEmailMessage.getText());
         return sendEmail(formData);
     }
 
     public boolean sendEmail(HtmlEmailMessage htmlEmailMessage) {
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-        setCommonFormData(htmlEmailMessage, formData);
+        MultiValueMap<String, String> formData = createFormData(htmlEmailMessage);
         formData.add("html", htmlEmailMessage.getHtml());
         return sendEmail(formData);
     }
 
-    private void setCommonFormData(EmailMessage emailMessage, MultiValueMap<String, String> formData) {
+    private MultiValueMap<String, String> createFormData(EmailMessage emailMessage) {
+        LinkedMultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("from", emailMessage.getFrom());
         formData.add("to", emailMessage.getTo());
         formData.add("subject", emailMessage.getSubject());
+        return formData;
     }
 
     private boolean sendEmail(MultiValueMap<String, String> formData) {

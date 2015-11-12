@@ -7,9 +7,7 @@ public class PlainTextEmailMessage extends EmailMessage {
     private final String text;
 
     public PlainTextEmailMessage (String from, String to, String subject, String text) {
-        this.from = from;
-        this.to = to;
-        this.subject = subject;
+        super(from,to,subject);
         this.text = text;
     }
 
