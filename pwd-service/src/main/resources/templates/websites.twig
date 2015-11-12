@@ -31,9 +31,9 @@
 					<th class="sortable">Województwo<i class="fa fa-sort"></i></th>
 					<th class="sortable">Powiat<i class="fa fa-sort"></i></th>
 					<th class="sortable">Pkt.<i class="fa fa-sort"></i></th>
-					<th>Url</th>
-					<th>Rap.</th>
-					<th>CMS</th>
+					<th class="sorttable_nosort">Url</th>
+					<th class="sorttable_nosort">Rap.</th>
+					<th class="sorttable_nosort">CMS</th>
 				</tr>
 				{% endif %}
 				</thead>
@@ -73,4 +73,5 @@
 	</div>
 </div>
 <script src="/js/sorttable.js"></script>
+<script>sorttable.sort_alpha = function(a,b) { return a[0].localeCompare(b[0], 'pl'); }</script>
 {% endblock %}
