@@ -43,7 +43,8 @@ h1,h2,h3,h4,h5,h6{
 	background:#ffff00
 }
 .table.ranking{
-	background:#ffff00
+	background:#ffff00;
+	border:1px #000 solid
 }
 .table-striped > tbody > tr:nth-of-type(2n+1){
 	background:#ffff00
@@ -63,14 +64,15 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
-.cta-1{
-	background:#000;
+.cta-1, .cta-1:hover, .cta-1:focus{
+	background:#ffff00;
 	border-color:#000;
-	color:#ffff00!important
-}
-.cta-2{
-	border-color:#000!important;
 	color:#000!important
+}
+.cta-2, .cta-2:hover, .cta-2:focus{
+	border-color:#000!important;
+	color:#000!important;
+	background:#ffff00
 }
 .visible-contrast a{
 	color:#000;	
@@ -80,4 +82,35 @@ footer{
 }
 .rank-change{
 	color:#000
+}
+
+.alert{
+	background:#ffff00;
+	color:#000;
+	border:1px #000 solid
+}
+.close, .close:hover{
+	color:#000!important;
+	opacity:1
+}
+
+.form-control{
+	background:#ffff00;
+	color:#000;
+	border-color:#000
+}
+::-webkit-input-placeholder {
+   color: #000!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #000!important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #000!important;  
+}
+
+:-ms-input-placeholder {  
+   color: #000!important;  
 }

@@ -292,6 +292,9 @@ footer p{
 	border-right:1px #f2f2f2 solid;
 	font-weight:500
 }
+.ranking th:nth-child(4){
+	width:180px
+}
 th.sortable{
 	cursor:pointer
 }

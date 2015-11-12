@@ -27,43 +27,53 @@ $(document).ready(function() {
 		
 		});
 		$('.contrast-1').click(function() {
-			$('.rank-ico').attr('src','img/rank.png');
+			$('.rank-ico').attr('src','/img/rank.png');
 			$('.visible-regular').show();
 			$('.visible-contrast').hide();
 			$('#contrast-style').remove();
 			Cookies.set('style', '1');
 		});
 		$('.contrast-2').click(function() {
-			$('.rank-ico').attr('src','img/rank-white.png');
+			$('.rank-ico').attr('src','/img/rank-white.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="css/contrast-2.css" type="text/css" />');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-2.css" type="text/css" />');
 			Cookies.set('style', '2');
 		});
 		$('.contrast-3').click(function() {
-			$('.rank-ico').attr('src','img/rank.png');
+			$('.rank-ico').attr('src','/img/rank.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="css/contrast-3.css" type="text/css" />');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-3.css" type="text/css" />');
 			Cookies.set('style', '3');
 		});
 		$('.contrast-4').click(function() {
-			$('.rank-ico').attr('src','img/rank-yellow.png');
+			$('.rank-ico').attr('src','/img/rank-yellow.png');
 			$('.visible-contrast').show();
 			$('.visible-regular').hide();
 			$('#contrast-style').remove();
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="css/contrast-4.css" type="text/css" />');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-4.css" type="text/css" />');
 			Cookies.set('style', '4');
 		});
 		
 		var style = Cookies.get('style');
 		if(style == 1){
 			$('#contrast-style').remove();
+			$('.rank-ico').attr('src','/img/rank.png');
 		}
-		else{
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="css/contrast-'+style+'.css" type="text/css" />');
+		else if(style == 2){
+			$('.rank-ico').attr('src','/img/rank-white.png');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
+		}
+		else if(style == 3){
+			$('.rank-ico').attr('src','/img/rank.png');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
+		}
+		else if(style == 4){
+			$('.rank-ico').attr('src','/img/rank-yellow.png');
+			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
 		}
 		
 		
