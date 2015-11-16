@@ -65,15 +65,15 @@ $(document).ready(function() {
 		}
 		else if(style == 2){
 			$('.rank-ico').attr('src','/img/rank-white.png');
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
+			//$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
 		}
 		else if(style == 3){
 			$('.rank-ico').attr('src','/img/rank.png');
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
+			//$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
 		}
 		else if(style == 4){
 			$('.rank-ico').attr('src','/img/rank-yellow.png');
-			$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
+			//$('head').append('<link id="contrast-style" rel="stylesheet" href="/css/contrast-'+style+'.css" type="text/css" />');
 		}
 		
 		

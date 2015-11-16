@@ -3,7 +3,8 @@ a{
 	color:#ffff00
 }
 .rank-value::before{
-	background:#000
+	background:#000;
+	border:5px #ffff00 solid
 }
 .rank-value{
 	color:#ffff00!important
@@ -45,7 +46,7 @@ h1,h2,h3,h4,h5,h6{
 .rank-value span{
 	color:#ffff00
 }
-.table.ranking, , .table{
+.table.ranking,.table{
 	background:#000;
 	border:1px #ffff00 solid
 }
@@ -55,6 +56,9 @@ h1,h2,h3,h4,h5,h6{
 .ranking th{
 	background:#000;
 	border-color:#ffff00
+}
+.ranking td{
+	background:#000
 }
 .ranking a{
 	color:#ffff00
