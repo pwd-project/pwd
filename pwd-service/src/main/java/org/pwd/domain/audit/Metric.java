@@ -57,7 +57,7 @@ public enum Metric {
     elementsWithMeaningfulBackgroundImage(
             2, "Znaczące obrazy nie są tłem", "AX_IMAGE_01", "https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_image_01"),
     focusableElementNotVisibleAndNotAriaHidden(
-            2, "Niewidoczne elementy z focusem", "AX_FOCUS_01", "https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_focus_01");
+            0, "Niewidoczne elementy z focusem", "AX_FOCUS_01", "https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_focus_01");
 
     private String namePl;
     private int weight;
