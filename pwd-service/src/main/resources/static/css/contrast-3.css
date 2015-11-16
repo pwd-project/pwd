@@ -12,7 +12,8 @@ a:focus{
 	color:#ffff00
 }
 .rank-value::before{
-	background:#ffff00
+	background:#ffff00;
+	border:5px #000 solid
 }
 .rank-value{
 	color:#000!important
@@ -51,7 +52,7 @@ h1,h2,h3,h4,h5,h6{
 .box-download div{
 	background:#ffff00
 }
-.table.ranking, , .table{
+.table.ranking, .table{
 	background:#ffff00;
 	border:1px #000 solid
 }
@@ -61,6 +62,9 @@ h1,h2,h3,h4,h5,h6{
 .ranking th{
 	background:#ffff00;
 	border-color:#000
+}
+.ranking td{
+	background:#ffff00
 }
 .ranking a{
 	color:#000

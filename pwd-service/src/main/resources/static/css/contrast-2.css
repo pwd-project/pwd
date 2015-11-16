@@ -9,10 +9,11 @@ a:focus{
 }
 
 .rank-value::before{
-	background:#fff
+	background:#000;
+	border:5px #fff solid
 }
 .rank-value{
-	color:#000!important
+	color:#fff!important
 }
 .news p.date, .news p{
 	color:#fff
@@ -52,6 +53,9 @@ h1,h2,h3,h4,h5,h6{
 	background:#000
 }
 .ranking th{
+	background:#000
+}
+.ranking td{
 	background:#000
 }
 .ranking a{
