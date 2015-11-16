@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
-<body>
-<img src="http://pwd.dolinagubra.pl/img/pwd-online-logo.svg" border="0" align="left" />
-<p>Wyniki audytu z dnia {{ auditFinished }} dla strony {{ websiteUrl }}</p>
-<p><a href="http://pwd.dolinagubra.pl/audyty/{{auditId}}/{{websiteId}}">Zobacz</a></p>
+<div style="width:700px;margin:10px auto;font-family:Arial">
+	<div style="border-bottom:1px #ccc solid;">
+		<img src="http://pwd.dolinagubra.pl/img/pwd-online-logo.svg" style="float:left; width: 230px;padding:10px 0 20px; display:block"/>
+		<div style="clear:both"></div>
+	</div>
+	<div style="clear:both;padding:0 0 30px;color:#666">
+		<div style="background:#336699 url('http://pwd.dolinagubra.pl/img/bg-newsletter-pwd.jpg');background-size:cover;color:#fff;height:389px;text-align:center">
+			<h2 style="padding-top:50px;font-size:40px;margin:0">Walidator Dostępności</h2>
+			<p style="padding:25px 150px;font-size:14px;line-height:2">
+			Dostępność to proces a nie stan, dlatego naszym celem jest nieustanne monitorowanie serwisów internetowych i generowanie raportów dostępności.
+			</p>
+			<a href="http://pwd.dolinagubra.pl/top-100" style="text-transform:uppercase;color:#fff;background:#990000;padding:20px 40px;text-decoration:none;font-weight:bold;margin-top:5px;display:inline-block">
+			Zobacz ranking top 100
+			</a>
+		</div>
+		<div style="text-align:center;padding:30px">
+			<h2 style="text-transform:uppercase;font-size:28px;margin-bottom:40px">PWD Online - start projektu</h2>
+			<p style="font-size:14px;line-height:1.5">
+			Wystartowała pierwsza testowa wersja strony PWD Online. Zaimplementowanych jest 29 metryk sprawdzających różne aspekty dostępności stron internetowych. Aktualnie regularnie badamy 2814 stron internetowych jednostek samorządowych.
+			</p>
+			<p style="font-size:14px;line-height:1.5">
+			Projekt Polski Walidator Dostępności w skrócie PWD Online to specjalizowany serwis internetowy publikujący ranking dostępności stron internetowych oraz udostępniający szczegółowe raporty dostępności dla osób zarządzających tymi serwisami. PWD Online to również źródło informacji o procesie ulepszania i kształtowania dostępności treści w serwisach internetowych.
+			</p>
+			<a href="http://pwd.dolinagubra.pl/audyty/{{auditId}}/{{websiteId}}" style="text-transform:uppercase;color:#fff;background:#990000;padding:20px 40px;text-decoration:none;font-weight:bold;margin-top:30px;display:inline-block">
+			sprawdź walidator PWD
+			</a>
+		</div>
+	</div>
+	<div style="border-top:1px #ccc solid;clear:both;padding:30px 0;color:#666">
+		<p style="font-size:10pt">
+		 PWD Online - projekt prowadzony przez Stowarzyszenie Na Rzecz Rozwoju Regionu Dolina Gubra i Ministerstwo Administracji i Cyfryzacji pwd.dolinagubra.pl, wersja 1.0
+		</p>
+		<img src="http://pwd.dolinagubra.pl/img/dolina-gubra-logo-stopka.svg" style=" height: 60px;padding:10px 0 20px;"/>
+		<img src="http://pwd.dolinagubra.pl/img/maic.png" style="height: 60px;padding:10px 0 20px; margin-left:30px"/>
+	</div>
+</div>
 </body>
 </html>
