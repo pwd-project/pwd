@@ -57,7 +57,7 @@ public class DownloadController {
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
         PlainTextEmailMessage plainTextEmailMessage = new PlainTextEmailMessage("noreplay@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms()));
+                "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
 
         if (mailgunClient.sendEmail(plainTextEmailMessage)) {
             logger.info("Email {} was sent successfully", plainTextEmailMessage);
@@ -67,7 +67,20 @@ public class DownloadController {
         return "error";
     }
 
-    private String composeMessage(String name, String cms) {
-        return String.format("Wybrałeś szablon %s do systemu %s\nWkrótce udostępnimy szablony.", name, cms);
+    private String composeMessage(String name, String cms, String file) {
+        String path = "";
+        switch (cms) {
+            case "WordPress":
+                path = Template.DOWNLOAD_PATH_WORDPRESS;
+                break;
+            case "Drupal":
+                path = Template.DOWNLOAD_PATH_DRUPAL;
+                break;
+            case "Joomla":
+                path = Template.DOWNLOAD_PATH_JOOMLA;
+                break;
+        }
+        return String.format("Wybrałeś szablon %s do systemu %s\n"+
+                             "%s/%s", name, cms, path, file);
     }
 }

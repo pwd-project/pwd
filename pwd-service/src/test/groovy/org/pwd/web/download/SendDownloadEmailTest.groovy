@@ -34,8 +34,8 @@ class SendDownloadEmailTest extends IntegrationTest {
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
         form.add('templateName', 'templateName');
         form.add('cms', 'cms');
-        form.add('unitName', 'unitName');
-        form.add('city', 'city');
+        form.add('file', 'file');
+        form.add('name', 'name');
         form.add('administrativeEmail', 'mail@localhost');
 
         wireMockRule.stubFor(post(urlPathEqualTo("/messages"))
@@ -51,8 +51,8 @@ class SendDownloadEmailTest extends IntegrationTest {
         with(downloadRequestRepository.findAll()[0]) {
             templateName == "templateName"
             cms == "cms"
-            unitName == "unitName"
-            city == "city"
+            file == "file"
+            name == "name"
             administrativeEmail == "mail@localhost"
         }
     }

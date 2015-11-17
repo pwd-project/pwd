@@ -21,6 +21,7 @@
 				<form role="form" action="/pobierz" method="post">
 					<input title="Nazwa" type="text" class="hidden" id="templateName" name="templateName" value="{{ template.namePl }}" required>
 					<input title="CMS" type="text" class="hidden" id="cms" name="cms" value="{{ cms }}" required>
+					<input title="File" type="text" class="hidden" id="file" name="file" value="{{ template.downloadName }}" required>
 					<div class="form-group">
 						<input title="Imię i nazwisko" type="text" class="form-control" id="name" name="name" maxLength="50"
 							placeholder="Imię i nazwisko (wymagane)"

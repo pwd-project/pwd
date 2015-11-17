@@ -25,7 +25,7 @@ class DownloadRequestRepositoryTest extends IntegrationTest {
     @Rollback(false)
     def "should persist DownloadRequest in database"() {
         given:
-        def DownloadRequest downloadRequest = new DownloadRequest("T1","WordPress","Gmina","Warszawa","email")
+        def DownloadRequest downloadRequest = new DownloadRequest("T1","WordPress","plik","Kris","email")
 
         when:
         downloadRequest = downloadRequestRepository.save(downloadRequest)
@@ -36,8 +36,8 @@ class DownloadRequestRepositoryTest extends IntegrationTest {
         downloadRequestPersisted instanceof DownloadRequest
         downloadRequestPersisted.templateName == "T1"
         downloadRequestPersisted.cms == "WordPress"
-        downloadRequestPersisted.unitName == "Gmina"
-        downloadRequestPersisted.city == "Warszawa"
+        downloadRequestPersisted.file == "plik"
+        downloadRequestPersisted.name == "Kris"
         downloadRequestPersisted.administrativeEmail == "email"
     }
 

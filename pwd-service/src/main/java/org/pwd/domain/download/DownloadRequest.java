@@ -17,11 +17,9 @@ public class DownloadRequest {
 
     private String templateName;
     private String cms;
-    private String unitName;
-    private String city;
+    private String file;
     private String name;
     private String administrativeEmail;
-    private String mobile;
 
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime created;
@@ -30,11 +28,11 @@ public class DownloadRequest {
     public DownloadRequest() {
     }
 
-    public DownloadRequest(String templateName, String cms, String unitName, String city, String administrativeEmail) {
+    public DownloadRequest(String templateName, String cms, String file, String name, String administrativeEmail) {
         this.templateName = templateName;
         this.cms = cms;
-        this.unitName = unitName;
-        this.city = city;
+        this.file = file;
+        this.name = name;
         this.administrativeEmail = administrativeEmail;
         this.created = LocalDateTime.now();
     }
@@ -51,16 +49,8 @@ public class DownloadRequest {
         return cms;
     }
 
-    public String getUnitName() {
-        return unitName;
-    }
-
     public String getAdministrativeEmail() {
         return administrativeEmail;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public LocalDateTime getCreated() {
@@ -75,14 +65,6 @@ public class DownloadRequest {
         this.cms = cms;
     }
 
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public void setAdministrativeEmail(String administrativeEmail) {
         this.administrativeEmail = administrativeEmail;
     }
@@ -95,12 +77,12 @@ public class DownloadRequest {
         this.name = name;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getFile() {
+        return file;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     @Override
@@ -109,10 +91,8 @@ public class DownloadRequest {
                 "id=" + id +
                 ", templateName='" + templateName + '\'' +
                 ", cms='" + cms + '\'' +
+                ", file='" + file + '\'' +
                 ", name='" + name + '\'' +
-                ", unitName='" + unitName + '\'' +
-                ", city='" + city + '\'' +
-                ", mobile='" + mobile + '\'' +
                 ", administrativeEmail='" + administrativeEmail + '\'' +
                 ", created=" + created +
                 '}';
