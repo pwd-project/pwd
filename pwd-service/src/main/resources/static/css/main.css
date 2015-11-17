@@ -33,7 +33,9 @@ h2 {
 	font-size:48px;
 	
 }
-
+.section h2{
+	clear:both
+}
 h3 {
     color: #990000;
     font-weight: 400;
@@ -214,7 +216,7 @@ footer p{
 	max-width:120px;
 	margin-left:15px
 }
-/*globalny wskaünik*/
+/*globalny wska≈∫nik*/
 
 .rank-value{
 	font-size:140px;
@@ -575,7 +577,7 @@ textarea.form-control{
 	
 }
 .icons span:focus, .icons a:focus{
-	border:1px red solid
+	border:1px #990000 solid
 }
 .font{
 	position:relative
@@ -772,7 +774,7 @@ textarea.form-control{
 	}
 	.rank-value{
 		font-size:90px;
-		color:red;
+		color:#990000;
 		height:auto;
 		width:auto;
 		margin:0px 0 30px 0
