@@ -35,27 +35,29 @@
 					</th>
 				</tr>
 				{% for item in metrics %}
-				<tr>
-					<td class="text-left">
-						{{ loop.index }}.
-					</td>
-				
-					<td class="text-left">
-						<a href="/metryki/{{ item.name }}">{{ item.namePl }} </a>
-					</td>
-					<td class="text-left">
-						{{ item.name }}
-					</td>
-					<td class="text-left">
-						<a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a>
-					</td>
-					<td class="text-left">
-					    {{ item.getWeightString }}
-					</td>
-					<td class="text-left">
-						{{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
-					</td>
-				</tr>
+                    {% if item.weight > 0 %}
+                    <tr>
+                        <td class="text-left">
+                            {{ loop.index }}.
+                        </td>
+
+                        <td class="text-left">
+                            <a href="/metryki/{{ item.name }}">{{ item.namePl }} </a>
+                        </td>
+                        <td class="text-left">
+                            {{ item.name }}
+                        </td>
+                        <td class="text-left">
+                            <a href="{{ item.guidelineHref }}" target="_blank">{{ item.guidelineName }}</a>
+                        </td>
+                        <td class="text-left">
+                            {{ item.getWeightString }}
+                        </td>
+                        <td class="text-left">
+                            {{ websiteAudit.auditReport.getMetric(item.name).valueAsString }}
+                        </td>
+                    </tr>
+                    {% endif %}
 				{% endfor %}
 			</table>
 		</div>
