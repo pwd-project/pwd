@@ -14,8 +14,21 @@
     <link href="/css/main.css" rel="stylesheet">
 	<script src="/js/js.cookie.js"></script>
 	<script>
-	function loadjscssfile(e,t){var s=document.createElement("link");s.setAttribute("rel","stylesheet"),s.setAttribute("type","text/css"),s.setAttribute("href",e),"undefined"!=typeof s&&document.getElementsByTagName("head")[0].appendChild(s)}var style=Cookies.get("style");style&&loadjscssfile("/css/contrast-"+style+".css","css");
-	</script>
+		function loadjscssfile(filename, filetype){
+				var fileref=document.createElement("link");
+				fileref.setAttribute("rel", "stylesheet");
+				fileref.setAttribute("type", "text/css");
+				fileref.setAttribute("href", filename);
+				fileref.setAttribute("id", "contrast-style");
+				if (typeof fileref!="undefined"){
+					document.getElementsByTagName("head")[0].appendChild(fileref)
+				}
+			}		
+		var style = Cookies.get("style");
+		if(style){
+			loadjscssfile("/css/contrast-"+style+".css","css");
+		} 
+		</script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,300,900%7CUbuntu:700,500,400&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
