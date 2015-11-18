@@ -26,10 +26,6 @@ public enum Template {
     T63 (0, 1, "Szablon PWD T6.3", "szablon-pwd-t6-3", "", "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej")
     ;
 
-    public static final String DOWNLOAD_PATH_WORDPRESS = "http://studzieniec.home.pl/pwd_templates/wordpress";
-    public static final String DOWNLOAD_PATH_DRUPAL = "http://studzieniec.home.pl/pwd_templates/drupal";
-    public static final String DOWNLOAD_PATH_JOOMLA = "http://studzieniec.home.pl/pwd_templates/joomla";
-
     private int startRow;
     private int endRow;
     private String namePl;

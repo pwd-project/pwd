@@ -78,27 +78,9 @@ public class DownloadController {
     }
 
     private JtwigModelMap getEmailMessageModelMap(String name, String cms, String file) {
-        final String path = getCmsTemplatePath(cms);
         return new JtwigModelMap()
                 .withModelAttribute("name", name)
-                .withModelAttribute("cmd", cms)
-                .withModelAttribute("path", path)
+                .withModelAttribute("cms", cms)
                 .withModelAttribute("file", file);
-    }
-
-    private String getCmsTemplatePath(String cms) {
-        String path = "";
-        switch (cms) {
-            case "WordPress":
-                path = Template.DOWNLOAD_PATH_WORDPRESS;
-                break;
-            case "Drupal":
-                path = Template.DOWNLOAD_PATH_DRUPAL;
-                break;
-            case "Joomla":
-                path = Template.DOWNLOAD_PATH_JOOMLA;
-                break;
-        }
-        return path;
     }
 }
