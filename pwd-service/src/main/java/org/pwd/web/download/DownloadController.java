@@ -60,7 +60,7 @@ public class DownloadController {
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD", getEmailMessageTemplate(), getEmailMessageModelMap(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
+                "Szablon CMS ze strony PWD", getEmailMessageTemplate(downloadRequest.getCms()), getEmailMessageModelMap(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
@@ -70,9 +70,9 @@ public class DownloadController {
         return "error";
     }
 
-    private JtwigTemplate getEmailMessageTemplate(){
+    private JtwigTemplate getEmailMessageTemplate(String cms){
         return new JtwigTemplate(
-                new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
+                new ClasspathJtwigResource("templates/emails/"+cms+"/DownloadEmail.twig"),
                 new JtwigConfiguration()
         );
     }
