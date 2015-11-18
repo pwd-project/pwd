@@ -1,10 +1,17 @@
 package org.pwd.web.download;
 
+import com.lyncode.jtwig.JtwigModelMap;
+import com.lyncode.jtwig.JtwigTemplate;
+import com.lyncode.jtwig.configuration.JtwigConfiguration;
+import com.lyncode.jtwig.resource.ClasspathJtwigResource;
+import org.pwd.domain.audit.Audit;
+import org.pwd.domain.contact.HtmlEmailMessage;
 import org.pwd.domain.contact.PlainTextEmailMessage;
 import org.pwd.domain.download.DownloadRequest;
 import org.pwd.domain.download.DownloadRequestRepository;
 import org.pwd.domain.download.Template;
 import org.pwd.domain.contact.EmailMessage;
+import org.pwd.domain.websites.Website;
 import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,18 +63,25 @@ public class DownloadController {
         logger.info("New download request: {}", downloadRequest);
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
-        PlainTextEmailMessage plainTextEmailMessage = new PlainTextEmailMessage("noreplay@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD", composeMessage(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
+        HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
+                "Szablon CMS ze strony PWD", getEmailMessageTemplate(), getEmailMessageModelMap(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
 
-        if (mailgunClient.sendEmail(plainTextEmailMessage)) {
-            logger.info("Email {} was sent successfully", plainTextEmailMessage);
+        if (mailgunClient.sendEmail(htmlEmailMessage)) {
+            logger.info("Email {} was sent successfully", htmlEmailMessage);
             return "email_download";
         }
-        logger.warn("Email {} could not be sent", plainTextEmailMessage);
+        logger.warn("Email {} could not be sent", htmlEmailMessage);
         return "error";
     }
 
-    private String composeMessage(String name, String cms, String file) {
+    private JtwigTemplate getEmailMessageTemplate(){
+        return new JtwigTemplate(
+                new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
+                new JtwigConfiguration()
+        );
+    }
+
+    private JtwigModelMap getEmailMessageModelMap(String name, String cms, String file) {
         String path = "";
         switch (cms) {
             case "WordPress":
@@ -80,7 +94,10 @@ public class DownloadController {
                 path = Template.DOWNLOAD_PATH_JOOMLA;
                 break;
         }
-        return String.format("Wybrałeś szablon %s do systemu %s\n"+
-                             "%s/%s", name, cms, path, file);
+        return new JtwigModelMap()
+                .withModelAttribute("name", name)
+                .withModelAttribute("cmd", cms)
+                .withModelAttribute("path", path)
+                .withModelAttribute("file", file);
     }
 }
