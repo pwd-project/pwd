@@ -78,6 +78,15 @@ public class DownloadController {
     }
 
     private JtwigModelMap getEmailMessageModelMap(String name, String cms, String file) {
+        final String path = getCmsTemplatePath(cms);
+        return new JtwigModelMap()
+                .withModelAttribute("name", name)
+                .withModelAttribute("cmd", cms)
+                .withModelAttribute("path", path)
+                .withModelAttribute("file", file);
+    }
+
+    private String getCmsTemplatePath(String cms) {
         String path = "";
         switch (cms) {
             case "WordPress":
@@ -90,10 +99,6 @@ public class DownloadController {
                 path = Template.DOWNLOAD_PATH_JOOMLA;
                 break;
         }
-        return new JtwigModelMap()
-                .withModelAttribute("name", name)
-                .withModelAttribute("cmd", cms)
-                .withModelAttribute("path", path)
-                .withModelAttribute("file", file);
+        return path;
     }
 }
