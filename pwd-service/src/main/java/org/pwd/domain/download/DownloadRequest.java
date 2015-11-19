@@ -54,14 +54,4 @@ public class DownloadRequest {
     public void setAdministrativeEmail(String administrativeEmail) {
         this.administrativeEmail = administrativeEmail;
     }
-
-    @Override
-    public String toString() {
-        return "DownloadRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", administrativeEmail='" + administrativeEmail + '\'' +
-                ", created=" + created +
-                '}';
-    }
 }
