@@ -32,9 +32,6 @@ class SendDownloadEmailTest extends IntegrationTest {
         def restTemplate = new RestTemplate();
 
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
-        form.add('templateName', 'templateName');
-        form.add('cms', 'WordPress');
-        form.add('file', 'file');
         form.add('name', 'name');
         form.add('administrativeEmail', 'mail@localhost');
 
@@ -49,9 +46,6 @@ class SendDownloadEmailTest extends IntegrationTest {
         downloadRequestRepository.flush()
         downloadRequestRepository.count() == 1
         with(downloadRequestRepository.findAll()[0]) {
-            templateName == "templateName"
-            cms == "WordPress"
-            file == "file"
             name == "name"
             administrativeEmail == "mail@localhost"
         }

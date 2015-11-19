@@ -15,9 +15,6 @@ public class DownloadRequest {
     @GeneratedValue(generator = "download_request_id_seq", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    private String templateName;
-    private String cms;
-    private String file;
     private String name;
     private String administrativeEmail;
 
@@ -28,10 +25,7 @@ public class DownloadRequest {
     public DownloadRequest() {
     }
 
-    public DownloadRequest(String templateName, String cms, String file, String name, String administrativeEmail) {
-        this.templateName = templateName;
-        this.cms = cms;
-        this.file = file;
+    public DownloadRequest(String name, String administrativeEmail) {
         this.name = name;
         this.administrativeEmail = administrativeEmail;
         this.created = LocalDateTime.now();
@@ -41,28 +35,12 @@ public class DownloadRequest {
         return id;
     }
 
-    public String getTemplateName() {
-        return templateName;
-    }
-
-    public String getCms() {
-        return cms;
-    }
-
     public String getAdministrativeEmail() {
         return administrativeEmail;
     }
 
     public LocalDateTime getCreated() {
         return created;
-    }
-
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-
-    public void setCms(String cms) {
-        this.cms = cms;
     }
 
     public void setAdministrativeEmail(String administrativeEmail) {
@@ -77,21 +55,10 @@ public class DownloadRequest {
         this.name = name;
     }
 
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
-    }
-
     @Override
     public String toString() {
         return "DownloadRequest{" +
                 "id=" + id +
-                ", templateName='" + templateName + '\'' +
-                ", cms='" + cms + '\'' +
-                ", file='" + file + '\'' +
                 ", name='" + name + '\'' +
                 ", administrativeEmail='" + administrativeEmail + '\'' +
                 ", created=" + created +

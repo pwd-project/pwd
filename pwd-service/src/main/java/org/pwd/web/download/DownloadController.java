@@ -34,6 +34,9 @@ public class DownloadController {
     private final MailgunClient mailgunClient;
     private final DownloadRequestRepository downloadRequestRepository;
 
+    private static Template template;
+    private static String cms;
+
     @Autowired
     public DownloadController(MailgunClient mailgunClient, DownloadRequestRepository downloadRequestRepository) {
         this.mailgunClient = mailgunClient;
@@ -49,8 +52,10 @@ public class DownloadController {
     @RequestMapping(value = "/{templateName}/{cmsName}", method = RequestMethod.GET)
     public String showTemplateDownloadForm(@PathVariable String templateName, @PathVariable String cmsName, Model model) {
 
-        model.addAttribute("template", Template.valueOf(templateName));
-        model.addAttribute("cms", cmsName);
+        template = Template.valueOf(templateName);
+        cms = cmsName;
+        model.addAttribute("template", template);
+        model.addAttribute("cms", cms);
         return "downloadForm";
     }
 
@@ -60,7 +65,9 @@ public class DownloadController {
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD", getEmailMessageTemplate(downloadRequest.getCms()), getEmailMessageModelMap(downloadRequest.getTemplateName(), downloadRequest.getCms(), downloadRequest.getFile()));
+                "Szablon CMS ze strony PWD",
+                    getEmailMessageTemplate(cms),
+                    getEmailMessageModelMap(template.getNamePl(), cms, template.getDownloadName()));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
