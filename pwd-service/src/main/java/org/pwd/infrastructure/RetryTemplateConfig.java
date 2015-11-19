@@ -18,7 +18,7 @@ public class RetryTemplateConfig {
         RetryTemplate retryTemplate = new RetryTemplate();
 
         TimeoutRetryPolicy timeoutRetryPolicy = new TimeoutRetryPolicy();
-        timeoutRetryPolicy.setTimeout(Duration.ofSeconds(25).toMillis());
+        timeoutRetryPolicy.setTimeout(Duration.ofSeconds(5).toMillis());
 
         retryTemplate.setRetryPolicy(timeoutRetryPolicy);
         retryTemplate.setRetryPolicy(new SimpleRetryPolicy(10, Collections.singletonMap(RuntimeException.class, true)));
