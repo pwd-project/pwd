@@ -31,7 +31,10 @@ class SendDownloadEmailTest extends IntegrationTest {
         given:
         def restTemplate = new RestTemplate();
 
+        restTemplate.postForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WordPress")
+
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
+
         form.add('name', 'name');
         form.add('administrativeEmail', 'mail@localhost');
 
