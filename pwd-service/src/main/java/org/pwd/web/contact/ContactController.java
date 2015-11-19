@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -46,6 +48,7 @@ public class ContactController {
         Preconditions.checkArgument(contactRequest.getSite().length()<=50);
         Preconditions.checkArgument(contactRequest.getMessage().length()<=255);
 
+        contactRequest.setCreated(LocalDateTime.now());
         logger.info("New contact record {}", contactRequest);
         contactRequest = contactRequestRepository.save(contactRequest);
 

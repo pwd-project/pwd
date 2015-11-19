@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -61,7 +62,12 @@ public class DownloadController {
 
     @RequestMapping(method = POST)
     public String sendEmail(DownloadRequest downloadRequest) {
+        downloadRequest.setTemplateName(template.getNamePl());
+        downloadRequest.setCms(cms);
+        downloadRequest.setCreated(LocalDateTime.now());
         logger.info("New download request: {}", downloadRequest);
+        logger.info("Data: "+downloadRequest.getCreated().toString());
+
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),

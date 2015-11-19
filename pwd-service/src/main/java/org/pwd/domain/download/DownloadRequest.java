@@ -15,6 +15,8 @@ public class DownloadRequest {
     @GeneratedValue(generator = "download_request_id_seq", strategy = GenerationType.SEQUENCE)
     private int id;
 
+    private String templateName;
+    private String cms;
     private String name;
     private String administrativeEmail;
 
@@ -35,6 +37,14 @@ public class DownloadRequest {
         return id;
     }
 
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public String getCms() {
+        return cms;
+    }
+
     public String getName() {
         return name;
     }
@@ -47,11 +57,23 @@ public class DownloadRequest {
         return created;
     }
 
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public void setCms(String cms) {
+        this.cms = cms;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setAdministrativeEmail(String administrativeEmail) {
         this.administrativeEmail = administrativeEmail;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 }
