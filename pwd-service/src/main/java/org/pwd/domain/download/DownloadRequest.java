@@ -35,6 +35,10 @@ public class DownloadRequest {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getAdministrativeEmail() {
         return administrativeEmail;
     }
@@ -43,16 +47,12 @@ public class DownloadRequest {
         return created;
     }
 
-    public void setAdministrativeEmail(String administrativeEmail) {
-        this.administrativeEmail = administrativeEmail;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAdministrativeEmail(String administrativeEmail) {
+        this.administrativeEmail = administrativeEmail;
     }
 
     @Override
