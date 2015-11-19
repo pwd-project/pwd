@@ -40,7 +40,7 @@ class SendDownloadEmailTest extends IntegrationTest {
                 .withStatus(200)))
 
         when:
-        restTemplate.postForObject('http://localhost:8081/pobierz/T11/WordPress', form, String.class)
+        restTemplate.postForObject('http://localhost:8081/pobierz', form, String.class)
 
         then:
         downloadRequestRepository.flush()
