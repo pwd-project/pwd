@@ -18,13 +18,13 @@ public class RetryTemplateConfig {
         RetryTemplate retryTemplate = new RetryTemplate();
 
         TimeoutRetryPolicy timeoutRetryPolicy = new TimeoutRetryPolicy();
-        timeoutRetryPolicy.setTimeout(Duration.ofSeconds(5).toMillis());
+        timeoutRetryPolicy.setTimeout(Duration.ofSeconds(20).toMillis());
 
         retryTemplate.setRetryPolicy(timeoutRetryPolicy);
-        retryTemplate.setRetryPolicy(new SimpleRetryPolicy(10, Collections.singletonMap(RuntimeException.class, true)));
+        retryTemplate.setRetryPolicy(new SimpleRetryPolicy(5, Collections.singletonMap(RuntimeException.class, true)));
 
         ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
-        backOffPolicy.setInitialInterval(2000L);
+        backOffPolicy.setInitialInterval(200L);
         retryTemplate.setBackOffPolicy(backOffPolicy);
 
         return retryTemplate;

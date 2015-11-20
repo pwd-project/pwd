@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -51,10 +53,13 @@ public class AnalysisRestClient {
         headers.add("Authorization", authHeader);
         headers.add("Accept", "application/vnd.heroku+json; version=3");
         HttpEntity<Object> request = new HttpEntity<>(headers);
-        restTemplate.exchange("https://api.heroku.com/apps/pwd-analysis/dynos", HttpMethod.DELETE, request, Void.class);
+        ResponseEntity<Void> exchange = restTemplate.exchange("https://api.heroku.com/apps/pwd-analysis/dynos", HttpMethod.DELETE, request, Void.class);
+        if (exchange.getStatusCode() == HttpStatus.ACCEPTED) {
+            logger.info("Restarted pwd analysis...");
+        }
     }
 
-    public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
+    public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) throws InterruptedException {
         int count = 0;
         int maxTries = 3;
         while (true) {
@@ -63,6 +68,7 @@ public class AnalysisRestClient {
                 return Optional.of(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
             } catch (Exception e) {
                 restartPwdAnalysis();
+                Thread.sleep(5000L);
                 if (++count == maxTries) {
                     throw e;
                 }
