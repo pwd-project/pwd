@@ -59,7 +59,7 @@ public class AnalysisRestClient {
         }
     }
 
-    public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) throws InterruptedException {
+    public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
         int count = 0;
         int maxTries = 3;
         while (true) {
@@ -68,7 +68,6 @@ public class AnalysisRestClient {
                 return Optional.of(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
             } catch (Exception e) {
                 restartPwdAnalysis();
-                Thread.sleep(5000L);
                 if (++count == maxTries) {
                     throw e;
                 }
