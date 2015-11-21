@@ -13,6 +13,7 @@ import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -66,6 +68,15 @@ public class DownloadController {
         return "downloadForm";
     }
 
+    @RequestMapping(value = "/{hashCode}", method = RequestMethod.GET)
+    public FileSystemResource downloadTemplate(@PathVariable long hashCode, Model model) {
+        long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
+        if (delay < 0 || delay > 3600) return null;//"error_expired";
+
+        String filePath = "/pub/templates/"+cms.getNamePl()+"/"+template.getDownloadName();
+        return new FileSystemResource(filePath);
+    }
+
     @RequestMapping(method = POST)
     public String sendEmail(DownloadRequest downloadRequest) {
         downloadRequest.setTemplateName(template.getNamePl());
@@ -76,10 +87,12 @@ public class DownloadController {
 
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
+        long hashSend = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD",
                     getEmailMessageTemplate(),
-                    getEmailMessageModelMap(template.getNamePl(), cms.getNamePl(), template.getDownloadName()));
+                    getEmailMessageModelMap(template.getNamePl(), template.getDownloadName(), cms.getNamePl(), hashSend));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
@@ -96,10 +109,12 @@ public class DownloadController {
         );
     }
 
-    private JtwigModelMap getEmailMessageModelMap(String name, String cms, String file) {
+    private JtwigModelMap getEmailMessageModelMap(String name, String file, String cms, long hash) {
         return new JtwigModelMap()
                 .withModelAttribute("name", name)
+                .withModelAttribute("file", file)
                 .withModelAttribute("cms", cms)
-                .withModelAttribute("file", file);
+                .withModelAttribute("hash", hash)
+                ;
     }
 }
