@@ -5,6 +5,7 @@ import com.lyncode.jtwig.JtwigTemplate;
 import com.lyncode.jtwig.configuration.JtwigConfiguration;
 import com.lyncode.jtwig.resource.ClasspathJtwigResource;
 import org.pwd.domain.contact.HtmlEmailMessage;
+import org.pwd.domain.download.Cms;
 import org.pwd.domain.download.DownloadRequest;
 import org.pwd.domain.download.DownloadRequestRepository;
 import org.pwd.domain.download.Template;
@@ -36,7 +37,7 @@ public class DownloadController {
     private final DownloadRequestRepository downloadRequestRepository;
 
     private static Template template;
-    private static String cms;
+    private static Cms cms;
 
     @Autowired
     public DownloadController(MailgunClient mailgunClient, DownloadRequestRepository downloadRequestRepository) {
@@ -52,9 +53,14 @@ public class DownloadController {
 
     @RequestMapping(value = "/{templateName}/{cmsName}", method = RequestMethod.GET)
     public String showTemplateDownloadForm(@PathVariable String templateName, @PathVariable String cmsName, Model model) {
-
-        template = Template.valueOf(templateName);
-        cms = cmsName;
+        try {
+            template = Template.valueOf(templateName);
+            cms = Cms.valueOf(cmsName);
+        }
+        catch(Exception ex) {
+            logger.error(ex.getMessage());
+            return "error_404";
+        }
         model.addAttribute("template", template);
         model.addAttribute("cms", cms);
         return "downloadForm";
@@ -63,7 +69,7 @@ public class DownloadController {
     @RequestMapping(method = POST)
     public String sendEmail(DownloadRequest downloadRequest) {
         downloadRequest.setTemplateName(template.getNamePl());
-        downloadRequest.setCms(cms);
+        downloadRequest.setCms(cms.getNamePl());
         downloadRequest.setCreated(LocalDateTime.now());
         logger.info("New download request: {}", downloadRequest);
         logger.info("Data: "+downloadRequest.getCreated().toString());
@@ -72,8 +78,8 @@ public class DownloadController {
 
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD",
-                    getEmailMessageTemplate(cms),
-                    getEmailMessageModelMap(template.getNamePl(), cms, template.getDownloadName()));
+                    getEmailMessageTemplate(),
+                    getEmailMessageModelMap(template.getNamePl(), cms.getNamePl(), template.getDownloadName()));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
@@ -83,7 +89,7 @@ public class DownloadController {
         return "error";
     }
 
-    private JtwigTemplate getEmailMessageTemplate(String cms){
+    private JtwigTemplate getEmailMessageTemplate(){
         return new JtwigTemplate(
                 new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
                 new JtwigConfiguration()

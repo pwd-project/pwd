@@ -31,7 +31,7 @@ class SendDownloadEmailTest extends IntegrationTest {
         given:
         def restTemplate = new RestTemplate();
 
-        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WordPress")
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WORDPRESS")
 
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
 
@@ -52,5 +52,33 @@ class SendDownloadEmailTest extends IntegrationTest {
             name == "name"
             administrativeEmail == "mail@localhost"
         }
+    }
+
+    @Transactional
+    @Rollback(false)
+    def "do not send email with template from 'Download' page for bad template "() {
+        given:
+        def restTemplate = new RestTemplate();
+
+        when:
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "bad_temp", "WORDPRESS")
+
+        then:
+        downloadRequestRepository.flush()
+        downloadRequestRepository.count() == 0
+    }
+
+    @Transactional
+    @Rollback(false)
+    def "do not send email with template from 'Download' page for bad cms "() {
+        given:
+        def restTemplate = new RestTemplate();
+
+        when:
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "bad_cms")
+
+        then:
+        downloadRequestRepository.flush()
+        downloadRequestRepository.count() == 0
     }
 }

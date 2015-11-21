@@ -1,7 +1,5 @@
 package org.pwd.domain.download;
 
-import java.util.Optional;
-
 /**
  * @author kadamowi
  */
