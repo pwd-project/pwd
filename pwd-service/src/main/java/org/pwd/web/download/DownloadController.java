@@ -85,7 +85,7 @@ public class DownloadController {
 
     private JtwigTemplate getEmailMessageTemplate(String cms){
         return new JtwigTemplate(
-                new ClasspathJtwigResource("templates/emails/"+cms+"/DownloadEmail.twig"),
+                new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
                 new JtwigConfiguration()
         );
     }
