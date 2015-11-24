@@ -31,11 +31,11 @@ class SendDownloadEmailTest extends IntegrationTest {
         given:
         def restTemplate = new RestTemplate();
 
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WORDPRESS")
+
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
-        form.add('templateName', 'templateName');
-        form.add('cms', 'cms');
-        form.add('unitName', 'unitName');
-        form.add('city', 'city');
+
+        form.add('name', 'name');
         form.add('administrativeEmail', 'mail@localhost');
 
         wireMockRule.stubFor(post(urlPathEqualTo("/messages"))
@@ -49,11 +49,36 @@ class SendDownloadEmailTest extends IntegrationTest {
         downloadRequestRepository.flush()
         downloadRequestRepository.count() == 1
         with(downloadRequestRepository.findAll()[0]) {
-            templateName == "templateName"
-            cms == "cms"
-            unitName == "unitName"
-            city == "city"
+            name == "name"
             administrativeEmail == "mail@localhost"
         }
+    }
+
+    @Transactional
+    @Rollback(false)
+    def "do not send email with template from 'Download' page for bad template "() {
+        given:
+        def restTemplate = new RestTemplate();
+
+        when:
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "bad_temp", "WORDPRESS")
+
+        then:
+        downloadRequestRepository.flush()
+        downloadRequestRepository.count() == 0
+    }
+
+    @Transactional
+    @Rollback(false)
+    def "do not send email with template from 'Download' page for bad cms "() {
+        given:
+        def restTemplate = new RestTemplate();
+
+        when:
+        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "bad_cms")
+
+        then:
+        downloadRequestRepository.flush()
+        downloadRequestRepository.count() == 0
     }
 }

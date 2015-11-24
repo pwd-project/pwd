@@ -3,11 +3,8 @@ package org.pwd.web.audit;
 import com.lyncode.jtwig.JtwigModelMap;
 import com.lyncode.jtwig.JtwigTemplate;
 import com.lyncode.jtwig.configuration.JtwigConfiguration;
-import com.lyncode.jtwig.mvc.JtwigViewResolver;
 import com.lyncode.jtwig.resource.ClasspathJtwigResource;
-import com.lyncode.jtwig.resource.FileJtwigResource;
 import org.pwd.domain.audit.*;
-import org.pwd.domain.contact.EmailMessage;
 import org.pwd.domain.contact.HtmlEmailMessage;
 import org.pwd.domain.processing.AuditProcessStarter;
 import org.pwd.domain.websites.Website;
@@ -21,11 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.function.Predicate;
 
 /**

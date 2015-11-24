@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+<div style="width:700px;margin:10px auto;font-family:Arial">
+	<div style="border-bottom:1px #ccc solid;">
+		<img src="http://pwd.dolinagubra.pl/img/pwd-logo.png" style="float:left; width: 230px;padding:10px 0 20px; display:block"/>
+		<div style="clear:both"></div>
+	</div>
+	<div style="clear:both;padding:30px 0;color:#666">
+	<p>Wybrałeś szablon {{ name }} do systemu {{ cms }}</p>
+	<a href="http://pwd.dolinagubra.pl/pobierz/{{ file }}/{{ cms }}/{{ hash }}" style="text-transform:uppercase;color:#fff;background:#990000;padding:20px 40px;text-decoration:none;font-weight:bold;margin-top:30px;display:inline-block">
+	POBIERZ SZABLON
+	</a>
+	{% if cms == 'WordPress' %}
+	<h1>Instrukcja pobrania szablonu dla WordPressa</h1>
+    <ol>
+        <li>Użyj powyższego odnośnika by pobrać szablon</li>
+        <li>Zapisz plik archiwum ZIP na dysku</li>
+        <li>Zaloguj się do panelu administracyjnego WordPressa</li>
+        <li>Z menu po lewej stronie wybierz Wygląd a następnie Motywy</li>
+        <li>W oknie Motywy naciśnij przycisk Dodaj nowy</li>
+        <li>Z górnego wiersza odnośników użyj Prześlij</li>
+        <li>Naciśnij przycisk Wybierz plik</li>
+        <li>W oknie Explorera wskaż, pobrany wczesniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
+        <li>W oknie Motywy naciśnij przycisk Instaluj</li>
+        <li>Z dolnego wiersza odnośników użyj Aktywuj</li>
+    </ol>
+    {% endif %}
+	{% if cms == 'Joomla' %}
+	<h1>Instrukcja pobrania szablonu dla Joomla</h1>
+    <ol>
+        <li>Użyj powyższego odnośnika by pobrać szablon</li>
+        <li>Zapisz plik archiwum ZIP na dysku</li>
+        <li>Zaloguj się do panelu administracyjnego Joomla</li>
+        <li>Z górnego menu wybierz Rozszerzenia a następnie Menadżer Rozszerzeń</li>
+        <li>W oknie Menadżera wybierz zakładkę Prześlij Pakiet</li>
+        <li>Naciśnij przycisk Wybierz plik</li>
+        <li>W oknie Explorera wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
+        <li>W oknie Menadżera naciśnij przycisk Prześlij i Instaluj</li>
+        <li>Po pomyślnej instalacji w oknie Menadżera pojawi się komunikat z potwierdzeniem</li>
+        <li>Z górnego menu wybierz Rozszerzenia a następnie Menadżer Szablonów</li>
+        <li>Odszukaj szablon na liście i oznacz go jak domyślny przez naciśnięcie przycisku z gwiazdką</li>
+    </ol>
+    {% endif %}
+	{% if cms == 'Drupal' %}
+	<h1>Instrukcja pobrania szablonu dla Drupala</h1>
+    <ol>
+        <li>Użyj powyższego odnośnika by pobrać szablon</li>
+        <li>Zapisz plik archiwum ZIP na dysku</li>
+        <li>Zaloguj się do panelu administracyjnego Drupal</li>
+        <li>Z górnego menu wybierz Wygląd</li>
+        <li>W oknie Wygląd użyj odnośnik 'instalacja nowej skórki'</li>
+        <li>W nowym oknie naciśnij przycisk Przeglądaj, który znajduje się obok pola 'Wyślij archiwum modułu lub skórki do instalacji'</li>
+        <li>W oknie Explorera wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
+        <li>Naciśnij przycisk Instaluj, otworzy się okno Update Menadżera</li>
+        <li>Po pomyślnej instalacji w oknie Menadżera pojawi się komunikat z potwierdzeniem</li>
+        <li>W oknie Menadżera użyj odnośnik 'Administration pages'</li>
+        <li>Po powrocie do panelu administracyjnego ponownie wybierz Wygląd z górnego menu</li>
+        <li>Odszukaj szablon na samym dole galerii skórek</li>
+        <li>Użyj odnośnik 'Włącz i ustaw jako domyślne', który znajduje się pod miniaturką szablonu</li>
+    </ol>
+    {% endif %}
+    <p>Gotowe. Twój nowy szablon jest już aktywny</p>
+	</div>
+	<div style="border-top:1px #ccc solid;clear:both;padding:30px 0;color:#666">
+		<p style="font-size:10pt">
+		 PWD Online - projekt prowadzony przez Stowarzyszenie Na Rzecz Rozwoju Regionu Dolina Gubra i Ministerstwo Administracji i Cyfryzacji pwd.dolinagubra.pl, wersja 1.0 
+		</p>
+		<img src="http://pwd.dolinagubra.pl/img/dolina-gubra-logo-stopka.png" style=" height: 60px;padding:10px 0 20px;"/>
+		<img src="http://pwd.dolinagubra.pl/img/maic.png" style="height: 60px;padding:10px 0 20px; margin-left:30px"/>
+	</div>
+</div>
+</body>
+</html>

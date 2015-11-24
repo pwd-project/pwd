@@ -84,4 +84,8 @@ public class ContactRequest {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
 }
