@@ -73,17 +73,22 @@ public class DownloadController {
         return "downloadForm";
     }
 
-    @RequestMapping(value = "/{hashCode}", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadTemplate(@PathVariable long hashCode, Model model) {
+    @RequestMapping(value = "/{templateName}/{cmsName}/{hashCode}", method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> downloadTemplate(
+            @PathVariable String templateName,
+            @PathVariable String cmsName,
+            @PathVariable long hashCode,
+            Model model) {
         long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
         if (delay < 0 || delay > 3600) return null;//"error_expired";
 
-        String filePath = "static/pub/templates/"+cms.getNamePl()+"/"+template.getDownloadName();
+        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
         try {
-            return getResourceFileResponse(filePath,template.getDownloadName());
+            return getResourceFileResponse(filePath,templateName + ".zip");
         }
         catch (IOException ex){
-            return null; //TODO: obsługa brakującego szablonu
+            //TODO: obsługa brakującego szablonu
+            return null;
         }
     }
 
