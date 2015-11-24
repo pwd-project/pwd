@@ -80,14 +80,14 @@ public class DownloadController {
 
         String filePath = "static/pub/templates/"+cms.getNamePl()+"/"+template.getDownloadName();
         try {
-            return getResourceFileResponse(filePath);
+            return getResourceFileResponse(filePath,template.getDownloadName());
         }
         catch (IOException ex){
             return null; //TODO: obsługa brakującego szablonu
         }
     }
 
-    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path)
+    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path, String fileName)
             throws IOException {
 
         ClassPathResource templateFile = new ClassPathResource(path);
@@ -96,6 +96,8 @@ public class DownloadController {
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
+        headers.add("content-disposition", "attachment; filename=" + fileName);
+
 
         return ResponseEntity
                 .ok()
