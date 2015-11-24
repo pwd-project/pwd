@@ -82,8 +82,7 @@ public class DownloadController {
         long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
         if (delay < 0 || delay > 3600) return null;//"error_expired";
 
-        //String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
-        String filePath = "http://studzieniec.home.pl/pwd_templates/" + cmsName + "/" + templateName + ".zip";
+        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
         try {
             logger.info("Downloading: " + filePath);
             return getResourceFileResponse(filePath,templateName + ".zip");
