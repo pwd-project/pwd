@@ -13,13 +13,18 @@ import org.pwd.interfaces.mailgun.MailgunClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
@@ -69,12 +74,37 @@ public class DownloadController {
     }
 
     @RequestMapping(value = "/{hashCode}", method = RequestMethod.GET)
-    public FileSystemResource downloadTemplate(@PathVariable long hashCode, Model model) {
+    public ResponseEntity<InputStreamResource> downloadTemplate(@PathVariable long hashCode, Model model) {
         long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
         if (delay < 0 || delay > 3600) return null;//"error_expired";
 
-        String filePath = "/pub/templates/"+cms.getNamePl()+"/"+template.getDownloadName();
-        return new FileSystemResource(filePath);
+        String filePath = "static/pub/templates/"+cms.getNamePl()+"/"+template.getDownloadName();
+        try {
+            return getResourceFileResponse(filePath,template.getDownloadName());
+        }
+        catch (IOException ex){
+            return null; //TODO: obsługa brakującego szablonu
+        }
+    }
+
+    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path, String fileName)
+            throws IOException {
+
+        ClassPathResource templateFile = new ClassPathResource(path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        headers.add("content-disposition", "attachment; filename=" + fileName);
+
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentLength(templateFile.contentLength())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(templateFile.getInputStream()));
     }
 
     @RequestMapping(method = POST)
