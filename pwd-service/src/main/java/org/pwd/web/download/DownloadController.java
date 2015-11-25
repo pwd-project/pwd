@@ -84,8 +84,8 @@ public class DownloadController {
         try {
             long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
             if (delay < 0 || delay > 3600) {
-                logger.info("Hash code: " + hashCode + " has exprired. Delay: "+ delay);
-                return returnTwigResponse("templates/error_expired.twig");
+                logger.info("Hash code: " + hashCode + " has expired. Delay: "+ delay);
+                return getTwigResponse("templates/error_expired.twig");
             }
 
             String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
@@ -94,11 +94,11 @@ public class DownloadController {
         }
         catch (IOException ex){
             logger.error("Caught IOException: " +  ex.getMessage());
-            return returnTwigResponse("templates/error_404.twig");
+            return getTwigResponse("templates/error_404.twig");
         }
     }
 
-    private ResponseEntity<InputStreamResource> returnTwigResponse(String twigFilename) {
+    private ResponseEntity<InputStreamResource> getTwigResponse(String twigFilename) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             JtwigTemplate jtwigTemplate = new JtwigTemplate(
