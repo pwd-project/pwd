@@ -125,6 +125,9 @@ hr {
 	background:#990000;
 	color:#fff
 }
+.navbar-right{
+	margin-right:-15px !important
+}
 /* Helpers */
 .section{
 	padding-top:50px;
