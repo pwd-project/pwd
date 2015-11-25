@@ -88,6 +88,7 @@ public class DownloadController {
         try {
             long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
             if (delay < 0 || delay > 3600) {
+                logger.info("Hash code: " + hashCode + " has exprired. Delay: "+ delay);
                 return returnTwigResponse("templates/error_expired.twig");
             }
 
