@@ -84,10 +84,12 @@ public class DownloadController {
 
         String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
         try {
+            logger.info("Downloading: " + filePath);
             return getResourceFileResponse(filePath,templateName + ".zip");
         }
         catch (IOException ex){
             //TODO: obsługa brakującego szablonu
+            logger.error("Caught IOException: " +  ex.getMessage());
             return null;
         }
     }
