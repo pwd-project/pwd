@@ -3,9 +3,6 @@ package org.pwd.web.download;
 import com.lyncode.jtwig.JtwigModelMap;
 import com.lyncode.jtwig.JtwigTemplate;
 import com.lyncode.jtwig.configuration.JtwigConfiguration;
-import com.lyncode.jtwig.exception.CompileException;
-import com.lyncode.jtwig.exception.ParseException;
-import com.lyncode.jtwig.exception.RenderException;
 import com.lyncode.jtwig.resource.ClasspathJtwigResource;
 import org.pwd.domain.contact.HtmlEmailMessage;
 import org.pwd.domain.download.Cms;
@@ -33,7 +30,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
