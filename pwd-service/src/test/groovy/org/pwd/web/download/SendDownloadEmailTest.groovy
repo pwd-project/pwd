@@ -5,10 +5,13 @@ import org.junit.Rule
 import org.pwd.application.IntegrationTest
 import org.pwd.domain.download.DownloadRequestRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.TestRestTemplate
+import org.springframework.http.HttpStatus
 import org.springframework.test.annotation.Rollback
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestTemplate
+import spock.lang.Shared
 
 import javax.transaction.Transactional
 
@@ -21,17 +24,16 @@ class SendDownloadEmailTest extends IntegrationTest {
     @Autowired
     DownloadRequestRepository downloadRequestRepository;
 
+    @Shared
+    TestRestTemplate testRestTemplate = new TestRestTemplate();
+
     def setup() {
         downloadRequestRepository.deleteAll()
     }
 
-    @Transactional
-    @Rollback(false)
     def "should send email with template from 'Download' page and save it to database"() {
         given:
-        def restTemplate = new RestTemplate();
-
-        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WORDPRESS")
+        testRestTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "WORDPRESS")
 
         MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
 
@@ -43,7 +45,7 @@ class SendDownloadEmailTest extends IntegrationTest {
                 .withStatus(200)))
 
         when:
-        restTemplate.postForObject('http://localhost:8081/pobierz', form, String.class)
+        testRestTemplate.postForObject('http://localhost:8081/pobierz/{template}/{cms}', form, String.class, "T11", "WORDPRESS")
 
         then:
         downloadRequestRepository.flush()
@@ -54,30 +56,22 @@ class SendDownloadEmailTest extends IntegrationTest {
         }
     }
 
-    @Transactional
-    @Rollback(false)
     def "do not send email with template from 'Download' page for bad template "() {
-        given:
-        def restTemplate = new RestTemplate();
-
         when:
-        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "bad_temp", "WORDPRESS")
+        def response = testRestTemplate.getForEntity('http://localhost:8081/pobierz/{template}/{cms}', String.class, "bad_temp", "WORDPRESS")
 
         then:
+        response.statusCode == HttpStatus.BAD_REQUEST;
         downloadRequestRepository.flush()
         downloadRequestRepository.count() == 0
     }
 
-    @Transactional
-    @Rollback(false)
     def "do not send email with template from 'Download' page for bad cms "() {
-        given:
-        def restTemplate = new RestTemplate();
-
         when:
-        restTemplate.getForObject('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "bad_cms")
+        def response = testRestTemplate.getForEntity('http://localhost:8081/pobierz/{template}/{cms}', String.class, "T11", "bad_cms")
 
         then:
+        response.statusCode == HttpStatus.BAD_REQUEST;
         downloadRequestRepository.flush()
         downloadRequestRepository.count() == 0
     }

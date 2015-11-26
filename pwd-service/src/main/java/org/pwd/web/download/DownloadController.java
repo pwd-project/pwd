@@ -1,5 +1,6 @@
 package org.pwd.web.download;
 
+import com.google.common.base.Charsets;
 import com.lyncode.jtwig.JtwigModelMap;
 import com.lyncode.jtwig.JtwigTemplate;
 import com.lyncode.jtwig.configuration.JtwigConfiguration;
@@ -14,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
@@ -44,14 +41,15 @@ public class DownloadController {
 
     private final MailgunClient mailgunClient;
     private final DownloadRequestRepository downloadRequestRepository;
-
-    private static Template template;
-    private static Cms cms;
+    private final DownloadRequestParamsHasher downloadRequestParamsHasher;
 
     @Autowired
-    public DownloadController(MailgunClient mailgunClient, DownloadRequestRepository downloadRequestRepository) {
+    public DownloadController(MailgunClient mailgunClient,
+                              DownloadRequestRepository downloadRequestRepository,
+                              DownloadRequestParamsHasher downloadRequestParamsHasher) {
         this.mailgunClient = mailgunClient;
         this.downloadRequestRepository = downloadRequestRepository;
+        this.downloadRequestParamsHasher = downloadRequestParamsHasher;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -62,119 +60,76 @@ public class DownloadController {
 
     @RequestMapping(value = "/{templateName}/{cmsName}", method = RequestMethod.GET)
     public String showTemplateDownloadForm(@PathVariable String templateName, @PathVariable String cmsName, Model model) {
-        try {
-            template = Template.valueOf(templateName);
-            cms = Cms.valueOf(cmsName);
-        }
-        catch(Exception ex) {
-            logger.error(ex.getMessage());
-            return "error_404";
-        }
-        model.addAttribute("template", template);
-        model.addAttribute("cms", cms);
+        model.addAttribute("template", Template.valueOf(templateName));
+        model.addAttribute("cms", Cms.valueOf(cmsName));
         return "downloadForm";
     }
 
-    @RequestMapping(value = "/{templateName}/{cmsName}/{hashCode}", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadTemplate(
-            @PathVariable String templateName,
-            @PathVariable String cmsName,
-            @PathVariable long hashCode,
-            Model model) {
-        try {
-            long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
-            if (delay < 0 || delay > 3600) {
-                logger.info("Hash code: " + hashCode + " has expired. Delay: "+ delay);
-                return getTwigResponse("templates/error_expired.twig");
-            }
-
-            String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
-            logger.info("Downloading: " + filePath);
-            return getResourceFileResponse(filePath,templateName + ".zip");
-        }
-        catch (IOException ex){
-            logger.error("Caught IOException: " +  ex.getMessage());
-            return getTwigResponse("templates/error_404.twig");
-        }
-    }
-
-    private ResponseEntity<InputStreamResource> getTwigResponse(String twigFilename) {
-        try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            JtwigTemplate jtwigTemplate = new JtwigTemplate(
-                    new ClasspathJtwigResource(twigFilename),
-                    new JtwigConfiguration());
-            jtwigTemplate.output(outputStream, new JtwigModelMap());
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.parseMediaType("text/html"))
-                    .body(new InputStreamResource(new ByteArrayInputStream(outputStream.toByteArray())));
-        }
-        catch (Exception ex){
-            logger.error("Cannot render twig template. Caught Exception: " +  ex.getMessage());
-            return null;
-        }
-    }
-
-    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path, String fileName)
-            throws IOException {
-
-        ClassPathResource templateFile = new ClassPathResource(path);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        if( !fileName.isEmpty()){
-            headers.add("content-disposition", "attachment; filename=" + fileName);
-        }
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentLength(templateFile.contentLength())
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new InputStreamResource(templateFile.getInputStream()));
-    }
-
-    @RequestMapping(method = POST)
-    public String sendEmail(DownloadRequest downloadRequest) {
-        downloadRequest.setTemplateName(template.getNamePl());
-        downloadRequest.setCms(cms.getNamePl());
+    @RequestMapping(value = "/{templateName}/{cmsName}", method = POST)
+    public String sendEmail(DownloadRequest downloadRequest,
+                            @PathVariable String templateName,
+                            @PathVariable String cmsName) {
+        downloadRequest.setTemplateName(templateName);
+        downloadRequest.setCms(cmsName);
         downloadRequest.setCreated(LocalDateTime.now());
         logger.info("New download request: {}", downloadRequest);
-        logger.info("Data: "+downloadRequest.getCreated().toString());
-
         downloadRequest = downloadRequestRepository.save(downloadRequest);
-
-        long hashSend = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-
+        long timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        String hash = downloadRequestParamsHasher.getHash(Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), timestamp);
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD",
-                    getEmailMessageTemplate(),
-                    getEmailMessageModelMap(template.getNamePl(), template.getDownloadName(), cms.getNamePl(), hashSend));
-
+                getEmailMessageTemplate(),
+                getEmailMessageModelMap(templateName, Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), hash, timestamp));
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
-            logger.info("Email {} was sent successfully", htmlEmailMessage);
             return "email_download";
         }
-        logger.warn("Email {} could not be sent", htmlEmailMessage);
         return "error";
     }
 
-    private JtwigTemplate getEmailMessageTemplate(){
+    @RequestMapping(value = "/{templateName}/{cmsName}/{hashCode}/{timestamp}", method = RequestMethod.GET)
+    public ResponseEntity<ClassPathResource> downloadTemplate(
+            @PathVariable String templateName,
+            @PathVariable String cmsName,
+            @PathVariable String hashCode,
+            @PathVariable long timestamp) {
+        String validHash = downloadRequestParamsHasher.getHash(templateName, cmsName, timestamp);
+        if (validHash.equals(hashCode)) {
+            long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - timestamp;
+            if (delay < 0 || delay > 3600) {
+                throw new CmsTemplateHashExpiredException("Hash code: " + hashCode + " has expired. Delay: " + delay);
+            }
+            return sendFile(templateName, cmsName);
+        } else {
+            throw new CmsTemplateHashErrorException("Hash code: " + hashCode + " is invalid.");
+        }
+    }
+
+    private ResponseEntity<ClassPathResource> sendFile(@PathVariable String templateName, @PathVariable String cmsName) {
+        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
+        ClassPathResource body = new ClassPathResource(filePath);
+        if (body.exists()) {
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + body.getFilename())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(body);
+        } else {
+            throw new CmsTemplateNotFoundException("File " + filePath + " not found");
+        }
+    }
+
+    private JtwigTemplate getEmailMessageTemplate() {
         return new JtwigTemplate(
                 new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
                 new JtwigConfiguration()
         );
     }
 
-    private JtwigModelMap getEmailMessageModelMap(String name, String file, String cms, long hash) {
+    private JtwigModelMap getEmailMessageModelMap(String name, String file, String cms, String hash, long timestamp) {
         return new JtwigModelMap()
                 .withModelAttribute("name", name)
                 .withModelAttribute("file", file)
                 .withModelAttribute("cms", cms)
                 .withModelAttribute("hash", hash)
-                ;
+                .withModelAttribute("timestamp", timestamp);
     }
 }

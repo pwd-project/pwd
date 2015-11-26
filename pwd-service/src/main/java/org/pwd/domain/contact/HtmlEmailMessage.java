@@ -5,7 +5,6 @@ import com.lyncode.jtwig.JtwigTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 
 /**
@@ -16,7 +15,7 @@ public class HtmlEmailMessage extends EmailMessage {
     private final String html;
 
     public HtmlEmailMessage(String from, String to, String subject, JtwigTemplate jtwigTemplate, JtwigModelMap modelMap) {
-        super(from,to,subject);
+        super(from, to, subject);
         this.html = renderTemplateIntoText(jtwigTemplate, modelMap);
     }
 
@@ -28,10 +27,9 @@ public class HtmlEmailMessage extends EmailMessage {
         String result;
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            jtwigTemplate.output(outputStream,modelMap);
+            jtwigTemplate.output(outputStream, modelMap);
             result = outputStream.toString("UTF-8");
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             logger.error("Cannot render email text template: {}. Error: {}", jtwigTemplate, ex.getMessage());
             throw new RuntimeException("Cannot render email text template");
         }
