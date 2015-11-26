@@ -18,8 +18,8 @@ analysis:
   endpoint: http://pwd-analysis.herokuapp.com/analysis
 
 mailgun:
- apikey: dummyApiKey
- domain: https://localhost
+ apikey: dummyKey
+ domain: http://localhost
 
 error:
   whitelabel:

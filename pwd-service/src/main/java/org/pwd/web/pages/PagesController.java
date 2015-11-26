@@ -37,6 +37,11 @@ class PagesController {
         return "contact";
     }
 
+    @RequestMapping(value = "regulamin", method = GET)
+    public String regulaminPage() {
+        return "terms";
+    }
+
     @RequestMapping(method = GET)
     public String getWebsites(Model model) {
         model.addAttribute("template1", Template.valueOf("T11"));

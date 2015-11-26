@@ -12,7 +12,7 @@
 						<p>
 							Dostępność to proces a nie stan, dlatego naszym celem jest nieustanne monitorowanie serwisów
 
-							internetowych i generowanie raportów dostępności.
+							internetowych i doprowadzanie do wzrostu ich dostępności.
 						</p>
 						<a role="button" href="/top-100" class="btn cta cta-1">Zobacz ranking top 100</a>
 						<a role="button" href="/o-projekcie" class="btn cta cta-2">O projekcie</a>
@@ -23,20 +23,17 @@
     </section>
 
     <section class="container-fluid section text-center">
-		<h2>Twoja strona pod naszym nadzorem</h2>
-		<h3>Zobacz jak wygląda nasz proces analizy</h3>
+		<h2>Grupa stron pod naszym nadzorem</h2>
+		<h3>Zobacz jak wygląda proces analizy</h3>
         <div class="container text-center">
             <div class="col-lg-4 column">
-                <img src="/img/odwiedziny-ico.png" class="img-responsive" alt="Odwiedziny Twojej strony">
-                <h4>Odwiedziny Twojej strony</h4>
+                <img src="/img/odwiedziny-ico.png" class="img-responsive" alt="Budowanie bazy stron">
+                <h4>Baza stron do silnika PWD</h4>
                 <p>
-                    Jeśli Twoja strona jest w naszej bazie Serwisów, wówczas jest systematycznie audytowana przez nasz
-                    system badania dostępności.
-                    Pierwsza wersja silnika PWD Online korzysta z danych opublikowanych w
-                    serwisie <a href="https://danepubliczne.gov.pl" target="_blank">danepubliczne.gov.pl</a>
-                    i audytuje serwisy administracji publicznej dostępne na tej stronie.
-                    Jeśli Twojego serwisu nie ma w zakładce serwisy, możesz go zgłosić przez
-                    <a href="/kontakt">formularz kontaktowy</a>.
+                    Obecna wersja Silnika PWD audytuje strony Jednostek Samorządu Terytorialnego
+					pobrane z serwisu <a href="https://danepubliczne.gov.pl" target="_blank">danepubliczne.gov.pl</a>
+					Jeśli jesteś administratorem/właścicielem serwisu JST i Waszej strony nie znajdziesz w zakładce serwisy, 
+					możesz ją zgłosić przez <a href="/kontakt">formularz kontaktowy</a>.
                 </p>
             </div>
 
@@ -44,12 +41,12 @@
                 <img src="/img/analiza-ico.png" class="img-responsive" alt="Analiza danych">
                 <h4>Analiza danych</h4>
                 <p>
-                    System PWD Online cyklicznie, co 7 dni, analizuje i sprawdza serwisy internetowe
+                    System PWD Online cyklicznie (codziennie) analizuje i sprawdza serwisy internetowe
                     dostępne w naszej bazie danych.
-                    Każdy z serwisów badany jest przez specjalny proces wykorzystujący metryki PWD.
-                    Na podstawie tego badania przydzielane są punkty.
-                    Następnie wyliczany jest wskaźnik dostępności.
-                    Wskaźnik ten jest publikowany i brany pod uwagę w tworzeniu Rankingu PWD.
+                    Każdy z serwisów badany jest przez specjalny proces(walidator) wykorzystujący metryki PWD.
+                    Każda metryka (wytyczna WCAG 2.0) posiada przydzieloną wagę(współczynnik ważności) na tej podstawie wyliczany jest wskaźnik PWD,
+                    który jest publikowany i brany pod uwagę w tworzeniu Rankingu PWD.
+					Wskaźnik ten nie jest wytyczną pełnej dostępności strony, ale jest skalą spełnienia metryk PWD.
                 </p>
             </div>
 
@@ -57,12 +54,11 @@
                 <img src="/img/raport-ico.png" class="img-responsive" alt="Raport">
                 <h4>Raport</h4>
                 <p>
-                    Wynikiem analizy poprzez system metryk jest raport dostępności PWD Online.
-                    Raport ten jest publikowany na naszej stronie przy każdym serwisie.
-                    Dostęp do raportu posiada każdy użytkownik internetu.
-                    Raport jest przesyłany redaktorowi strony internetowej w celu wskazania elementów,
-                    które należy poprawić aby serwis uzyskał lepszy wynik walidacji
-                    co przyczyni się do podwyższenia pozycji strony w naszym rankingu.
+                    Na podstawie analizy poprzez system metryk tworzony jest raport dostępności strony.
+                    Raport ten jest publikowany przy każdym serwisie i dostęp do niego posiada każdy użytkownik internetu.
+                    Raport zawiera wykaz metryk(wytycznych), które są spełnione w danym serwisie a także te które wymagają poprawy.
+                    Admistratorzy dostają wskazówki jak poprawić serwis aby uzyskał lepszy wynik walidacji
+                    co przyczyni się do zwiększenia dostępności strony a także podwyższenia pozycji w naszym rankingu.
                 </p>
             </div>
         </div>
@@ -70,7 +66,7 @@
 
     <section class="container-fluid text-center section bg-gray">
 		<h2>Do pobrania</h2>
-		<h3>Bezpłatne szablony stron www z certyfikatem PWD</h3>
+		<h3>Bezpłatne szablony stron www</h3>
 
 		<div class="container">
 
@@ -148,8 +144,8 @@
     </section>
 
 	<section class="section container text-center">
-		<h2>Globalny wskaźnik dostępności</h2>
-		<h3>PWD Rank</h3>
+		<h2>Globalny wskaźnik dostępności PWD</h2>
+		<h3>oparty o metryki i wskaźniki PWD Online</h3>
 		<div class="rank-value" id="globalScore">
 			<img src="/img/loading.gif" alt="loading" />
 		</div>
@@ -158,10 +154,10 @@
     <section class="container-fluid text-center section bg-gray" >
         <div class="container text-center ">
 			<h2>Ranking top 100</h2>
-			<h3>Najbardziej dostępne strony użyteczności publicznej</h3>
-
+			<h3>Najlepiej ocenione strony użyteczności publicznej</h3>
 			<div class="table-responsive text-left">
-				<table class="table table-striped table-hover ranking">
+			    <p>Uwaga: miejsce w rankingu określa stopień spełnienia analizowanych metryk i może nie odzwierciedlać faktycznej dostępności serwisów</p>
+					<table class="table table-striped table-hover ranking">
                     <thead>
                     <tr>
 						<th class="text-center"><img class="rank-ico" src="/img/rank.png" alt="Pozycja w rankingu"></th>
