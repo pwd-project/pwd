@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -65,8 +63,7 @@ public class DownloadController {
         try {
             template = Template.valueOf(templateName);
             cms = Cms.valueOf(cmsName);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             logger.error(ex.getMessage());
             return "error_404";
         }
@@ -79,62 +76,35 @@ public class DownloadController {
     public ResponseEntity<InputStreamResource> downloadTemplate(
             @PathVariable String templateName,
             @PathVariable String cmsName,
-            @PathVariable long hashCode,
-            Model model) {
-        try {
-            long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
-            if (delay < 0 || delay > 3600) {
-                logger.info("Hash code: " + hashCode + " has expired. Delay: "+ delay);
-                return getTwigResponse("templates/error_expired.twig");
-            }
+            @PathVariable long hashCode) {
+        long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
+        if (delay < 0 || delay > 3600) {
+            throw new CmsTemplateHashExpiredException("Hash code: " + hashCode + " has expired. Delay: " + delay);
+        }
+        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
+        return getResourceFileResponse(filePath, templateName + ".zip");
 
-            String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
-            logger.info("Downloading: " + filePath);
-            return getResourceFileResponse(filePath,templateName + ".zip");
-        }
-        catch (IOException ex){
-            logger.error("Caught IOException: " +  ex.getMessage());
-            return getTwigResponse("templates/error_404.twig");
-        }
     }
 
-    private ResponseEntity<InputStreamResource> getTwigResponse(String twigFilename) {
-        try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            JtwigTemplate jtwigTemplate = new JtwigTemplate(
-                    new ClasspathJtwigResource(twigFilename),
-                    new JtwigConfiguration());
-            jtwigTemplate.output(outputStream, new JtwigModelMap());
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.parseMediaType("text/html"))
-                    .body(new InputStreamResource(new ByteArrayInputStream(outputStream.toByteArray())));
-        }
-        catch (Exception ex){
-            logger.error("Cannot render twig template. Caught Exception: " +  ex.getMessage());
-            return null;
-        }
-    }
-
-    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path, String fileName)
-            throws IOException {
-
+    private ResponseEntity<InputStreamResource> getResourceFileResponse(String path, String fileName) {
         ClassPathResource templateFile = new ClassPathResource(path);
-
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        if( !fileName.isEmpty()){
+        if (!fileName.isEmpty()) {
             headers.add("content-disposition", "attachment; filename=" + fileName);
         }
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentLength(templateFile.contentLength())
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new InputStreamResource(templateFile.getInputStream()));
+        try {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .contentLength(templateFile.contentLength())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(new InputStreamResource(templateFile.getInputStream()));
+        } catch (IOException e) {
+            throw new CmsTemplateNotFoundException("File cannot be read" + templateFile.getPath());
+        }
     }
 
     @RequestMapping(method = POST)
@@ -143,7 +113,7 @@ public class DownloadController {
         downloadRequest.setCms(cms.getNamePl());
         downloadRequest.setCreated(LocalDateTime.now());
         logger.info("New download request: {}", downloadRequest);
-        logger.info("Data: "+downloadRequest.getCreated().toString());
+        logger.info("Data: " + downloadRequest.getCreated().toString());
 
         downloadRequest = downloadRequestRepository.save(downloadRequest);
 
@@ -151,8 +121,8 @@ public class DownloadController {
 
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD",
-                    getEmailMessageTemplate(),
-                    getEmailMessageModelMap(template.getNamePl(), template.getDownloadName(), cms.getNamePl(), hashSend));
+                getEmailMessageTemplate(),
+                getEmailMessageModelMap(template.getNamePl(), template.getDownloadName(), cms.getNamePl(), hashSend));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
@@ -162,7 +132,7 @@ public class DownloadController {
         return "error";
     }
 
-    private JtwigTemplate getEmailMessageTemplate(){
+    private JtwigTemplate getEmailMessageTemplate() {
         return new JtwigTemplate(
                 new ClasspathJtwigResource("templates/emails/DownloadEmail.twig"),
                 new JtwigConfiguration()
@@ -174,7 +144,6 @@ public class DownloadController {
                 .withModelAttribute("name", name)
                 .withModelAttribute("file", file)
                 .withModelAttribute("cms", cms)
-                .withModelAttribute("hash", hash)
-                ;
+                .withModelAttribute("hash", hash);
     }
 }
