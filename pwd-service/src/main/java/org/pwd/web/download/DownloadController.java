@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -79,17 +81,37 @@ public class DownloadController {
             @PathVariable String cmsName,
             @PathVariable long hashCode,
             Model model) {
-        long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
-        if (delay < 0 || delay > 3600) return null;//"error_expired";
-
-        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
         try {
+            long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - hashCode;
+            if (delay < 0 || delay > 3600) {
+                logger.info("Hash code: " + hashCode + " has expired. Delay: "+ delay);
+                return getTwigResponse("templates/error_expired.twig");
+            }
+
+            String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
             logger.info("Downloading: " + filePath);
             return getResourceFileResponse(filePath,templateName + ".zip");
         }
         catch (IOException ex){
-            //TODO: obsługa brakującego szablonu
             logger.error("Caught IOException: " +  ex.getMessage());
+            return getTwigResponse("templates/error_404.twig");
+        }
+    }
+
+    private ResponseEntity<InputStreamResource> getTwigResponse(String twigFilename) {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JtwigTemplate jtwigTemplate = new JtwigTemplate(
+                    new ClasspathJtwigResource(twigFilename),
+                    new JtwigConfiguration());
+            jtwigTemplate.output(outputStream, new JtwigModelMap());
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.parseMediaType("text/html"))
+                    .body(new InputStreamResource(new ByteArrayInputStream(outputStream.toByteArray())));
+        }
+        catch (Exception ex){
+            logger.error("Cannot render twig template. Caught Exception: " +  ex.getMessage());
             return null;
         }
     }
@@ -103,8 +125,9 @@ public class DownloadController {
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        headers.add("content-disposition", "attachment; filename=" + fileName);
-
+        if( !fileName.isEmpty()){
+            headers.add("content-disposition", "attachment; filename=" + fileName);
+        }
 
         return ResponseEntity
                 .ok()
