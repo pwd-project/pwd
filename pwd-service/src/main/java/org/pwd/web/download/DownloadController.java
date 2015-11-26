@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -108,7 +109,7 @@ public class DownloadController {
         ClassPathResource body = new ClassPathResource(filePath);
         if (body.exists()) {
             return ResponseEntity.ok()
-                    .header("content-disposition", "attachment; filename=" + body.getFilename())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + body.getFilename())
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .body(body);
         } else {

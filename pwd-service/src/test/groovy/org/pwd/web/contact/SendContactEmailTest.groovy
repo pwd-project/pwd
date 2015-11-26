@@ -25,8 +25,6 @@ class SendContactEmailTest extends IntegrationTest {
         contactRequestRepository.deleteAll()
     }
 
-    @Transactional
-    @Rollback(false)
     def "should send email with details from 'Contact' page and save it to database"() {
         given:
         def restTemplate = new RestTemplate();
