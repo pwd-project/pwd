@@ -63,6 +63,27 @@ public class DownloadController {
         return "downloadForm";
     }
 
+    @RequestMapping(value = "/{templateName}/{cmsName}", method = POST)
+    public String sendEmail(DownloadRequest downloadRequest,
+                            @PathVariable String templateName,
+                            @PathVariable String cmsName) {
+        downloadRequest.setTemplateName(templateName);
+        downloadRequest.setCms(cmsName);
+        downloadRequest.setCreated(LocalDateTime.now());
+        logger.info("New download request: {}", downloadRequest);
+        downloadRequest = downloadRequestRepository.save(downloadRequest);
+        long timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        String hash = getHash(Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), timestamp);
+        HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
+                "Szablon CMS ze strony PWD",
+                getEmailMessageTemplate(),
+                getEmailMessageModelMap(templateName, Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), hash, timestamp));
+        if (mailgunClient.sendEmail(htmlEmailMessage)) {
+            return "email_download";
+        }
+        return "error";
+    }
+
     @RequestMapping(value = "/{templateName}/{cmsName}/{hashCode}/{timestamp}", method = RequestMethod.GET)
     public ResponseEntity<ClassPathResource> downloadTemplate(
             @PathVariable String templateName,
@@ -75,39 +96,23 @@ public class DownloadController {
             if (delay < 0 || delay > 3600) {
                 throw new CmsTemplateHashExpiredException("Hash code: " + hashCode + " has expired. Delay: " + delay);
             }
-            String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
-            ClassPathResource body = new ClassPathResource(filePath);
-            return ResponseEntity.ok()
-                    .header("content-disposition", "attachment; filename=" + body.getFilename())
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(body);
+            return sendFile(templateName, cmsName);
         } else {
             throw new CmsTemplateHashErrorException("Hash code: " + hashCode + " is invalid.");
         }
     }
 
-    @RequestMapping(value = "/{templateName}/{cmsName}", method = POST)
-    public String sendEmail(DownloadRequest downloadRequest,
-                            @PathVariable String templateName,
-                            @PathVariable String cmsName) {
-        downloadRequest.setTemplateName(templateName);
-        downloadRequest.setCms(cmsName);
-        downloadRequest.setCreated(LocalDateTime.now());
-        logger.info("New download request: {}", downloadRequest);
-        logger.info("Data: " + downloadRequest.getCreated().toString());
-        downloadRequest = downloadRequestRepository.save(downloadRequest);
-        long timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-        String hash = getHash(Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), timestamp);
-        HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
-                "Szablon CMS ze strony PWD",
-                getEmailMessageTemplate(),
-                getEmailMessageModelMap(templateName, Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), hash, timestamp));
-        if (mailgunClient.sendEmail(htmlEmailMessage)) {
-            logger.info("Email {} was sent successfully", htmlEmailMessage);
-            return "email_download";
+    private ResponseEntity<ClassPathResource> sendFile(@PathVariable String templateName, @PathVariable String cmsName) {
+        String filePath = "/pub/templates/" + cmsName + "/" + templateName + ".zip";
+        ClassPathResource body = new ClassPathResource(filePath);
+        if (body.exists()) {
+            return ResponseEntity.ok()
+                    .header("content-disposition", "attachment; filename=" + body.getFilename())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(body);
+        } else {
+            throw new CmsTemplateNotFoundException("File " + filePath + " not found");
         }
-        logger.warn("Email {} could not be sent", htmlEmailMessage);
-        return "error";
     }
 
     private String getHash(String templateName, String cms, long timestamp) {

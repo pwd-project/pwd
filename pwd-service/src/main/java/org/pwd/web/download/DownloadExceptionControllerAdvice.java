@@ -13,7 +13,7 @@ public class DownloadExceptionControllerAdvice {
     @ExceptionHandler(CmsTemplateHashExpiredException.class)
     public String handleCmsTemplateHashExpired(CmsTemplateHashExpiredException ex) {
         logger.error(ex.getMessage());
-        return "error_404";
+        return "error_expired";
     }
 
     @ExceptionHandler(CmsTemplateNotFoundException.class)

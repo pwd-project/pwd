@@ -76,4 +76,16 @@ public class DownloadRequest {
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
+
+    @Override
+    public String toString() {
+        return "DownloadRequest{" +
+                "id=" + id +
+                ", templateName='" + templateName + '\'' +
+                ", cms='" + cms + '\'' +
+                ", name='" + name + '\'' +
+                ", administrativeEmail='" + administrativeEmail + '\'' +
+                ", created=" + created +
+                '}';
+    }
 }

@@ -68,9 +68,9 @@ public class MailgunClient {
 
     private boolean sendEmail(MultiValueMap<String, String> formData) {
         HttpEntity request = new HttpEntity<>(formData, headers);
-
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
+            logger.info("Email {} to {} was sent successfully", formData.get("subject"), formData.get("to"));
             return (response.getStatusCode() == HttpStatus.OK);
         } catch (RestClientException e) {
             logger.info("mailgun request failed", e);
