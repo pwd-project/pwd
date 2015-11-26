@@ -1,5 +1,8 @@
-package org.pwd.web.download;
+package org.pwd.web;
 
+import org.pwd.web.download.CmsTemplateHashErrorException;
+import org.pwd.web.download.CmsTemplateHashExpiredException;
+import org.pwd.web.download.CmsTemplateNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,5 +29,17 @@ public class DownloadExceptionControllerAdvice {
     public String handleCmsTemplateHashError(CmsTemplateHashErrorException ex) {
         logger.error(ex.getMessage());
         return "error_404";
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentError(IllegalArgumentException ex) {
+        logger.error(ex.getMessage());
+        return "error";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String handleError(Exception ex) {
+        logger.error(ex.getMessage());
+        return "error";
     }
 }

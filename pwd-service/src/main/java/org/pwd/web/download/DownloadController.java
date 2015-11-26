@@ -1,8 +1,6 @@
 package org.pwd.web.download;
 
 import com.google.common.base.Charsets;
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
 import com.lyncode.jtwig.JtwigModelMap;
 import com.lyncode.jtwig.JtwigTemplate;
 import com.lyncode.jtwig.configuration.JtwigConfiguration;
@@ -42,12 +40,15 @@ public class DownloadController {
 
     private final MailgunClient mailgunClient;
     private final DownloadRequestRepository downloadRequestRepository;
-    private final HashFunction hasher = Hashing.md5();
+    private final DownloadRequestParamsHasher downloadRequestParamsHasher;
 
     @Autowired
-    public DownloadController(MailgunClient mailgunClient, DownloadRequestRepository downloadRequestRepository) {
+    public DownloadController(MailgunClient mailgunClient,
+                              DownloadRequestRepository downloadRequestRepository,
+                              DownloadRequestParamsHasher downloadRequestParamsHasher) {
         this.mailgunClient = mailgunClient;
         this.downloadRequestRepository = downloadRequestRepository;
+        this.downloadRequestParamsHasher = downloadRequestParamsHasher;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -73,7 +74,7 @@ public class DownloadController {
         logger.info("New download request: {}", downloadRequest);
         downloadRequest = downloadRequestRepository.save(downloadRequest);
         long timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-        String hash = getHash(Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), timestamp);
+        String hash = downloadRequestParamsHasher.getHash(Template.valueOf(templateName).getDownloadName(), Cms.valueOf(cmsName).getNamePl(), timestamp);
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", downloadRequest.getAdministrativeEmail(),
                 "Szablon CMS ze strony PWD",
                 getEmailMessageTemplate(),
@@ -90,7 +91,7 @@ public class DownloadController {
             @PathVariable String cmsName,
             @PathVariable String hashCode,
             @PathVariable long timestamp) {
-        String validHash = getHash(templateName, cmsName, timestamp);
+        String validHash = downloadRequestParamsHasher.getHash(templateName, cmsName, timestamp);
         if (validHash.equals(hashCode)) {
             long delay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - timestamp;
             if (delay < 0 || delay > 3600) {
@@ -113,16 +114,6 @@ public class DownloadController {
         } else {
             throw new CmsTemplateNotFoundException("File " + filePath + " not found");
         }
-    }
-
-    private String getHash(String templateName, String cms, long timestamp) {
-        return hasher
-                .newHasher()
-                .putString(templateName, Charsets.UTF_8)
-                .putString(cms, Charsets.UTF_8)
-                .putLong(timestamp)
-                .hash()
-                .toString();
     }
 
     private JtwigTemplate getEmailMessageTemplate() {
