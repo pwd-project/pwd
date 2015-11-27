@@ -15,23 +15,35 @@
 
                 <h3>Opis</h3>
                 <p>
-                    Metryka weryfikuje czy grafiki osadzone na stronie (tagi <code>img</code>)
-                    mają ustawiony atrybut <code>alt</code>.
+                    Wszelkie treści nietekstowe przedstawione użytkownikowi posiadają swoją tekstową alternatywę,
+                    która pełni tę samą funkcję, za wyjątkiem niektórych sytuacji gdzie jest to uzasadnione.
                 </p>
 
                 <p>
-                    Atrybut ten powinien zawierać treść alternatywną,
-                    która jest pokazywana jeśli przeglądarka użytkownika
-                    ma wyłączoną obsługę grafiki, przykładowo:
+                    Atrybut powinien zawierać pusty napis, gdy obraz jest używany w celach dekoracyjnych,
+                    aby umożliwić technologiom wspomagającym jej zignorowanie.
                 </p>
 
-                <pre>&lt;img src="smiley.gif" alt="Smiley face"/&gt;</pre>
+                <h3>Realizacja</h3>
+                <p>
+                    Metryka weryfikuje czy grafiki osadzone na stronie (tagi <code>img</code>)
+                    mają ustawiony poprawnie atrybut <code>alt</code>.
+                </p>
+                <p>
+                    W tym celu badamy:
+                </p>
+                <ul>
+                    <li>liczbę wszystkich obrazów na stronie - S</li>
+                    <li>liczbę obrazów bez znacznika alt - A</li>
+                    <li>liczbę obrazów ze znakami specjalnymi: ' ', '-', '*' i '<' - B</li>
+                </ul>
 
                 <h3>Wartości metryki</h3>
 
                 <ul>
                     <li>0 jeśli żadna z grafik na stronie nie ma tekstu alternatywnego</li>
                     <li>100 jeśli wszystkie grafiki mają tekst alternatywny</li>
+                    <li>Liczba <0,100> obliczona wg wzoru X = 100-(A+B)*100/S w pozostałych przypadkach</li>
                 </ul>
 
                 {% include 'metric_meta.twig' %}

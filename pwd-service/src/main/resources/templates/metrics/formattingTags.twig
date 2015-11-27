@@ -15,13 +15,28 @@
 
                 <h3>Opis</h3>
                 <p>
-                    Metryka weryfikuje gęstość tagów formatujących.
+                    Informacje, struktura oraz relacje pomiędzy treściami przedstawiane w treści
+                    mogą być odczytane przez program komputerowy lub są dostępne w postaci tekstu.
                 </p>
 
-                <h3>Wartości metryki</h3>
-
+                <h3>Realizacja</h3>
+                <p>
+                    Metryka weryfikuje gęstość tagów formatujących, zakłądając, że treść merytoryczna strony
+                    powinna być odseparowana od jej wizualizacji. Formatowanie wizualne tekstu powinno być realizowane
+                    za pomocą arkuszy stylu.
+                </p>
+                <p>
+                    W tym celu badamy:
+                </p>
                 <ul>
-                    <li>100 - (ilość tagów formatujących)/(ilość wszystkich tagów w body)</li>
+                    <li>liczbę wszystkich tagów znajujących się wewnątrz znacznika <code>body</code> - S</li>
+                    <li>liczbę tagów służących do formatowania np: <code>b,i.u,br,center,code,</code> - A</li>
+                </ul>
+
+
+                <h3>Wartości metryki</h3>
+                <ul>
+                    <li>100 - A*100/S</li>
                 </ul>
 
                 {% include 'metric_meta.twig' %}

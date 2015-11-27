@@ -15,15 +15,25 @@
 
                 <h3>Opis</h3>
                 <p>
-                    Metryka weryfikuje czy zaraz po wczytaniu strony nie jest odtwarzany dźwięk.
-                    Sprawdza czy zostały użyte mechanizmy wywołujące taki efekt, przykładowo:
+                    Jeśli jakieś nagranie audio włącza się automatycznie na danej stronie
+                    i jest odtwarzane przez okres dłuższy niż 3 sekundy,
+                    dostępny jest albo mechanizm umożliwiający przerwanie lub wyłączenie nagrania,
+                    albo mechanizm kontrolujący poziom głośności niezależnie od poziomu głośności całego systemu.
                 </p>
 
+                <h3>Realizacja</h3>
+                <p>
+                    Metryka weryfikuje czy zostały użyte mechanizmy wywołujące efekt uruchomienia dźwięku po uruchomieniu strony,
+                    przykładowo:
+                </p>
 <pre>&lt;audio controls autoplay&gt;
   &lt;source src="plik.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;</pre>
                 lub
                 <pre>&lt;bgsound src="plik.mp3"/&gt;</pre>
+                <p>
+                    Metryka nie weryfikuje innych sposobów pozwalajcych na takie odtworzenie dźwięków jak np: flash
+                </p>
 
                 <h3>Wartości metryki</h3>
                 <ul>
