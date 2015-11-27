@@ -685,6 +685,15 @@ textarea.form-control{
 	max-height:none
 }
 
+.skryptcookies-pl {
+bottom: 0px;
+top: auto;
+}
+
+.skryptcookies-pl-p{
+font-size:12px;
+}
+
 @media only screen and (max-width: 1200px) {
 	.container{
 		width:100%!important
