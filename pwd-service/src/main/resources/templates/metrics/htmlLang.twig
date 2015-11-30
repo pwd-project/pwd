@@ -15,14 +15,20 @@
 
                 <h3>Opis</h3>
                 <p>
-                    Metryka weryfikuje czy strona ma określony domyślny język strony internetowej,
-                    może zostać odczytany przez program komputerowy
+                    Domyślny język naturalny każdej strony internetowej może zostać odczytany przez program komputerowy.
+                </p>
+
+                <h3>Realizacja</h3>
+                <p>
+                    Metryka weryfikuje czy strona ma określony domyślny język strony internetowej, przykładowo:
+                    <pre>&lt;html lang="pl"&gt;</pre>
+                    Zakłądamy, że analizujemy polskie strony i nie analizujemy czy język strony jest polski.
                 </p>
 
                 <h3>Wartości metryki</h3>
                 <ul>
-                    <li>0 brak</li>
-                    <li>100 istnieje</li>
+                    <li>0 brak określonego języka strony</li>
+                    <li>100 język strony jest określony</li>
                 </ul>
 
                 {% include 'metric_meta.twig' %}
