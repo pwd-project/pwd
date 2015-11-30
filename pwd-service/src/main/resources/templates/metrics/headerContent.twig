@@ -15,17 +15,24 @@
 
                 <h3>Opis</h3>
                 <p>
+                    Nagłówki sekcji są używane do porządkowania treści.
+                </p>
+
+                <h3>Realizacja</h3>
+                <p>
                     Metryka weryfikuje, każda z sekcji z treścią jest opisana za pomocą nagłówków (tytułów), tam gdzie
-                    będzie to konieczne.
+                    będzie to konieczne. <BR/>
+                    Analizowane są tago nagłówkowe &lt;h1&gt;, &lt;h2&gt;, ... <BR/>
+                    Obliczane są: <BR/>
+                    S - ilość wszystkich nagłówków<BR/>
+                    P - ilość pustych nagłówków<BR/>
+                    W - ilość nagłówków posiadających podwęzły
                 </p>
 
                 <h3>Wartości metryki</h3>
-
                 <ul>
                     <li>0 jeśli strona posiada więcej niż jeden tag h1 albo tag h1 nie jest pierwszym z nagłówków</li>
-                    <li>100 - 40 * (ilość nagłówków posiadających podwęzły)/(ilość wszystkich nagłówków) - 40 * (ilość
-                        pustych nagłówków)/(ilość wszystkich nagłówków)
-                    </li>
+                    <li>100 - 40 * W/S - 40*P/S</li>
                     <li>100 jeśli strona nie posiada w ogóle nagłówków</li>
                 </ul>
 

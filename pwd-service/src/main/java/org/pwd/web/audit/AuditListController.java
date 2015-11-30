@@ -84,7 +84,7 @@ class AuditListController {
 
     private void sendEmail(WebsiteAudit websiteAudit) {
         HtmlEmailMessage htmlEmailMessage = new HtmlEmailMessage("noreply@pwd.dolinagubra.pl", websiteAudit.getWebsite().getAdministrativeEmail(),
-                "Wyniki audytu ze strony PWD", getEmailMessageTemplate(), getEmailMessageModelMap(websiteAudit.getAudit(), websiteAudit.getWebsite()));
+                "Start projektu PWD", getEmailMessageTemplate(), getEmailMessageModelMap(websiteAudit.getAudit(), websiteAudit.getWebsite()));
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
