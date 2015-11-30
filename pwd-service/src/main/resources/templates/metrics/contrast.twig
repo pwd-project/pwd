@@ -14,16 +14,27 @@
                 </ul>
 
                 <h3>Opis</h3>
+                <p>
+                Wizualne przedstawienie tekstu, lub obrazu tekstu posiada kontrast wynoszący przynajmniej 4,5:1, poza następującymi wyjątkami:
+                </p>
                 <ul>
                     <li>Duży tekst: Duży tekst oraz grafiki takiego tekstu posiadają kontrast przynajmniej 3:1</li>
                     <li>Przypadkowość: Nie stosuje się wymogów minimalnego kontrastu dla tekstów lub obrazu tekstu, będących elementem nieużywanych części interfejsu użytkownika, mających cel czysto dekoracyjny, nie są widoczne lub też są częścią obrazu zawierającego inne istotne treści wizualne</li>
                     <li>Logo: Nie wymaga się minimalnego kontrastu dla tekstu, który jest częścią logo lub nazwy własnej produktu (marki)</li>
                 </ul>
 
+                <h3>Realizacja</h3>
+                <p>
+                    Metryka wykorzystuje funkcję <a href="https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_color_01" target="_blank">AX_COLOR_01</a>
+                    dostęną w otwartym projekcie <a href="https://www.google.com/accessibility/" target="_blank">Google Accesibility</a>.<BR/>
+                    Uwaga: szczegóowe dane na temat analizy <a href="https://www.google.com/accessibility/" target="_blank">Google Accesibility</a>
+                    można zobaczyć w przeglądarce Chrome po naciśnięciu klawisza F12 w zakładce Audits w pozycji "Text elements should have a reasonable contrast ratio".
+                </p>
+
                 <h3>Wartości metryki</h3>
                 <ul>
-                    <li>0 jeśli strona nie spełnia wytyczne</li>
-                    <li>100 jeśli strona spełnia wytycznych</li>
+                    <li>100 jeśli strona przejdzie test <a href="https://github.com/GoogleChrome/accessibility-developer-tools/wiki/Audit-Rules#ax_color_01" target="_blank">AX_COLOR_01</a></li>
+                    <li>0 w przeciwnym przypadku</li>
                 </ul>
 
                 {% include 'metric_meta.twig' %}

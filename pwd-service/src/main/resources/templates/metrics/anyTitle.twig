@@ -15,14 +15,20 @@
 
                 <h3>Opis</h3>
                 <p>
-                    Metryka weryfikuje czy strona posiada znacznik określający tytuł strony, przykładowo:
+                    Strony internetowe posiadają tytuły, które opisują ich cel lub przedstawiają ich temat.
                 </p>
-                <pre>&lt;title&gt;Tytuł strony&lt;/title&gt;</pre>
+
+                <h3>Realizacja</h3>
+                <p>
+                    W obecnej wersji metryka sprawdza jedynie czy tytuł strony został określony, przykładowo:
+                    <pre>&lt;title&gt;Tytuł strony&lt;/title&gt;</pre>
+                    Nie weryfikuje czy opisują cel lub przedstawiają ich temat, być może zostanie to zaimplementowane w kolejnej wersji.
+                </p>
 
                 <h3>Wartości metryki</h3>
                 <ul>
-                    <li>0 brak</li>
-                    <li>100 istnieje</li>
+                    <li>0 brak tytułu strony</li>
+                    <li>100 tytuł został określony</li>
                 </ul>
 
                 {% include 'metric_meta.twig' %}
