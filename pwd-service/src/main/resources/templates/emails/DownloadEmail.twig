@@ -10,64 +10,71 @@
 		<div style="clear:both"></div>
 	</div>
 	<div style="clear:both;padding:30px 0;color:#666">
-	<p>Wybrałeś szablon {{ name }} do systemu {{ cms }}</p>
-	<a href="http://pwd.dolinagubra.pl/pobierz/{{ file }}/{{ cms }}/{{ hash }}/{{ timestamp }}" style="text-transform:uppercase;color:#fff;background:#990000;padding:20px 40px;text-decoration:none;font-weight:bold;margin-top:30px;display:inline-block">
+	<h2>Witaj,</h2>
+	<p>dziękujemy że wybrałeś nasz szablon {{ name }} dla systemu {{ cms }}, by przygotować swój serwis www. Mamy nadzieję, iż spełni on Twoje oczekiwania. Gdybyś miał uwagi będziemy wdzięczni, jeśli podzielisz się z nami Swoją opinią. Zapraszamy do kontaktu z nami przez <a href="http://pwd.dolinagubra.pl/kontakt">formularz kontaktowy</a>.</p>
+	<a href="http://pwd.dolinagubra.pl/pobierz/{{ file }}/{{ cms }}/{{ hash }}" style="text-transform:uppercase;color:#fff;background:#990000;padding:20px 40px;text-decoration:none;font-weight:bold;margin-top:30px;display:inline-block">
 	POBIERZ SZABLON
 	</a>
+	<p/>
 	{% if cms == 'WordPress' %}
-	<h1>Instrukcja pobrania szablonu dla WordPressa</h1>
+	<h2>Instrukcja pobrania i instalacji szablonu*</h2>
     <ol>
         <li>Użyj powyższego odnośnika by pobrać szablon</li>
         <li>Zapisz plik archiwum ZIP na dysku</li>
         <li>Zaloguj się do panelu administracyjnego WordPressa</li>
         <li>Z menu po lewej stronie wybierz Wygląd a następnie Motywy</li>
-        <li>W oknie Motywy naciśnij przycisk Dodaj nowy</li>
-        <li>Z górnego wiersza odnośników użyj Prześlij</li>
-        <li>Naciśnij przycisk Wybierz plik</li>
-        <li>W oknie Explorera wskaż, pobrany wczesniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
-        <li>W oknie Motywy naciśnij przycisk Instaluj</li>
-        <li>Z dolnego wiersza odnośników użyj Aktywuj</li>
+        <li>W oknie Motywy naciśnij przycisk 'Dodaj nowy' a następnie przycisk 'Wyślij motyw na serwer'</li>
+        <li>Naciśnij przycisk 'Przegladaj'</li>
+        <li>W oknie wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem 'Otwórz'</li>
+        <li>W oknie Motywy naciśnij przycisk 'Instaluj'</li>
+        <li>Z dolnego wiersza odnośników użyj 'Włącz'</li>
     </ol>
+	<p>Gotowe. Twój nowy szablon jest już aktywny.</p>
+	<p>*Dotyczy WordPress w wersji 4.3.1. Poszczególne kroki instalacji dla innych wersji mogą się różnić. </p>
     {% endif %}
 	{% if cms == 'Joomla' %}
-	<h1>Instrukcja pobrania szablonu dla Joomla</h1>
+	<h2>Instrukcja pobrania i instalacji szablonu*</h2>
     <ol>
         <li>Użyj powyższego odnośnika by pobrać szablon</li>
         <li>Zapisz plik archiwum ZIP na dysku</li>
         <li>Zaloguj się do panelu administracyjnego Joomla</li>
-        <li>Z górnego menu wybierz Rozszerzenia a następnie Menadżer Rozszerzeń</li>
-        <li>W oknie Menadżera wybierz zakładkę Prześlij Pakiet</li>
-        <li>Naciśnij przycisk Wybierz plik</li>
-        <li>W oknie Explorera wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
-        <li>W oknie Menadżera naciśnij przycisk Prześlij i Instaluj</li>
-        <li>Po pomyślnej instalacji w oknie Menadżera pojawi się komunikat z potwierdzeniem</li>
-        <li>Z górnego menu wybierz Rozszerzenia a następnie Menadżer Szablonów</li>
-        <li>Odszukaj szablon na liście i oznacz go jak domyślny przez naciśnięcie przycisku z gwiazdką</li>
+        <li>Z lewego menu wybierz Rozszerzenia a następnie Instalacja Rozszerzeń</li>
+        <li>W oknie Instalatora wybierz zakładkę 'Instaluj z pakietu'</li>
+        <li>Naciśnij przycisk 'Wybierz plik'</li>
+        <li>W oknie wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
+        <li>W oknie Instalatora naciśnij przycisk 'Wczytaj plik i zainstaluj'</li>
+        <li>Po pomyślnej instalacji w oknie Instalatora pojawi się komunikat z potwierdzeniem</li>
+        <li>Z górnego menu wybierz Rozszerzenia a następnie Szablony</li>
+        <li>Odszukaj szablon na liście i oznacz go jako domyślny przez naciśnięcie przycisku z gwiazdką</li>
     </ol>
+    <p>Gotowe. Twój nowy szablon jest już aktywny.</p>
+	<p>*Dotyczy Joomla w wersji 3.4.5. Poszczególne kroki instalacji dla innych wersji mogą się różnić. </p>
     {% endif %}
 	{% if cms == 'Drupal' %}
-	<h1>Instrukcja pobrania szablonu dla Drupala</h1>
+	<h2>Instrukcja pobrania i instalacji szablonu*</h2>
     <ol>
         <li>Użyj powyższego odnośnika by pobrać szablon</li>
         <li>Zapisz plik archiwum ZIP na dysku</li>
         <li>Zaloguj się do panelu administracyjnego Drupal</li>
         <li>Z górnego menu wybierz Wygląd</li>
-        <li>W oknie Wygląd użyj odnośnik 'instalacja nowej skórki'</li>
-        <li>W nowym oknie naciśnij przycisk Przeglądaj, który znajduje się obok pola 'Wyślij archiwum modułu lub skórki do instalacji'</li>
-        <li>W oknie Explorera wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem Otwórz</li>
-        <li>Naciśnij przycisk Instaluj, otworzy się okno Update Menadżera</li>
-        <li>Po pomyślnej instalacji w oknie Menadżera pojawi się komunikat z potwierdzeniem</li>
+        <li>W oknie Wygląd użyj odnośnik 'Instalacja nowej skórki'</li>
+        <li>W nowym oknie naciśnij przycisk 'Wybierz plik', który znajduje się pod polem 'Wyślij archiwum modułu lub skórki do instalacji'</li>
+        <li>W oknie wskaż, pobrany wcześniej, plik archiwum ZIP i potwierdź przyciskiem 'Otwórz'</li>
+        <li>Naciśnij przycisk 'Instaluj'</li>
+        <li>Po pomyślnej instalacji otworzy się okno Update Menadżera i pojawi się komunikat z potwierdzeniem</li>
         <li>W oknie Menadżera użyj odnośnik 'Administration pages'</li>
         <li>Po powrocie do panelu administracyjnego ponownie wybierz Wygląd z górnego menu</li>
-        <li>Odszukaj szablon na samym dole galerii skórek</li>
+        <li>Odszukaj szablon w galerii skórek</li>
         <li>Użyj odnośnik 'Włącz i ustaw jako domyślne', który znajduje się pod miniaturką szablonu</li>
     </ol>
+    <p>Gotowe. Twój nowy szablon jest już aktywny.</p>
+	<p>*Dotyczy Drupal w wersji 7.41. Poszczególne kroki instalacji dla innych wersji mogą się różnić. </p>
     {% endif %}
-    <p>Gotowe. Twój nowy szablon jest już aktywny</p>
-	</div>
+	<p>Pozdrawiamy, zespół <a href="http://pwd.dolinagubra.pl">pwd.dolinagubra.pl</a></p>
+    </div>
 	<div style="border-top:1px #ccc solid;clear:both;padding:30px 0;color:#666">
 		<p style="font-size:10pt">
-		 PWD Online - projekt prowadzony przez Stowarzyszenie Na Rzecz Rozwoju Regionu Dolina Gubra i Ministerstwo Administracji i Cyfryzacji pwd.dolinagubra.pl, wersja 1.0 
+		 PWD Online - projekt realizowany przez Stowarzyszenie Na Rzecz Rozwoju Regionu Dolina Gubra przy wsparciu Ministerstwa Administracji i Cyfryzacji, <a href="http://pwd.dolinagubra.pl">pwd.dolinagubra.pl</a>, wersja 1.0 
 		</p>
 		<img src="http://pwd.dolinagubra.pl/img/dolina-gubra-logo-stopka.png" style=" height: 60px;padding:10px 0 20px;"/>
 		<img src="http://pwd.dolinagubra.pl/img/maic.png" style="height: 60px;padding:10px 0 20px; margin-left:30px"/>

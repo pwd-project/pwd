@@ -14,6 +14,16 @@
                 <h3>Opis</h3>
                 <p>
                     Metryka weryfikuje czy na stronie głównej znajduje się odnośnik do informacji kontaktowych.
+                    Taka zasada nie jest uwzględniona w standardzie WCAG, uznaliśmy jednak,
+                    że osoby zaglądające do serwisów jednostek samorzadowych będą szukały tam informacji kontaktowych,
+                    takich jak telefon czy email. Metryka sprawdza czy łatwo taką informację wyszukać stosując
+                    narzędzia wspomagające takie jak czytnikki trreści.
+                </p>
+
+                <h3>Realizacja</h3>
+                <p>
+                    Weryfikujemy czy na stronie jest link zawierajacy w  opisie słowo "kontakt", przykładowo:
+                    <pre>&lt;a href="/kontakt"&gt;Informaacje kontaktowe&lt;/a&gt;</pre>
                 </p>
 
                 <h3>Wartości metryki</h3>
