@@ -51,15 +51,21 @@
 					Wybierz swój CMS:
 					</p>
 					<div class="clearfix">
-						<a role="button" class="col-md-4">
+					    {% if item.w %}
+						<a role="button" href="/pobierz/{{ item.name }}/WORDPRESS" class="col-md-4">
 							<img src="/img/wordpress.png" class="img-responsive" alt="pobierz szablon dla wordpress">
 						</a>
-						<a role="button" class="col-md-4">
+						{% endif %}
+					    {% if item.d %}
+						<a role="button" href="/pobierz/{{ item.name }}/DRUPAL" class="col-md-4">
 							<img src="/img/drupal.png" class="img-responsive" alt="pobierz szablon dla drupal">
 						</a>
-						<a role="button" class="col-md-4">
+						{% endif %}
+					    {% if item.j %}
+						<a role="button" href="/pobierz/{{ item.name }}/JOOMLA" class="col-md-4">
 							<img src="/img/joomla.png" class="img-responsive" alt="pobierz szablon dla joomla">
 						</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
