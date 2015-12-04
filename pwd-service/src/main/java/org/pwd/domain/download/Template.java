@@ -19,9 +19,9 @@ public enum Template {
     //T51 (1, 0, "Szablon PWD T5.1", "szablon-pwd-t5-1", "szablon_pwd_5_1", 0, 0, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji podstawowej"),
     //T52 (0, 0, "Szablon PWD T5.2", "szablon-pwd-t5-2", "szablon_pwd_5_2", 0, 0, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej"),
     //T53 (0, 1, "Szablon PWD T5.3", "szablon-pwd-t5-3", "szablon_pwd_5_3", 0, 0, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji podstawowej z elementami BIP"),
-    T61 (1, 0, "Szablon PWD T6.1", "szablon-pwd-t6-1", "szablon_pwd_6_1", 0, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji podstawowej"),
-    T62 (0, 0, "Szablon PWD T6.2", "szablon-pwd-t6-2", "szablon_pwd_6_2", 0, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej"),
-    T63 (0, 1, "Szablon PWD T6.3", "szablon-pwd-t6-3", "szablon_pwd_6_3", 0, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej")
+    T61 (1, 0, "Szablon PWD T6.1", "szablon-pwd-t6-1", "szablon_pwd_6_1", 1, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji podstawowej"),
+    T62 (0, 0, "Szablon PWD T6.2", "szablon-pwd-t6-2", "szablon_pwd_6_2", 1, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej"),
+    T63 (0, 1, "Szablon PWD T6.3", "szablon-pwd-t6-3", "szablon_pwd_6_3", 1, 1, 0, "Szablon dla Stowarzyszenia lub Fundacji w wersji alternatywnej")
     ;
 
     private int startRow;
