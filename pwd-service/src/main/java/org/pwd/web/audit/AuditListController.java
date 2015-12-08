@@ -78,8 +78,7 @@ class AuditListController {
 
     private Predicate<WebsiteAudit> auditsWithScoreAndEmail() {
         return  websiteAudit -> websiteAudit.getAuditScore() > 0 &&
-                websiteAudit.getWebsite().getAdministrativeEmail() != null &&
-                websiteAudit.getWebsite().getId() >= 2826;//ten warunek jest tymczasowy
+                websiteAudit.getWebsite().getAdministrativeEmail() != null;
     }
 
     private void sendEmail(WebsiteAudit websiteAudit) {
