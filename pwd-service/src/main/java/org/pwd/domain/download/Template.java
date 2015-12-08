@@ -4,9 +4,9 @@ package org.pwd.domain.download;
  * @author kadamowi
  */
 public enum Template {
-    T11 (1, 0, "Szablon PWD T1.1", "szablon-pwd-t1-1", "szablon_pwd_1_1", 1, 0, 0, "Szablon Biuletynu Informacji Publicznej w wersji szarej"),
-    T12 (0, 0, "Szablon PWD T1.2", "szablon-pwd-t1-2", "szablon_pwd_1_2", 1, 0, 0, "Szablon Biuletynu Informacji Publicznej w wersji zielonej"),
-    T13 (0, 1, "Szablon PWD T1.3", "szablon-pwd-t1-3", "szablon_pwd_1_3", 1, 0, 0, "Szablon Biuletynu Informacji Publicznej w wersji czerwonej"),
+    T11 (1, 0, "Szablon PWD T1.1", "szablon-pwd-t1-1", "szablon_pwd_1_1", 1, 1, 0, "Szablon Biuletynu Informacji Publicznej w wersji szarej"),
+    T12 (0, 0, "Szablon PWD T1.2", "szablon-pwd-t1-2", "szablon_pwd_1_2", 1, 1, 0, "Szablon Biuletynu Informacji Publicznej w wersji zielonej"),
+    T13 (0, 1, "Szablon PWD T1.3", "szablon-pwd-t1-3", "szablon_pwd_1_3", 1, 1, 0, "Szablon Biuletynu Informacji Publicznej w wersji czerwonej"),
     //T21 (1, 0, "Szablon PWD T2.1", "szablon-pwd-t2-1", "szablon_pwd_2_1", 1, 0, 0, "Alternatywny szablon Biuletynu Informacji Publicznej w kolorystyce szarej"),
     //T22 (0, 0, "Szablon PWD T2.2", "szablon-pwd-t2-2", "szablon_pwd_2_2", 1, 0, 0, "Alternatywny szablon Biuletynu Informacji Publicznej w kolorystyce niebieskiej"),
     //T23 (0, 1, "Szablon PWD T2.3", "szablon-pwd-t2-3", "szablon_pwd_2_3", 1, 0, 0, "Alternatywny szablon Biuletynu Informacji Publicznej w kolorystyce czerwonej"),
