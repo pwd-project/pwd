@@ -78,7 +78,8 @@ class AuditListController {
 
     private Predicate<WebsiteAudit> auditsWithScoreAndEmail() {
         return  websiteAudit -> websiteAudit.getAuditScore() > 0 &&
-                websiteAudit.getWebsite().getAdministrativeEmail() != null;
+                websiteAudit.getWebsite().getAdministrativeEmail() != null &&
+                websiteAudit.getWebsite().getSended() == 0;
     }
 
     private void sendEmail(WebsiteAudit websiteAudit) {
@@ -87,6 +88,7 @@ class AuditListController {
 
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
+            websiteAudit.getWebsite().setSended(1);
             return;
         }
         logger.warn("Email {} could not be sent", htmlEmailMessage);

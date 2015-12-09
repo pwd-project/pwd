@@ -32,15 +32,15 @@ class WebsiteAuditRepositoryTest extends IntegrationTest {
         def website1 = new Website(10, 111, new URL("http://example.com/"),
                 "P", "Urząd Smoka Wawelskiego", "kris@gnail.com",
                 new Address("Żyrardów", "Śląskie", "Powiat Duży"),
-                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"), 0)
         def website2 = new Website(11, 222, new URL("http://example.com/"),
                 "W", "Biuro Smoka Wawelskiego", "kris@gnail.com",
                 new Address("Gniezno", "Mazowieckie", "Powiat Mały"),
-                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"), 0)
         def website3 = new Website(13, 333, new URL("http://example.com/"),
                 "W", "Biuro Świnki Peppy", "kris@gnail.com",
                 new Address("Łódź", "łódzkie", "Gmina"),
-                new Person("Krzysiek", "Adamowicz", "Burmistrz"))
+                new Person("Krzysiek", "Adamowicz", "Burmistrz"), 0)
 
         websiteRepository.save([website1,website2,website3])
 
