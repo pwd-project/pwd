@@ -2,6 +2,7 @@ package org.pwd.domain.websites;
 
 import com.google.common.base.Preconditions;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -32,6 +33,10 @@ public class Website {
     @Embedded
     private Person person;
 
+    // email to unit was sended
+    @Column(nullable = true)
+    private int sended;
+
     // only for Hibernate
     Website() {
     }
@@ -44,7 +49,7 @@ public class Website {
 
     public Website(int id, Integer areaCode, URL url,
                    String unitType, String administrativeUnit, String administrativeEmail,
-                   Address address, Person person) {
+                   Address address, Person person, int sended) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
@@ -53,6 +58,7 @@ public class Website {
         this.administrativeEmail = administrativeEmail;
         this.address = address;
         this.person = person;
+        this.sended = sended;
     }
 
     public Address getAddress() {
@@ -85,5 +91,13 @@ public class Website {
 
     public String getAdministrativeEmail() {
         return administrativeEmail;
+    }
+
+    public int getSended() {
+        return sended;
+    }
+
+    public void setSended(int sended) {
+        this.sended = sended;
     }
 }
