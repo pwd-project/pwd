@@ -8,7 +8,11 @@
 		<h3><a target="_blank" href="{{ website.url }}">{{ website.url }}</a></h3>
 		<h4>Aktualna dostępność: <strong>{{ currentScore|number_format(2, ',', ' ') }}</strong></h4>
 		<h4>Aktualne miejsce w rankingu: <strong>{{ currentPlaces.indexOf(websiteAudits|first)+1 }}</strong></h4>
-	</section>    
+		<h4>
+		   Aby zobaczyć szczegóowe wyniki parsowanie strony (metryka <a href="/metryki/w3c">4.1.1</a>) wejdź tu:
+		   <a href="https://validator.w3.org/nu/?doc={{ website.url }}" target="_blank">Nu Html Checker</a>
+		</h4>
+	</section>
 	<div class="container-fluid bg-gray section ">
 		<div class="container clearfix">	
 			<div class="table-responsive ranking">

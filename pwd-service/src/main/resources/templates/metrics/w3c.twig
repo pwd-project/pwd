@@ -1,0 +1,55 @@
+{% extends "../layout/base.twig" %}
+
+{% block content %}
+    <section class="container">
+        <div class="row mt">
+            <div class="col-md-12">
+                <h1>{{ metric.namePl }}</h1>
+
+                <h3>WCAG 2.0</h3>
+                <ul>
+                    <li>Parsowanie - wytyczna
+                        <a href="{{ metric.guidelineHref }}" target="_blank">{{ metric.guidelineName }}</a>
+                    </li>
+                </ul>
+
+                <h3>Opis</h3>
+                <p>
+                    W treści wprowadzonej przy użyciu języka znaczników, elementy posiadają pełne znaczniki początkowe i końcowe,
+                    elementy są zagnieżdżane według swoich specyfikacji, elementy nie posiadają zduplikowanych atrybutów oraz
+                    wszystkie ID są unikalne, za wyjątkiem przypadków, kiedy specyfikacja zezwala na wyżej wymienione cechy.
+                </p>
+
+                <p>
+                    Uwaga: Początkowe i końcowe znaczniki, w których brak kluczowych znaków, takich, jak
+                    zamykający nawias ostry lub pytajnik błędnie dopasowany do atrybutu wartości, nie są uznawane za znaczniki pełne.
+                </p>
+
+                <h3>Realizacja</h3>
+                <p>
+                    Skorzytaliśmy zewnętrznego walidatora - Nu Html Checker na stronie
+                    <a href="https://validator.w3.org" target="_blank">validator.w3.org</a>.
+                </p>
+                <p>
+                    W tym celu badamy:
+                    <ul>
+                        <li>czy strona podlega walidacji</li>
+                        <li>komunikaty typu Warning </li>
+                        <li>komunikaty typu Error</li>
+                    </ul>
+                </p>
+
+                <h3>Wartości metryki</h3>
+
+                <ul>
+                    <li>0 jeśli strona nie daje się zwalidować (komunikat IO Error) lub zwraca Fatal Error</li>
+                    <li>100 jeśli na stronie brak komunikatów Warning i Error</li>
+                    <li>Za każdy Error odej mujemy 1 punkt, za każdy Warning odejmujemy 1/10 punkta</li>
+                </ul>
+
+                {% include 'metric_meta.twig' %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

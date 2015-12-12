@@ -20,6 +20,7 @@ public enum Metric {
     htmlLang(
             1, "Język strony", "3.1.1", "http://fdc.org.pl/wcag2/#meaning"),
     labels( 1, "Etykiety lub instrukcje", "3.3.2", "http://fdc.org.pl/wcag2/#minimize-error"),
+    w3c(    3, "Parsowanie", "4.1.1", "http://fdc.org.pl/wcag2/#ensure-compat"),
     contact(3, "Kontakt", "", ""),
     // Metryki Googlowe
     cms(    0, "Użycie CMS", "", ""),
