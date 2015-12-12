@@ -89,6 +89,7 @@ class AuditListController {
         if (mailgunClient.sendEmail(htmlEmailMessage)) {
             logger.info("Email {} was sent successfully", htmlEmailMessage);
             websiteAudit.getWebsite().setSended(1);
+            websiteAuditRepository.save(websiteAudit);
             return;
         }
         logger.warn("Email {} could not be sent", htmlEmailMessage);
