@@ -55,18 +55,23 @@ class AuditProcess {
         int i = 0;
         Collections.shuffle(websites);
         for (Website website : websites) {
-            long pageStart = System.currentTimeMillis();
-            logger.info(++i + ". auditing website: {}", website.getUrl());
-            try {
-                websiteAuditor.auditWebsite(audit, website);
-                long pageStop = System.currentTimeMillis();
-                long pageAverage = (pageStop - start) / i;
-                logger.info(" .. website audited in {} millis, website average: {} millis, {}% of all websites processed", (pageStop - pageStart), pageAverage, (i * 100 / websites.size()));
-                audit.mark();
-                auditRepository.save(audit);
-                logger.info("[NOTIFICATION] going to send email to {} about his webiste {}", website.getAdministrativeEmail(), website.getUrl());
-            } catch (AnalysisNotCompleteException e) {
-                logger.error("Could not finish analysis of {}", website.getUrl());
+            if (website.getBlocked() == 0) {
+                long pageStart = System.currentTimeMillis();
+                logger.info(++i + ". {}", website.getUrl());
+                try {
+                    websiteAuditor.auditWebsite(audit, website);
+                    long pageStop = System.currentTimeMillis();
+                    long pageTime = (pageStop - pageStart) / 1000;
+                    logger.info("   time {} secs", pageTime);
+                    audit.mark();
+                    auditRepository.save(audit);
+                    //logger.info("[NOTIFICATION] going to send email to {} about his webiste {}", website.getAdministrativeEmail(), website.getUrl());
+                } catch (AnalysisNotCompleteException e) {
+                    logger.error("Could not finish analysis of {}", website.getUrl());
+                }
+            }
+            else {
+                logger.info("Page {} is blocked", website.getUrl());
             }
         }
     }

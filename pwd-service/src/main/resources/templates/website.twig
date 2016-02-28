@@ -12,6 +12,10 @@
 		<h5 class="rank-value">	
 			{{ websiteAudit.auditReport.score|number_format(2, ',', ' ') }}
 		</h5>
+		<h4 class="rank-header">Sprawdź zgodność swojej strony ze standardem W3C (duża ilość błędów blokuje analizę)</h4>
+		<h3 class="rank-header">
+		  <a target="_blank" href="https://validator.w3.org/nu/?doc={{ websiteAudit.website.url }}">https://www.w3.org</a>
+		</h3>
 		<div class="table-responsive container">
 			<table class="table table-striped ranking">
 				<tr>
