@@ -37,6 +37,10 @@ public class Website {
     @Column(nullable = true)
     private int sended;
 
+    // blocked for audit
+    @Column(nullable = true)
+    private int blocked;
+
     // only for Hibernate
     Website() {
     }
@@ -49,7 +53,7 @@ public class Website {
 
     public Website(int id, Integer areaCode, URL url,
                    String unitType, String administrativeUnit, String administrativeEmail,
-                   Address address, Person person, int sended) {
+                   Address address, Person person, int sended, int blocked) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
@@ -59,6 +63,7 @@ public class Website {
         this.address = address;
         this.person = person;
         this.sended = sended;
+        this.blocked = blocked;
     }
 
     public Address getAddress() {
@@ -99,5 +104,9 @@ public class Website {
 
     public void setSended(int sended) {
         this.sended = sended;
+    }
+
+    public int getBlocked() {
+        return blocked;
     }
 }
