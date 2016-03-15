@@ -28,6 +28,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT wa.* " +
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
+            " AND    w.mc_site = 0" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
             " ORDER BY wa.audit_score DESC, w.id " +
             " LIMIT :maxRecords")
@@ -37,6 +38,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT wa.*, w.* " +
             " FROM   website w,  website_audit wa" +
             " WHERE  w.id = wa.website_fk" +
+            " AND    w.mc_site = 0" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE')" +
             " AND    wa.audit_score > 0" +
             " AND    wa.audit_prev_score > 0" +
@@ -48,6 +50,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT wa.*" +
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
+            " AND    w.mc_site = 0" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit WHERE process_status = 'DONE')" +
             " ORDER BY wa.audit_score DESC, w.id ")
     List<WebsiteAudit> getSorted();
@@ -56,6 +59,7 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT * " +
             " FROM   website_audit wa, website w" +
             " WHERE  w.id = wa.website_fk" +
+            " AND    w.mc_site = 0" +
             " AND    wa.audit_fk = (SELECT MAX(id) FROM audit WHERE process_status = 'DONE')" +
             " AND    w.id = :websiteId")
     WebsiteAudit getCurrentScore(@Param("websiteId") int websiteId);
@@ -75,7 +79,8 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT wa.*" +
             " FROM website w left join website_audit wa on w.id = wa.website_fk " +
             " WHERE wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE') " +
-            " AND to_tsvector(unaccent( replace(w.url,'.', ' ') ||' '|| coalesce(w.city,'') ||' '|| coalesce(w.county,'') || ' ' || coalesce(w.voivodeship,'') || ' '|| coalesce(w.administrative_unit,'') || ' ' || coalesce(wa.cms_used,''))) " +
+            " AND ((:searchPhrase = 'MC' AND w.mc_site = 1) OR (:searchPhrase <> 'MC' AND w.mc_site = 0))" +
+            " AND to_tsvector(unaccent( replace(w.url,'.', ' ') ||' '|| coalesce(w.city,'') ||' '|| coalesce(w.county,'') || ' ' || coalesce(w.voivodeship,'') || ' '|| coalesce(w.administrative_unit,'') || ' ' || coalesce(wa.cms_used,'') || ' ' || coalesce(w.unit_type,''))) " +
             " @@ to_tsquery(unaccent(replace(:searchPhrase,' ','&')))\n" +
             " ORDER BY wa.audit_score DESC, w.id ")
     List<WebsiteAudit> search(@Param("searchPhrase") String searchPhrase);
