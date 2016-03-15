@@ -41,6 +41,10 @@ public class Website {
     @Column(nullable = true)
     private int blocked;
 
+    // site for MC private use
+    @Column(nullable = true)
+    private int mcSite;
+
     // only for Hibernate
     Website() {
     }
@@ -53,7 +57,7 @@ public class Website {
 
     public Website(int id, Integer areaCode, URL url,
                    String unitType, String administrativeUnit, String administrativeEmail,
-                   Address address, Person person, int sended, int blocked) {
+                   Address address, Person person, int sended, int blocked, int mcSite) {
         this.id = id;
         this.areaCode = areaCode;
         this.url = url;
@@ -64,6 +68,7 @@ public class Website {
         this.person = person;
         this.sended = sended;
         this.blocked = blocked;
+        this.mcSite = mcSite;
     }
 
     public Address getAddress() {
@@ -108,5 +113,9 @@ public class Website {
 
     public int getBlocked() {
         return blocked;
+    }
+
+    public int getMcSite() {
+        return mcSite;
     }
 }
