@@ -79,7 +79,13 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
             " SELECT wa.*" +
             " FROM website w left join website_audit wa on w.id = wa.website_fk " +
             " WHERE wa.audit_fk = (SELECT MAX(id) FROM audit where process_status = 'DONE') " +
-            " AND ((:searchPhrase = 'MC' AND w.mc_site = 1) OR (:searchPhrase <> 'MC' AND w.mc_site = 0))" +
+            " AND (" +
+                    "(:searchPhrase = 'MC' AND w.mc_site = 1) " +
+                    "OR " +
+                    "(:searchPhrase = 'PIIT' AND w.mc_site = 2) " +
+                    "OR " +
+                    "(:searchPhrase <> 'MC' AND :searchPhrase <> 'PIIT' AND w.mc_site = 0)" +
+                  ")" +
             " AND to_tsvector(unaccent( replace(w.url,'.', ' ') ||' '|| coalesce(w.city,'') ||' '|| coalesce(w.county,'') || ' ' || coalesce(w.voivodeship,'') || ' '|| coalesce(w.administrative_unit,'') || ' ' || coalesce(wa.cms_used,'') || ' ' || coalesce(w.unit_type,''))) " +
             " @@ to_tsquery(unaccent(replace(:searchPhrase,' ','&')))\n" +
             " ORDER BY wa.audit_score DESC, w.id ")
