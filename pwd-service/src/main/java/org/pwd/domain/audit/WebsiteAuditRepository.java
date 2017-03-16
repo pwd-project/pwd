@@ -85,7 +85,9 @@ public interface WebsiteAuditRepository extends JpaRepository<WebsiteAudit, Inte
                     "OR " +
                     "(:searchPhrase = 'PIIT' AND w.mc_site = 2) " +
                     "OR " +
-                    "(:searchPhrase <> 'MC' AND :searchPhrase <> 'PIIT' AND w.mc_site = 0)" +
+                    "(:searchPhrase = 'PLTELCO' AND w.mc_site = 3) " +
+                    "OR " +
+                    "(:searchPhrase <> 'MC' AND :searchPhrase <> 'PIIT' AND :searchPhrase <> 'PLTELCO' AND w.mc_site = 0)" +
                     ")" +
                     " AND to_tsvector(unaccent( replace(w.url,'.', ' ') ||' '|| coalesce(w.city,'') ||' '|| coalesce(w.county,'') || ' ' || coalesce(w.voivodeship,'') || ' '|| coalesce(w.administrative_unit,'') || ' ' || coalesce(wa.cms_used,'') || ' ' || coalesce(w.unit_type,''))) " +
                     " @@ to_tsquery(unaccent(replace(:searchPhrase,' ','&')))\n" +
