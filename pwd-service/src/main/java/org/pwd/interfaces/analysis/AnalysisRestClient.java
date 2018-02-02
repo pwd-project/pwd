@@ -62,6 +62,7 @@ public class AnalysisRestClient {
     public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
         int count = 0;
         int maxTries = 9;
+        Thread t;
         while (true) {
             try {
                 String response = retryTemplate.execute(request -> restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl));
