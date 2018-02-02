@@ -68,7 +68,6 @@ public class AnalysisRestClient {
                 return Optional.of(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
             } catch (Exception e) {
                 restartPwdAnalysis();
-                wait(30000);
                 if (++count == maxTries) {
                     throw e;
                 }
