@@ -61,13 +61,14 @@ public class AnalysisRestClient {
 
     public Optional<WebsiteAuditReport> getAnalysis(URL websiteUrl) {
         int count = 0;
-        int maxTries = 4;
+        int maxTries = 9;
         while (true) {
             try {
                 String response = retryTemplate.execute(request -> restTemplate.getForObject(analysisEndpointUrl + "?url={websiteUrl}", String.class, websiteUrl));
                 return Optional.of(new WebsiteAuditReport(gson.fromJson(response, JsonElement.class).getAsJsonObject()));
             } catch (Exception e) {
                 restartPwdAnalysis();
+                Thread.sleep(30000);
                 if (++count == maxTries) {
                     throw e;
                 }
