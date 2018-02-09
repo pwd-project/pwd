@@ -6,9 +6,9 @@ dependencies {
     compile 'com.lyncode:jtwig-spring:3.1.1'
     compile 'com.google.code.gson:gson:2.8.2'
 
-    testCompile 'com.github.tomakehurst:wiremock:1.57'
-    testCompile 'com.h2database:h2:1.4.187'
-    testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
+    testCompile 'com.github.tomakehurst:wiremock:2.14.0'
+    testCompile 'com.h2database:h2:1.4.196'
+    testCompile 'org.springframework:spring-test:5.0.3.RELEASE'
 }
 
 //fired by heroku-buildpack-gradle
