@@ -2,7 +2,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.5.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE'
     compile 'org.springframework.retry:spring-retry:1.1.2.RELEASE'
-    compile 'org.postgresql:postgresql:l42.2.1''
+    compile 'org.postgresql:postgresql:9.4.1212'
     compile 'com.lyncode:jtwig-spring:3.1.1'
     compile 'com.google.code.gson:gson:2.3.1'
 
