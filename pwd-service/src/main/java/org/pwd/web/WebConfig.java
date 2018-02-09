@@ -3,7 +3,8 @@ package org.pwd.web;
 import com.lyncode.jtwig.mvc.JtwigViewResolver;
 import org.pwd.web.jtwig.LocalDateFormatter;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.ErrorPage;
+/*import org.springframework.boot.context.embedded.ErrorPage;*/
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
