@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://uranus.internet.pl:5432/PWD
+    url: jdbc:postgresql://uranus.internet.pl:5432/pwd
     username: kadamowicz    
     max-active: 2
 
