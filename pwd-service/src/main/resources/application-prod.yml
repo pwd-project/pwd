@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://s70.linuxpl.com:5432/galcia_pwd?sslmode=require
+    url: jdbc:postgresql://s70.linuxpl.com:5432/galcia_pwd?sslmode=disable
     username: galcia_pwd
     max-active: 2
 
