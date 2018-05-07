@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://horton.elephantsql.com:5432/wmvyckpy
-    username: wmvyckpy      
+    url: jdbc:postgresql://uranus.internet.pl:5432/pwd
+    username: pwd    
     max-active: 2
 
   jackson:
